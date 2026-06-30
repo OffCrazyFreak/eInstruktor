@@ -1,0 +1,15 @@
+onlyBuiltDependencies:
+  - esbuild
+  - lightningcss
+  - sharp
+  - '@parcel/watcher'
+  - '@biomejs/biome'
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true
+  lightningcss: true
+  '@biomejs/biome': true
+  # ne koristimo (Turso/libSQL umjesto njih) - eksplicitno bez build skripti:
+  better-sqlite3: false
+  '@prisma/client': false

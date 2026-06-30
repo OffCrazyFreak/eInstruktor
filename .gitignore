@@ -1,0 +1,34 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+.env
+.nitro
+.tanstack
+.wrangler
+.output
+.vinxi
+__unconfig*
+todos.json
+
+# lokalna SQLite baza (dev)
+local.db
+local.db-*
+*.sqlite
+
+# Netlify build output
+.netlify
+
+# scaffold metadata
+.cta.json
+
+# TypeScript build info
+*.tsbuildinfo
+
+# local Claude settings
+.claude/settings.local.json
+
+# logs
+*.log
+
