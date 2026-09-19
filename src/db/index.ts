@@ -1,6 +1,6 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
-import * as schema from "./schema";
+import * as schema from "@/db/schema";
 
 // Lokalni razvoj koristi file:local.db ako Turso varijable nisu postavljene.
 const client = createClient({
