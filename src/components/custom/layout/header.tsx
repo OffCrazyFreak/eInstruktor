@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
 import GoogleIcon from "@/components/custom/icons/google-icon";
 import BrandMark from "@/components/custom/layout/brand-mark";
@@ -24,14 +25,14 @@ export default function Header() {
 	return (
 		<header className="fixed inset-x-0 top-0 z-50 border-b border-[#002c78]/10 bg-white/70 backdrop-blur-md">
 			<div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 md:px-8">
-				<a
-					href="/"
+				<Link
+					to="/"
 					className="flex items-center gap-2"
 					aria-label="eInstruktor, naslovnica"
 				>
 					<BrandMark />
 					<Wordmark />
-				</a>
+				</Link>
 
 				<nav
 					className="hidden items-center gap-8 md:flex"
