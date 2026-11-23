@@ -31,9 +31,9 @@ export default function LeaveSetSheet({
 					Prekinuti seriju?
 				</SheetTitle>
 				<SheetDescription className="mt-1">
-					{answered} {pluralHr(answered, "odgovor", "odgovora", "odgovora")} iz
-					ove serije ostaje spremljeno, ali kraj serije s rezultatom nećeš
-					vidjeti.
+					Već spremljeno: {answered}{" "}
+					{pluralHr(answered, "odgovor", "odgovora", "odgovora")}. Ako izađeš,
+					rezultat serije nećeš vidjeti.
 				</SheetDescription>
 
 				<div className="mt-6 flex flex-col gap-2 sm:flex-row-reverse">

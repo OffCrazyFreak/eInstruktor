@@ -101,6 +101,7 @@ export default function OralRounds({ deck }: IOralRoundsProps) {
 				title={deckTitle(deck)}
 				closeTo="/vjezba/usmeno"
 				closeLabel="Zatvori kartice"
+				itemLabel="Kartica"
 				position={
 					card ? { current: state.index + 1, total: state.queue.length } : null
 				}

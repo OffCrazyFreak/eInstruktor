@@ -10,6 +10,8 @@ interface ISessionTopBarProps {
 	onClose?: () => void;
 	/** Null on the end screen, which has no position or bar. */
 	position: { current: number; total: number } | null;
+	/** Read out before the position, such as "Kartica 3 / 7". */
+	itemLabel?: string;
 	flag?: { flagged: boolean; onToggle: () => void };
 }
 
@@ -22,6 +24,7 @@ export default function SessionTopBar({
 	closeLabel,
 	onClose,
 	position,
+	itemLabel = "Pitanje",
 	flag,
 }: ISessionTopBarProps) {
 	return (
@@ -53,7 +56,7 @@ export default function SessionTopBar({
 
 				{position && (
 					<p className="shrink-0 font-mono text-[0.9rem] tabular-nums">
-						<span className="sr-only">Pitanje </span>
+						<span className="sr-only">{itemLabel} </span>
 						{position.current} / {position.total}
 					</p>
 				)}
