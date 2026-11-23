@@ -6,6 +6,8 @@ interface ISessionTopBarProps {
 	title: string;
 	closeTo: "/vjezba" | "/vjezba/usmeno";
 	closeLabel: string;
+	/** Replaces the close link with a button, so the caller can ask before leaving. */
+	onClose?: () => void;
 	/** Null on the end screen, which has no position or bar. */
 	position: { current: number; total: number } | null;
 	flag?: { flagged: boolean; onToggle: () => void };
@@ -18,19 +20,32 @@ export default function SessionTopBar({
 	title,
 	closeTo,
 	closeLabel,
+	onClose,
 	position,
 	flag,
 }: ISessionTopBarProps) {
 	return (
 		<header className="sticky top-0 z-40 border-b border-border bg-background/92 pt-[env(safe-area-inset-top)] backdrop-blur-md">
 			<div className="mx-auto flex h-14 max-w-3xl items-center gap-2 px-2 sm:px-4">
-				<Link
-					to={closeTo}
-					aria-label={closeLabel}
-					className={ICON_BUTTON_CLASS}
-				>
-					<X className="size-6" aria-hidden="true" />
-				</Link>
+				{onClose ? (
+					<button
+						type="button"
+						onClick={onClose}
+						aria-label={closeLabel}
+						aria-haspopup="dialog"
+						className={ICON_BUTTON_CLASS}
+					>
+						<X className="size-6" aria-hidden="true" />
+					</button>
+				) : (
+					<Link
+						to={closeTo}
+						aria-label={closeLabel}
+						className={ICON_BUTTON_CLASS}
+					>
+						<X className="size-6" aria-hidden="true" />
+					</Link>
+				)}
 
 				<p className="min-w-0 flex-1 truncate text-[0.95rem] font-semibold">
 					{title}
