@@ -246,6 +246,9 @@ export const quote = "Sigurna luka počinje dobrom pripremom.";
 /** Shared CTA copy so every call to action says the same thing. */
 export const cta = {
 	primary: "Počni besplatno",
+	startHref: "/ucenje/propisi/kako-do-dozvole",
+	continue: "Nastavi",
+	continueHref: "/pocetna",
 	secondary: "Prijava Googleom",
 	free: "100% besplatno",
 	freeNote: "Bez registracije. Napredak i slabe teme prati anonimno.",
