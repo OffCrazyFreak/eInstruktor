@@ -1,6 +1,12 @@
 #!/bin/sh
 # A repository core.hooksPath replaces a global one, so pass this event on to any global hook that prepares new worktrees.
-global=$(git config --global --type=path --get core.hooksPath)
-if [ -n "$global" ] && [ -x "$global/post-checkout" ]; then
-  exec "$global/post-checkout" "$@"
+global=$(git config --global --includes --type=path --get core.hooksPath)
+[ -n "$global" ] || exit 0
+
+target=$(cd "$global" 2>/dev/null && pwd -P)/post-checkout
+self=$(cd "$(dirname "$0")" && pwd -P)/$(basename "$0")
+
+# A global hooksPath that points back at this folder would make the hook exec itself forever.
+if [ "$target" != "$self" ] && [ -x "$target" ]; then
+  exec "$target" "$@"
 fi
