@@ -28,7 +28,7 @@ or code. These guidelines keep the process smooth for everyone.
 
 ## Contributing code (pull requests)
 
-1. Fork the repo and create a feature branch from `main`:
+1. Fork the repo and create a feature branch from `dev` (`main` only receives release PRs from `dev`):
    - e.g. `feat/lights-quiz` or `fix/readiness-meter-rounding`.
 2. Follow the project conventions in [AGENTS.md](./AGENTS.md). Highlights:
    - **pnpm** for package management (`pnpm add` / `pnpm remove`, never edit
@@ -58,7 +58,7 @@ or code. These guidelines keep the process smooth for everyone.
    Brief explanation of why the change was needed.
    ```
 
-5. Open a PR against `main` with:
+5. Open a PR against `dev` with:
    - a summary of the changes and why they were made;
    - screenshots or short recordings for UI changes;
    - links to related issues.

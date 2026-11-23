@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ConceptSwitcher } from "@/features/landing/ConceptSwitcher";
+import LandingPage from "@/features/landing/components/landing-page";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-	return <ConceptSwitcher />;
+	return (
+		<main>
+			<LandingPage />
+		</main>
+	);
 }
