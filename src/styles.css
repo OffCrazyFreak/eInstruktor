@@ -267,8 +267,14 @@ body::after {
   mask-image: radial-gradient(circle at 50% 30%, black, transparent 78%);
 }
 
-/* In the base layer so Tailwind text colour utilities on a link (a Button with asChild) still win. */
+/* In the base layer so Tailwind colour and transition utilities on links and buttons still win. */
 @layer base {
+  button,
+  a {
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease,
+      transform 180ms ease;
+  }
+
   a {
     color: var(--lagoon-deep);
     text-decoration-color: rgba(50, 143, 151, 0.4);
@@ -308,12 +314,6 @@ pre code {
 .page-wrap {
   width: min(1080px, calc(100% - 2rem));
   margin-inline: auto;
-}
-
-button,
-a {
-  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease,
-    transform 180ms ease;
 }
 
 @layer base {
