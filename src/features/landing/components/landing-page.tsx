@@ -14,7 +14,7 @@ import Moon from "@/features/landing/components/sky/moon";
 import SkyGradient from "@/features/landing/components/sky/sky-gradient";
 import StarField from "@/features/landing/components/sky/star-field";
 import Sun from "@/features/landing/components/sky/sun";
-import { NAVY } from "@/features/landing/constants/palette";
+import { NAVY, NIGHT } from "@/features/landing/constants/palette";
 
 /**
  * The "Zlatni sat" landing concept.
@@ -44,9 +44,12 @@ export default function LandingPage() {
 			<PillarsSection reduce={reduce} />
 			<ReadinessSection reduce={reduce} />
 			<FreeSection reduce={reduce} />
-			<QuoteSection />
-			<FaqSection />
-			<FinalCtaSection />
+			{/* Without the scroll-driven sky these sections need their own night background for their light text. */}
+			<div style={reduce ? { background: NIGHT } : undefined}>
+				<QuoteSection />
+				<FaqSection />
+				<FinalCtaSection />
+			</div>
 		</div>
 	);
 }
