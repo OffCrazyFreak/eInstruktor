@@ -446,8 +446,8 @@ const lessons: ILesson[] = [
 					["Plovila kraća od 15 m (brodice)", "50 m"],
 					["Glisiranje (gliseri, skuteri)", "samo dalje od 300 m"],
 					[
-						"Ograda uređene plaže",
-						"50 m (plovila do 15 m), 100 m (15 do 30 m), 300 m (30 m i dulja)",
+						"Ograda uređenog kupališta",
+						"50 m (kraća od 15 m), 100 m (15 do 30 m), 300 m (30 m i dulja, hidroavioni)",
 					],
 				],
 			},
@@ -455,7 +455,7 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"Bliže smiješ samo kad uplovljavaš u luku, ulaziš na sidrište ili pristaješ, i tada moraš usporiti toliko da možeš brzo skrenuti ili stati. Brodice na vesla, kajaci, kanui, pedaline i daske smiju i bliže od 50 m.\n\n**Brzina:** ako nije drukčije propisano, u pojasu do **300 m** od obale, u uskim kanalima te na prilazima luka i sidrišta plovi se najviše **8 čvorova**, uz posebnu pažnju (NN 52/25, čl. 50). Na nekim mjestima (npr. Pelješki kanal, Mali Ždrelac) vrijede posebna ograničenja.\n\n**Sidrenje:** ne sidri bliže od **150 m** od obale prirodnog kupališta ni bliže od **50 m** od ograde uređenog kupališta (NN 52/25, čl. 53. st. 9).",
+					"Bliže smiješ samo kad uplovljavaš u luku, ulaziš na sidrište ili pristaješ, i tada moraš usporiti toliko da možeš brzo skrenuti ili stati. Brodice na vesla, kajaci, kanui, pedaline i daske smiju i bliže od 50 m.\n\n**Brzina:** ako nije drukčije propisano, u pojasu do **300 m** od obale, u uskim kanalima te na prilazima luka i sidrišta plovi se najviše **8 čvorova**, uz posebnu pažnju (NN 52/25, čl. 50. st. 1). Na nekim mjestima (npr. Pelješki kanal, Mali Ždrelac) vrijede posebna ograničenja.\n\n**Sidrenje:** ne sidri bliže od **150 m** od obale prirodnog kupališta ni bliže od **50 m** od ograde uređenog kupališta (NN 52/25, čl. 53. st. 9).",
 			},
 			{
 				type: "warning",
@@ -491,7 +491,8 @@ const lessons: ILesson[] = [
 		],
 		cheatSheet: [
 			"Od obale: kraće od 15 m 50 m, 15 do 30 m 150 m, 30 m i dulje 300 m.",
-			"Uređena plaža: 50 m od ograde (plovila do 15 m).",
+			"Ograda uređenog kupališta: s plovilom kraćim od 15 m ne bliže od 50 m, ni u plovidbi ni na sidru.",
+			"Prirodno kupalište: ne sidri bliže od 150 m od obale.",
 			"Glisiranje samo dalje od 300 m od obale.",
 			"Brzina: do 300 m od obale najviše 8 čv.",
 			"Ronilac: žuti ili narančasti balon od najmanje 30 cm.",

@@ -83,8 +83,8 @@ const lesson: ILesson = {
 			markdown:
 				'**Kako izgleda ispit?** Ispit je **usmeni**, pred **tročlanim povjerenstvom**. Za A polažeš jedan predmet (osnove plovidbe), a za B pet: pomorsku plovidbu; motoristiku; pomorstvo, propise i meteorologiju; manevriranje, sigurnost i prvu pomoć; radiotelefoniju. Često dobiješ kratki zadatak na karti (kurs, udaljenost, pozicija) i zavežeš uzao. Vožnje brodicom nema.\n\nZa svaki predmet dobiješ ocjenu "zadovoljio" ili "nije zadovoljio", a ispit si položio samo ako si zadovoljio iz svih. Službenog popisa pitanja ni propisanog broja nema: kandidati opisuju od šest-sedam do tridesetak pitanja, a ispit s čekanjem traje od petnaestak minuta do sat vremena. Ispitivači cijene kad situaciju objasniš svojim riječima. Ako ne položiš, prijavljuješ novi termin i u pravilu ponovno plaćaš pristojbu. Polaganje na stranom jeziku ovisi o uredu i terminu, pa ga dogovori unaprijed.\n\n*Zadnje provjereno 23.11.2026.*',
 		},
-		{ type: "check", level: "common", questionId: "propisi-016" },
-		{ type: "check", level: "common", questionId: "propisi-037" },
+		{ type: "check", level: "common", questionId: "propisi-038" },
+		{ type: "check", level: "common", questionId: "propisi-039" },
 	],
 	cheatSheet: [
 		"Za većinu ljudi najbolji izbor je kategorija B (od 16 godina, do 12 NM, jahte do 18 m).",

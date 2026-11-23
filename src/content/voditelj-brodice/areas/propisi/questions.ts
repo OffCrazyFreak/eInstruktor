@@ -586,7 +586,7 @@ const questions: IQuestion[] = [
 		explanation:
 			"Plovila kraća od 15 m ne smiju ploviti bliže od 50 m od obale, plovila od 15 do 30 m 150 m, a duža od 30 m 300 m. Bliže smiješ samo radi uplovljavanja ili pristajanja, uz smanjenu brzinu.",
 		ruleRef:
-			"Pravilnik o sigurnosti pomorske plovidbe u unutarnjim morskim vodama i teritorijalnom moru RH",
+			"Pravilnik o sigurnosti pomorske plovidbe, čl. 49. st. 1 (NN 52/25)",
 		difficulty: 1,
 		source: "original",
 	},
@@ -610,7 +610,7 @@ const questions: IQuestion[] = [
 		explanation:
 			"Glisirati se smije samo dalje od 300 m od obale i samo tamo gdje kapetanija to nije zabranila.",
 		ruleRef:
-			"Pravilnik o sigurnosti pomorske plovidbe u unutarnjim morskim vodama i teritorijalnom moru RH",
+			"Pravilnik o sigurnosti pomorske plovidbe, čl. 50. st. 2 (NN 52/25)",
 		difficulty: 1,
 		source: "original",
 	},
@@ -629,8 +629,9 @@ const questions: IQuestion[] = [
 			{ id: "d", text: "10 čvorova", correct: false },
 		],
 		explanation:
-			"U pojasu do 300 m od obale najviše 8 čvorova, uz posebnu pažnju (NN 52/25, čl. 50).",
-		ruleRef: "Pravilnik o sigurnosti pomorske plovidbe, čl. 50 (NN 52/25)",
+			"U pojasu do 300 m od obale najviše 8 čvorova, uz posebnu pažnju (NN 52/25, čl. 50. st. 1).",
+		ruleRef:
+			"Pravilnik o sigurnosti pomorske plovidbe, čl. 50. st. 1 (NN 52/25)",
 		difficulty: 2,
 		source: "original",
 	},
@@ -719,8 +720,9 @@ const questions: IQuestion[] = [
 			{ id: "d", text: "Prednost ima onaj tko prvi zatrubi", correct: false },
 		],
 		explanation:
-			"Plovila duljine do 20 m u lukama i u polukrugu od 1 NM od ulaza u luku moraju se sklanjati većim plovilima (NN 52/25, čl. 46).",
-		ruleRef: "Pravilnik o sigurnosti pomorske plovidbe, čl. 46 (NN 52/25)",
+			"Plovila duljine do 20 m u lukama i u polukrugu od 1 NM od ulaza u luku moraju se sklanjati većim plovilima (NN 52/25, čl. 46. st. 1).",
+		ruleRef:
+			"Pravilnik o sigurnosti pomorske plovidbe, čl. 46. st. 1 (NN 52/25)",
 		difficulty: 3,
 		source: "original",
 	},
@@ -779,6 +781,45 @@ const questions: IQuestion[] = [
 		],
 		explanation:
 			"Praktična nastava za B samo je najavljena reformom. Na dan 23.11.2026. propis nije donesen, pa za A i B vrijede dob i položen ispit.",
+		difficulty: 1,
+		source: "original",
+	},
+	{
+		id: "propisi-038",
+		area: "propisi",
+		lesson: "kako-do-dozvole",
+		level: "common",
+		type: "true-false",
+		prompt:
+			"Za ispit za voditelja brodice kategorije A ili B moraš prvo završiti tečaj.",
+		options: [
+			{ id: "t", text: "Točno", correct: false },
+			{ id: "f", text: "Netočno", correct: true },
+		],
+		explanation:
+			"Za A i B uvjet su samo dob i položen ispit. Tečaj ti može pomoći, ali nije obavezan.",
+		difficulty: 1,
+		source: "original",
+	},
+	{
+		id: "propisi-039",
+		area: "propisi",
+		lesson: "kako-do-dozvole",
+		level: "common",
+		type: "single",
+		prompt: "Kako izgleda ispit za voditelja brodice?",
+		options: [
+			{
+				id: "a",
+				text: "Usmeni ispit pred tročlanim povjerenstvom",
+				correct: true,
+			},
+			{ id: "b", text: "Test na računalu s 20 pitanja", correct: false },
+			{ id: "c", text: "Vožnja brodicom s ispitivačem", correct: false },
+			{ id: "d", text: "Pisani test koji se šalje poštom", correct: false },
+		],
+		explanation:
+			"Ispit je usmeni, pred tročlanim povjerenstvom, po predmetima. Računalni ispit i praktična vožnja zasad su samo najavljeni.",
 		difficulty: 1,
 		source: "original",
 	},
