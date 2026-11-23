@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isProductionRuntime } from "@/lib/is-production-runtime";
 
 const optionalString = z
 	.string()
@@ -25,7 +26,7 @@ export type ServerEnv = z.infer<typeof serverEnvSchema>;
 // Local dev may run without Google sign-in so the anonymous app works from a fresh clone; a deployed build may not.
 export function parseServerEnv(
 	env: Record<string, string | undefined> = process.env,
-	isProduction: boolean = import.meta.env.PROD,
+	isProduction: boolean = isProductionRuntime(),
 ): ServerEnv {
 	const schema = isProduction
 		? serverEnvSchema.superRefine((parsed, ctx) => {
