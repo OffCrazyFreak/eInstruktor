@@ -38,22 +38,51 @@ const lastLessonSchema = z.object({
 	percent: z.number().min(0).max(1),
 });
 
+// One bad element is dropped on its own, so a single corrupt answer never empties the whole list.
+function listOf<T extends z.ZodType>(item: T) {
+	return z
+		.array(z.unknown())
+		.catch([])
+		.transform((items) =>
+			items.flatMap((value) => {
+				const parsed = item.safeParse(value);
+
+				return parsed.success ? [parsed.data as z.output<T>] : [];
+			}),
+		);
+}
+
+function recordOf<T extends z.ZodType>(value: T) {
+	return z
+		.record(z.string(), z.unknown())
+		.catch({})
+		.transform((entries) =>
+			Object.fromEntries(
+				Object.entries(entries).flatMap(([key, entry]) => {
+					const parsed = value.safeParse(entry);
+
+					return parsed.success ? [[key, parsed.data as z.output<T>]] : [];
+				}),
+			),
+		);
+}
+
 // Every field falls back on its own, so one damaged field never wipes the rest of the learner's progress.
 export const progressSchema = z.object({
 	targetLevel: examLevelSchema.nullable().catch(null),
 	examDate: studyDaySchema.nullable().catch(null),
-	attempts: z.array(attemptSchema).catch([]),
-	lessonsDone: z.record(z.string(), z.number()).catch({}),
+	attempts: listOf(attemptSchema),
+	lessonsDone: recordOf(z.number()),
 	lastLesson: lastLessonSchema.nullable().catch(null),
-	flagged: z.record(z.string(), z.number()).catch({}),
-	questionBoxes: z.record(z.string(), leitnerEntrySchema).catch({}),
-	cardBoxes: z.record(z.string(), leitnerEntrySchema).catch({}),
-	examSessions: z.array(examSessionSchema).catch([]),
-	studyDays: z.array(studyDaySchema).catch([]),
-	dismissedNudges: z.record(z.string(), z.number()).catch({}),
+	flagged: recordOf(z.number()),
+	questionBoxes: recordOf(leitnerEntrySchema),
+	cardBoxes: recordOf(leitnerEntrySchema),
+	examSessions: listOf(examSessionSchema),
+	studyDays: listOf(studyDaySchema),
+	dismissedNudges: recordOf(z.number()),
 });
 
-export type IProgressState = z.infer<typeof progressSchema>;
+export type IProgressState = z.output<typeof progressSchema>;
 
 export type IAttempt = z.infer<typeof attemptSchema>;
 
