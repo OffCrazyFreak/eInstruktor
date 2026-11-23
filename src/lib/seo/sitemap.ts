@@ -1,12 +1,32 @@
-import type { ICourse } from "@/content/course-types";
+import type { IArea, ILesson } from "@/content/types";
 import { absoluteUrl } from "@/lib/seo/site";
 
-const STATIC_PATHS = ["/", "/ucenje", "/privatnost", "/uvjeti"];
+export const STATIC_PATHS = ["/", "/ucenje", "/privatnost", "/uvjeti"];
 
-export function sitemapPaths(course: ICourse): string[] {
-	const areaPaths = course.areas.map((area) => `/ucenje/${area.slug}`);
+interface ISitemapContent {
+	areas: Pick<IArea, "slug">[];
+	lessons: Pick<ILesson, "area" | "slug">[];
+}
 
-	const lessonPaths = course.lessons.map(
+const XML_ENTITIES: Record<string, string> = {
+	"&": "&amp;",
+	"<": "&lt;",
+	">": "&gt;",
+	'"': "&quot;",
+	"'": "&apos;",
+};
+
+export function escapeXml(value: string): string {
+	return value.replace(
+		/[&<>"']/g,
+		(character) => XML_ENTITIES[character] ?? character,
+	);
+}
+
+export function sitemapPaths({ areas, lessons }: ISitemapContent): string[] {
+	const areaPaths = areas.map((area) => `/ucenje/${area.slug}`);
+
+	const lessonPaths = lessons.map(
 		(lesson) => `/ucenje/${lesson.area}/${lesson.slug}`,
 	);
 
@@ -15,7 +35,7 @@ export function sitemapPaths(course: ICourse): string[] {
 
 export function renderSitemap(paths: string[]): string {
 	const urls = paths
-		.map((path) => `\t<url><loc>${absoluteUrl(path)}</loc></url>`)
+		.map((path) => `\t<url><loc>${escapeXml(absoluteUrl(path))}</loc></url>`)
 		.join("\n");
 
 	return [
