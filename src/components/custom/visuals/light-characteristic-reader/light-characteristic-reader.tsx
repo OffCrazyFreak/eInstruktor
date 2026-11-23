@@ -7,7 +7,11 @@ import {
 	COLOR_CODES,
 	type LightColor,
 } from "@/components/custom/visuals/shared/light/light-code";
-import { parseLightCode } from "@/components/custom/visuals/shared/light/parse-light-code";
+import {
+	MAX_INPUT_LENGTH,
+	parseLightCode,
+} from "@/components/custom/visuals/shared/light/parse-light-code";
+import { useAutoplay } from "@/components/custom/visuals/shared/use-autoplay";
 import {
 	readBoolean,
 	readOption,
@@ -56,6 +60,7 @@ export default function LightCharacteristicReader({
 	const sliderId = useId();
 	const [text, setText] = useState(color ? `${code} ${color}` : (code ?? ""));
 	const [bearing, setBearing] = useState(170);
+	const [playing, setPlaying] = useAutoplay();
 	const light = parseLightCode(text);
 	const sector = SECTORS.find(
 		(item) => bearing >= item.from && bearing < item.to,
@@ -74,6 +79,7 @@ export default function LightCharacteristicReader({
 					id={inputId}
 					value={text}
 					onChange={(event) => setText(event.target.value)}
+					maxLength={MAX_INPUT_LENGTH}
 					spellCheck={false}
 					className="min-h-11 w-full rounded-xl border border-[#002c78]/20 bg-white px-3 font-mono text-[0.95rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 				/>
@@ -102,6 +108,8 @@ export default function LightCharacteristicReader({
 						key={`${text}-${lampColor}`}
 						code={text}
 						color={lampColor}
+						playing={playing}
+						onTogglePlaying={() => setPlaying(!playing)}
 					/>
 
 					{showSectors && (
