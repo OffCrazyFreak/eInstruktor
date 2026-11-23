@@ -5,6 +5,19 @@ export const A_SUBJECT_ID = "osnove-plovidbe";
 
 export type ReadinessSubjectId = ExamSubjectId | typeof A_SUBJECT_ID;
 
+/** The five category B subjects, in exam order. */
+export const EXAM_SUBJECT_IDS = [
+	"pomorska-plovidba",
+	"motoristika",
+	"pomorstvo-propisi-meteorologija",
+	"manevriranje-sigurnost-prva-pomoc",
+	"radiotelefonija",
+] as const satisfies readonly ExamSubjectId[];
+
+export function isExamSubjectId(id: string): id is ExamSubjectId {
+	return (EXAM_SUBJECT_IDS as readonly string[]).includes(id);
+}
+
 export const SUBJECT_LABELS: Record<ReadinessSubjectId, string> = {
 	"osnove-plovidbe": "Osnove plovidbe",
 	"pomorska-plovidba": "Pomorska plovidba",

@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import type { AreaSlug, ILesson } from "@/content/types";
 
 interface ILessonEndCardProps {
+	lesson: ILesson;
 	next: ILesson | undefined;
 	/** Null for Lekcija 0, which has no area cheat sheet. */
 	cheatSheetArea: AreaSlug | null;
 }
 
 export default function LessonEndCard({
+	lesson,
 	next,
 	cheatSheetArea,
 }: ILessonEndCardProps) {
@@ -45,9 +47,17 @@ export default function LessonEndCard({
 				<Button
 					asChild
 					variant="secondary"
-					className="h-12 rounded-full text-[0.95rem] font-semibold"
+					className="h-12 rounded-full text-[0.95rem] font-semibold dark:bg-[#00aef3] dark:text-[#002c78] dark:hover:bg-[#4cc2ff]"
 				>
-					<Link to="/vjezba">
+					<Link
+						to="/vjezba/serija"
+						search={{
+							mode: "podrucje",
+							area: lesson.area,
+							lesson: lesson.slug,
+							length: 10,
+						}}
+					>
 						<ListChecks className="size-4" aria-hidden="true" />
 						Vježbaj ovu temu
 					</Link>

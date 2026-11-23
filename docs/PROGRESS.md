@@ -21,6 +21,7 @@ Change the shape only together with a new version suffix on the key and a migrat
 - `ProgressProvider` (used by the app layout) puts a store in context; tests pass their own.
 - `useProgress()` returns `{ progress, ready, level, update }` through `useSyncExternalStore`. The server and the hydration render get the empty state with `ready` false, so the markup never mismatches; show progress-dependent UI only when `ready`.
 - `progress-actions.ts` has the pure updates: `recordAnswer`, `markLessonDone`, `markLessonUnread`, `openLesson`, `setLessonPercent`, `toggleFlag`, `setTargetLevel`, `setExamDate`. Call them as `update((current) => recordAnswer(current, answer))`.
+- `practice/practice-actions.ts` has `gradeCard` for the oral cards, and `practice/practice-selectors.ts` has `wrongQuestionIds` and `flaggedIds` for the practice modes (see [PRACTICE.md](./PRACTICE.md)).
 - `exam-session-actions.ts` and `exam-session-selectors.ts` hold the mock exam updates and reads; see [EXAM.md](./EXAM.md).
 
 ## Derived values

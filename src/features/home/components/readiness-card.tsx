@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { isExamSubjectId } from "@/content/voditelj-brodice/subjects";
 import SubjectRow, { LABEL_TEXT } from "@/features/home/components/subject-row";
 import type { IReadiness } from "@/lib/progress/readiness";
 
@@ -10,6 +11,8 @@ interface IReadinessCardProps {
 export default function ReadinessCard({ readiness }: IReadinessCardProps) {
 	const showWeakest =
 		readiness.subjects.length > 1 && readiness.weakest !== null;
+
+	const weakest = readiness.weakest;
 
 	return (
 		<section
@@ -52,13 +55,24 @@ export default function ReadinessCard({ readiness }: IReadinessCardProps) {
 				</p>
 			</details>
 
-			<Button
-				asChild
-				variant="outline"
-				className="mt-3 h-11 w-full rounded-full font-semibold"
-			>
-				<Link to="/vjezba">Vježbaj najslabije</Link>
-			</Button>
+			{weakest && (
+				<Button
+					asChild
+					variant="outline"
+					className="mt-3 h-11 w-full rounded-full font-semibold"
+				>
+					<Link
+						to="/vjezba/serija"
+						search={{
+							mode: "mjesovito",
+							subject: isExamSubjectId(weakest.id) ? weakest.id : undefined,
+							length: 10,
+						}}
+					>
+						Vježbaj najslabije
+					</Link>
+				</Button>
+			)}
 		</section>
 	);
 }
