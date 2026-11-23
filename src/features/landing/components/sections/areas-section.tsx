@@ -1,11 +1,15 @@
 import { motion } from "motion/react";
-import { examAreas } from "@/features/landing/constants/landing-content";
+import course from "@/content/voditelj-brodice";
 import { MUTE, OCEAN } from "@/features/landing/constants/palette";
 import { reveal } from "@/features/landing/utils/reveal";
 
 interface IAreasSectionProps {
 	reduce: boolean;
 }
+
+const areas = [...course.areas].sort(
+	(first, second) => first.order - second.order,
+);
 
 export default function AreasSection({ reduce }: IAreasSectionProps) {
 	return (
@@ -16,13 +20,13 @@ export default function AreasSection({ reduce }: IAreasSectionProps) {
 						Što sve moraš znati
 					</h2>
 					<span className="font-mono text-[0.78rem]" style={{ color: OCEAN }}>
-						8 područja ispita
+						{areas.length} područja gradiva, 5 ispitnih predmeta za B
 					</span>
 				</div>
 				<div className="mt-8 grid gap-3 sm:grid-cols-2">
-					{examAreas.map((a, i) => (
+					{areas.map((a, i) => (
 						<motion.div
-							key={a.id}
+							key={a.slug}
 							{...reveal(reduce, 14)}
 							transition={
 								reduce
@@ -40,17 +44,17 @@ export default function AreasSection({ reduce }: IAreasSectionProps) {
 							}}
 						>
 							<span
-								className="font-serif text-2xl italic"
+								className="shrink-0 font-serif text-2xl italic"
 								style={{ color: OCEAN }}
 							>
 								{String(i + 1).padStart(2, "0")}
 							</span>
 							<div>
 								<h3 className="text-[1rem] font-semibold leading-tight">
-									{a.name}
+									{a.title}
 								</h3>
 								<p className="text-[0.85rem]" style={{ color: MUTE }}>
-									{a.blurb}
+									{a.summary}
 								</p>
 							</div>
 						</motion.div>

@@ -1,7 +1,11 @@
 import { motion } from "motion/react";
 import FreeChip from "@/features/landing/components/free-chip";
 import GlassPanel from "@/features/landing/components/glass-panel";
-import { costs, harbours } from "@/features/landing/constants/landing-content";
+import {
+	costs,
+	factsCheckedOn,
+	harbours,
+} from "@/features/landing/constants/landing-content";
 import { MUTE, NAVY, OCEAN } from "@/features/landing/constants/palette";
 import { reveal } from "@/features/landing/utils/reveal";
 
@@ -42,12 +46,12 @@ export default function FreeSection({ reduce }: IFreeSectionProps) {
 								{costs.map((c) => (
 									<li
 										key={c.label}
-										className="flex items-center justify-between border-b pb-2"
+										className="flex items-center justify-between gap-4 border-b pb-2"
 										style={{ borderColor: "rgba(0,44,120,0.12)" }}
 									>
 										<span>{c.label}</span>
 										<span
-											className="font-mono text-[0.85rem]"
+											className="shrink-0 whitespace-nowrap font-mono text-[0.85rem]"
 											style={{ color: NAVY }}
 										>
 											{c.range}
@@ -58,7 +62,9 @@ export default function FreeSection({ reduce }: IFreeSectionProps) {
 									className="pt-1 text-[0.8rem]"
 									style={{ color: "rgba(0,44,120,0.6)" }}
 								>
-									Iznosi su okvirni i mijenjaju se. Provjeri službeni izvor.
+									Iznosi su okvirni i mogu se promijeniti, posebno nakon
+									01.01.2027. kad se očekuju nova pravila. Zadnje provjereno{" "}
+									{factsCheckedOn}
 								</li>
 							</ul>
 						</div>
