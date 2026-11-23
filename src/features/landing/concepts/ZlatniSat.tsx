@@ -16,7 +16,7 @@ import {
 	harbours,
 	pillars,
 	procedure,
-	quotes,
+	quote,
 	readiness,
 } from "@/features/landing/content";
 import { Speedometer } from "@/features/landing/illustrations/Speedometer";
@@ -678,7 +678,7 @@ function SatQuote() {
 					className="font-serif text-2xl italic leading-snug sm:text-3xl md:text-4xl"
 					style={{ color: LIGHT }}
 				>
-					&ldquo;{quotes.sat}&rdquo;
+					&ldquo;{quote}&rdquo;
 				</blockquote>
 				<p
 					className="mt-5 font-mono text-[0.76rem] tracking-widest"

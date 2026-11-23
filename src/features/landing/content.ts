@@ -1,8 +1,7 @@
 /**
- * Single source of truth for the FACTS shown across the landing concepts.
+ * Single source of truth for the FACTS shown on the landing page.
  * Prices, procedure and rules change, so copy stays deliberately soft ("okvirno")
- * and points people to official sources. Each concept imports these facts and
- * dresses them in its own voice and layout.
+ * and points people to official sources.
  */
 
 export type Category = {
@@ -201,41 +200,6 @@ export const pillars: Pillar[] = [
 	},
 ];
 
-export type Wind = {
-	name: string;
-	deg: number;
-	from: string;
-	note: string;
-};
-
-/** Adriatic winds for the meteorology topic (also drives the wind rose). */
-export const winds: Wind[] = [
-	{
-		name: "Bura",
-		deg: 45,
-		from: "sjeveroistok",
-		note: "Hladna, na mahove, iznenada jaka.",
-	},
-	{
-		name: "Jugo",
-		deg: 135,
-		from: "jugoistok",
-		note: "Toplo, vlažno, diže valove.",
-	},
-	{
-		name: "Maestral",
-		deg: 315,
-		from: "sjeverozapad",
-		note: "Ljetni, ugodan, popodnevni.",
-	},
-	{
-		name: "Nevera",
-		deg: 250,
-		from: "zapad",
-		note: "Nagla ljetna oluja, kratka i žestoka.",
-	},
-];
-
 export type Badge = {
 	name: string;
 	detail: string;
@@ -277,14 +241,9 @@ export const faqs: Faq[] = [
 	},
 ];
 
-/** One quote per concept, assigned uniquely. */
-export const quotes = {
-	karta: "Tko zna kamo plovi, svaki mu je vjetar povoljan.",
-	most: "Dobar se pomorac ne poznaje po mirnom moru.",
-	sat: "Sigurna luka počinje dobrom pripremom.",
-} as const;
+export const quote = "Sigurna luka počinje dobrom pripremom.";
 
-/** Shared, tokenized CTA copy so every concept says the same thing. */
+/** Shared CTA copy so every call to action says the same thing. */
 export const cta = {
 	primary: "Počni besplatno",
 	secondary: "Prijava Googleom",

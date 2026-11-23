@@ -5,7 +5,7 @@ import { signInWithGoogle } from "@/lib/auth-actions";
 import { cn } from "@/lib/utils";
 
 /**
- * The two primary calls to action, shared across concepts. Built on the shadcn
+ * The two primary calls to action, shared across sections. Built on the shadcn
  * Button with brand-blue styling layered on top.
  */
 export function LandingCtas({ onDark }: { onDark?: boolean }) {

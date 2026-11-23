@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 /**
  * Readiness shown as a speedometer gauge: a 270 degree arc with the gap
  * centered at the bottom (rotate 135 puts the start at 7:30 and the end at
- * 4:30). Reused across every concept, recolored per page via props.
+ * 4:30). Recolored per use via props.
  */
 
 type SpeedometerProps = {
