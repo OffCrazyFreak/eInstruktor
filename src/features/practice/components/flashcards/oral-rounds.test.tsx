@@ -7,10 +7,18 @@ import { renderWithProgress } from "@/lib/testing/render-with-progress";
 
 const [card] = deckCards(course, "B", "radiotelefonija");
 
+let now = Date.parse("2026-11-20T11:00:00Z");
+
+// The grade buttons ignore taps right after "Prikaži odgovor", so each grade moves the clock past that guard.
+function later() {
+	now += 1000;
+}
+
 describe("OralRounds", () => {
 	// jsdom has no scrolling; the set scrolls to the top for each new question.
 	beforeEach(() => {
 		vi.spyOn(window, "scrollTo").mockImplementation(() => {});
+		vi.spyOn(Date, "now").mockImplementation(() => now);
 	});
 
 	afterEach(() => {
@@ -35,6 +43,7 @@ describe("OralRounds", () => {
 
 		expect(screen.getByText("ODGOVOR")).toBeTruthy();
 
+		later();
 		fireEvent.click(screen.getByRole("button", { name: "Nisam znao" }));
 
 		expect(store.getSnapshot().cardBoxes[card.id]?.box).toBe(1);
@@ -42,6 +51,7 @@ describe("OralRounds", () => {
 
 		fireEvent.click(screen.getByRole("button", { name: "Ponovi 1 karticu" }));
 		fireEvent.click(screen.getByRole("button", { name: "Prikaži odgovor" }));
+		later();
 		fireEvent.click(screen.getByRole("button", { name: "Znao sam" }));
 
 		expect(screen.getByText("Sve znaš za sada")).toBeTruthy();
@@ -63,6 +73,7 @@ describe("OralRounds", () => {
 
 		while (!screen.queryByText(corrected.prompt)) {
 			fireEvent.click(screen.getByRole("button", { name: "Prikaži odgovor" }));
+			later();
 			fireEvent.click(screen.getByRole("button", { name: "Znao sam" }));
 		}
 
@@ -70,5 +81,48 @@ describe("OralRounds", () => {
 
 		expect(screen.getByText(corrected.correction)).toBeTruthy();
 		expect(screen.getByRole("note", { name: "Ispravak" })).toBeTruthy();
+	});
+
+	it("ignores a grade tapped right after showing the answer", async () => {
+		const { store } = await renderWithProgress(
+			() => <OralRounds deck="radiotelefonija" />,
+			{ targetLevel: "B" },
+		);
+
+		fireEvent.click(screen.getByRole("button", { name: "Prikaži odgovor" }));
+		fireEvent.click(screen.getByRole("button", { name: "Znao sam" }));
+
+		expect(store.getSnapshot().cardBoxes).toEqual({});
+		expect(screen.getByText("ODGOVOR")).toBeTruthy();
+	});
+
+	it("moves focus to the next card after a grade", async () => {
+		await renderWithProgress(() => <OralRounds deck="motoristika" />, {
+			targetLevel: "B",
+		});
+
+		fireEvent.click(screen.getByRole("button", { name: "Prikaži odgovor" }));
+		later();
+		fireEvent.click(screen.getByRole("button", { name: "Znao sam" }));
+
+		expect(document.activeElement?.getAttribute("aria-label")).toMatch(
+			/^Kartica 2 od /,
+		);
+	});
+
+	it("shows an empty deck instead of a finished round for an A learner", async () => {
+		expect(deckCards(course, "A", "motoristika")).toEqual([]);
+
+		await renderWithProgress(() => <OralRounds deck="motoristika" />, {
+			targetLevel: "A",
+		});
+
+		expect(screen.getByText("Ovdje sad nema pitanja")).toBeTruthy();
+		expect(screen.queryByText("Sve znaš za sada")).toBeNull();
+		for (const link of screen.getAllByRole("link", {
+			name: "Natrag na kartice",
+		})) {
+			expect(link.getAttribute("href")).toBe("/vjezba/usmeno");
+		}
 	});
 });

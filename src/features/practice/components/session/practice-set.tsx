@@ -8,6 +8,7 @@ import LeaveSetSheet from "@/features/practice/components/session/leave-set-shee
 import SessionActionBar from "@/features/practice/components/session/session-action-bar";
 import SessionEnd from "@/features/practice/components/session/session-end";
 import SessionTopBar from "@/features/practice/components/session/session-top-bar";
+import { DOUBLE_TAP_GUARD_MS } from "@/features/practice/constants/double-tap";
 import {
 	type ISessionAnswer,
 	practiceSessionReducer,
@@ -23,9 +24,6 @@ interface IPracticeSetProps {
 	deferFeedback: boolean;
 	onAgain: (answers: ISessionAnswer[]) => void;
 }
-
-// A double tap on "Provjeri" would land its second tap on "Dalje" and skip the feedback, so "Dalje" waits this long after a check.
-const NEXT_AFTER_CHECK_MS = 400;
 
 export default function PracticeSet({
 	title,
@@ -117,7 +115,7 @@ export default function PracticeSet({
 	}
 
 	function handleNext() {
-		if (Date.now() - checkedAt.current < NEXT_AFTER_CHECK_MS) {
+		if (Date.now() - checkedAt.current < DOUBLE_TAP_GUARD_MS) {
 			return;
 		}
 

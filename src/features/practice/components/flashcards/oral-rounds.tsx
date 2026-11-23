@@ -1,11 +1,13 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import course from "@/content/voditelj-brodice";
 import { SUBJECT_LABELS } from "@/content/voditelj-brodice/subjects";
 import FlashCard from "@/features/practice/components/flashcards/flash-card";
 import OralSummary from "@/features/practice/components/flashcards/oral-summary";
+import EmptySet from "@/features/practice/components/session/empty-set";
 import SessionActionBar from "@/features/practice/components/session/session-action-bar";
 import SessionTopBar from "@/features/practice/components/session/session-top-bar";
+import { DOUBLE_TAP_GUARD_MS } from "@/features/practice/constants/double-tap";
 import { deckTitle } from "@/features/practice/utils/deck-title";
 import {
 	type DeckId,
@@ -41,11 +43,48 @@ export default function OralRounds({ deck }: IOralRoundsProps) {
 		startFlashcards(cards.map((card) => card.id)),
 	);
 
+	const revealedAt = useRef(0);
+	const cardRef = useRef<HTMLDivElement>(null);
+	const shownCard = useRef<string | null>(null);
+
 	const cardId = currentCardId(state);
 	const card = cards.find((candidate) => candidate.id === cardId);
+	const cardKey = card ? `${state.round}:${card.id}` : null;
+
+	// The grade buttons are gone with the graded card, so focus moves on to the next card.
+	useEffect(() => {
+		if (
+			cardKey &&
+			shownCard.current !== null &&
+			shownCard.current !== cardKey
+		) {
+			cardRef.current?.focus({ preventScroll: true });
+		}
+
+		shownCard.current = cardKey;
+	}, [cardKey]);
+
+	if (cards.length === 0) {
+		return (
+			<EmptySet
+				title={deckTitle(deck)}
+				message="U ovom predmetu nema kartica za tvoju kategoriju. Odaberi drugi predmet na popisu kartica."
+				back={{ to: "/vjezba/usmeno", label: "Natrag na kartice" }}
+			/>
+		);
+	}
+
+	function handleReveal() {
+		revealedAt.current = Date.now();
+		dispatch({ type: "reveal" });
+	}
 
 	function handleGrade(known: boolean) {
-		if (!card) {
+		if (
+			!card ||
+			state.phase !== "back" ||
+			Date.now() - revealedAt.current < DOUBLE_TAP_GUARD_MS
+		) {
 			return;
 		}
 
@@ -77,20 +116,28 @@ export default function OralRounds({ deck }: IOralRoundsProps) {
 			) : (
 				<>
 					<main className="mx-auto max-w-2xl px-4 pt-6 pb-[calc(9rem+env(safe-area-inset-bottom))] sm:px-6">
-						<FlashCard
-							key={`${state.round}:${card.id}`}
-							card={card}
-							subject={subject ? SUBJECT_LABELS[subject] : ""}
-							revealed={state.phase === "back"}
-							onReveal={() => dispatch({ type: "reveal" })}
-						/>
+						<div
+							ref={cardRef}
+							tabIndex={-1}
+							aria-label={`Kartica ${state.index + 1} od ${state.queue.length}`}
+							className="rounded-[1.6rem] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/60"
+						>
+							<FlashCard
+								key={cardKey}
+								card={card}
+								subject={subject ? SUBJECT_LABELS[subject] : ""}
+								revealed={state.phase === "back"}
+								onReveal={handleReveal}
+							/>
+						</div>
 					</main>
 
 					<SessionActionBar>
 						{state.phase === "front" ? (
 							<Button
+								key="reveal"
 								type="button"
-								onClick={() => dispatch({ type: "reveal" })}
+								onClick={handleReveal}
 								className="h-12 w-full rounded-full text-[1rem] font-semibold"
 							>
 								Prikaži odgovor
@@ -98,6 +145,7 @@ export default function OralRounds({ deck }: IOralRoundsProps) {
 						) : (
 							<>
 								<Button
+									key="known"
 									type="button"
 									onClick={() => handleGrade(true)}
 									className="h-12 rounded-full text-[1rem] font-semibold sm:flex-1"
@@ -105,6 +153,7 @@ export default function OralRounds({ deck }: IOralRoundsProps) {
 									Znao sam
 								</Button>
 								<Button
+									key="missed"
 									type="button"
 									variant="outline"
 									onClick={() => handleGrade(false)}

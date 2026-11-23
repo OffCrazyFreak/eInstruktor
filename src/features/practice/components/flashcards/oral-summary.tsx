@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { CircleCheck, RotateCcw } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import SessionActionBar from "@/features/practice/components/session/session-action-bar";
 import { pluralHr } from "@/lib/plural";
@@ -22,6 +23,12 @@ export default function OralSummary({
 	onRepeat,
 }: IOralSummaryProps) {
 	const allKnown = missed === 0;
+	const headingRef = useRef<HTMLHeadingElement>(null);
+
+	// The grade buttons are gone with the last card, so focus starts at the round's result.
+	useEffect(() => {
+		headingRef.current?.focus({ preventScroll: true });
+	}, []);
 
 	return (
 		<>
@@ -29,7 +36,11 @@ export default function OralSummary({
 				<p className="font-mono text-[0.74rem] tracking-[0.2em] text-[#0a63b0] dark:text-[#4cc2ff]">
 					{round === 1 ? "KRAJ KRUGA" : `KRAJ ${round}. KRUGA`}
 				</p>
-				<h1 className="mt-2 font-serif text-[1.9rem] leading-tight">
+				<h1
+					ref={headingRef}
+					tabIndex={-1}
+					className="mt-2 font-serif text-[1.9rem] leading-tight outline-none"
+				>
 					{allKnown ? "Sve znaš za sada" : `Još ${cards(missed)} za ponoviti`}
 				</h1>
 
