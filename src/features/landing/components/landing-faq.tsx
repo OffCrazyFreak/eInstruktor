@@ -4,7 +4,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import { faqs } from "@/features/landing/content";
+import { faqs } from "@/features/landing/constants/landing-content";
 import { cn } from "@/lib/utils";
 
 /** FAQ built on the shadcn Accordion, themed light or dark per section. */

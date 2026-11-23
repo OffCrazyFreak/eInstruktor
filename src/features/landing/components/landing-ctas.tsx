@@ -1,7 +1,7 @@
+import { GoogleIcon } from "@/components/custom/icons/google-icon";
 import { Button } from "@/components/ui/button";
-import { GoogleIcon } from "@/components/ui/google-icon";
-import { cta } from "@/features/landing/content";
-import { signInWithGoogle } from "@/lib/auth-actions";
+import { cta } from "@/features/landing/constants/landing-content";
+import { signInWithGoogle } from "@/lib/auth/sign-in-with-google";
 import { cn } from "@/lib/utils";
 
 /**

@@ -1,4 +1,4 @@
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth/auth-client";
 
 /** Starts the Google sign-in flow and returns to the home page when done. */
 export function signInWithGoogle() {

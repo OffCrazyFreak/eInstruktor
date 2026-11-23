@@ -6,9 +6,9 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import TanStackQueryDevtools from "@/integrations/tanstack-query/devtools";
+import TanStackQueryDevtools from "@/components/custom/devtools/query-devtools-plugin";
+import Footer from "@/components/custom/layout/footer";
+import Header from "@/components/custom/layout/header";
 import appCss from "@/styles.css?url";
 
 interface MyRouterContext {

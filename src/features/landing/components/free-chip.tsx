@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { cta } from "@/features/landing/content";
+import { cta } from "@/features/landing/constants/landing-content";
 import { cn } from "@/lib/utils";
 
 /** The "100% besplatno" chip, built on the shadcn Badge. */

@@ -6,9 +6,10 @@ import {
 	useTransform,
 } from "motion/react";
 import { Card } from "@/components/ui/card";
-import { FreeChip } from "@/features/landing/components/FreeChip";
-import { LandingCtas } from "@/features/landing/components/LandingCtas";
-import { LandingFaq } from "@/features/landing/components/LandingFaq";
+import { FreeChip } from "@/features/landing/components/free-chip";
+import { LandingCtas } from "@/features/landing/components/landing-ctas";
+import { LandingFaq } from "@/features/landing/components/landing-faq";
+import { Speedometer } from "@/features/landing/components/speedometer";
 import {
 	categories,
 	costs,
@@ -18,8 +19,7 @@ import {
 	procedure,
 	quote,
 	readiness,
-} from "@/features/landing/content";
-import { Speedometer } from "@/features/landing/illustrations/Speedometer";
+} from "@/features/landing/constants/landing-content";
 import { cn } from "@/lib/utils";
 
 /**

@@ -1,6 +1,6 @@
 import { Menu } from "lucide-react";
+import { GoogleIcon } from "@/components/custom/icons/google-icon";
 import { Button } from "@/components/ui/button";
-import { GoogleIcon } from "@/components/ui/google-icon";
 import {
 	Sheet,
 	SheetClose,
@@ -8,7 +8,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { signInWithGoogle } from "@/lib/auth-actions";
+import { signInWithGoogle } from "@/lib/auth/sign-in-with-google";
 import { cn } from "@/lib/utils";
 
 /** `active` marks the current page: it stays light blue; the rest are navy. */
