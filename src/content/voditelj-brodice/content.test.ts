@@ -83,7 +83,7 @@ describe("voditelj brodice content", () => {
 	});
 
 	it("starts with lecture 0", () => {
-		expect(course.lessons[0]?.slug).toBe("kako-do-dozvole");
+		expect(course.lessons[0]?.slug).toBe(course.introLessonSlug);
 	});
 
 	it("points every check block at an existing question", () => {

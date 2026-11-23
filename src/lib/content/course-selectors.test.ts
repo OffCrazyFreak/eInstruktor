@@ -6,6 +6,7 @@ import {
 	getLessonsByArea,
 	getQuestions,
 	matchesLevel,
+	subjectOfArea,
 } from "@/lib/content/course-selectors";
 
 describe("matchesLevel", () => {
@@ -40,6 +41,28 @@ describe("course selectors", () => {
 		);
 		expect(forA.length).toBeLessThan(all.length);
 		expect(forA.every((lesson) => lesson.level !== "B")).toBe(true);
+	});
+
+	it("keeps lecture 0 out of its area's list", () => {
+		const slugs = getLessonsByArea(course, "propisi").map(
+			(lesson) => lesson.slug,
+		);
+
+		expect(slugs).not.toContain(course.introLessonSlug);
+		expect(slugs.length).toBeGreaterThan(0);
+	});
+
+	it("maps an area to its exam subject", () => {
+		expect(subjectOfArea(course, "vhf-radio")).toBe("radiotelefonija");
+	});
+
+	it("filters questions by lesson", () => {
+		const questions = getQuestions(course, { lesson: course.introLessonSlug });
+
+		expect(questions.length).toBeGreaterThan(0);
+		expect(questions.every((q) => q.lesson === course.introLessonSlug)).toBe(
+			true,
+		);
 	});
 
 	it("filters questions by area and level", () => {

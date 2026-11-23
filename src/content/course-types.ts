@@ -29,6 +29,8 @@ export type IExamFormat = IOverallExamFormat | IPerSubjectExamFormat;
 export interface ICourse {
 	slug: string;
 	title: string;
+	/** The "how to get the licence" lesson, shown on its own and kept out of area lists and mock exams. */
+	introLessonSlug: string;
 	areas: IArea[];
 	/** Lecture 0 first, then each area's lessons in area order. */
 	lessons: ILesson[];

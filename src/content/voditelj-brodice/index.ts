@@ -85,6 +85,7 @@ const areaModules = [
 const course: ICourse = {
 	slug: "voditelj-brodice",
 	title: "Voditelj brodice",
+	introLessonSlug: lectureZero.slug,
 	areas: areaModules.map((module) => module.area),
 	lessons: [lectureZero, ...areaModules.flatMap((module) => module.lessons)],
 	questions: areaModules.flatMap((module) => module.questions),

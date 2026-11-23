@@ -1,10 +1,7 @@
 import { describe, expect, it } from "vitest";
 import course from "@/content/voditelj-brodice";
+import { subjectOfArea } from "@/lib/content/course-selectors";
 import { questionsForExam } from "@/lib/content/exam-questions";
-
-const subjectOf = new Map(
-	course.areas.map((area) => [area.slug, area.subject]),
-);
 
 describe("questionsForExam", () => {
 	it("draws the A exam from common and A questions only", () => {
@@ -20,7 +17,7 @@ describe("questionsForExam", () => {
 		const perSubject = new Map<string, number>();
 
 		for (const question of questions) {
-			const subject = subjectOf.get(question.area) ?? "";
+			const subject = subjectOfArea(course, question.area) ?? "";
 			perSubject.set(subject, (perSubject.get(subject) ?? 0) + 1);
 		}
 
@@ -29,6 +26,15 @@ describe("questionsForExam", () => {
 			Array(5).fill(course.examFormats.B.questionsPerSubject),
 		);
 		expect(questions.every((q) => q.level !== "A")).toBe(true);
+	});
+
+	it("leaves out the lecture 0 questions", () => {
+		const all = [
+			...questionsForExam(course, "A", 3),
+			...questionsForExam(course, "B", 3),
+		];
+
+		expect(all.some((q) => q.lesson === course.introLessonSlug)).toBe(false);
 	});
 
 	it("repeats the same exam for the same seed", () => {

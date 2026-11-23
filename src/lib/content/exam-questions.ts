@@ -1,21 +1,22 @@
 import type { ExamLevel, ICourse } from "@/content/course-types";
 import type { ExamSubjectId, IQuestion } from "@/content/types";
-import { getQuestions } from "@/lib/content/course-selectors";
+import { getQuestions, subjectOfArea } from "@/lib/content/course-selectors";
 import { seededShuffle } from "@/lib/content/seeded-shuffle";
+
+// Lecture 0 questions are about getting the licence, which the exam does not ask.
+function examPool(course: ICourse, level: ExamLevel): IQuestion[] {
+	return getQuestions(course, { level }).filter(
+		(question) => question.lesson !== course.introLessonSlug,
+	);
+}
 
 function questionsForSubject(
 	course: ICourse,
 	subject: ExamSubjectId,
 	seed: number,
 ): IQuestion[] {
-	const areas = new Set(
-		course.areas
-			.filter((area) => area.subject === subject)
-			.map((area) => area.slug),
-	);
-
-	const pool = getQuestions(course, { level: "B" }).filter((question) =>
-		areas.has(question.area),
+	const pool = examPool(course, "B").filter(
+		(question) => subjectOfArea(course, question.area) === subject,
 	);
 
 	return seededShuffle(pool, seed).slice(
@@ -31,9 +32,10 @@ export function questionsForExam(
 	seed: number,
 ): IQuestion[] {
 	if (level === "A") {
-		const pool = getQuestions(course, { level: "A" });
-
-		return seededShuffle(pool, seed).slice(0, course.examFormats.A.questions);
+		return seededShuffle(examPool(course, "A"), seed).slice(
+			0,
+			course.examFormats.A.questions,
+		);
 	}
 
 	const subjects = [...new Set(course.areas.map((area) => area.subject))];
