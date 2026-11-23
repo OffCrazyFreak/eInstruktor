@@ -17,6 +17,8 @@ interface IEngineAnimationProps {
 	mode: EngineMode;
 	/** Freezes the picture on this stroke and hides its name until revealed, for questions. */
 	frozenStroke?: StrokeId;
+	/** Only the cylinder, for question media. */
+	drawingOnly?: boolean;
 }
 
 const DEGREES_PER_SECOND = 120;
@@ -24,6 +26,7 @@ const DEGREES_PER_SECOND = 120;
 export default function EngineAnimation({
 	mode,
 	frozenStroke,
+	drawingOnly = false,
 }: IEngineAnimationProps) {
 	const [playing, setPlaying] = useAutoplay(!frozenStroke);
 	const [angle, setAngle] = useState(
@@ -46,17 +49,29 @@ export default function EngineAnimation({
 		}
 	});
 
+	const cylinder = (
+		<EngineCylinder
+			mode={mode}
+			angle={angle}
+			label={
+				revealed && stroke && !drawingOnly
+					? `${stroke.name}: ${stroke.text}`
+					: "Presjek cilindra; strelica pokazuje kamo ide klip."
+			}
+		/>
+	);
+
+	if (drawingOnly) {
+		return (
+			<div ref={rootRef} className="mx-auto max-w-xs">
+				{cylinder}
+			</div>
+		);
+	}
+
 	return (
 		<div ref={rootRef} className="grid gap-4 md:grid-cols-2 md:items-center">
-			<EngineCylinder
-				mode={mode}
-				angle={angle}
-				label={
-					revealed && stroke
-						? `${stroke.name}: ${stroke.text}`
-						: "Presjek cilindra; strelica pokazuje kamo ide klip."
-				}
-			/>
+			{cylinder}
 
 			<div className="space-y-3">
 				<ol className="m-0 grid list-none gap-1.5 p-0">

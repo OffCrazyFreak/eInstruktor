@@ -10,6 +10,7 @@ import ConstantBearing from "@/components/custom/visuals/collision-situations/co
 import NarrowChannel from "@/components/custom/visuals/collision-situations/narrow-channel";
 import OptionButtons from "@/components/custom/visuals/shared/option-buttons";
 import {
+	readBoolean,
 	readOption,
 	type VisualProps,
 } from "@/components/custom/visuals/shared/visual-props";
@@ -26,6 +27,8 @@ export interface ICollisionSituationsProps {
 	focus?: (typeof FOCUSES)[number];
 	/** In a crossing, whether you are the vessel that gives way or the one that stands on. */
 	own?: (typeof OWN_ROLES)[number];
+	/** Question media: the scene only, with no situation name, rule or give-way marking. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -35,6 +38,7 @@ export function fromVisualProps(
 		situation: readOption(props, "situation", SITUATIONS),
 		focus: readOption(props, "focus", FOCUSES),
 		own: readOption(props, "own", OWN_ROLES),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -52,11 +56,12 @@ export default function CollisionSituations({
 	situation,
 	focus,
 	own,
+	hideAnswer = false,
 }: ICollisionSituationsProps) {
 	const [selected, setSelected] = useState<SituationId>(situation ?? "head-on");
 
 	if (focus === "constant-bearing") {
-		return <ConstantBearing />;
+		return <ConstantBearing hideAnswer={hideAnswer} />;
 	}
 
 	const scenario =
@@ -65,6 +70,14 @@ export default function CollisionSituations({
 			: selected === "narrow-channel"
 				? null
 				: SCENARIOS[selected as ScenarioId];
+
+	if (hideAnswer) {
+		return scenario ? (
+			<CollisionScene scenario={scenario} hideAnswer />
+		) : (
+			<NarrowChannel hideAnswer />
+		);
+	}
 
 	return (
 		<div className="space-y-4">

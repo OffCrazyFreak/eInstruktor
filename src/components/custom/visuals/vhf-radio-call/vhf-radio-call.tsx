@@ -1,4 +1,5 @@
 import {
+	readBoolean,
 	readOption,
 	type VisualProps,
 } from "@/components/custom/visuals/shared/visual-props";
@@ -17,6 +18,8 @@ export interface IVhfRadioCallProps {
 	call?: CallId;
 	/** "controls" tours the radio's controls; "order" asks for the parts of the call in order. */
 	mode?: (typeof MODES)[number];
+	/** Question media: order mode lists the parts without checking them. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -25,19 +28,21 @@ export function fromVisualProps(
 	return {
 		call: readOption(props, "call", CALL_IDS),
 		mode: readOption(props, "mode", MODES),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
 export default function VhfRadioCall({
 	call = "mayday",
 	mode = "script",
+	hideAnswer = false,
 }: IVhfRadioCallProps) {
 	if (mode === "controls") {
 		return <ControlsTour />;
 	}
 
 	if (mode === "order") {
-		return <CallOrder call={call} />;
+		return <CallOrder call={call} hideAnswer={hideAnswer} />;
 	}
 
 	return <CallScript key={call} call={call} />;

@@ -13,6 +13,8 @@ import { PALETTE } from "@/components/custom/visuals/shared/visual-palette";
 
 interface ICollisionSceneProps {
 	scenario: IScenario;
+	/** Question media: both vessels hold course and nothing marks who gives way. */
+	hideAnswer?: boolean;
 }
 
 const LOOP_SECONDS = 5;
@@ -66,7 +68,10 @@ function trackPath(
 		.join(" ");
 }
 
-export default function CollisionScene({ scenario }: ICollisionSceneProps) {
+export default function CollisionScene({
+	scenario,
+	hideAnswer = false,
+}: ICollisionSceneProps) {
 	const arrowId = useId();
 	const [playing, setPlaying] = useAutoplay();
 	const [t, setT] = useState(0);
@@ -75,8 +80,8 @@ export default function CollisionScene({ scenario }: ICollisionSceneProps) {
 		scenario.other,
 		scenario.windFrom,
 	);
-	const ownTurns = verdict.giveWay !== "b";
-	const otherTurns = verdict.giveWay !== "a";
+	const ownTurns = !hideAnswer && verdict.giveWay !== "b";
+	const otherTurns = !hideAnswer && verdict.giveWay !== "a";
 	const [ownSpeed, otherSpeed] = scenario.speeds;
 
 	const rootRef = useRef<HTMLDivElement>(null);
@@ -94,7 +99,11 @@ export default function CollisionScene({ scenario }: ICollisionSceneProps) {
 				viewBox="0 0 300 300"
 				className="block w-full"
 				role="img"
-				aria-label={`${scenario.title}. ${scenario.explanation}`}
+				aria-label={
+					hideAnswer
+						? "Dva plovila na kursevima koji se sijeku"
+						: `${scenario.title}. ${scenario.explanation}`
+				}
 			>
 				<defs>
 					<RouteArrowMarker id={arrowId} />
@@ -162,8 +171,9 @@ export default function CollisionScene({ scenario }: ICollisionSceneProps) {
 			<div className="flex items-center gap-3">
 				<PlayToggle playing={playing} onToggle={() => setPlaying(!playing)} />
 				<p className="text-[0.8rem] text-[#002c78]/70">
-					Isprekidana crta je put. Narančasti krug: plovilo koje se uklanja.
-					Pravilo: {verdict.rule}.
+					Isprekidana crta je put.
+					{!hideAnswer &&
+						` Narančasti krug: plovilo koje se uklanja. Pravilo: ${verdict.rule}.`}
 				</p>
 			</div>
 		</div>

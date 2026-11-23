@@ -25,6 +25,8 @@ export interface INavigationAreasMapProps {
 	/** Distance rings to draw, in NM. */
 	rings?: number[];
 	showCertificate?: boolean;
+	/** Question media: area names only, with no distances, tint or licence text. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -39,6 +41,7 @@ export function fromVisualProps(
 		certificate: readOption(props, "certificate", CERTIFICATES),
 		rings: rings.length > 0 ? rings : undefined,
 		showCertificate: readBoolean(props, "showCertificate"),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -56,12 +59,24 @@ export default function NavigationAreasMap({
 	certificate,
 	rings = DEFAULT_RINGS,
 	showCertificate = false,
+	hideAnswer = false,
 }: INavigationAreasMapProps) {
 	const sliderId = useId();
 	const [distance, setDistance] = useState(highlight ? middleOf(highlight) : 2);
 	const area = areaAt(distance);
 	const licence = certificateFor(area);
 	const tinted = certificate ? CERTIFICATE_AREAS[certificate] : [area];
+
+	if (hideAnswer) {
+		return (
+			<AreasChart
+				distance={distance}
+				onDistanceChange={setDistance}
+				tinted={[]}
+				rings={[]}
+			/>
+		);
+	}
 
 	return (
 		<div className="space-y-3">

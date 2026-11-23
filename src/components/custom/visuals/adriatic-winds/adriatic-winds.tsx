@@ -12,6 +12,7 @@ import {
 import OptionButtons from "@/components/custom/visuals/shared/option-buttons";
 import QuizChoices from "@/components/custom/visuals/shared/quiz-choices";
 import {
+	readBoolean,
 	readOption,
 	readOptionList,
 	type VisualProps,
@@ -29,6 +30,8 @@ export interface IAdriaticWindsProps {
 	show?: (typeof SHOWS)[number];
 	/** Quiz: the direction whose wind the learner must name. */
 	direction?: Direction;
+	/** Question media: an unlabelled map; in quiz mode the asked direction is drawn, otherwise no wind is. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -40,6 +43,7 @@ export function fromVisualProps(
 		compare: readOptionList(props, "compare", WIND_IDS),
 		show: readOption(props, "show", SHOWS),
 		direction: readOption(props, "direction", DIRECTIONS),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -49,12 +53,25 @@ export default function AdriaticWinds({
 	compare = [],
 	show,
 	direction = "SW",
+	hideAnswer = false,
 }: IAdriaticWindsProps) {
 	const [selected, setSelected] = useState<WindId>(
 		highlight ?? compare[0] ?? "bura",
 	);
 	const [quizDirection, setQuizDirection] = useState<Direction>(direction);
 	const [round, setRound] = useState(0);
+
+	if (hideAnswer) {
+		const asked = WIND_IDS.filter(
+			(id) => mode === "quiz" && WINDS[id].direction === direction,
+		);
+
+		return (
+			<div className="mx-auto max-w-md">
+				<AdriaticMap selected={asked} hideNames />
+			</div>
+		);
+	}
 
 	if (mode === "quiz") {
 		const answer =

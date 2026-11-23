@@ -10,6 +10,7 @@ import ShapeBuilder from "@/components/custom/visuals/day-shapes/shape-builder";
 import OptionButtons from "@/components/custom/visuals/shared/option-buttons";
 import QuizChoices from "@/components/custom/visuals/shared/quiz-choices";
 import {
+	readBoolean,
 	readOption,
 	type VisualProps,
 } from "@/components/custom/visuals/shared/visual-props";
@@ -20,6 +21,8 @@ export interface IDayShapesProps {
 	/** "builder" asks the learner to hang the shapes; "quiz" shows shapes and asks for the state. */
 	mode?: (typeof MODES)[number];
 	state?: DayState;
+	/** Question media: only the shapes, with no state name or picker. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -28,12 +31,14 @@ export function fromVisualProps(
 	return {
 		mode: readOption(props, "mode", MODES),
 		state: readOption(props, "state", STATES),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
 export default function DayShapes({
 	mode = "explore",
 	state,
+	hideAnswer = false,
 }: IDayShapesProps) {
 	const [selected, setSelected] = useState<DayState>(state ?? "anchored");
 	const [round, setRound] = useState(0);
@@ -44,6 +49,10 @@ export default function DayShapes({
 
 	const info = DAY_STATES[selected];
 	const shapesText = info.shapes.map((shape) => SHAPE_NAMES[shape]).join(", ");
+
+	if (hideAnswer) {
+		return <MastFigure shapes={info.shapes} label="Dnevni znak na jarbolu" />;
+	}
 
 	if (mode === "quiz") {
 		const choices = [

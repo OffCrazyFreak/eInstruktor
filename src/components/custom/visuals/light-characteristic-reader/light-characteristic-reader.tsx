@@ -39,6 +39,8 @@ export interface ILightCharacteristicReaderProps {
 	/** Overrides the colour, for codes written without one, e.g. "VQ(3) 5s" with color "W". */
 	color?: string;
 	showSectors?: boolean;
+	/** Question media: the lighthouse and its rhythm only, with no code breakdown. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -48,6 +50,7 @@ export function fromVisualProps(
 		code: readString(props, "code"),
 		color: readOption(props, "color", COLOR_KEYS),
 		showSectors: readBoolean(props, "showSectors"),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -55,6 +58,7 @@ export default function LightCharacteristicReader({
 	code = PRESETS[0],
 	color,
 	showSectors = false,
+	hideAnswer = false,
 }: ILightCharacteristicReaderProps) {
 	const inputId = useId();
 	const sliderId = useId();
@@ -68,6 +72,19 @@ export default function LightCharacteristicReader({
 	const lampColor: LightColor = showSectors
 		? (sector?.color ?? "white")
 		: (light.colors[0] ?? "white");
+
+	if (hideAnswer) {
+		return (
+			<div className="space-y-3 rounded-2xl bg-[#04142e] p-3 text-[#eaf3ff]">
+				<LightPlayer
+					code={text}
+					color={lampColor}
+					playing={playing}
+					onTogglePlaying={() => setPlaying(!playing)}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className="space-y-4">

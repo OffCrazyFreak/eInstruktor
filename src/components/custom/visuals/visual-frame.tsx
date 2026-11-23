@@ -9,6 +9,8 @@ interface IVisualFrameProps {
 	visual: VisualId;
 	caption?: string;
 	props?: VisualProps;
+	/** Question media before the learner answers: the visual leaves out names and text that give the answer away. */
+	hideAnswer?: boolean;
 	className?: string;
 }
 
@@ -21,10 +23,12 @@ export default function VisualFrame({
 	visual,
 	caption,
 	props,
+	hideAnswer = false,
 	className,
 }: IVisualFrameProps) {
 	const Visual = VISUALS[visual];
-	const instance = `${visual}:${JSON.stringify(props ?? {})}`;
+	const shownProps = hideAnswer ? { ...props, hideAnswer: true } : props;
+	const instance = `${visual}:${JSON.stringify(shownProps ?? {})}`;
 
 	return (
 		<figure
@@ -48,7 +52,7 @@ export default function VisualFrame({
 						</div>
 					}
 				>
-					<Visual props={props} />
+					<Visual props={shownProps} />
 				</Suspense>
 			</VisualErrorBoundary>
 

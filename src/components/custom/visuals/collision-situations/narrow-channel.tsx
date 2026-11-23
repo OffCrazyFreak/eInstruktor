@@ -1,15 +1,26 @@
 import BoatIcon from "@/components/custom/visuals/shared/sea/boat-icon";
 import { PALETTE } from "@/components/custom/visuals/shared/visual-palette";
 
+interface INarrowChannelProps {
+	/** Question media: the channel and the large vessel, without your boat on its side of the channel. */
+	hideAnswer?: boolean;
+}
+
 /** A narrow channel: keep to its starboard side and do not hamper a larger vessel that can only use the fairway. */
-export default function NarrowChannel() {
+export default function NarrowChannel({
+	hideAnswer = false,
+}: INarrowChannelProps) {
 	return (
 		<div className="space-y-2">
 			<svg
 				viewBox="0 0 300 300"
 				className="mx-auto block w-full max-w-lg"
 				role="img"
-				aria-label="Uski kanal: brodica plovi uz desni rub, a veliki brod sredinom plovnog puta."
+				aria-label={
+					hideAnswer
+						? "Uski kanal s velikim brodom na sredini plovnog puta."
+						: "Uski kanal: brodica plovi uz desni rub, a veliki brod sredinom plovnog puta."
+				}
 			>
 				<rect width="300" height="300" rx="16" fill={PALETTE.land} />
 				<path
@@ -40,30 +51,36 @@ export default function NarrowChannel() {
 				>
 					veliki brod
 				</text>
-				<BoatIcon x={212} y={220} heading={0} scale={1.3} />
-				<text
-					x="212"
-					y="248"
-					textAnchor="middle"
-					fontSize="11"
-					fontWeight="700"
-					fill={PALETTE.navy}
-				>
-					Ti
-				</text>
-				<path
-					d="M212 200 V120"
-					stroke={PALETTE.sun}
-					strokeWidth="3"
-					strokeDasharray="2 6"
-					strokeLinecap="round"
-				/>
+				{!hideAnswer && (
+					<>
+						<BoatIcon x={212} y={220} heading={0} scale={1.3} />
+						<text
+							x="212"
+							y="248"
+							textAnchor="middle"
+							fontSize="11"
+							fontWeight="700"
+							fill={PALETTE.navy}
+						>
+							Ti
+						</text>
+						<path
+							d="M212 200 V120"
+							stroke={PALETTE.sun}
+							strokeWidth="3"
+							strokeDasharray="2 6"
+							strokeLinecap="round"
+						/>
+					</>
+				)}
 			</svg>
-			<p className="text-[0.9rem] leading-relaxed">
-				U uskom kanalu drži se njegova desnog ruba. Brodica ne smije ometati
-				veliki brod koji može ploviti samo sredinom kanala, a pretjecanje se
-				najavljuje zvučnim signalima i čeka pristanak.
-			</p>
+			{!hideAnswer && (
+				<p className="text-[0.9rem] leading-relaxed">
+					U uskom kanalu drži se njegova desnog ruba. Brodica ne smije ometati
+					veliki brod koji može ploviti samo sredinom kanala, a pretjecanje se
+					najavljuje zvučnim signalima i čeka pristanak.
+				</p>
+			)}
 		</div>
 	);
 }

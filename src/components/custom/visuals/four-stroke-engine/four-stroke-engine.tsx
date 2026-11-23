@@ -22,6 +22,8 @@ export interface IFourStrokeEngineProps {
 	stroke?: StrokeId;
 	/** With `stroke`, freezes the picture on that stroke for a question. */
 	paused?: boolean;
+	/** Question media: the cylinder only, with no stroke names. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -31,6 +33,7 @@ export function fromVisualProps(
 		mode: readOption(props, "mode", MODES),
 		stroke: readOption(props, "stroke", STROKE_IDS),
 		paused: readBoolean(props, "paused"),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -44,6 +47,7 @@ export default function FourStrokeEngine({
 	mode = "four-stroke",
 	stroke,
 	paused = false,
+	hideAnswer = false,
 }: IFourStrokeEngineProps) {
 	const [engine, setEngine] = useState<EngineMode>(
 		mode === "instruments" ? "four-stroke" : mode,
@@ -57,7 +61,7 @@ export default function FourStrokeEngine({
 
 	return (
 		<div className="space-y-4">
-			{!frozen && (
+			{!frozen && !hideAnswer && (
 				<OptionButtons
 					label="Vrsta motora"
 					options={ENGINE_MODES.map((id) => ({
@@ -68,7 +72,12 @@ export default function FourStrokeEngine({
 					onChange={setEngine}
 				/>
 			)}
-			<EngineAnimation key={engine} mode={engine} frozenStroke={frozen} />
+			<EngineAnimation
+				key={engine}
+				mode={engine}
+				frozenStroke={frozen}
+				drawingOnly={hideAnswer}
+			/>
 		</div>
 	);
 }

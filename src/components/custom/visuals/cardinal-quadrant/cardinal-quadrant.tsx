@@ -10,6 +10,7 @@ import { MARKS } from "@/components/custom/visuals/shared/buoy/buoy-marks";
 import MarkScene from "@/components/custom/visuals/shared/buoy/mark-scene";
 import OptionButtons from "@/components/custom/visuals/shared/option-buttons";
 import {
+	readBoolean,
 	readOption,
 	type VisualProps,
 } from "@/components/custom/visuals/shared/visual-props";
@@ -20,6 +21,8 @@ export interface ICardinalQuadrantProps {
 	/** "identify" and "quiz" ask which mark is shown, "pass" asks which side to pass it on. */
 	mode?: (typeof MODES)[number];
 	mark?: Quadrant;
+	/** Question media: the mark only, with no name, passing side or built-in quiz. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -28,14 +31,24 @@ export function fromVisualProps(
 	return {
 		mode: readOption(props, "mode", MODES),
 		mark: readOption(props, "mark", QUADRANTS),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
 export default function CardinalQuadrant({
 	mode = "explore",
 	mark = "N",
+	hideAnswer = false,
 }: ICardinalQuadrantProps) {
 	const [quadrant, setQuadrant] = useState<Quadrant>(mark);
+
+	if (hideAnswer) {
+		return (
+			<div className="mx-auto max-w-md">
+				<MarkScene mark={MARKS[QUADRANT_MARK[mark]]} hideName />
+			</div>
+		);
+	}
 
 	if (mode !== "explore") {
 		return (

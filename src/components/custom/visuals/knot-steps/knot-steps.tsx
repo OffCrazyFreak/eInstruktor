@@ -27,7 +27,8 @@ export function fromVisualProps(
 	return {
 		knot: readOption(props, "knot", KNOT_IDS),
 		compare: readOptionList(props, "compare", KNOT_IDS),
-		hideName: readBoolean(props, "hideName"),
+		hideName:
+			readBoolean(props, "hideName") || readBoolean(props, "hideAnswer"),
 	};
 }
 

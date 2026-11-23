@@ -8,13 +8,18 @@ import { cn } from "@/lib/utils";
 
 interface ICallOrderProps {
 	call: CallId;
+	/** Question media: the parts in shuffled order, with no tapping and no check. */
+	hideAnswer?: boolean;
 }
 
 /** Fixed shuffle so the server and the browser render the same order. */
 const SHUFFLE = [3, 0, 6, 2, 7, 1, 5, 4];
 
 /** Tap the parts of the call in the order you would say them. */
-export default function CallOrder({ call }: ICallOrderProps) {
+export default function CallOrder({
+	call,
+	hideAnswer = false,
+}: ICallOrderProps) {
 	const steps = CALL_SCRIPTS[call].steps(DEFAULT_FIELDS[call]);
 	const shuffled = SHUFFLE.filter((index) => index < steps.length)
 		.map((index) => steps[index])
@@ -22,6 +27,26 @@ export default function CallOrder({ call }: ICallOrderProps) {
 	const [picked, setPicked] = useState<string[]>([]);
 	const [wrong, setWrong] = useState<string | null>(null);
 	const done = picked.length === steps.length;
+
+	if (hideAnswer) {
+		return (
+			<div className="space-y-2">
+				<p className="font-serif text-[1.02rem]">
+					{CALL_SCRIPTS[call].name}: dijelovi poziva, izmiješani
+				</p>
+				<ul className="m-0 flex list-none flex-wrap gap-2 p-0">
+					{shuffled.map((step) => (
+						<li
+							key={step.title}
+							className="rounded-2xl border border-[#002c78]/15 bg-white px-3 py-2 text-[0.88rem]"
+						>
+							{step.title}
+						</li>
+					))}
+				</ul>
+			</div>
+		);
+	}
 
 	function pick(title: string) {
 		if (steps[picked.length]?.title === title) {

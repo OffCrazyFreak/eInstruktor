@@ -34,8 +34,15 @@ function positions(t: number, otherCase: Case) {
 	};
 }
 
+interface IConstantBearingProps {
+	/** Question media: no case picker and no verdict, only the moving picture. */
+	hideAnswer?: boolean;
+}
+
 /** The 45 degree picture of rule 7: watch the bearing to the other vessel over time. */
-export default function ConstantBearing() {
+export default function ConstantBearing({
+	hideAnswer = false,
+}: IConstantBearingProps) {
 	const [caseId, setCaseId] = useState<Case>("risk");
 	const [playing, setPlaying] = useAutoplay();
 	const [t, setT] = useState(0.5);
@@ -55,22 +62,28 @@ export default function ConstantBearing() {
 
 	return (
 		<div ref={rootRef} className="space-y-3">
-			<OptionButtons
-				label="Što se događa"
-				options={[
-					{ value: "risk", label: "Smjer stoji" },
-					{ value: "ahead", label: "Prolazi ispred" },
-					{ value: "astern", label: "Prolazi iza" },
-				]}
-				value={caseId}
-				onChange={setCaseId}
-			/>
+			{!hideAnswer && (
+				<OptionButtons
+					label="Što se događa"
+					options={[
+						{ value: "risk", label: "Smjer stoji" },
+						{ value: "ahead", label: "Prolazi ispred" },
+						{ value: "astern", label: "Prolazi iza" },
+					]}
+					value={caseId}
+					onChange={setCaseId}
+				/>
+			)}
 
 			<svg
 				viewBox="0 0 300 300"
 				className="mx-auto block w-full max-w-lg"
 				role="img"
-				aria-label={VERDICTS[caseId]}
+				aria-label={
+					hideAnswer
+						? "Dva plovila i smjer prema drugom plovilu"
+						: VERDICTS[caseId]
+				}
 			>
 				<rect width="300" height="300" rx="16" fill={PALETTE.sea} />
 				{SAMPLES.filter((sample) => sample < t).map((sample) => {
@@ -130,9 +143,11 @@ export default function ConstantBearing() {
 
 			<div className="flex items-center gap-3">
 				<PlayToggle playing={playing} onToggle={() => setPlaying(!playing)} />
-				<p className="text-[0.9rem] leading-snug" aria-live="polite">
-					{VERDICTS[caseId]}
-				</p>
+				{!hideAnswer && (
+					<p className="text-[0.9rem] leading-snug" aria-live="polite">
+						{VERDICTS[caseId]}
+					</p>
+				)}
 			</div>
 		</div>
 	);

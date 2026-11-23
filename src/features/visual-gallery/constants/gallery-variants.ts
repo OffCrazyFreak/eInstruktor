@@ -1,14 +1,15 @@
 import type { VisualProps } from "@/components/custom/visuals/shared/visual-props";
 import type { VisualId } from "@/content/types";
+import course from "@/content/voditelj-brodice";
 
 interface IGalleryVisual {
 	id: VisualId;
 	title: string;
-	/** Every prop combination the course content passes, plus the extra modes each visual offers. */
+	/** Every prop combination the course content passes, plus the extra modes each visual offers; question media are added below. */
 	variants: VisualProps[];
 }
 
-export const GALLERY: IGalleryVisual[] = [
+const BASE_GALLERY: IGalleryVisual[] = [
 	{
 		id: "iala-buoy-explorer",
 		title: "IALA oznake",
@@ -196,3 +197,30 @@ export const GALLERY: IGalleryVisual[] = [
 		],
 	},
 ];
+
+/** Every question's media as the learner sees it before answering, so the gallery can check nothing gives the answer away. */
+function questionMediaVariants(id: VisualId): VisualProps[] {
+	const seen = new Set<string>();
+
+	return course.questions.flatMap((question) => {
+		if (question.media?.visual !== id) {
+			return [];
+		}
+
+		const props = { ...question.media.props, hideAnswer: true };
+		const key = JSON.stringify(props);
+
+		if (seen.has(key)) {
+			return [];
+		}
+
+		seen.add(key);
+
+		return [props];
+	});
+}
+
+export const GALLERY: IGalleryVisual[] = BASE_GALLERY.map((visual) => ({
+	...visual,
+	variants: [...visual.variants, ...questionMediaVariants(visual.id)],
+}));

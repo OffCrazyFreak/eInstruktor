@@ -12,6 +12,7 @@ import CourseSlider from "@/components/custom/visuals/compass-course-calculator/
 import RoseDial from "@/components/custom/visuals/compass-course-calculator/rose-dial";
 import { PALETTE } from "@/components/custom/visuals/shared/visual-palette";
 import {
+	readBoolean,
 	readNumber,
 	readOption,
 	type VisualProps,
@@ -28,6 +29,8 @@ export interface ICompassCourseCalculatorProps {
 	/** Degrees, east plus and west minus. */
 	variation?: number;
 	deviation?: number;
+	/** Question media: the rose and the heading only, with no worked answer. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -38,6 +41,7 @@ export function fromVisualProps(
 		trueCourse: readNumber(props, "trueCourse", COURSE_RANGE),
 		variation: readNumber(props, "variation", CORRECTION_RANGE),
 		deviation: readNumber(props, "deviation", CORRECTION_RANGE),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -46,6 +50,7 @@ export default function CompassCourseCalculator({
 	trueCourse = 45,
 	variation = 3,
 	deviation = -2,
+	hideAnswer = false,
 }: ICompassCourseCalculatorProps) {
 	const [course, setCourse] = useState(trueCourse);
 	const [variationValue, setVariation] = useState(variation);
@@ -55,6 +60,19 @@ export default function CompassCourseCalculator({
 	const compass = compassFromMagnetic(magnetic, deviationValue);
 	const point = pointName(course);
 	const conversion = mode === "variation-deviation";
+
+	if (hideAnswer) {
+		return (
+			<div className="mx-auto w-full max-w-80">
+				<RoseDial
+					heading={trueCourse}
+					onHeadingChange={() => undefined}
+					label={`Ruža kompasa, kurs ${formatCourse(trueCourse)}`}
+					norths={[]}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center">

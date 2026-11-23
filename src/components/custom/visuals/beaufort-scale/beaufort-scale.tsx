@@ -5,6 +5,7 @@ import {
 } from "@/components/custom/visuals/beaufort-scale/beaufort-data";
 import SeaState from "@/components/custom/visuals/beaufort-scale/sea-state";
 import {
+	readBoolean,
 	readNumber,
 	readOption,
 	type VisualProps,
@@ -16,6 +17,8 @@ export interface IBeaufortScaleProps {
 	mode?: (typeof MODES)[number];
 	/** Force to start on, 0 to 12. */
 	value?: number;
+	/** Question media: the sea and the force only, with no name, speed or scale. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -24,16 +27,29 @@ export function fromVisualProps(
 	return {
 		mode: readOption(props, "mode", MODES),
 		value: readNumber(props, "value", { min: 0, max: 12 }),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
-export default function BeaufortScale({ value = 3 }: IBeaufortScaleProps) {
+export default function BeaufortScale({
+	value = 3,
+	hideAnswer = false,
+}: IBeaufortScaleProps) {
 	const sliderId = useId();
 	const [force, setForce] = useState(Math.round(value));
 	const level = BEAUFORT[force] ?? BEAUFORT[0];
 
 	if (!level) {
 		return null;
+	}
+
+	if (hideAnswer) {
+		return (
+			<div className="space-y-2">
+				<SeaState force={force} label={`More pri ${force} Bofora`} />
+				<p className="font-serif text-2xl">{force} Bofora</p>
+			</div>
+		);
 	}
 
 	return (

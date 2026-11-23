@@ -12,6 +12,7 @@ import {
 import MarkScene from "@/components/custom/visuals/shared/buoy/mark-scene";
 import OptionButtons from "@/components/custom/visuals/shared/option-buttons";
 import {
+	readBoolean,
 	readOption,
 	type VisualProps,
 } from "@/components/custom/visuals/shared/visual-props";
@@ -26,6 +27,8 @@ export interface IIalaBuoyExplorerProps {
 	focus?: Focus;
 	mark?: MarkId;
 	direction?: Direction;
+	/** Question media: the mark only, with no name, meaning or passing side. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -35,6 +38,7 @@ export function fromVisualProps(
 		focus: readOption(props, "focus", FOCUSES),
 		mark: readOption(props, "mark", MARK_IDS),
 		direction: readOption(props, "direction", DIRECTIONS),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -75,6 +79,7 @@ export default function IalaBuoyExplorer({
 	focus = "all",
 	mark: initialMark,
 	direction: initialDirection = "inbound",
+	hideAnswer = false,
 }: IIalaBuoyExplorerProps) {
 	const groups =
 		initialMark && focus === "all" ? FOCUS_GROUPS.all : FOCUS_GROUPS[focus];
@@ -90,6 +95,14 @@ export default function IalaBuoyExplorer({
 
 	function selectGroup(group: MarkGroup) {
 		setMarkId(MARK_IDS.find((id) => MARKS[id].group === group) ?? markId);
+	}
+
+	if (hideAnswer) {
+		return (
+			<div className="mx-auto max-w-md">
+				<MarkScene mark={mark} hideName />
+			</div>
+		);
 	}
 
 	return (

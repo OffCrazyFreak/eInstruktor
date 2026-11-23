@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+	readBoolean,
 	readOption,
 	type VisualProps,
 } from "@/components/custom/visuals/shared/visual-props";
@@ -21,6 +22,8 @@ export interface ISoundSignalPlayerProps {
 	pattern?: PatternId;
 	set?: SignalSet;
 	mode?: (typeof MODES)[number];
+	/** Question media: the meaning cannot be revealed. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -30,6 +33,7 @@ export function fromVisualProps(
 		pattern: readOption(props, "pattern", PATTERN_IDS),
 		set: readOption(props, "set", SETS),
 		mode: readOption(props, "mode", MODES),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -43,6 +47,7 @@ export default function SoundSignalPlayer({
 	pattern,
 	set = "manoeuvre",
 	mode = "list",
+	hideAnswer = false,
 }: ISoundSignalPlayerProps) {
 	const player = useSignalPlayer();
 	const [revealed, setRevealed] = useState(false);
@@ -83,7 +88,7 @@ export default function SoundSignalPlayer({
 						onPlay={() => player.play(id)}
 						onStop={player.stop}
 					>
-						{pattern && !revealed ? (
+						{hideAnswer ? null : pattern && !revealed ? (
 							<button
 								type="button"
 								onClick={() => setRevealed(true)}

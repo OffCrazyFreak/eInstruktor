@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import OptionButtons from "@/components/custom/visuals/shared/option-buttons";
 import {
+	readBoolean,
 	readOption,
 	type VisualProps,
 } from "@/components/custom/visuals/shared/visual-props";
@@ -29,6 +30,8 @@ export interface IShipLightsViewerProps {
 	/** "beam" is the starboard side. */
 	view?: View;
 	mode?: (typeof MODES)[number];
+	/** Question media: the lights from the given view only, with no vessel name or arcs. */
+	hideAnswer?: boolean;
 }
 
 export function fromVisualProps(
@@ -39,6 +42,7 @@ export function fromVisualProps(
 		vessel: readOption(props, "vessel", VESSEL_IDS),
 		view: readOption(props, "view", VIEWS),
 		mode: readOption(props, "mode", MODES),
+		hideAnswer: readBoolean(props, "hideAnswer"),
 	};
 }
 
@@ -68,11 +72,25 @@ export default function ShipLightsViewer({
 	vessel,
 	view,
 	mode = "explore",
+	hideAnswer = false,
 }: IShipLightsViewerProps) {
 	const selectId = useId();
 	const sliderId = useId();
 	const [vesselId, setVesselId] = useState<VesselId>(vessel ?? "power-12-50m");
 	const [bearing, setBearing] = useState(view ? VIEW_BEARINGS[view] : 0);
+
+	if (hideAnswer) {
+		return (
+			<div className="rounded-2xl bg-[#04142e] p-3">
+				<NightView
+					vessel={vesselId}
+					bearing={bearing}
+					lightsOnly
+					label="Svjetla plovila noću"
+				/>
+			</div>
+		);
+	}
 
 	if (mode === "quiz") {
 		return <LightsQuiz />;
