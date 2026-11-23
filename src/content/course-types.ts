@@ -1,4 +1,13 @@
-import type { IArea, ILesson, IQuestion, IStudyCard } from "@/content/types";
+import type {
+	IArea,
+	ILesson,
+	IQuestion,
+	IStudyCard,
+	Level,
+} from "@/content/types";
+
+/** The licence category a learner prepares for; content tagged "common" belongs to both. */
+export type ExamLevel = Exclude<Level, "common">;
 
 /** One pool of questions scored as a whole (category A). */
 export interface IOverallExamFormat {
