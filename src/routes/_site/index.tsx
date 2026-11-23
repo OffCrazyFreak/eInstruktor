@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import LandingPage from "@/features/landing/components/landing-page";
 import pageHead from "@/lib/seo/page-head";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_site/")({
 	head: () =>
 		pageHead({
 			path: "/",

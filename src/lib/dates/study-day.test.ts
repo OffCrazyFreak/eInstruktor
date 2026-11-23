@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { addDays, previousDay, toStudyDay } from "@/lib/dates/study-day";
+import {
+	addDays,
+	daysBetween,
+	previousDay,
+	toStudyDay,
+} from "@/lib/dates/study-day";
 
 describe("toStudyDay", () => {
 	it("uses Zagreb winter time (UTC+1)", () => {
@@ -30,5 +35,13 @@ describe("addDays and previousDay", () => {
 		expect(addDays("2026-12-31", 1)).toBe("2027-01-01");
 		expect(previousDay("2026-03-01")).toBe("2026-02-28");
 		expect(addDays("2026-11-23", 30)).toBe("2026-12-23");
+	});
+});
+
+describe("daysBetween", () => {
+	it("counts calendar days, negative for the past", () => {
+		expect(daysBetween("2026-11-23", "2026-12-23")).toBe(30);
+		expect(daysBetween("2026-03-28", "2026-03-30")).toBe(2);
+		expect(daysBetween("2026-11-23", "2026-11-20")).toBe(-3);
 	});
 });

@@ -12,14 +12,13 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import signInWithGoogle from "@/lib/auth/sign-in-with-google";
-import { cn } from "@/lib/utils";
 
-/** `active` marks the current page: it stays light blue; the rest are navy. */
+// Real routes instead of landing anchors, so the links work on the legal pages and the gallery too.
 const NAV = [
-	{ label: "Lekcije", href: "#ucenje", active: false },
-	{ label: "Vježba", href: "#vjezbanje", active: false },
-	{ label: "Ispit", href: "#ispit", active: false },
-];
+	{ label: "Lekcije", to: "/ucenje" },
+	{ label: "Vježba", to: "/vjezba" },
+	{ label: "Ispit", to: "/ispit" },
+] as const;
 
 export default function Header() {
 	return (
@@ -39,23 +38,14 @@ export default function Header() {
 					aria-label="Glavna navigacija"
 				>
 					{NAV.map((n) => (
-						<a
+						<Link
 							key={n.label}
-							href={n.href}
-							aria-current={n.active ? "page" : undefined}
-							className="group relative text-sm font-medium"
-							style={{ color: n.active ? "#00aef3" : "#002c78" }}
+							to={n.to}
+							className="group relative text-sm font-medium text-[#002c78] data-[status=active]:text-[#00aef3]"
 						>
 							{n.label}
-							<span
-								className={cn(
-									"absolute -bottom-1.5 left-0 h-0.5 w-full origin-left bg-[#00aef3] transition-transform duration-300 ease-out",
-									n.active
-										? "scale-x-100"
-										: "scale-x-0 group-hover:scale-x-100",
-								)}
-							/>
-						</a>
+							<span className="absolute -bottom-1.5 left-0 h-0.5 w-full origin-left scale-x-0 bg-[#00aef3] transition-transform duration-300 ease-out group-hover:scale-x-100 group-data-[status=active]:scale-x-100" />
+						</Link>
 					))}
 				</nav>
 
@@ -91,12 +81,12 @@ export default function Header() {
 							>
 								{NAV.map((n) => (
 									<SheetClose asChild key={n.label}>
-										<a
-											href={n.href}
+										<Link
+											to={n.to}
 											className="rounded-lg px-3 py-3 text-base font-medium text-[#002c78]/80 transition-colors hover:bg-[#eaf3fd] hover:text-[#002c78]"
 										>
 											{n.label}
-										</a>
+										</Link>
 									</SheetClose>
 								))}
 							</nav>

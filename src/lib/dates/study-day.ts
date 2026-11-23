@@ -23,3 +23,7 @@ export function addDays(day: string, days: number): string {
 export function previousDay(day: string): string {
 	return addDays(day, -1);
 }
+
+export function daysBetween(from: string, to: string): number {
+	return Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
+}

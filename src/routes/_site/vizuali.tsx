@@ -11,7 +11,7 @@ const searchSchema = z.object({
 	i: z.number().int().min(0).optional().catch(undefined),
 });
 
-export const Route = createFileRoute("/vizuali")({
+export const Route = createFileRoute("/_site/vizuali")({
 	validateSearch: searchSchema,
 	head: () => ({
 		meta: [
