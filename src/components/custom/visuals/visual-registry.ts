@@ -31,4 +31,8 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 				"@/components/custom/visuals/iala-buoy-explorer/iala-buoy-explorer"
 			),
 	),
+	"cardinal-quadrant": lazyVisual(
+		() =>
+			import("@/components/custom/visuals/cardinal-quadrant/cardinal-quadrant"),
+	),
 };
