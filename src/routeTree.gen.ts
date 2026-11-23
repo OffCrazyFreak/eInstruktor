@@ -16,13 +16,16 @@ import { Route as SiteIndexRouteImport } from './routes/_site/index'
 import { Route as SiteVizualiRouteImport } from './routes/_site/vizuali'
 import { Route as SiteUvjetiRouteImport } from './routes/_site/uvjeti'
 import { Route as SitePrivatnostRouteImport } from './routes/_site/privatnost'
-import { Route as AppVjezbaRouteImport } from './routes/_app/vjezba'
 import { Route as AppPocetnaRouteImport } from './routes/_app/pocetna'
 import { Route as AppNapredakRouteImport } from './routes/_app/napredak'
 import { Route as AppIspitRouteImport } from './routes/_app/ispit'
+import { Route as AppVjezbaIndexRouteImport } from './routes/_app/vjezba/index'
 import { Route as AppUcenjeIndexRouteImport } from './routes/_app/ucenje/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as AppVjezbaSerijaRouteImport } from './routes/_app/vjezba/serija'
+import { Route as AppVjezbaUsmenoIndexRouteImport } from './routes/_app/vjezba/usmeno/index'
 import { Route as AppUcenjeAreaIndexRouteImport } from './routes/_app/ucenje/$area/index'
+import { Route as AppVjezbaUsmenoDeckRouteImport } from './routes/_app/vjezba/usmeno/$deck'
 import { Route as AppUcenjeAreaLessonRouteImport } from './routes/_app/ucenje/$area/$lesson'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -58,11 +61,6 @@ const SitePrivatnostRoute = SitePrivatnostRouteImport.update({
   path: '/privatnost',
   getParentRoute: () => SiteRoute,
 } as any)
-const AppVjezbaRoute = AppVjezbaRouteImport.update({
-  id: '/vjezba',
-  path: '/vjezba',
-  getParentRoute: () => AppRoute,
-} as any)
 const AppPocetnaRoute = AppPocetnaRouteImport.update({
   id: '/pocetna',
   path: '/pocetna',
@@ -78,6 +76,11 @@ const AppIspitRoute = AppIspitRouteImport.update({
   path: '/ispit',
   getParentRoute: () => AppRoute,
 } as any)
+const AppVjezbaIndexRoute = AppVjezbaIndexRouteImport.update({
+  id: '/vjezba/',
+  path: '/vjezba/',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppUcenjeIndexRoute = AppUcenjeIndexRouteImport.update({
   id: '/ucenje/',
   path: '/ucenje/',
@@ -88,9 +91,24 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppVjezbaSerijaRoute = AppVjezbaSerijaRouteImport.update({
+  id: '/vjezba/serija',
+  path: '/vjezba/serija',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVjezbaUsmenoIndexRoute = AppVjezbaUsmenoIndexRouteImport.update({
+  id: '/vjezba/usmeno/',
+  path: '/vjezba/usmeno/',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppUcenjeAreaIndexRoute = AppUcenjeAreaIndexRouteImport.update({
   id: '/ucenje/$area/',
   path: '/ucenje/$area/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVjezbaUsmenoDeckRoute = AppVjezbaUsmenoDeckRouteImport.update({
+  id: '/vjezba/usmeno/$deck',
+  path: '/vjezba/usmeno/$deck',
   getParentRoute: () => AppRoute,
 } as any)
 const AppUcenjeAreaLessonRoute = AppUcenjeAreaLessonRouteImport.update({
@@ -105,14 +123,17 @@ export interface FileRoutesByFullPath {
   '/ispit': typeof AppIspitRoute
   '/napredak': typeof AppNapredakRoute
   '/pocetna': typeof AppPocetnaRoute
-  '/vjezba': typeof AppVjezbaRoute
   '/privatnost': typeof SitePrivatnostRoute
   '/uvjeti': typeof SiteUvjetiRoute
   '/vizuali': typeof SiteVizualiRoute
+  '/vjezba/serija': typeof AppVjezbaSerijaRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/ucenje/': typeof AppUcenjeIndexRoute
+  '/vjezba/': typeof AppVjezbaIndexRoute
   '/ucenje/$area/$lesson': typeof AppUcenjeAreaLessonRoute
+  '/vjezba/usmeno/$deck': typeof AppVjezbaUsmenoDeckRoute
   '/ucenje/$area/': typeof AppUcenjeAreaIndexRoute
+  '/vjezba/usmeno/': typeof AppVjezbaUsmenoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof SiteIndexRoute
@@ -120,14 +141,17 @@ export interface FileRoutesByTo {
   '/ispit': typeof AppIspitRoute
   '/napredak': typeof AppNapredakRoute
   '/pocetna': typeof AppPocetnaRoute
-  '/vjezba': typeof AppVjezbaRoute
   '/privatnost': typeof SitePrivatnostRoute
   '/uvjeti': typeof SiteUvjetiRoute
   '/vizuali': typeof SiteVizualiRoute
+  '/vjezba/serija': typeof AppVjezbaSerijaRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/ucenje': typeof AppUcenjeIndexRoute
+  '/vjezba': typeof AppVjezbaIndexRoute
   '/ucenje/$area/$lesson': typeof AppUcenjeAreaLessonRoute
+  '/vjezba/usmeno/$deck': typeof AppVjezbaUsmenoDeckRoute
   '/ucenje/$area': typeof AppUcenjeAreaIndexRoute
+  '/vjezba/usmeno': typeof AppVjezbaUsmenoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -137,15 +161,18 @@ export interface FileRoutesById {
   '/_app/ispit': typeof AppIspitRoute
   '/_app/napredak': typeof AppNapredakRoute
   '/_app/pocetna': typeof AppPocetnaRoute
-  '/_app/vjezba': typeof AppVjezbaRoute
   '/_site/privatnost': typeof SitePrivatnostRoute
   '/_site/uvjeti': typeof SiteUvjetiRoute
   '/_site/vizuali': typeof SiteVizualiRoute
   '/_site/': typeof SiteIndexRoute
+  '/_app/vjezba/serija': typeof AppVjezbaSerijaRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/_app/ucenje/': typeof AppUcenjeIndexRoute
+  '/_app/vjezba/': typeof AppVjezbaIndexRoute
   '/_app/ucenje/$area/$lesson': typeof AppUcenjeAreaLessonRoute
+  '/_app/vjezba/usmeno/$deck': typeof AppVjezbaUsmenoDeckRoute
   '/_app/ucenje/$area/': typeof AppUcenjeAreaIndexRoute
+  '/_app/vjezba/usmeno/': typeof AppVjezbaUsmenoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -155,14 +182,17 @@ export interface FileRouteTypes {
     | '/ispit'
     | '/napredak'
     | '/pocetna'
-    | '/vjezba'
     | '/privatnost'
     | '/uvjeti'
     | '/vizuali'
+    | '/vjezba/serija'
     | '/api/auth/$'
     | '/ucenje/'
+    | '/vjezba/'
     | '/ucenje/$area/$lesson'
+    | '/vjezba/usmeno/$deck'
     | '/ucenje/$area/'
+    | '/vjezba/usmeno/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -170,14 +200,17 @@ export interface FileRouteTypes {
     | '/ispit'
     | '/napredak'
     | '/pocetna'
-    | '/vjezba'
     | '/privatnost'
     | '/uvjeti'
     | '/vizuali'
+    | '/vjezba/serija'
     | '/api/auth/$'
     | '/ucenje'
+    | '/vjezba'
     | '/ucenje/$area/$lesson'
+    | '/vjezba/usmeno/$deck'
     | '/ucenje/$area'
+    | '/vjezba/usmeno'
   id:
     | '__root__'
     | '/_app'
@@ -186,15 +219,18 @@ export interface FileRouteTypes {
     | '/_app/ispit'
     | '/_app/napredak'
     | '/_app/pocetna'
-    | '/_app/vjezba'
     | '/_site/privatnost'
     | '/_site/uvjeti'
     | '/_site/vizuali'
     | '/_site/'
+    | '/_app/vjezba/serija'
     | '/api/auth/$'
     | '/_app/ucenje/'
+    | '/_app/vjezba/'
     | '/_app/ucenje/$area/$lesson'
+    | '/_app/vjezba/usmeno/$deck'
     | '/_app/ucenje/$area/'
+    | '/_app/vjezba/usmeno/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -255,13 +291,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitePrivatnostRouteImport
       parentRoute: typeof SiteRoute
     }
-    '/_app/vjezba': {
-      id: '/_app/vjezba'
-      path: '/vjezba'
-      fullPath: '/vjezba'
-      preLoaderRoute: typeof AppVjezbaRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/_app/pocetna': {
       id: '/_app/pocetna'
       path: '/pocetna'
@@ -283,6 +312,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIspitRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/vjezba/': {
+      id: '/_app/vjezba/'
+      path: '/vjezba'
+      fullPath: '/vjezba/'
+      preLoaderRoute: typeof AppVjezbaIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/ucenje/': {
       id: '/_app/ucenje/'
       path: '/ucenje'
@@ -297,11 +333,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/vjezba/serija': {
+      id: '/_app/vjezba/serija'
+      path: '/vjezba/serija'
+      fullPath: '/vjezba/serija'
+      preLoaderRoute: typeof AppVjezbaSerijaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/vjezba/usmeno/': {
+      id: '/_app/vjezba/usmeno/'
+      path: '/vjezba/usmeno'
+      fullPath: '/vjezba/usmeno/'
+      preLoaderRoute: typeof AppVjezbaUsmenoIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/ucenje/$area/': {
       id: '/_app/ucenje/$area/'
       path: '/ucenje/$area'
       fullPath: '/ucenje/$area/'
       preLoaderRoute: typeof AppUcenjeAreaIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/vjezba/usmeno/$deck': {
+      id: '/_app/vjezba/usmeno/$deck'
+      path: '/vjezba/usmeno/$deck'
+      fullPath: '/vjezba/usmeno/$deck'
+      preLoaderRoute: typeof AppVjezbaUsmenoDeckRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/ucenje/$area/$lesson': {
@@ -318,20 +375,26 @@ interface AppRouteChildren {
   AppIspitRoute: typeof AppIspitRoute
   AppNapredakRoute: typeof AppNapredakRoute
   AppPocetnaRoute: typeof AppPocetnaRoute
-  AppVjezbaRoute: typeof AppVjezbaRoute
+  AppVjezbaSerijaRoute: typeof AppVjezbaSerijaRoute
   AppUcenjeIndexRoute: typeof AppUcenjeIndexRoute
+  AppVjezbaIndexRoute: typeof AppVjezbaIndexRoute
   AppUcenjeAreaLessonRoute: typeof AppUcenjeAreaLessonRoute
+  AppVjezbaUsmenoDeckRoute: typeof AppVjezbaUsmenoDeckRoute
   AppUcenjeAreaIndexRoute: typeof AppUcenjeAreaIndexRoute
+  AppVjezbaUsmenoIndexRoute: typeof AppVjezbaUsmenoIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppIspitRoute: AppIspitRoute,
   AppNapredakRoute: AppNapredakRoute,
   AppPocetnaRoute: AppPocetnaRoute,
-  AppVjezbaRoute: AppVjezbaRoute,
+  AppVjezbaSerijaRoute: AppVjezbaSerijaRoute,
   AppUcenjeIndexRoute: AppUcenjeIndexRoute,
+  AppVjezbaIndexRoute: AppVjezbaIndexRoute,
   AppUcenjeAreaLessonRoute: AppUcenjeAreaLessonRoute,
+  AppVjezbaUsmenoDeckRoute: AppVjezbaUsmenoDeckRoute,
   AppUcenjeAreaIndexRoute: AppUcenjeAreaIndexRoute,
+  AppVjezbaUsmenoIndexRoute: AppVjezbaUsmenoIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
