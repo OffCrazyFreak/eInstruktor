@@ -19,7 +19,8 @@ The app screens live under the pathless `_app` layout route; the landing, the le
 | `/ucenje` | Lekcija 0 first, then every area with its lesson progress | indexed |
 | `/ucenje/$area` | The area's lessons with done and in-progress marks, and "Brzi pregled" (every lesson's cheat sheet) | indexed |
 | `/ucenje/$area/$lesson` | The lesson reader; Lekcija 0 is `/ucenje/propisi/kako-do-dozvole` | indexed |
-| `/vjezba`, `/ispit`, `/napredak` | "Uskoro" placeholders until their features land | noindex |
+| `/vjezba` and below | Practice and oral cards, see [PRACTICE.md](./PRACTICE.md) | noindex |
+| `/ispit`, `/napredak` | "Uskoro" placeholders until their features land | noindex |
 
 Unknown areas and lessons, or a lesson under the wrong area, return a 404 from the loader. Under `_app` it renders `AppNotFoundPage` inside the shell (never immersive) with a link to `/ucenje`; under `_site` it renders the site `NotFoundPage`. Loaders return only the title and summary for the head, so the lesson body is not sent twice in the page payload.
 
