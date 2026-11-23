@@ -20,6 +20,13 @@ const leitnerEntrySchema = z.object({
 	reviewedOn: studyDaySchema,
 });
 
+const examSubjectResultSchema = z.object({
+	correct: z.number(),
+	total: z.number(),
+	passed: z.boolean(),
+});
+
+// The optional fields came with the exam screens; sessions saved before them still parse.
 const examSessionSchema = z.object({
 	id: z.string(),
 	level: examLevelSchema,
@@ -29,6 +36,20 @@ const examSessionSchema = z.object({
 	finishedAt: z.number().nullable(),
 	score: z.number().nullable(),
 	passed: z.boolean().nullable(),
+	/** Absolute end time, so a reload or a locked phone never resets the clock; null runs without a limit. */
+	endsAt: z.number().nullable().optional().catch(undefined),
+	/** Chosen option ids per question while the exam runs and for the review afterwards. */
+	answers: z
+		.record(z.string(), z.array(z.string()))
+		.optional()
+		.catch(undefined),
+	flaggedIds: z.array(z.string()).optional().catch(undefined),
+	perSubject: z
+		.record(z.string(), examSubjectResultSchema)
+		.optional()
+		.catch(undefined),
+	/** Whether each answered question was right when the exam was handed in, so the review always matches the score. */
+	graded: z.record(z.string(), z.boolean()).optional().catch(undefined),
 });
 
 const lastLessonSchema = z.object({
@@ -93,6 +114,8 @@ export type ILeitnerEntry = z.infer<typeof leitnerEntrySchema>;
 export type LeitnerBox = ILeitnerEntry["box"];
 
 export type IExamSession = z.infer<typeof examSessionSchema>;
+
+export type IExamSubjectResult = z.infer<typeof examSubjectResultSchema>;
 
 export const EMPTY_PROGRESS: IProgressState = Object.freeze(
 	progressSchema.parse({}),

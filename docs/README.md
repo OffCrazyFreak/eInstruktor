@@ -8,3 +8,4 @@
 - [SEO.md](./SEO.md): page heads, canonical URLs, the sitemap and robots, the legal pages and where landing facts live.
 - [APP-SHELL.md](./APP-SHELL.md): the app layout and tabs, the level sheet, the learn routes, the lesson reader and the shared question component.
 - [PROGRESS.md](./PROGRESS.md): the local progress store, its shape, the hook and the derived values (coverage, accuracy, readiness, streak, due items).
+- [EXAM.md](./EXAM.md): the mock exam screens, the end-time timer, scoring per subject and how sessions are stored.
