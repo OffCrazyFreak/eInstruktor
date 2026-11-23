@@ -70,7 +70,7 @@ Exact versions live in [AGENTS.md](./AGENTS.md).
 
 - `pnpm dev` / `pnpm build` / `pnpm preview`
 - `pnpm generate-routes` (TanStack route tree)
-- `pnpm db:push` / `db:generate` / `db:migrate` / `db:studio`
+- `pnpm db:seed` (`--demo` for a demo learner) / `db:push` / `db:generate` / `db:migrate` / `db:studio`
 - `pnpm check` (Biome, TypeScript and tests) / `pnpm lint` / `pnpm format` (Biome)
 - `pnpm test` (Vitest)
 
@@ -78,7 +78,7 @@ More detail (database switch, hooks, tests, the Netlify dev workaround) is in [d
 
 ## Database (Drizzle + Turso)
 
-- Schema: `src/db/schema.ts` (Better Auth tables: `user` / `session` / `account` / `verification`). Hand-maintained, because `@better-auth/cli` (1.4.x) currently lags behind `better-auth` 1.6.x and its generator crashes. Regenerate when the CLI catches up.
+- Schema: `src/db/schema/` with the Better Auth tables in `auth.ts` (`user` / `session` / `account` / `verification`) and the learner progress tables beside them; see [docs/DATABASE.md](./docs/DATABASE.md). The auth tables are hand-maintained, because `@better-auth/cli` (1.4.x) currently lags behind `better-auth` 1.6.x and its generator crashes. Regenerate when the CLI catches up.
 - Client: `src/db/index.ts` (libSQL). `src/db/config.ts` picks the local `file:local.db` unless `DB_MODE=turso`.
 
 ## Auth (Better Auth)
