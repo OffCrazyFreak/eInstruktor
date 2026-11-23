@@ -44,4 +44,10 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 	"day-shapes": lazyVisual(
 		() => import("@/components/custom/visuals/day-shapes/day-shapes"),
 	),
+	"sound-signal-player": lazyVisual(
+		() =>
+			import(
+				"@/components/custom/visuals/sound-signal-player/sound-signal-player"
+			),
+	),
 };
