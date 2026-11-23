@@ -66,10 +66,10 @@ const GithubIcon = forwardRef<GithubIconHandle, GithubIconProps>(
 		});
 
 		const handleEnter = useCallback(
-			(e?: React.MouseEvent<HTMLDivElement>) => {
+			(e: React.MouseEvent<HTMLDivElement>) => {
 				if (!isAnimated || reduced) return;
 				if (!isControlled.current) controls.start("animate");
-				else onMouseEnter?.(e as any);
+				else onMouseEnter?.(e);
 			},
 			[controls, reduced, onMouseEnter, isAnimated],
 		);
@@ -79,7 +79,7 @@ const GithubIcon = forwardRef<GithubIconHandle, GithubIconProps>(
 				if (!isControlled.current) {
 					controls.start("normal");
 				} else {
-					onMouseLeave?.(e as any);
+					onMouseLeave?.(e);
 				}
 			},
 			[controls, onMouseLeave],
