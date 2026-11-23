@@ -30,11 +30,32 @@ const questions = [
 	question("meteorologija-902", "Drugo"),
 ];
 
-function renderSet(deferFeedback = false, onAgain = vi.fn()) {
+const multi: IQuestion = {
+	...question("meteorologija-903", "Više"),
+	type: "multi",
+	options: [
+		{ id: "a", text: "Više jedan", correct: true },
+		{ id: "b", text: "Više dva", correct: true },
+		{ id: "c", text: "Više tri", correct: false },
+	],
+};
+
+let now = Date.parse("2026-11-20T11:00:00Z");
+
+// "Dalje" ignores taps right after "Provjeri", so each step moves the clock past that guard.
+function later() {
+	now += 1000;
+}
+
+function renderSet(
+	deferFeedback = false,
+	onAgain = vi.fn(),
+	set: IQuestion[] = questions,
+) {
 	return renderWithProgress(() => (
 		<PracticeSet
 			title="Meteorologija"
-			questions={questions}
+			questions={set}
 			deferFeedback={deferFeedback}
 			onAgain={onAgain}
 		/>
@@ -45,6 +66,7 @@ describe("PracticeSet", () => {
 	// jsdom has no scrolling; the set scrolls to the top for each new question.
 	beforeEach(() => {
 		vi.spyOn(window, "scrollTo").mockImplementation(() => {});
+		vi.spyOn(Date, "now").mockImplementation(() => now);
 	});
 
 	afterEach(() => {
@@ -75,6 +97,7 @@ describe("PracticeSet", () => {
 		});
 		expect(store.getSnapshot().questionBoxes["meteorologija-901"]?.box).toBe(2);
 
+		later();
 		fireEvent.click(screen.getByRole("button", { name: "Dalje" }));
 
 		expect(screen.getByText("2 / 2")).toBeTruthy();
@@ -87,9 +110,11 @@ describe("PracticeSet", () => {
 
 		fireEvent.click(screen.getByRole("radio", { name: /Prvo točno/ }));
 		fireEvent.click(screen.getByRole("button", { name: "Provjeri" }));
+		later();
 		fireEvent.click(screen.getByRole("button", { name: "Dalje" }));
 		fireEvent.click(screen.getByRole("radio", { name: /Drugo krivo/ }));
 		fireEvent.click(screen.getByRole("button", { name: "Provjeri" }));
+		later();
 		fireEvent.click(screen.getByRole("button", { name: "Pogledaj rezultat" }));
 
 		expect(screen.getByText("KRAJ SERIJE")).toBeTruthy();
@@ -110,12 +135,14 @@ describe("PracticeSet", () => {
 		fireEvent.click(screen.getByRole("button", { name: "Još 10" }));
 
 		expect(onAgain).toHaveBeenCalledOnce();
+		expect(onAgain.mock.calls[0]?.[0]).toHaveLength(2);
 	});
 
 	it("holds back right and wrong until the end when feedback waits", async () => {
 		await renderSet(true);
 
 		fireEvent.click(screen.getByRole("radio", { name: /Prvo krivo/ }));
+		later();
 		fireEvent.click(screen.getByRole("button", { name: "Dalje" }));
 
 		expect(screen.queryByText("Netočno")).toBeNull();
@@ -138,5 +165,78 @@ describe("PracticeSet", () => {
 			"number",
 		);
 		expect(flag.getAttribute("aria-pressed")).toBe("true");
+	});
+
+	it("does not skip the feedback when Provjeri is tapped twice", async () => {
+		await renderSet();
+
+		fireEvent.click(screen.getByRole("radio", { name: /Prvo krivo/ }));
+		fireEvent.click(screen.getByRole("button", { name: "Provjeri" }));
+		fireEvent.click(screen.getByRole("button", { name: "Dalje" }));
+
+		expect(screen.getByText("Netočno")).toBeTruthy();
+		expect(screen.getByText("1 / 2")).toBeTruthy();
+
+		later();
+		fireEvent.click(screen.getByRole("button", { name: "Dalje" }));
+
+		expect(screen.getByText("2 / 2")).toBeTruthy();
+	});
+
+	it("puts focus on the new question after Dalje", async () => {
+		await renderSet();
+
+		fireEvent.click(screen.getByRole("radio", { name: /Prvo točno/ }));
+		fireEvent.click(screen.getByRole("button", { name: "Provjeri" }));
+		later();
+		fireEvent.click(screen.getByRole("button", { name: "Dalje" }));
+
+		expect(document.activeElement?.getAttribute("aria-label")).toBe(
+			"Pitanje 2 od 2",
+		);
+	});
+
+	it("grades a question with several right answers", async () => {
+		const { store } = await renderSet(false, vi.fn(), [multi]);
+
+		fireEvent.click(screen.getByRole("checkbox", { name: /Više jedan/ }));
+		fireEvent.click(screen.getByRole("button", { name: "Provjeri" }));
+
+		expect(screen.getByText("Netočno")).toBeTruthy();
+
+		later();
+		fireEvent.click(screen.getByRole("button", { name: "Pogledaj rezultat" }));
+
+		expect(store.getSnapshot().attempts[0]).toMatchObject({
+			questionId: "meteorologija-903",
+			correct: false,
+			selected: ["a"],
+		});
+	});
+
+	it("counts a multi question right only with every right option", async () => {
+		const { store } = await renderSet(false, vi.fn(), [multi]);
+
+		fireEvent.click(screen.getByRole("checkbox", { name: /Više jedan/ }));
+		fireEvent.click(screen.getByRole("checkbox", { name: /Više dva/ }));
+		fireEvent.click(screen.getByRole("button", { name: "Provjeri" }));
+
+		expect(screen.getByText("Točno")).toBeTruthy();
+		expect(store.getSnapshot().attempts[0]?.selected).toEqual(["a", "b"]);
+	});
+
+	it("leaves at once before any answer and asks after one", async () => {
+		await renderSet();
+
+		expect(screen.getByRole("link", { name: "Zatvori seriju" })).toBeTruthy();
+
+		fireEvent.click(screen.getByRole("radio", { name: /Prvo točno/ }));
+		fireEvent.click(screen.getByRole("button", { name: "Provjeri" }));
+		fireEvent.click(screen.getByRole("button", { name: "Zatvori seriju" }));
+
+		expect(screen.getByText("Prekinuti seriju?")).toBeTruthy();
+		expect(
+			screen.getByRole("link", { name: "Izađi" }).getAttribute("href"),
+		).toBe("/vjezba");
 	});
 });

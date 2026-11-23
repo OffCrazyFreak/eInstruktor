@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ListRestart, RotateCcw } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LoginNudgeSlot from "@/components/custom/login-nudge/login-nudge-slot";
 import { Button } from "@/components/ui/button";
 import type { IQuestion } from "@/content/types";
@@ -15,7 +15,7 @@ interface ISessionEndProps {
 	title: string;
 	questions: IQuestion[];
 	answers: ISessionAnswer[];
-	onAgain: () => void;
+	onAgain: (answers: ISessionAnswer[]) => void;
 }
 
 function verdict(share: number): string {
@@ -37,6 +37,12 @@ export default function SessionEnd({
 	onAgain,
 }: ISessionEndProps) {
 	const [showMistakes, setShowMistakes] = useState(false);
+	const headingRef = useRef<HTMLHeadingElement>(null);
+
+	// The last "Dalje" disappears with the set, so focus starts at the score.
+	useEffect(() => {
+		headingRef.current?.focus({ preventScroll: true });
+	}, []);
 	const summary = sessionSummary(answers, questions);
 	const share = summary.total === 0 ? 0 : summary.correct / summary.total;
 	const mistakes = summary.wrongIds.length;
@@ -54,7 +60,11 @@ export default function SessionEnd({
 				<p className="font-mono text-[0.74rem] tracking-[0.2em] text-[#0a63b0] dark:text-[#4cc2ff]">
 					KRAJ SERIJE
 				</p>
-				<h1 className="mt-3 flex items-baseline gap-3 font-serif">
+				<h1
+					ref={headingRef}
+					tabIndex={-1}
+					className="mt-3 flex items-baseline gap-3 font-serif outline-none"
+				>
 					<span className="text-[3.4rem] leading-none tabular-nums">
 						{summary.correct}
 						<span className="text-muted-foreground"> / {summary.total}</span>
@@ -99,7 +109,7 @@ export default function SessionEnd({
 				</Button>
 				<Button
 					type="button"
-					onClick={onAgain}
+					onClick={() => onAgain(answers)}
 					className="order-first h-12 rounded-full text-[1rem] font-semibold sm:order-none sm:flex-1"
 				>
 					<RotateCcw className="size-4" aria-hidden="true" />

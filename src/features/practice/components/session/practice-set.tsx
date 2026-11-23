@@ -1,13 +1,15 @@
 import { Flag } from "lucide-react";
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { isCorrectSelection } from "@/components/custom/question/grade-answer";
 import QuestionView from "@/components/custom/question/question-view";
 import { Button } from "@/components/ui/button";
 import type { IQuestion } from "@/content/types";
+import LeaveSetSheet from "@/features/practice/components/session/leave-set-sheet";
 import SessionActionBar from "@/features/practice/components/session/session-action-bar";
 import SessionEnd from "@/features/practice/components/session/session-end";
 import SessionTopBar from "@/features/practice/components/session/session-top-bar";
 import {
+	type ISessionAnswer,
 	practiceSessionReducer,
 	startSession,
 } from "@/features/practice/utils/practice-session";
@@ -19,8 +21,11 @@ interface IPracticeSetProps {
 	title: string;
 	questions: IQuestion[];
 	deferFeedback: boolean;
-	onAgain: () => void;
+	onAgain: (answers: ISessionAnswer[]) => void;
 }
+
+// A double tap on "Provjeri" would land its second tap on "Dalje" and skip the feedback, so "Dalje" waits this long after a check.
+const NEXT_AFTER_CHECK_MS = 400;
 
 export default function PracticeSet({
 	title,
@@ -30,6 +35,10 @@ export default function PracticeSet({
 }: IPracticeSetProps) {
 	const { progress, update } = useProgress();
 	const [sessionId] = useState(randomId);
+	const [leaving, setLeaving] = useState(false);
+	const checkedAt = useRef(0);
+	const questionRef = useRef<HTMLDivElement>(null);
+	const shownIndex = useRef<number | null>(null);
 
 	const [state, dispatch] = useReducer(practiceSessionReducer, null, () =>
 		startSession(
@@ -40,6 +49,15 @@ export default function PracticeSet({
 
 	const question = questions[state.index];
 	const isLast = state.index === questions.length - 1;
+
+	// The button that moved on is gone or disabled now, so keyboard and screen reader users start again at the new question.
+	useEffect(() => {
+		if (shownIndex.current !== null && shownIndex.current !== state.index) {
+			questionRef.current?.focus({ preventScroll: true });
+		}
+
+		shownIndex.current = state.index;
+	}, [state.index]);
 
 	if (state.phase === "finished" || !question) {
 		return (
@@ -67,9 +85,15 @@ export default function PracticeSet({
 	}
 
 	function handleCheck() {
-		if (!question || state.selected.length === 0) {
+		if (
+			!question ||
+			state.phase !== "answering" ||
+			state.selected.length === 0
+		) {
 			return;
 		}
+
+		checkedAt.current = Date.now();
 
 		const correct = isCorrectSelection(question, state.selected);
 
@@ -93,6 +117,10 @@ export default function PracticeSet({
 	}
 
 	function handleNext() {
+		if (Date.now() - checkedAt.current < NEXT_AFTER_CHECK_MS) {
+			return;
+		}
+
 		dispatch({ type: "next" });
 		scrollToTop();
 	}
@@ -109,20 +137,34 @@ export default function PracticeSet({
 				title={title}
 				closeTo="/vjezba"
 				closeLabel="Zatvori seriju"
+				onClose={state.answers.length > 0 ? () => setLeaving(true) : undefined}
 				position={{ current: state.index + 1, total: questions.length }}
 				flag={{ flagged, onToggle: handleToggleFlag }}
 			/>
 
+			<LeaveSetSheet
+				open={leaving}
+				answered={state.answers.length}
+				onOpenChange={setLeaving}
+			/>
+
 			<main className="mx-auto max-w-2xl px-4 pt-6 pb-[calc(7rem+env(safe-area-inset-bottom))] sm:px-6">
-				<QuestionView
-					key={question.id}
-					question={question}
-					selected={state.selected}
-					onSelectedChange={(selected) =>
-						dispatch({ type: "select", selected })
-					}
-					revealed={checked}
-				/>
+				<div
+					ref={questionRef}
+					tabIndex={-1}
+					aria-label={`Pitanje ${state.index + 1} od ${questions.length}`}
+					className="rounded-2xl outline-none focus-visible:ring-[3px] focus-visible:ring-ring/60"
+				>
+					<QuestionView
+						key={question.id}
+						question={question}
+						selected={state.selected}
+						onSelectedChange={(selected) =>
+							dispatch({ type: "select", selected })
+						}
+						revealed={checked}
+					/>
+				</div>
 
 				{checked && (
 					<Button
@@ -145,6 +187,7 @@ export default function PracticeSet({
 			<SessionActionBar>
 				{checked ? (
 					<Button
+						key="next"
 						type="button"
 						onClick={handleNext}
 						className="h-12 w-full rounded-full text-[1rem] font-semibold"
@@ -153,6 +196,7 @@ export default function PracticeSet({
 					</Button>
 				) : (
 					<Button
+						key="check"
 						type="button"
 						onClick={handleCheck}
 						disabled={state.selected.length === 0}
