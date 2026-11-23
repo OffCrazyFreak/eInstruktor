@@ -35,4 +35,13 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 		() =>
 			import("@/components/custom/visuals/cardinal-quadrant/cardinal-quadrant"),
 	),
+	"ship-lights-viewer": lazyVisual(
+		() =>
+			import(
+				"@/components/custom/visuals/ship-lights-viewer/ship-lights-viewer"
+			),
+	),
+	"day-shapes": lazyVisual(
+		() => import("@/components/custom/visuals/day-shapes/day-shapes"),
+	),
 };
