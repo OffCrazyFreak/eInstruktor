@@ -81,4 +81,10 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 	"beaufort-scale": lazyVisual(
 		() => import("@/components/custom/visuals/beaufort-scale/beaufort-scale"),
 	),
+	"four-stroke-engine": lazyVisual(
+		() =>
+			import(
+				"@/components/custom/visuals/four-stroke-engine/four-stroke-engine"
+			),
+	),
 };
