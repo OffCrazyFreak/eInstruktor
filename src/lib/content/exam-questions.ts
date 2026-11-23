@@ -4,7 +4,7 @@ import { getQuestions, subjectOfArea } from "@/lib/content/course-selectors";
 import { seededShuffle } from "@/lib/content/seeded-shuffle";
 
 // Lecture 0 questions are about getting the licence, which the exam does not ask.
-function examPool(course: ICourse, level: ExamLevel): IQuestion[] {
+export function examPool(course: ICourse, level: ExamLevel): IQuestion[] {
 	return getQuestions(course, { level }).filter(
 		(question) => question.lesson !== course.introLessonSlug,
 	);
