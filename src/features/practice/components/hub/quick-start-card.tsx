@@ -30,8 +30,7 @@ export default function QuickStartCard({ dueCount }: IQuickStartCardProps) {
 
 			<Button
 				asChild
-				variant="secondary"
-				className="mt-5 h-12 rounded-full px-6 text-[1rem] font-semibold"
+				className="mt-5 h-12 rounded-full bg-[#00aef3] px-6 text-[1rem] font-semibold text-[#002c78] hover:bg-[#4cc2ff]"
 			>
 				<Link to="/vjezba/serija" search={{ mode: "mjesovito", length: 10 }}>
 					Kreni

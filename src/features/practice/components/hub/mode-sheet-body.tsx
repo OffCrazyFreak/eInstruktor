@@ -115,31 +115,33 @@ export default function ModeSheetBody({
 				</div>
 			</div>
 
-			<Button
-				asChild={canStart}
-				disabled={!canStart}
-				className="mt-6 h-12 w-full rounded-full text-[1rem] font-semibold"
-			>
-				{canStart ? (
-					<Link
-						to="/vjezba/serija"
-						search={{
-							mode,
-							area,
-							length,
-							level,
-							feedback: endFeedback ? "end" : "instant",
-						}}
-					>
-						Kreni ({count} {pluralHr(count, "pitanje", "pitanja", "pitanja")})
-						<ArrowRight className="size-4" aria-hidden="true" />
-					</Link>
-				) : (
-					<span>
-						{needsArea && !area ? "Odaberi područje" : "Nema pitanja"}
-					</span>
-				)}
-			</Button>
+			<div className="sticky -bottom-[calc(1.25rem+env(safe-area-inset-bottom))] -mx-5 mt-6 -mb-[calc(1.25rem+env(safe-area-inset-bottom))] border-t border-border bg-background px-5 pt-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
+				<Button
+					asChild={canStart}
+					disabled={!canStart}
+					className="h-12 w-full rounded-full text-[1rem] font-semibold"
+				>
+					{canStart ? (
+						<Link
+							to="/vjezba/serija"
+							search={{
+								mode,
+								area,
+								length,
+								level,
+								feedback: endFeedback ? "end" : "instant",
+							}}
+						>
+							Kreni ({count} {pluralHr(count, "pitanje", "pitanja", "pitanja")})
+							<ArrowRight className="size-4" aria-hidden="true" />
+						</Link>
+					) : (
+						<span>
+							{needsArea && !area ? "Odaberi područje" : "Nema pitanja"}
+						</span>
+					)}
+				</Button>
+			</div>
 		</>
 	);
 }

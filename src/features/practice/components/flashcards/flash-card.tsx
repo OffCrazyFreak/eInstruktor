@@ -11,7 +11,7 @@ interface IFlashCardProps {
 }
 
 const CARD_CLASS =
-	"block w-full rounded-[1.6rem] border border-border bg-card p-5 text-left shadow-[0_1px_0_rgba(0,44,120,0.06),0_12px_32px_-18px_rgba(0,44,120,0.35)] sm:p-7";
+	"w-full rounded-[1.6rem] border border-border bg-card p-5 text-left shadow-[0_1px_0_rgba(0,44,120,0.06),0_12px_32px_-18px_rgba(0,44,120,0.35)] sm:p-7";
 
 export default function FlashCard({
 	card,
@@ -24,7 +24,7 @@ export default function FlashCard({
 	// The front button disappears on reveal, so focus goes to the answer instead of falling back to the page.
 	useEffect(() => {
 		if (revealed) {
-			backRef.current?.focus();
+			backRef.current?.focus({ preventScroll: true });
 		}
 	}, [revealed]);
 
@@ -33,7 +33,7 @@ export default function FlashCard({
 			<button
 				type="button"
 				onClick={onReveal}
-				className={`${CARD_CLASS} min-h-[16rem] cursor-pointer outline-none hover:border-[#0a63b0]/40 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50`}
+				className={`${CARD_CLASS} flex min-h-[16rem] cursor-pointer flex-col items-start outline-none hover:border-[#0a63b0]/40 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50`}
 			>
 				<CardTags card={card} subject={subject} />
 				<span className="mt-6 block font-serif text-[1.45rem] leading-snug sm:text-[1.7rem]">
