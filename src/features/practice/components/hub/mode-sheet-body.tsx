@@ -43,14 +43,18 @@ export default function ModeSheetBody({
 	const count =
 		length === "sve" ? available.length : Math.min(length, available.length);
 
-	const areaChoices = course.areas.map((candidate) => ({
-		area: candidate,
-		count: modeQuestionIds(
-			course,
-			{ mode, level, area: candidate.slug },
-			context,
-		).length,
-	}));
+	const areaChoices = needsArea
+		? course.areas
+				.map((candidate) => ({
+					area: candidate,
+					count: modeQuestionIds(
+						course,
+						{ mode, level, area: candidate.slug },
+						context,
+					).length,
+				}))
+				.filter((choice) => choice.count > 0)
+		: [];
 
 	const canStart = count > 0 && (!needsArea || area !== undefined);
 

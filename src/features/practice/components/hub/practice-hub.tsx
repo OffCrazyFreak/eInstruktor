@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { ExamLevel } from "@/content/course-types";
 import course from "@/content/voditelj-brodice";
 import ModeCard from "@/features/practice/components/hub/mode-card";
 import ModeSheet from "@/features/practice/components/hub/mode-sheet";
@@ -19,6 +20,7 @@ import {
 	practicePool,
 } from "@/features/practice/utils/practice-pool";
 import type { PracticeMode } from "@/features/practice/utils/practice-search";
+import { areaGroups } from "@/lib/content/question-groups";
 import { toStudyDay } from "@/lib/dates/study-day";
 import { pluralHr } from "@/lib/plural";
 import useProgress from "@/lib/progress/use-progress";
@@ -28,9 +30,13 @@ function questionCount(count: number): string {
 }
 
 // Area and mixed sets always have questions, so their chip says how big the pool is instead of a count to clear.
-function countLabel(mode: PracticeMode, count: number): string {
+function countLabel(
+	mode: PracticeMode,
+	count: number,
+	level: ExamLevel,
+): string {
 	if (mode === "podrucje") {
-		return `${course.areas.length} područja`;
+		return `${areaGroups(course, level).length} područja`;
 	}
 
 	return questionCount(count);
@@ -81,7 +87,9 @@ export default function PracticeHub() {
 							<ModeCard
 								info={PRACTICE_MODE_INFO[mode]}
 								countLabel={
-									ready || alwaysOpen ? countLabel(mode, counts[mode]) : null
+									ready || alwaysOpen
+										? countLabel(mode, counts[mode], level)
+										: null
 								}
 								empty={empty}
 								onOpen={() => setOpenMode(mode)}
