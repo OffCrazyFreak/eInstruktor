@@ -28,7 +28,7 @@ export default function AppTopBar() {
 						onClick={signInWithGoogle}
 						aria-label="Prijava Googleom"
 						title="Prijava Googleom"
-						className="grid size-10 place-items-center rounded-full border border-[#002c78]/20 bg-card text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60"
+						className="grid size-11 place-items-center rounded-full border border-[#002c78]/20 bg-card text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60"
 					>
 						<UserRound className="size-5" aria-hidden="true" />
 					</button>

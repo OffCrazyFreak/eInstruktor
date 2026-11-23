@@ -11,7 +11,7 @@ interface IReaderTopBarProps {
 }
 
 const BACK_LINK_CLASS =
-	"grid size-10 shrink-0 place-items-center rounded-full text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60";
+	"grid size-11 shrink-0 place-items-center rounded-full text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60";
 
 export default function ReaderTopBar({
 	title,

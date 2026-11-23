@@ -21,7 +21,7 @@ export default function ExamDateChip({ examDate, today }: IExamDateChipProps) {
 		<LevelSheet>
 			<button
 				type="button"
-				className="inline-flex h-10 items-center gap-1.5 rounded-full bg-[#ffb43c]/20 px-3.5 text-[0.85rem] font-semibold text-[#7a4600] outline-none hover:bg-[#ffb43c]/30 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:text-[#ffd48a]"
+				className="inline-flex h-11 items-center gap-1.5 rounded-full bg-[#ffb43c]/20 px-3.5 text-[0.85rem] font-semibold text-[#7a4600] outline-none hover:bg-[#ffb43c]/30 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:text-[#ffd48a]"
 			>
 				<CalendarClock className="size-4" aria-hidden="true" />
 				{chipText(daysBetween(today, examDate))}
