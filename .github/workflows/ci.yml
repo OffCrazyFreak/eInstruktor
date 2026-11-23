@@ -16,7 +16,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: file:ci.db
+      DB_MODE: local
       BETTER_AUTH_URL: http://localhost:3000
       BETTER_AUTH_SECRET: ci-only-secret-not-used-anywhere-else-000000
     steps:

@@ -1,11 +1,8 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
+import { resolveDbConfig } from "@/db/config";
 import * as schema from "@/db/schema";
 
-// Lokalni razvoj koristi file:local.db ako Turso varijable nisu postavljene.
-const client = createClient({
-	url: process.env.TURSO_DATABASE_URL || "file:local.db",
-	authToken: process.env.TURSO_AUTH_TOKEN || undefined,
-});
+const client = createClient(resolveDbConfig());
 
 export const db = drizzle({ client, schema });
