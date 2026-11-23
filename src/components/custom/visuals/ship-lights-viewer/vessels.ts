@@ -29,7 +29,7 @@ export const VESSELS: Record<VesselId, IVessel> = {
 		note: "Jarbolno svjetlo, bočna svjetla i krmeno svjetlo.",
 	},
 	"power-over-50m": {
-		name: "Motorno plovilo dulje od 50 m",
+		name: "Motorno plovilo 50 m i dulje",
 		group: "power-driven",
 		hull: "power",
 		note: "Dva jarbolna svjetla: prednje niže, stražnje više. Uz to bočna i krmeno.",
