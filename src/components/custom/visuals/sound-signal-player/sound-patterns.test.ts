@@ -63,6 +63,13 @@ describe("scheduleSignal", () => {
 		expect(signalLength(sounds)).toBe(15);
 	});
 
+	it("leaves about 2 s between the two blasts of a stopped power vessel", () => {
+		const sounds = scheduleSignal("fog-power-stopped");
+
+		expect(sounds.map((sound) => sound.start)).toEqual([0, 7]);
+		expect(signalLength(sounds)).toBe(12);
+	});
+
 	it("plays SOS at Morse speed so the long blasts stay distinct but short", () => {
 		const sounds = scheduleSignal("sos");
 

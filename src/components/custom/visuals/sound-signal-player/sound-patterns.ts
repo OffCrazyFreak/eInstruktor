@@ -8,6 +8,8 @@ interface ISignalPattern {
 	meaning: string;
 	/** Morse-speed timing for SOS; prolonged blasts of 4 to 6 s would stretch it past recognition. */
 	morse?: boolean;
+	/** Seconds of silence between blasts when the rule sets one. */
+	gap?: number;
 }
 
 const S: SignalElement = "short";
@@ -62,6 +64,8 @@ export const PATTERNS = {
 		set: "fog",
 		elements: [L, L],
 		meaning: "Motorno plovilo u plovidbi koje stoji i ne kreće se kroz vodu.",
+		/** COLREG rule 35(b): two prolonged blasts about 2 s apart. */
+		gap: 2,
 	},
 	"fog-long-short-short": {
 		set: "fog",
@@ -139,7 +143,9 @@ export function scheduleSignal(id: PatternId): IScheduledSound[] {
 					: timing[element];
 
 		sounds.push({ element, start: cursor, duration });
-		cursor += duration + (element === "stroke" ? TIMING.strokeGap : timing.gap);
+		cursor +=
+			duration +
+			(element === "stroke" ? TIMING.strokeGap : (pattern.gap ?? timing.gap));
 	}
 
 	return sounds;
