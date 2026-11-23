@@ -164,4 +164,21 @@ describe("QuestionView", () => {
 		expect(screen.getByText("Točno")).toBeTruthy();
 		expect(document.activeElement).toBe(document.body);
 	});
+
+	it("shows a read-only review as a plain list with no inputs", async () => {
+		await renderWithRouter(() => (
+			<QuestionView
+				question={single}
+				selected={["b"]}
+				onSelectedChange={() => {}}
+				revealed
+				readOnly
+			/>
+		));
+
+		expect(screen.queryAllByRole("radio")).toHaveLength(0);
+		expect(screen.getAllByRole("listitem")).toHaveLength(2);
+		expect(screen.getByText("Tvoj odgovor, netočno")).toBeTruthy();
+		expect(screen.getByText("Točan odgovor")).toBeTruthy();
+	});
 });

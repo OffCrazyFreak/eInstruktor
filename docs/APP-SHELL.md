@@ -20,7 +20,8 @@ The app screens live under the pathless `_app` layout route; the landing, the le
 | `/ucenje/$area` | The area's lessons with done and in-progress marks, and "Brzi pregled" (every lesson's cheat sheet) | indexed |
 | `/ucenje/$area/$lesson` | The lesson reader; Lekcija 0 is `/ucenje/propisi/kako-do-dozvole` | indexed |
 | `/vjezba` and below | Practice and oral cards, see [PRACTICE.md](./PRACTICE.md) | noindex |
-| `/ispit`, `/napredak` | "Uskoro" placeholders until their features land | noindex |
+| `/ispit`, `/ispit/$sessionId`, `/ispit/rezultat/$sessionId`, `/ispit/povijest` | The mock exam: start, running exam (immersive), result with review, history; see [EXAM.md](./EXAM.md) | noindex |
+| `/napredak` | "Uskoro" placeholder until its feature lands | noindex |
 
 Unknown areas and lessons, or a lesson under the wrong area, return a 404 from the loader. Under `_app` it renders `AppNotFoundPage` inside the shell (never immersive) with a link to `/ucenje`; under `_site` it renders the site `NotFoundPage`. Loaders return only the title and summary for the head, so the lesson body is not sent twice in the page payload.
 
@@ -34,7 +35,7 @@ Unknown areas and lessons, or a lesson under the wrong area, return a 404 from t
 
 ## Question component
 
-`src/components/custom/question/question-view.tsx` is the one question view for learn, practice and exam. The caller owns the selection, the check button and what an answer records.
+`src/components/custom/question/question-view.tsx` is the one question view for learn, practice and exam. The caller owns the selection, the check button and what an answer records. The exam passes `revealed={false}` while it runs, which is its no-feedback mode, and `revealed` in the review.
 
 - Single and true-false questions are a `radiogroup` of native radios named by the prompt, so arrow keys work; multi questions are checkboxes in a fieldset. Rows are at least 56 px high and show focus.
 - With `revealed`, every option shows whether it was right (icon and text, never colour alone), and the feedback panel shows "Točno" or "Netočno", the explanation, the rule and a "Pročitaj lekciju" link. Focus moves to the panel and a polite live region announces it, but only when the answer is revealed after mount; a question shown already answered leaves focus alone.

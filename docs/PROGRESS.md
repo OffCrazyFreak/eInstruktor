@@ -10,7 +10,8 @@ Anonymous progress is stored in the browser under `PROGRESS_STORAGE_KEY` (`src/l
 - `attempts`: client uuid, question id, correct, selected option ids, mode (`practice`, `exam`, `check`), session id and time. Append only, keeping the newest 4000 (`MAX_STORED_ATTEMPTS`) so localStorage stays well under its quota.
 - `lessonsDone` (slug to time), `lastLesson` (slug, time, share read), `flagged`.
 - `questionBoxes` and `cardBoxes`: three-box Leitner state per question and per oral card.
-- `examSessions`, `studyDays` (Zagreb calendar days that counted) and `dismissedNudges`.
+- `examSessions`: level, seed, ordered question ids, start, finish, score and passed, plus the optional `endsAt`, `answers`, `flaggedIds` and `perSubject` the exam screens write (sessions saved without them still parse).
+- `studyDays` (Zagreb calendar days that counted) and `dismissedNudges`.
 
 Change the shape only together with a new version suffix on the key and a migration.
 
@@ -21,6 +22,7 @@ Change the shape only together with a new version suffix on the key and a migrat
 - `useProgress()` returns `{ progress, ready, level, update }` through `useSyncExternalStore`. The server and the hydration render get the empty state with `ready` false, so the markup never mismatches; show progress-dependent UI only when `ready`.
 - `progress-actions.ts` has the pure updates: `recordAnswer`, `markLessonDone`, `markLessonUnread`, `openLesson`, `setLessonPercent`, `toggleFlag`, `setTargetLevel`, `setExamDate`. Call them as `update((current) => recordAnswer(current, answer))`.
 - `practice/practice-actions.ts` has `gradeCard` for the oral cards, and `practice/practice-selectors.ts` has `wrongQuestionIds` and `flaggedIds` for the practice modes (see [PRACTICE.md](./PRACTICE.md)).
+- `exam-session-actions.ts` and `exam-session-selectors.ts` hold the mock exam updates and reads; see [EXAM.md](./EXAM.md).
 
 ## Derived values
 
