@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 import type { ExamSubjectId, Level, VisualId } from "@/content/types";
 import course from "@/content/voditelj-brodice";
+import { matchesLevel } from "@/lib/content/course-selectors";
 
 // A Record forces this list to name every VisualId, so the runtime check cannot fall behind the type.
-const VISUAL_IDS: Record<VisualId, true> = {
+const VISUAL_ID_RECORD: Record<VisualId, true> = {
 	"iala-buoy-explorer": true,
 	"cardinal-quadrant": true,
 	"ship-lights-viewer": true,
@@ -21,6 +22,8 @@ const VISUAL_IDS: Record<VisualId, true> = {
 	"knot-steps": true,
 };
 
+const VISUAL_IDS = new Set<string>(Object.keys(VISUAL_ID_RECORD));
+
 const EXAM_SUBJECTS: ExamSubjectId[] = [
 	"pomorska-plovidba",
 	"motoristika",
@@ -29,7 +32,8 @@ const EXAM_SUBJECTS: ExamSubjectId[] = [
 	"radiotelefonija",
 ];
 
-const EN_OR_EM_DASH = /[\u2013\u2014]/;
+// En dash, em dash, minus sign and horizontal bar all read as a long dash.
+const LONG_DASH = /[\u2013\u2014\u2015\u2212]/;
 
 function findDuplicates(values: string[]): string[] {
 	const seen = new Set<string>();
@@ -49,7 +53,18 @@ function countCorrect(options: { correct: boolean }[]): number {
 	return options.filter((option) => option.correct).length;
 }
 
-const questionIds = new Set(course.questions.map((question) => question.id));
+const questionsById = new Map(
+	course.questions.map((question) => [question.id, question]),
+);
+
+const lessonSlugs = new Set(course.lessons.map((lesson) => lesson.slug));
+
+// A check block may only use a question its own readers get in practice: common blocks need common questions.
+function isVisibleAtBlock(questionLevel: Level, blockLevel: Level): boolean {
+	return blockLevel === "common"
+		? questionLevel === "common"
+		: matchesLevel(questionLevel, blockLevel);
+}
 
 const blocks = course.lessons.flatMap((lesson) =>
 	lesson.blocks.map((block) => ({ lesson: lesson.slug, block })),
@@ -73,12 +88,53 @@ describe("voditelj brodice content", () => {
 
 	it("points every check block at an existing question", () => {
 		const missing = blocks.flatMap(({ lesson, block }) =>
-			block.type === "check" && !questionIds.has(block.questionId)
+			block.type === "check" && !questionsById.has(block.questionId)
 				? [`${lesson}:${block.questionId}`]
 				: [],
 		);
 
 		expect(missing).toEqual([]);
+	});
+
+	it("checks only questions visible at the block's level", () => {
+		const hidden = blocks.flatMap(({ lesson, block }) => {
+			const question =
+				block.type === "check"
+					? questionsById.get(block.questionId)
+					: undefined;
+
+			if (!question) {
+				return [];
+			}
+
+			return isVisibleAtBlock(question.level, block.level)
+				? []
+				: [`${lesson}:${question.id}`];
+		});
+
+		expect(hidden).toEqual([]);
+	});
+
+	it("links every question to an existing lesson", () => {
+		const orphans = course.questions
+			.filter(
+				(question) => question.lesson && !lessonSlugs.has(question.lesson),
+			)
+			.map((question) => question.id);
+
+		expect(orphans).toEqual([]);
+	});
+
+	it("gives true-false questions exactly the options t and f", () => {
+		const wrong = course.questions
+			.filter((question) => question.type === "true-false")
+			.filter(
+				(question) =>
+					question.options.map((option) => option.id).join() !== "t,f",
+			)
+			.map((question) => question.id);
+
+		expect(wrong).toEqual([]);
 	});
 
 	it("has exactly one correct option for single and true-false questions", () => {
@@ -109,11 +165,11 @@ describe("voditelj brodice content", () => {
 			),
 		];
 
-		expect(used.filter((visual) => !(visual in VISUAL_IDS))).toEqual([]);
+		expect(used.filter((visual) => !VISUAL_IDS.has(visual))).toEqual([]);
 	});
 
-	it("has no em or en dashes", () => {
-		expect(JSON.stringify(course)).not.toMatch(EN_OR_EM_DASH);
+	it("has no long dashes", () => {
+		expect(JSON.stringify(course)).not.toMatch(LONG_DASH);
 	});
 
 	it("has questions for every level an area teaches", () => {
