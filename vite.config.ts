@@ -12,7 +12,8 @@ const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     devtools(),
-    netlify(),
+    // Netlify's Deno emulator passes a flag newer Deno rejects (netlify/primitives PR 790); we have no edge functions.
+    netlify({ dev: { edgeFunctions: { enabled: false } } }),
     tailwindcss(),
     tanstackStart(),
     viteReact(),
