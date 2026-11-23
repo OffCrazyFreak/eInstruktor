@@ -54,7 +54,9 @@ export default function ResumeCard({ session }: IResumeCardProps) {
 			</Button>
 
 			<p className="mt-3 text-[0.85rem] text-[#eaf3ff]/80">
-				Ako kreneš ispočetka, ovaj se ispit briše.
+				{timeUp
+					? "Ako kreneš ispočetka, ovaj se predaje i ostaje u povijesti."
+					: "Ako kreneš ispočetka, ovaj se ispit briše."}
 			</p>
 		</section>
 	);

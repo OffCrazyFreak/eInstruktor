@@ -14,6 +14,7 @@ import {
 	type TimerChoice,
 	timerMinutes,
 } from "@/features/exam/utils/exam-timer";
+import { submitIfExpired } from "@/features/exam/utils/submit-exam";
 import { questionsForExam } from "@/lib/content/exam-questions";
 import { startExamSession } from "@/lib/progress/exam-session-actions";
 import {
@@ -72,8 +73,16 @@ export default function ExamStartPage() {
 		const seed = newSeed();
 		const startedAt = Date.now();
 
-		update((current) =>
-			startExamSession(current, {
+		update((current) => {
+			const previous = activeExamSession(current);
+			const settled = previous
+				? submitIfExpired(course, current, previous.id, {
+						now: startedAt,
+						makeId: randomId,
+					})
+				: current;
+
+			return startExamSession(settled, {
 				id,
 				level,
 				seed,
@@ -82,8 +91,8 @@ export default function ExamStartPage() {
 				),
 				startedAt,
 				endsAt: examEndsAt(startedAt, timerMinutes(course, level, timer)),
-			}),
-		);
+			});
+		});
 
 		void navigate({ to: "/ispit/$sessionId", params: { sessionId: id } });
 	}

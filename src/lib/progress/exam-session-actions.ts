@@ -27,7 +27,10 @@ export interface IExamOutcome {
 }
 
 export interface IExamFinish {
+	/** When the exam ended; the end time for one handed in by the clock. */
 	finishedAt: number;
+	/** When the answers are recorded, which counts for the study day; later than finishedAt when an expired exam is reopened. Defaults to finishedAt. */
+	answeredAt?: number;
 	/** Makes the client id of each recorded attempt. */
 	makeId: () => string;
 }
@@ -122,7 +125,7 @@ export function finishExamSession(
 	progress: IProgressState,
 	sessionId: string,
 	outcome: IExamOutcome,
-	{ finishedAt, makeId }: IExamFinish,
+	{ finishedAt, answeredAt = finishedAt, makeId }: IExamFinish,
 ): IProgressState {
 	const finished = updateSession(progress, sessionId, (session) => ({
 		...session,
@@ -130,6 +133,9 @@ export function finishExamSession(
 		score: outcome.score,
 		passed: outcome.passed,
 		perSubject: outcome.perSubject,
+		graded: Object.fromEntries(
+			outcome.graded.map(({ questionId, correct }) => [questionId, correct]),
+		),
 	}));
 
 	if (finished === progress) {
@@ -149,7 +155,7 @@ export function finishExamSession(
 				selected: answers[questionId] ?? [],
 				mode: "exam",
 				sessionId,
-				answeredAt: finishedAt,
+				answeredAt,
 			}),
 		finished,
 	);

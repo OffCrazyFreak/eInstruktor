@@ -48,6 +48,8 @@ const examSessionSchema = z.object({
 		.record(z.string(), examSubjectResultSchema)
 		.optional()
 		.catch(undefined),
+	/** Whether each answered question was right when the exam was handed in, so the review always matches the score. */
+	graded: z.record(z.string(), z.boolean()).optional().catch(undefined),
 });
 
 const lastLessonSchema = z.object({

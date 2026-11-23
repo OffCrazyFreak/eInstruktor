@@ -185,4 +185,23 @@ describe("discardExamSession", () => {
 			[],
 		);
 	});
+
+	it("stamps the attempts, which decide the study day, with answeredAt when given", () => {
+		const nextDay = Date.parse("2026-11-21T09:00:00Z");
+		const progress = finishExamSession(answeredExam(), "exam-1", outcome, {
+			finishedAt: NOON + 60_000,
+			answeredAt: nextDay,
+			makeId: idMaker(),
+		});
+
+		expect(progress.examSessions[0]?.finishedAt).toBe(NOON + 60_000);
+		expect(progress.attempts.map((attempt) => attempt.answeredAt)).toEqual([
+			nextDay,
+			nextDay,
+		]);
+		expect(progress.examSessions[0]?.graded).toEqual({
+			"q-1": true,
+			"q-2": false,
+		});
+	});
 });

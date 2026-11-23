@@ -13,18 +13,12 @@ import {
 	blockQuestions,
 	examBlocks,
 } from "@/features/exam/utils/exam-blocks";
-import { scoreExam } from "@/features/exam/utils/score-exam";
+import { submitExam } from "@/features/exam/utils/submit-exam";
 import {
-	finishExamSession,
 	setExamAnswer,
 	toggleExamFlag,
 } from "@/lib/progress/exam-session-actions";
-import {
-	answeredCount,
-	findExamSession,
-	isAnswered,
-	isFlagged,
-} from "@/lib/progress/exam-session-selectors";
+import { isAnswered, isFlagged } from "@/lib/progress/exam-session-selectors";
 import type { IExamSession } from "@/lib/progress/progress-schema";
 import useProgress from "@/lib/progress/use-progress";
 import randomId from "@/lib/random-id";
@@ -71,6 +65,10 @@ export default function ExamRunner({
 		finish(Math.min(Date.now(), session.endsAt ?? Date.now())),
 	);
 
+	const answered = questions.filter((item) =>
+		isAnswered(session, item.id),
+	).length;
+
 	useEffect(() => {
 		void navigate({ search: { pitanje: index + 1 }, replace: true });
 
@@ -89,25 +87,13 @@ export default function ExamRunner({
 		setConfirmOpen(false);
 		setGridOpen(false);
 
-		update((current) => {
-			const latest = findExamSession(current, session.id);
-
-			if (!latest) {
-				return current;
-			}
-
-			const score = scoreExam(
-				course,
-				latest.level,
-				examBlocks(course, latest.level, latest.questionIds),
-				latest.answers ?? {},
-			);
-
-			return finishExamSession(current, session.id, score, {
+		update((current) =>
+			submitExam(course, current, session.id, {
 				finishedAt,
+				answeredAt: Date.now(),
 				makeId: randomId,
-			});
-		});
+			}),
+		);
 	}
 
 	function openSubmit() {
@@ -190,7 +176,7 @@ export default function ExamRunner({
 			<SubmitDialog
 				open={confirmOpen}
 				onOpenChange={setConfirmOpen}
-				answered={answeredCount(session)}
+				answered={answered}
 				total={questions.length}
 				flagged={session.flaggedIds?.length ?? 0}
 				onConfirm={() => finish(Date.now())}
