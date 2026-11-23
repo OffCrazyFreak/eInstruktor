@@ -68,4 +68,11 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 				"@/components/custom/visuals/light-characteristic-reader/light-characteristic-reader"
 			),
 	),
+	"vhf-radio-call": lazyVisual(
+		() => import("@/components/custom/visuals/vhf-radio-call/vhf-radio-call"),
+	),
+	"phonetic-alphabet": lazyVisual(
+		() =>
+			import("@/components/custom/visuals/phonetic-alphabet/phonetic-alphabet"),
+	),
 };
