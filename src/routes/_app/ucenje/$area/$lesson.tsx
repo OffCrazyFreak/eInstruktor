@@ -1,4 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import AppNotFoundPage from "@/components/custom/app-shell/app-not-found-page";
 import type { ICourse } from "@/content/course-types";
 import course from "@/content/voditelj-brodice";
 import LessonReader from "@/features/learn/components/reader/lesson-reader";
@@ -31,6 +32,7 @@ export const Route = createFileRoute("/_app/ucenje/$area/$lesson")({
 			description:
 				loaderData?.summary ?? "Lekcija za ispit za voditelja brodice.",
 		}),
+	notFoundComponent: AppNotFoundPage,
 	component: LessonRoute,
 });
 

@@ -9,7 +9,11 @@ import { cn } from "@/lib/utils";
 /** Top bar and bottom tabs (a left rail from lg); immersive routes such as the lesson reader bring their own bars. */
 export default function AppLayout() {
 	const immersive = useMatches({
-		select: (matches) => matches.some((match) => match.staticData.immersive),
+		// A 404 inside a full-screen route keeps the app bars, so the learner can find the way back.
+		select: (matches) =>
+			matches.some(
+				(match) => match.staticData.immersive && match.status !== "notFound",
+			),
 	});
 
 	return (

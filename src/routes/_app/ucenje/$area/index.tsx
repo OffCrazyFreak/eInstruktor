@@ -1,4 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import AppNotFoundPage from "@/components/custom/app-shell/app-not-found-page";
 import areasIndex from "@/content/voditelj-brodice/areas-index";
 import AreaPage from "@/features/learn/components/area-page";
 import pageHead from "@/lib/seo/page-head";
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/_app/ucenje/$area/")({
 			description:
 				loaderData?.summary ?? "Lekcije za ispit za voditelja brodice.",
 		}),
+	notFoundComponent: AppNotFoundPage,
 	component: AreaRoute,
 });
 
