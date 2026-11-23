@@ -22,18 +22,13 @@ export interface IScenario {
 	explanation: string;
 }
 
-const power = (x: number, y: number, heading: number): IVesselState => ({
-	x,
-	y,
-	heading,
-	kind: "power",
-});
-const sail = (x: number, y: number, heading: number): IVesselState => ({
-	x,
-	y,
-	heading,
-	kind: "sail",
-});
+function power(x: number, y: number, heading: number): IVesselState {
+	return { x, y, heading, kind: "power" };
+}
+
+function sail(x: number, y: number, heading: number): IVesselState {
+	return { x, y, heading, kind: "sail" };
+}
 
 export const SCENARIOS: Record<ScenarioId, IScenario> = {
 	"head-on": {

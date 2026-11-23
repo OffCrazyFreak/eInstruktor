@@ -17,10 +17,6 @@ export default function BuoyTopmark({
 	x,
 	y,
 }: IBuoyTopmarkProps) {
-	const up = (cy: number) =>
-		`${x - S},${cy + S * 0.8} ${x + S},${cy + S * 0.8} ${x},${cy - S * 0.8}`;
-	const down = (cy: number) =>
-		`${x - S},${cy - S * 0.8} ${x + S},${cy - S * 0.8} ${x},${cy + S * 0.8}`;
 	const stroke = {
 		stroke: color,
 		strokeWidth: 5,
@@ -32,37 +28,37 @@ export default function BuoyTopmark({
 			return <rect x={x - 9} y={y - 10} width="18" height="20" fill={color} />;
 
 		case "cone-up":
-			return <polygon points={up(y)} fill={color} />;
+			return <polygon points={coneUp(x, y)} fill={color} />;
 
 		case "cones-up":
 			return (
 				<g fill={color}>
-					<polygon points={up(y - 9)} />
-					<polygon points={up(y + 10)} />
+					<polygon points={coneUp(x, y - 9)} />
+					<polygon points={coneUp(x, y + 10)} />
 				</g>
 			);
 
 		case "cones-down":
 			return (
 				<g fill={color}>
-					<polygon points={down(y - 10)} />
-					<polygon points={down(y + 9)} />
+					<polygon points={coneDown(x, y - 10)} />
+					<polygon points={coneDown(x, y + 9)} />
 				</g>
 			);
 
 		case "cones-base-to-base":
 			return (
 				<g fill={color}>
-					<polygon points={up(y - 9)} />
-					<polygon points={down(y + 9)} />
+					<polygon points={coneUp(x, y - 9)} />
+					<polygon points={coneDown(x, y + 9)} />
 				</g>
 			);
 
 		case "cones-point-to-point":
 			return (
 				<g fill={color}>
-					<polygon points={down(y - 9)} />
-					<polygon points={up(y + 9)} />
+					<polygon points={coneDown(x, y - 9)} />
+					<polygon points={coneUp(x, y + 9)} />
 				</g>
 			);
 
@@ -93,4 +89,12 @@ export default function BuoyTopmark({
 				</g>
 			);
 	}
+}
+
+function coneUp(x: number, cy: number): string {
+	return `${x - S},${cy + S * 0.8} ${x + S},${cy + S * 0.8} ${x},${cy - S * 0.8}`;
+}
+
+function coneDown(x: number, cy: number): string {
+	return `${x - S},${cy - S * 0.8} ${x + S},${cy - S * 0.8} ${x},${cy + S * 0.8}`;
 }

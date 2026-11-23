@@ -31,7 +31,9 @@ interface IKnot {
 	steps: IKnotStep[];
 }
 
-const r = (d: string, tone: RopeTone = "rope"): IRope => ({ d, tone });
+function r(d: string, tone: RopeTone = "rope"): IRope {
+	return { d, tone };
+}
 
 export const KNOTS: Record<KnotId, IKnot> = {
 	pasnjak: {

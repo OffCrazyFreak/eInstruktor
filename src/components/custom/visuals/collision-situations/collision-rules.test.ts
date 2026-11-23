@@ -5,12 +5,14 @@ import {
 	tackOf,
 } from "@/components/custom/visuals/collision-situations/collision-rules";
 
-const vessel = (
+function vessel(
 	x: number,
 	y: number,
 	heading: number,
 	kind: IVesselState["kind"] = "power",
-): IVesselState => ({ x, y, heading, kind });
+): IVesselState {
+	return { x, y, heading, kind };
+}
 
 describe("classifySituation", () => {
 	it("makes both alter course when meeting head on", () => {

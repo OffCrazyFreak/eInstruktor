@@ -1,8 +1,7 @@
 import { useId, useState } from "react";
 import LightPlayer from "@/components/custom/visuals/light-characteristic-reader/light-player";
-import SectorChart, {
-	SECTORS,
-} from "@/components/custom/visuals/light-characteristic-reader/sector-chart";
+import { SECTORS } from "@/components/custom/visuals/light-characteristic-reader/light-sectors";
+import SectorChart from "@/components/custom/visuals/light-characteristic-reader/sector-chart";
 import {
 	COLOR_CODES,
 	type LightColor,

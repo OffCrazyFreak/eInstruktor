@@ -11,8 +11,6 @@ const CRESTS = Array.from({ length: 8 }, (_, index) => 20 + index * 40);
 /** Waves, white crests, streaks of foam and a flag that grow with the Beaufort force. */
 export default function SeaState({ force, label }: ISeaStateProps) {
 	const amplitude = 1 + force * 2.2;
-	const wave = (y: number) =>
-		`M0 ${y} ${Array.from({ length: 8 }, (_, index) => `Q${index * 40 + 20} ${y - amplitude * 2} ${index * 40 + 40} ${y}`).join(" ")} V200 H0 z`;
 	const sky = force >= 8 ? "#5a6b86" : force >= 5 ? "#9fb6d6" : PALETTE.sea;
 	const flagLift = Math.min(force, 8) * 9;
 	const clipId = useId();
@@ -44,8 +42,8 @@ export default function SeaState({ force, label }: ISeaStateProps) {
 					d={`M270 34 L${270 - 40} ${34 + 70 - flagLift} L${270 - 36} ${46 + 70 - flagLift} L270 50 z`}
 					fill={PALETTE.sun}
 				/>
-				<path d={wave(120)} fill={PALETTE.ocean} />
-				<path d={wave(150)} fill={PALETTE.navy} opacity="0.85" />
+				<path d={wavePath(120, amplitude)} fill={PALETTE.ocean} />
+				<path d={wavePath(150, amplitude)} fill={PALETTE.navy} opacity="0.85" />
 				{force >= 3 && (
 					<g fill="white">
 						{CRESTS.slice(0, Math.min(8, force - 1)).map((x) => (
@@ -78,4 +76,15 @@ export default function SeaState({ force, label }: ISeaStateProps) {
 			</g>
 		</svg>
 	);
+}
+
+/** Eight crests 40 wide across the 320 wide drawing, filled down to the bottom edge. */
+function wavePath(y: number, amplitude: number): string {
+	const crests = Array.from(
+		{ length: 8 },
+		(_, index) =>
+			`Q${index * 40 + 20} ${y - amplitude * 2} ${index * 40 + 40} ${y}`,
+	);
+
+	return `M0 ${y} ${crests.join(" ")} V200 H0 z`;
 }

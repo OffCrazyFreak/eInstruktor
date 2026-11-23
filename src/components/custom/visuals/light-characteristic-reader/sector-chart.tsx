@@ -1,3 +1,4 @@
+import { SECTORS } from "@/components/custom/visuals/light-characteristic-reader/light-sectors";
 import {
 	PALETTE,
 	SIGNAL,
@@ -7,12 +8,6 @@ interface ISectorChartProps {
 	/** Boat bearing from the lighthouse, degrees clockwise from north. */
 	bearing: number;
 }
-
-export const SECTORS = [
-	{ from: 95, to: 135, color: "red" as const },
-	{ from: 135, to: 205, color: "white" as const },
-	{ from: 205, to: 245, color: "red" as const },
-];
 
 const L = { x: 150, y: 34 };
 

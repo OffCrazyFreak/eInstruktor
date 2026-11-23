@@ -68,7 +68,9 @@ interface ICallScript {
 	steps: (fields: ICallFields) => ICallStep[];
 }
 
-const thrice = (word: string) => `${word}, ${word}, ${word}`;
+function thrice(word: string): string {
+	return `${word}, ${word}, ${word}`;
+}
 
 export const FIELD_LABELS: Record<keyof ICallFields, string> = {
 	vessel: "Ime brodice",

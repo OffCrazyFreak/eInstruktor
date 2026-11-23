@@ -42,10 +42,10 @@ export default function RadioFace({
 	onControl,
 	onChange,
 }: IRadioFaceProps) {
-	const set = (patch: Partial<IRadioState>, control: ControlId) => {
+	function set(patch: Partial<IRadioState>, control: ControlId) {
 		onChange({ ...state, ...patch });
 		onControl(control);
-	};
+	}
 
 	return (
 		<div className="rounded-[1.6rem] bg-[#1d2433] p-3 text-[#eaf3ff] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
