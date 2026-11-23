@@ -129,4 +129,38 @@ describe("scoreExam", () => {
 		expect(score.passed).toBe(false);
 		expect(score.graded).toEqual([{ questionId: onlyOne.id, correct: true }]);
 	});
+
+	it("counts a partly right multi answer as wrong", () => {
+		const multi: IQuestion = {
+			id: "multi-1",
+			area: "motoristika",
+			level: "common",
+			type: "multi",
+			prompt: "Koje su točne?",
+			options: [
+				{ id: "a", text: "Prvo", correct: true },
+				{ id: "b", text: "Drugo", correct: true },
+				{ id: "c", text: "Treće", correct: false },
+			],
+			explanation: "Prvo i drugo.",
+			difficulty: 1,
+			source: "original",
+		};
+		const blocks = [
+			{
+				subjectId: "motoristika" as const,
+				label: "Motoristika",
+				questions: [multi],
+				startIndex: 0,
+			},
+		];
+
+		expect(scoreExam(course, "B", blocks, { "multi-1": ["a"] }).score).toBe(0);
+		expect(
+			scoreExam(course, "B", blocks, { "multi-1": ["a", "b", "c"] }).score,
+		).toBe(0);
+		expect(
+			scoreExam(course, "B", blocks, { "multi-1": ["b", "a"] }).score,
+		).toBe(1);
+	});
 });
