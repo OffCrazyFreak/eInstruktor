@@ -584,7 +584,7 @@ const questions: IQuestion[] = [
 			{ id: "d", text: "200 m", correct: false },
 		],
 		explanation:
-			"Motorne brodice i jedrilice ne smiju ploviti bliže od 50 m od obale, jahte 150 m, a brodovi 300 m. Bliže smiješ samo radi uplovljavanja ili pristajanja, uz smanjenu brzinu.",
+			"Plovila kraća od 15 m ne smiju ploviti bliže od 50 m od obale, plovila od 15 do 30 m 150 m, a duža od 30 m 300 m. Bliže smiješ samo radi uplovljavanja ili pristajanja, uz smanjenu brzinu.",
 		ruleRef:
 			"Pravilnik o sigurnosti pomorske plovidbe u unutarnjim morskim vodama i teritorijalnom moru RH",
 		difficulty: 1,
@@ -621,17 +621,16 @@ const questions: IQuestion[] = [
 		level: "B",
 		type: "single",
 		prompt:
-			"Kojom najvećom brzinom smiješ ploviti u pojasu do 150 m od obale, ako nije drukčije propisano?",
+			"Kojom najvećom brzinom smiješ ploviti u pojasu do 300 m od obale, ako nije drukčije propisano?",
 		options: [
 			{ id: "a", text: "3 čvora", correct: false },
-			{ id: "b", text: "5 čvorova", correct: true },
-			{ id: "c", text: "8 čvorova", correct: false },
+			{ id: "b", text: "5 čvorova", correct: false },
+			{ id: "c", text: "8 čvorova", correct: true },
 			{ id: "d", text: "10 čvorova", correct: false },
 		],
 		explanation:
-			"Do 150 m od obale najviše 5 čvorova, a od 150 do 300 m najviše 8 čvorova, uz posebnu pažnju.",
-		ruleRef:
-			"Pravilnik o sigurnosti pomorske plovidbe u unutarnjim morskim vodama i teritorijalnom moru RH",
+			"U pojasu do 300 m od obale najviše 8 čvorova, uz posebnu pažnju (NN 52/25, čl. 50).",
+		ruleRef: "Pravilnik o sigurnosti pomorske plovidbe, čl. 50 (NN 52/25)",
 		difficulty: 2,
 		source: "original",
 	},
@@ -720,9 +719,8 @@ const questions: IQuestion[] = [
 			{ id: "d", text: "Prednost ima onaj tko prvi zatrubi", correct: false },
 		],
 		explanation:
-			"Plovila kraća od 24 m u lukama, u polukrugu od 1 NM od ulaza u luku i u uskim kanalima moraju se sklanjati većim plovilima.",
-		ruleRef:
-			"Pravilnik o sigurnosti pomorske plovidbe u unutarnjim morskim vodama i teritorijalnom moru RH",
+			"Plovila duljine do 20 m u lukama i u polukrugu od 1 NM od ulaza u luku moraju se sklanjati većim plovilima (NN 52/25, čl. 46).",
+		ruleRef: "Pravilnik o sigurnosti pomorske plovidbe, čl. 46 (NN 52/25)",
 		difficulty: 3,
 		source: "original",
 	},
@@ -754,18 +752,17 @@ const questions: IQuestion[] = [
 		lesson: "plovidba-uz-obalu",
 		level: "B",
 		type: "single",
-		prompt:
-			"Na kojoj udaljenosti od obale prirodne plaže mora ploviti brodica?",
+		prompt: "Koliko najmanje od obale prirodnog kupališta smiješ sidriti?",
 		options: [
-			{ id: "a", text: "Više od 50 m", correct: false },
-			{ id: "b", text: "Više od 100 m", correct: false },
-			{ id: "c", text: "Više od 150 m", correct: true },
-			{ id: "d", text: "Više od 300 m", correct: false },
+			{ id: "a", text: "50 m", correct: false },
+			{ id: "b", text: "100 m", correct: false },
+			{ id: "c", text: "150 m", correct: true },
+			{ id: "d", text: "300 m", correct: false },
 		],
 		explanation:
-			"Uz prirodnu plažu brodice i jahte plove dalje od 150 m od obale. Kod uređene plaže granica je 50 m od ograde kupališta.",
+			"Čl. 53. st. 9. NN 52/25 zabranjuje sidrenje bliže od 150 m od obale prirodnog kupališta.",
 		ruleRef:
-			"Pravilnik o sigurnosti pomorske plovidbe u unutarnjim morskim vodama i teritorijalnom moru RH",
+			"Pravilnik o sigurnosti pomorske plovidbe, čl. 53. st. 9 (NN 52/25)",
 		difficulty: 2,
 		source: "original",
 	},

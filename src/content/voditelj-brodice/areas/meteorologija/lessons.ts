@@ -191,13 +191,19 @@ const lessons: ILesson[] = [
 				columns: ["Vjetar", "Što trebaš znati"],
 				rows: [
 					["Tramontana (N)", "hladan vjetar sa sjevera, sličan buri"],
-					["Levanat (E)", "vjetar s istoka, često donosi oblake i kišu"],
+					[
+						"Levanat (E)",
+						"istočnjak; često ima obilježja bure, uz ciklonu može donijeti kišu, a ponekad je topao vjetar lijepog vremena",
+					],
 					["Oštro (S)", "topao i vlažan vjetar s juga, sličan jugu"],
 					[
 						"Lebić (SW)",
 						"s otvorenog mora; nemirne su luke i uvale otvorene prema jugozapadu",
 					],
-					["Ponente (W)", "uglavnom slab vjetar sa zapada"],
+					[
+						"Ponente (W)",
+						"rijedak zapadni vjetar kod nas; dolazi brzo, kratko traje i može biti opasan",
+					],
 				],
 			},
 			{
@@ -457,11 +463,11 @@ const lessons: ILesson[] = [
 					["4", "umjeren vjetar", "11 do 16"],
 					["5", "umjereno jak vjetar", "17 do 21"],
 					["6", "jak vjetar", "22 do 27"],
-					["7", "žestok vjetar", "28 do 33"],
+					["7", "žestoki vjetar", "28 do 33"],
 					["8", "olujni vjetar", "34 do 40"],
 					["9", "jak olujni vjetar", "41 do 47"],
-					["10", "žestok olujni vjetar", "48 do 55"],
-					["11", "orkanski vjetar", "56 do 63"],
+					["10", "orkanski vjetar", "48 do 55"],
+					["11", "jaki orkanski vjetar", "56 do 63"],
 					["12", "orkan", "64 i više"],
 				],
 			},

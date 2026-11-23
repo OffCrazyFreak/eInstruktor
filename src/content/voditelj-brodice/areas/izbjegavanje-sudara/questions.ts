@@ -703,7 +703,7 @@ const questions: IQuestion[] = [
 			{ id: "d", text: "Ono koje je brže", correct: false },
 		],
 		explanation:
-			"Plovilo ograničene sposobnosti manevriranja ima prednost i pred jedrilicom. Običan tegljač bez tih svjetala je motorno plovilo, pa tada jedrilica ima prednost.",
+			"Plovilo ograničene sposobnosti manevriranja ima prednost i pred jedrilicom. Tegljač je ograničen u manevriranju samo ako teglj bitno ograničava njegovu mogućnost skretanja (pravilo 3(g)(vi)). Inače je motorno plovilo, pa tada jedrilica ima prednost.",
 		ruleRef: "COLREG, pravila 18 i 27",
 		difficulty: 3,
 		source: "original",
@@ -853,8 +853,9 @@ const questions: IQuestion[] = [
 			},
 		],
 		explanation:
-			"Ovo pravilo dolazi iz lučkih redova, a ne iz COLREG-a. Plovilo koje ulazi pričeka da izlaz bude slobodan. Pravila pojedine luke provjeri u njenom lučkom redu.",
-		ruleRef: "Lučki red (lokalno pravilo)",
+			"Ovo pravilo je u Pravilniku o sigurnosti pomorske plovidbe (čl. 46. st. 2), a ne u COLREG-u. Plovilo koje ulazi ne smije ometati ono koje izlazi.",
+		ruleRef:
+			"Pravilnik o sigurnosti pomorske plovidbe, čl. 46. st. 2 (NN 52/25)",
 		difficulty: 2,
 		source: "original",
 	},

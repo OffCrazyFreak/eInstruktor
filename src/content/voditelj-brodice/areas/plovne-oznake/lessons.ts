@@ -148,7 +148,7 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"Prema hrvatskoj tablici IALA oznaka, i **mostovi** se označavaju po istoj logici: lijeva strana prolaza crvenom četvrtastom pločom i crvenim svjetlom, desna zelenim trokutom i zelenim svjetlom.",
+					"Prema Pravilniku o sustavu obilježavanja plovnih putova (NN 39/20, čl. 33) i HHI-jevu Popisu svjetala, **mostovi** se označavaju ovako: lijeva strana prolaza crvenom četvrtastom pločom i crvenim svjetlom, desna zelenim istostraničnim trokutom (vrhom prema gore) i zelenim svjetlom, a najsigurniji prolaz okruglom pločom s crvenim i bijelim okomitim prugama i bijelim svjetlom. Lijevo i desno određuje se kao kod lateralnih oznaka: dolazeći s otvorenog mora.",
 			},
 			{
 				type: "remember",
@@ -322,7 +322,10 @@ const lessons: ILesson[] = [
 						"Posebna oznaka",
 						"žuto, ritam koji se ne može zamijeniti s bijelim svjetlima drugih oznaka",
 					],
-					["Nova opasnost", "naizmjence plavo i žuto"],
+					[
+						"Nova opasnost",
+						"naizmjence plavo i žuto (1 s svako, razmak 0,5 s); po odluci kapetanije i racon Morse D",
+					],
 				],
 			},
 			{
@@ -370,12 +373,18 @@ const lessons: ILesson[] = [
 				rows: [
 					["B / C / Z / Ž", "bijelo / crveno / zeleno / žuto"],
 					["F", "stalno svjetlo, bez prekida"],
-					["Fl (u skriptama Bl)", "bljesak: svjetlo kraće od tame"],
+					[
+						"Fl (HHI: Bl)",
+						"bljesak: svjetlo kraće od tame, manje od 50 u minuti",
+					],
 					["Fl(4)", "grupa od četiri bljeska"],
-					["LFl", "dugi bljesak, najmanje 2 s"],
-					["Oc", "prekidno: svjetlo dulje od tame"],
-					["Iso (u skriptama Izo)", "izofazno: svjetlo i tama jednako"],
-					["Q / VQ", "brzi / vrlo brzi bljeskovi"],
+					["LFl (HHI: DBl)", "dugi bljesak, najmanje 2 s"],
+					["Oc (HHI: Pk)", "prekidno: svjetlo dulje od tame"],
+					["Iso (HHI: Izo)", "izofazno: svjetlo i tama jednako"],
+					[
+						"Q / VQ (HHI: K / VK)",
+						"brzi (50 do 79 u minuti) / vrlo brzi (80 do 159 u minuti) bljeskovi",
+					],
 				],
 			},
 			{
@@ -419,7 +428,7 @@ const lessons: ILesson[] = [
 		],
 		cheatSheet: [
 			"B bijelo, C crveno, Z zeleno, Ž žuto.",
-			"Fl/Bl bljesak, Oc prekidno, Iso/Izo izofazno, LFl dugi (2 s i više).",
+			"Fl/Bl bljesak, Oc/Pk prekidno, Iso/Izo izofazno, LFl/DBl dugi (2 s i više), Q/K brzi, VQ/VK vrlo brzi.",
 			"Zapis: boja, ritam, period (s), visina (m), domet (M).",
 			'Plovi u bijelom sektoru, "Pot" je sektor u kojem svjetla nema.',
 		],

@@ -365,7 +365,7 @@ const questions: IQuestion[] = [
 			{ id: "d", text: "Zeleno kružno svjetlo na pramcu", correct: false },
 		],
 		explanation:
-			"Uz obična svjetla motornog plovila, lebdjelica pali žuto bljeskajuće kružno svjetlo. Ono upozorava da se plovilo kreće brzo i neobično.",
+			"Uz obična svjetla motornog plovila, lebdjelica pali žuto bljeskajuće kružno svjetlo. Propisuje ga pravilo 23(b) kad plovilo ne istiskuje vodu.",
 		ruleRef: "COLREG, pravilo 23",
 		difficulty: 3,
 		source: "original",

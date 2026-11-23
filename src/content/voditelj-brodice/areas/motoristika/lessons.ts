@@ -290,8 +290,8 @@ const lessons: ILesson[] = [
 					],
 					[
 						"Temperatura raste, nema mlaza",
-						"Začepljen usis (vrećica, alge), zatvoren ventil, istrošeno kolo pumpe",
-						"Smanji gas, prati temperaturu, provjeri usis",
+						"Istrošen impeler (gumeno kolo pumpe), začepljen usis (vrećica, alge), zatvoren ventil",
+						"Smanji gas na prazni hod; ako nema mlaza, ugasi motor i provjeri usis i impeler",
 					],
 					[
 						"Tlak ulja naglo pada",
@@ -309,7 +309,7 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"**Pregrijavanje:** smanji gas i prati temperaturu. Skripte savjetuju da motor ne gasiš naglo dok hlađenje radi, jer bi se time prekinulo hlađenje. Ako temperatura i dalje raste ili voda uopće ne izlazi, ugasi motor i potraži uzrok (najčešće je nešto začepilo usis morske vode).",
+					"**Pregrijavanje:** smanji gas i prati temperaturu. Ako voda ne izlazi (nema mlaza) ili temperatura i dalje raste, ugasi motor i potraži uzrok (često je to istrošen impeler ili začepljen usis morske vode).",
 			},
 			{
 				type: "warning",
@@ -549,13 +549,13 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"**Balastni tankovi** velikih brodova primaju morsku vodu u jednoj luci i ispuštaju je u drugoj. S tom vodom putuju i strane vrste organizama, zato se balastna voda smije mijenjati i ispuštati samo prema pravilima. Na brodici ti je važnije znati da **otpadni tankovi** imaju svoj ventil i da ga na moru ne otvaraš bez provjere lokalnih pravila.",
+					"**Balastni tankovi** velikih brodova primaju morsku vodu u jednoj luci i ispuštaju je u drugoj. S tom vodom putuju i strane vrste organizama, zato se balastna voda smije mijenjati i ispuštati samo prema pravilima. Na brodici ti je važnije znati da **otpadni tankovi** imaju svoj ventil i da ga na moru ne otvaraš: sanitarne otpadne vode s brodice ne smiju u more.",
 			},
 			{
 				type: "source-note",
 				level: "B",
 				markdown:
-					'Neki popisi tema kažu da se "unutar 12 Nm ništa ne smije baciti u more". Taj podatak nismo potvrdili u propisu. Najsigurnije je ništa ne bacati, a za pražnjenje otpadnih voda provjeri pravila kod lučke kapetanije ili marine.',
+					'Za brodice vrijedi strože od "12 Nm": Pravilnik o brodicama (NN 13/20, 4.1.15 do 4.1.18) zabranjuje ispuštanje ulja, sanitarnih otpadnih voda i smeća u more na bilo kojoj udaljenosti. MARPOL Prilog V (Sredozemno more je posebno područje) dopušta samo usitnjeni otpad od hrane na 12 NM ili dalje.',
 			},
 			{ type: "check", level: "B", questionId: "motoristika-033" },
 			{ type: "check", level: "B", questionId: "motoristika-035" },

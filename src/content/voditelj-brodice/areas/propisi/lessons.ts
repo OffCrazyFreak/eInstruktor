@@ -433,7 +433,7 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"Ljeti je uz obalu puno kupača, ronilaca i malih plovila. Zato propis traži najmanju udaljenost od obale ovisno o tome čime plovite.",
+					"Ljeti je uz obalu puno kupača, ronilaca i malih plovila. Zato propis traži najmanju udaljenost od obale ovisno o duljini plovila.",
 			},
 			{
 				type: "table",
@@ -441,19 +441,21 @@ const lessons: ILesson[] = [
 				caption: "Najmanja udaljenost od obale",
 				columns: ["Plovilo", "Ne bliže od"],
 				rows: [
-					["Brodovi i hidroavioni", "300 m"],
-					["Jahte", "150 m"],
-					["Motorne brodice i jedrilice", "50 m"],
+					["Plovila 30 m i dulja, hidroavioni", "300 m"],
+					["Plovila od 15 m do 30 m", "150 m"],
+					["Plovila kraća od 15 m (brodice)", "50 m"],
 					["Glisiranje (gliseri, skuteri)", "samo dalje od 300 m"],
-					["Uređena plaža", "50 m od ograde kupališta"],
-					["Prirodna plaža", "150 m od obale"],
+					[
+						"Ograda uređene plaže",
+						"50 m (plovila do 15 m), 100 m (15 do 30 m), 300 m (30 m i dulja)",
+					],
 				],
 			},
 			{
 				type: "text",
 				level: "B",
 				markdown:
-					"Bliže smiješ samo kad uplovljavaš u luku, ulaziš na sidrište ili pristaješ, i tada moraš usporiti toliko da možeš brzo skrenuti ili stati. Brodice na vesla, kajaci, kanui, pedaline i daske smiju i bliže od 50 m.\n\n**Brzina:** ako nije drukčije propisano, u pojasu do **150 m** od obale plovi najviše **5 čvorova**, a od 150 do 300 m najviše **8 čvorova**. Na nekim mjestima (npr. ušće Krke, Pelješki kanal, Mali Ždrelac) vrijede posebna ograničenja.",
+					"Bliže smiješ samo kad uplovljavaš u luku, ulaziš na sidrište ili pristaješ, i tada moraš usporiti toliko da možeš brzo skrenuti ili stati. Brodice na vesla, kajaci, kanui, pedaline i daske smiju i bliže od 50 m.\n\n**Brzina:** ako nije drukčije propisano, u pojasu do **300 m** od obale, u uskim kanalima te na prilazima luka i sidrišta plovi se najviše **8 čvorova**, uz posebnu pažnju (NN 52/25, čl. 50). Na nekim mjestima (npr. Pelješki kanal, Mali Ždrelac) vrijede posebna ograničenja.\n\n**Sidrenje:** ne sidri bliže od **150 m** od obale prirodnog kupališta ni bliže od **50 m** od ograde uređenog kupališta (NN 52/25, čl. 53. st. 9).",
 			},
 			{
 				type: "warning",
@@ -465,16 +467,22 @@ const lessons: ILesson[] = [
 				type: "source-note",
 				level: "B",
 				markdown:
-					'Stara skripta s pitanjima i odgovorima piše "glisiranje 300 m, ostali 200 m od obale". Brojke 200 m u propisu nema: motorne brodice i jedrilice drže najmanje 50 m, jahte 150 m, brodovi 300 m.',
+					'Stara skripta s pitanjima i odgovorima piše "glisiranje 300 m, ostali 200 m od obale". Brojke 200 m u propisu nema: plovila kraća od 15 m drže najmanje 50 m, od 15 do 30 m 150 m, a 30 m i dulja 300 m.',
+			},
+			{
+				type: "source-note",
+				level: "B",
+				markdown:
+					'Starije skripte, i Diverso iz 2025., još prepisuju pravilnik iz 2013. (NN 79/13 i izmjene): "do 150 m od obale 5 čvorova", "jahte 150 m" i "plovila kraća od 24 m". Taj je pravilnik zamijenjen. Danas vrijedi Pravilnik o sigurnosti pomorske plovidbe (NN 52/25): do 300 m od obale najviše 8 čvorova, udaljenost od obale ovisi o duljini plovila, a na ulazu u luku sklanjaju se plovila do 20 m.',
 			},
 			{
 				type: "remember",
 				level: "B",
 				title: "Zapamti",
 				items: [
-					"Motorna brodica i jedrilica: najmanje 50 m od obale.",
+					"Plovilo kraće od 15 m: najmanje 50 m od obale.",
 					"Glisiranje samo dalje od 300 m.",
-					"Do 150 m od obale najviše 5 čvorova, do 300 m najviše 8.",
+					"Do 300 m od obale najviše 8 čvorova.",
 					"Ronilački balon: žuti ili narančasti, najmanje 30 cm.",
 				],
 			},
@@ -482,10 +490,10 @@ const lessons: ILesson[] = [
 			{ type: "check", level: "B", questionId: "propisi-030" },
 		],
 		cheatSheet: [
-			"Brodice 50 m, jahte 150 m, brodovi 300 m od obale.",
-			"Uređena plaža: 50 m od ograde; prirodna: 150 m od obale.",
+			"Od obale: kraće od 15 m 50 m, 15 do 30 m 150 m, 30 m i dulje 300 m.",
+			"Uređena plaža: 50 m od ograde (plovila do 15 m).",
 			"Glisiranje samo dalje od 300 m od obale.",
-			"Brzina: do 150 m najviše 5 čv, do 300 m najviše 8 čv.",
+			"Brzina: do 300 m od obale najviše 8 čv.",
 			"Ronilac: žuti ili narančasti balon od najmanje 30 cm.",
 		],
 		source: "original",
@@ -516,7 +524,7 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"**Gorivo:** točenje goriva ne smije početi dok se putnici ne iskrcaju, a putnici se ukrcavaju tek kad je gorivo natočeno.\n\n**Na ulazu u luku:** plovila kraća od **24 m** moraju se u luci, u polukrugu od **1 NM** od ulaza u luku i u uskim kanalima sklanjati s puta većim plovilima. Kanal ili tjesnac prelaziš **najkraćim putem**, okomito na njegov smjer.",
+					"**Gorivo:** točenje goriva ne smije početi dok se putnici ne iskrcaju, a putnici se ukrcavaju tek kad je gorivo natočeno.\n\n**Na ulazu u luku:** plovila duljine do **20 m** moraju se u luci i u polukrugu od **1 NM** od ulaza u luku sklanjati s puta većim plovilima. Skripte uče da kanal ili tjesnac prelaziš **najkraćim putem**, okomito na njegov smjer. U propisu to pravilo nismo našli (COLREG ga traži za sustave odijeljenog prometa), pa lokalna pravila provjeri kod lučke kapetanije.",
 			},
 			{
 				type: "example",
@@ -531,7 +539,7 @@ const lessons: ILesson[] = [
 				title: "Zapamti",
 				items: [
 					"Gorivo tek kad se putnici iskrcaju, putnici tek kad je gorivo natočeno.",
-					"Plovilo kraće od 24 m sklanja se većem unutar 1 NM od ulaza u luku i u uskim kanalima.",
+					"Plovilo do 20 m sklanja se većem unutar 1 NM od ulaza u luku.",
 					"U luci nema kupanja, vatre ni vezivanja za plovidbene oznake.",
 				],
 			},
@@ -542,8 +550,8 @@ const lessons: ILesson[] = [
 			"Red u luci: upravitelj luke; nadzor: kapetanija.",
 			"U luci zabranjeno kupanje, glisiranje, vatra, vez za plovidbene oznake.",
 			"Gorivo prije ukrcaja putnika, nikad s putnicima na brodici.",
-			"Kraće od 24 m: sklanjaj se većima unutar 1 NM od ulaza u luku.",
-			"Kanal prelazi okomito, najkraćim putem.",
+			"Do 20 m: sklanjaj se većima unutar 1 NM od ulaza u luku.",
+			"Kanal prelazi okomito, najkraćim putem (lokalna pravila provjeri kod lučke kapetanije).",
 		],
 		source: "original",
 	},

@@ -420,7 +420,7 @@ const lessons: ILesson[] = [
 				type: "warning",
 				level: "common",
 				markdown:
-					"Na ispitu se uči da **plovilo koje izlazi iz luke ima prednost** pred onim koje ulazi. To pravilo dolazi iz lučkih redova (COLREG ga nema), pa se pojedinosti razlikuju od luke do luke. Provjeri lučki red luke u koju ploviš.",
+					"Na ispitu se uči da **plovilo koje izlazi iz luke ima prednost** pred onim koje ulazi. To pravilo je u Pravilniku o sigurnosti pomorske plovidbe (NN 52/25, čl. 46. st. 2): plovila koja ulaze u luku ne smiju ometati ona koja izlaze. COLREG ga nema. Plovilo s prednošću može upozoriti s najmanje pet kratkih brzih zvukova.",
 			},
 			{
 				type: "remember",
@@ -452,7 +452,7 @@ const lessons: ILesson[] = [
 			"U kanalu ploviš uz desni rub.",
 			"Plovila ispod 20 m i jedrilice ne ometaju velike u kanalu.",
 			"Jedan dugi signal pred zavojem.",
-			"Izlaz iz luke ima prednost (lučki red).",
+			"Izlaz iz luke ima prednost (NN 52/25, čl. 46).",
 		],
 		source: "original",
 	},

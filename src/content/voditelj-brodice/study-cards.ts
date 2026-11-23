@@ -183,7 +183,7 @@ const studyCards: IStudyCard[] = [
 		answer:
 			"Glisiranje 300m od obale, plovidba za ostale 200 m od obale. Ne prilaziti bliže od 50 m od plutaća na kupalištu.Skuteri do 300 m moraju kroz poseban koridor od plutaća.Uluci je zabranjno plivati, kupati se, glisirati, dirati napreve za privez drugih plovila, ložiti vatru na plovilu ili kopnu, radio promet.",
 		correction:
-			"Propis ne poznaje granicu od 200 m. Motorne brodice i jedrilice plove najmanje 50 m od obale, jahte 150 m, brodovi 300 m, a glisirati se smije samo dalje od 300 m.",
+			"Propis ne poznaje granicu od 200 m. Plovila kraća od 15 m plove najmanje 50 m od obale, od 15 do 30 m 150 m, duža od 30 m 300 m, a glisirati se smije samo dalje od 300 m.",
 		ref: "III.1",
 		source: "qa-doc",
 	},
@@ -362,6 +362,8 @@ const studyCards: IStudyCard[] = [
 		prompt: "Svjetla, dnevni izvučni signali",
 		answer:
 			"Na brodu: lijevi bok - crveno 112,5 stupnjeva, desni bok - zeleno 112,5 stupnjeva, krma - bijelo 135 stupnjeva. Ako je motorni - na pramcu bijelo 225 stupnjeva.Ako je duži od 50 m na krmenom jarbolu još jedno bijelo 225 stupnjeva ili općenito - drugo bijelo svijetlo mora biti smješteno iza i iznad pramčanog, a iza bočnih svjetala.Ako je jedrenjak kraći od 20 m - samo bočna i krmeno, a duži od 20 m - još i na jarbolu zeleno i ispod njega crveno svjetlo 360 stupnjeva.Dnevni signali - stožac, kugla i valjak - crne boje.",
+		correction:
+			"Jedrenjak bilo koje duljine ima bočna i krmeno svjetlo (ispod 20 m smiju biti spojena u jedan fenjer na vrhu jarbola). Po želji smije na vrhu jarbola nositi dva kružna svjetla, gore crveno i dolje zeleno, ali ne uz spojeni fenjer (COLREG pravilo 25).",
 		ref: "IV.2",
 		source: "qa-doc",
 	},

@@ -470,7 +470,7 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"**Kutija prve pomoći** mora biti na brodici (od područja IIIc dalje). Drži je na suhom i na mjestu koje svi znaju. Provjeri rokove i nadopuni ono što potrošiš.\n\nU hitnom slučaju zovi **112** ili, na moru, **MRCC na 195** i VHF kanal 16. Za liječnički savjet preko radija postoji poziv PAN PAN MEDICO.",
+					"**Kutija prve pomoći** mora biti na brodici u područjima IIIc do III (u I i II je ormarić prve pomoći). Drži je na suhom i na mjestu koje svi znaju. Provjeri rokove i nadopuni ono što potrošiš.\n\nU hitnom slučaju zovi **112** ili, na moru, **MRCC na 195** i VHF kanal 16. Za liječnički savjet preko radija postoji poziv PAN PAN MEDICO.",
 			},
 			{
 				type: "remember",
@@ -507,7 +507,7 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"**Osoba ne reagira.** Provjeri je li mjesto sigurno, glasno je pozovi i lagano protresi za ramena. Zabaci joj glavu i podigni bradu, pa najviše 10 sekundi gledaj, slušaj i osjećaj diše li normalno.\n\n- **Diše normalno**: okreni je u **bočni (stabilni) položaj** i stalno je prati.\n- **Ne diše normalno**: zovi **112** (ili 195 na moru) i odmah počni **oživljavanje**.",
+					"**Osoba ne reagira.** Provjeri je li mjesto sigurno, glasno je pozovi i lagano protresi za ramena. Ako ne reagira, odmah zovi **112** (ili 195 na moru) ili neka to učini netko drugi. Zatim joj zabaci glavu i podigni bradu, pa najviše 10 sekundi gledaj, slušaj i osjećaj diše li normalno.\n\n- **Diše normalno**: okreni je u **bočni (stabilni) položaj** i stalno je prati.\n- **Ne diše normalno**: odmah počni **oživljavanje**.",
 			},
 			{
 				type: "example",

@@ -447,7 +447,7 @@ const questions: IQuestion[] = [
 			},
 		],
 		explanation:
-			"Manje opterećenje znači manje topline. Najčešći uzrok pregrijavanja je začepljen usis morske vode (vrećica, alge) ili zatvoren ventil.",
+			"Manje opterećenje znači manje topline. Česti uzroci pregrijavanja su istrošen impeler, začepljen usis morske vode (vrećica, alge) ili zatvoren ventil.",
 		ruleRef: DODATAK_7,
 		difficulty: 2,
 		source: "original",
@@ -819,8 +819,8 @@ const questions: IQuestion[] = [
 			},
 		],
 		explanation:
-			"Tank čuva otpadne vode dok ih ne predaš na obali. Pravila o ispuštanju na moru su stroga, pa ih provjeri kod kapetanije prije nego što otvoriš ventil.",
-		ruleRef: "MARPOL Prilog IV",
+			"Tank čuva otpadne vode dok ih ne predaš na obali. Ispuštanje sanitarnih otpadnih voda u more nije dopušteno.",
+		ruleRef: "Pravilnik o brodicama, čamcima i jahtama (NN 13/20), 4.1.16",
 		difficulty: 3,
 		source: "original",
 	},

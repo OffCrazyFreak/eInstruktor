@@ -64,7 +64,7 @@ const lessons: ILesson[] = [
 				type: "source-note",
 				level: "common",
 				markdown:
-					'Skripte se ne slažu gdje prestaje plavo: jedna kaže 10 m, bilješke za ispit B kažu 20 m. Granica ovisi o samoj karti, pa pogledaj legendu karte koju koristiš. Za ispit je dovoljno: plavo je plitko, bijelo je dublje.\n\nNeke bilješke čitaju "ŠK" kao šljunkovito dno. Na hrvatskim kartama Š je šljunak, a Šk su školjke.',
+					'Skripte se ne slažu gdje prestaje plavo: jedna kaže 10 m, bilješke za ispit B kažu 20 m. Prema Pomorskom leksikonu plavo je unutar izobate 10 m na obalnim kartama, a 20 m na kursnim kartama. Granica ovisi o samoj karti, pa pogledaj legendu karte koju koristiš. Za ispit je dovoljno: plavo je plitko, bijelo je dublje.\n\nNeke bilješke čitaju "ŠK" kao šljunkovito dno. Na hrvatskim kartama Š je šljunak, a Šk su školjke.',
 			},
 			{
 				type: "warning",

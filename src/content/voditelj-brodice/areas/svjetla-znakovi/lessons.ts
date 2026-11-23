@@ -177,7 +177,7 @@ const lessons: ILesson[] = [
 				type: "text",
 				level: "B",
 				markdown:
-					"Plovilo na zračnom jastuku (lebdjelica) kad leti iznad vode uz svjetla motornog plovila pali i **žuto bljeskajuće kružno svjetlo**.",
+					"Plovilo na zračnom jastuku (lebdjelica) kad plovi bez istiskivanja vode (iznad vode) uz svjetla motornog plovila pali i **žuto bljeskajuće kružno svjetlo**.",
 			},
 			{
 				type: "check",
@@ -576,7 +576,7 @@ const lessons: ILesson[] = [
 			},
 		],
 		cheatSheet: [
-			"Signal najmanje svake 2 minute, sidro svake minute.",
+			"Signal u razmacima do 2 minute, sidro najmanje jednom u minuti.",
 			"1 dugi u vožnji, 2 duga kad stoji.",
 			"Dugi i 2 kratka: jedrilica, ribar, tegljač, ograničeni.",
 			"Zvono 5 s: sidro; tri udarca prije i poslije: nasukan.",

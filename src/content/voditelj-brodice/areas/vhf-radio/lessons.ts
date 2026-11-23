@@ -226,7 +226,7 @@ const lessons: ILesson[] = [
 				type: "source-note",
 				level: "B",
 				markdown:
-					'Skripte različito broje VHF kanale (jedna kaže 56, bilješke 55). Za ispit je važno znati raspone 1 do 28 i 60 do 88 i da kanal 70 nije za govor. Ponegdje piše i da Rijeka kapetanija ima poseban kanal za SECURITE obavijesti: to provjeri u aktualnom izdanju priručnika "Radio služba".',
+					'ITU Dodatak 18 ima 57 brojeva kanala (1 do 28 i 60 do 88). Bez kanala 70 (samo DSC) je 56 govornih kanala, a bez zaštitnih kanala 75 i 76 ostaje 55. Zato skripte broje različito. Za ispit je važno znati raspone 1 do 28 i 60 do 88 i da kanal 70 nije za govor. Ponegdje piše i da Rijeka kapetanija ima poseban kanal za SECURITE obavijesti: to provjeri u aktualnom izdanju priručnika "Radio služba".',
 			},
 			{ type: "check", level: "B", questionId: "vhf-radio-010" },
 			{ type: "check", level: "B", questionId: "vhf-radio-012" },
