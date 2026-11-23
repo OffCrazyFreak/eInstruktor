@@ -5,7 +5,7 @@
 1. Use Node 22.18 or newer (`.nvmrc` says 22; `engines` in `package.json` sets the floor) and pnpm 12.18 (pinned as `packageManager`). Scripts need 22.18 because that is the first Node 22 release that strips TypeScript types by default; the alias loader also needs `module.registerHooks` (22.15).
 2. Run `pnpm install`. Its `prepare` script runs `git config core.hooksPath .githooks`, which turns on the commit message hook.
 3. Run `cp .env.example .env.local` and fill in what you need. Every variable is optional for local work: without Google credentials the app runs and only sign-in is off.
-4. Run `pnpm db:push` to create the tables in `local.db`, then `pnpm dev` (http://localhost:3000).
+4. Run `pnpm db:seed` to build `local.db` from the migrations (add `--demo` for a demo learner with some progress), then `pnpm dev` (http://localhost:3000).
 
 ## Database switch
 
@@ -29,7 +29,8 @@ Turso credentials in `.env.local` do nothing on their own, so `pnpm dev` and `pn
 | `pnpm check` | Biome, `tsc --noEmit` and Vitest; the gate before every PR and in CI |
 | `pnpm test` | Vitest only |
 | `pnpm lint` / `pnpm format` | Biome lint or format alone |
-| `pnpm db:push` | Apply `src/db/schema.ts` to the selected database |
+| `pnpm db:seed` | Apply the migrations in `drizzle/` to `local.db`; `--demo` adds a demo learner. Refuses any database but a local file |
+| `pnpm db:push` | Apply `src/db/schema/` to the selected database without a migration, for quick local experiments |
 | `pnpm db:generate` / `pnpm db:migrate` | SQL migrations, for Turso once it is live |
 | `pnpm db:studio` | Drizzle Studio |
 | `pnpm generate-routes` | Regenerate `src/routeTree.gen.ts` |

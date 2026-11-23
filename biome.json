@@ -31,6 +31,12 @@
 			"recommended": true
 		}
 	},
+	"overrides": [
+		{
+			"includes": ["**/src/content/types.ts"],
+			"formatter": { "enabled": false }
+		}
+	],
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double"
