@@ -1,5 +1,8 @@
 import { useId, useState } from "react";
-import { maestralStrength } from "@/components/custom/visuals/adriatic-winds/winds";
+import {
+	MAESTRAL_START_HOUR,
+	maestralStrength,
+} from "@/components/custom/visuals/adriatic-winds/winds";
 import { PALETTE } from "@/components/custom/visuals/shared/visual-palette";
 
 const HOURS = Array.from({ length: 61 }, (_, index) => 6 + index * 0.25);
@@ -9,7 +12,7 @@ function describe(hour: number): string {
 		return "Noć i rano jutro: slabi burin puše s kopna prema moru.";
 	}
 
-	if (hour < 10) {
+	if (hour < MAESTRAL_START_HOUR) {
 		return "Jutro: tišina, more se smiruje. Maestral još ne puše.";
 	}
 

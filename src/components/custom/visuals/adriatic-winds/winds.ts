@@ -114,11 +114,16 @@ export const WINDS: Record<WindId, IWind> = {
 	},
 };
 
-/** Relative strength of a typical summer maestral by hour (0 to 1): starts about 9, peaks about 14, dies before sunset. */
+/** Hrvatska enciklopedija: the maestral starts at 8 to 9 h, peaks about 14 h and dies before sunset. */
+export const MAESTRAL_START_HOUR = 9;
+
+/** Relative strength of a typical summer maestral by hour, 0 to 1. */
 export function maestralStrength(hour: number): number {
-	if (hour <= 9 || hour >= 19.5) {
+	if (hour <= MAESTRAL_START_HOUR || hour >= 19.5) {
 		return 0;
 	}
 
-	return hour <= 14 ? (hour - 9) / 5 : (19.5 - hour) / 5.5;
+	return hour <= 14
+		? (hour - MAESTRAL_START_HOUR) / (14 - MAESTRAL_START_HOUR)
+		: (19.5 - hour) / 5.5;
 }
