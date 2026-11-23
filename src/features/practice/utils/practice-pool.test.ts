@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import course from "@/content/voditelj-brodice";
 import {
+	againExclusions,
 	type IPracticeContext,
 	modeQuestionIds,
 	practiceLevel,
@@ -108,16 +109,19 @@ describe("modeQuestionIds", () => {
 		).toEqual([]);
 	});
 
-	it("lists flagged questions, newest first", () => {
-		const flagged = { [first.id]: 1, [second.id]: 2 };
+	it("asks flagged questions newest first, without shuffling", () => {
+		const flagged = { [first.id]: 1, [second.id]: 3, [third.id]: 2 };
 
-		expect(
-			modeQuestionIds(
-				course,
-				{ mode: "oznaceno", level: "B" },
-				context({ flagged }),
-			),
-		).toEqual([second.id, first.id]);
+		for (const seed of [1, 2, 3]) {
+			expect(
+				selectPracticeQuestions(
+					course,
+					{ mode: "oznaceno", level: "B", length: 10 },
+					context({ flagged }),
+					seed,
+				).map((q) => q.id),
+			).toEqual([second.id, third.id, first.id]);
+		}
 	});
 
 	it("lists only the questions due today for Za ponoviti danas", () => {
@@ -223,5 +227,91 @@ describe("selectPracticeQuestions", () => {
 		expect(set).toHaveLength(20);
 		expect(set.slice(0, own).every((q) => q.lesson === lesson)).toBe(true);
 		expect(set.every((q) => q.area === "plovne-oznake")).toBe(true);
+	});
+});
+
+describe("Još 10", () => {
+	const request = {
+		mode: "podrucje",
+		area: "meteorologija",
+		level: "B",
+		length: 10,
+	} as const;
+
+	it("leaves out the questions just asked while enough others remain", () => {
+		const firstSet = selectPracticeQuestions(course, request, context(), 1);
+		const recent = firstSet.map((q) => q.id);
+		const next = selectPracticeQuestions(course, request, context(), 2, {
+			recent,
+		});
+
+		expect(next).toHaveLength(10);
+		expect(next.some((q) => recent.includes(q.id))).toBe(false);
+	});
+
+	it("falls back to the whole pool when too few others remain", () => {
+		const pool = practicePool(course, "B", { area: "meteorologija" });
+		const recent = pool.slice(0, pool.length - 5).map((q) => q.id);
+
+		expect(
+			selectPracticeQuestions(course, request, context(), 2, { recent }),
+		).toHaveLength(10);
+	});
+
+	it("drops the mistakes just answered right from Pogrešni", () => {
+		const [wrongOne, wrongTwo] = areaQuestions("meteorologija");
+
+		if (!wrongOne || !wrongTwo) {
+			throw new Error("The course needs meteorology questions");
+		}
+
+		const progress = {
+			attempts: [
+				testAttempt({
+					questionId: wrongOne.id,
+					correct: false,
+					sessionId: "s1",
+				}),
+				testAttempt({
+					questionId: wrongTwo.id,
+					correct: false,
+					sessionId: "s1",
+				}),
+				testAttempt({
+					questionId: wrongOne.id,
+					correct: true,
+					sessionId: "s2",
+				}),
+				testAttempt({
+					questionId: wrongTwo.id,
+					correct: false,
+					sessionId: "s2",
+				}),
+			],
+		};
+
+		const exclusions = againExclusions("pogresni", [
+			{ questionId: wrongOne.id, selected: ["a"], correct: true },
+			{ questionId: wrongTwo.id, selected: ["b"], correct: false },
+		]);
+
+		expect(exclusions.drop).toEqual([wrongOne.id]);
+		expect(
+			selectPracticeQuestions(
+				course,
+				{ mode: "pogresni", level: "B", length: 10 },
+				context(progress),
+				1,
+				exclusions,
+			).map((q) => q.id),
+		).toEqual([wrongTwo.id]);
+	});
+
+	it("drops nothing for the other modes", () => {
+		expect(
+			againExclusions("mjesovito", [
+				{ questionId: "q-1", selected: ["a"], correct: true },
+			]),
+		).toEqual({ recent: ["q-1"], drop: [] });
 	});
 });

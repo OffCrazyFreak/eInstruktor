@@ -4,6 +4,7 @@ import type {
 	PracticeMode,
 	SessionLength,
 } from "@/features/practice/utils/practice-search";
+import type { ISessionAnswer } from "@/features/practice/utils/practice-session";
 import { getQuestions, subjectOfArea } from "@/lib/content/course-selectors";
 import { areaGroups } from "@/lib/content/question-groups";
 import { seededShuffle } from "@/lib/content/seeded-shuffle";
@@ -95,17 +96,53 @@ export function modeQuestionIds(
 	}
 }
 
-/** The questions of one practice set in the order they are asked; the lesson's own questions come first when a lesson is picked. */
+export interface IPracticeExclusions {
+	/** Left out while enough other questions remain, such as the ones the set before "Još 10" asked. */
+	recent?: readonly string[];
+	/** Always left out. */
+	drop?: readonly string[];
+}
+
+/** What "Još 10" leaves out: the questions just asked, and for Pogrešni the ones just answered right, which still wait for a second session. */
+export function againExclusions(
+	mode: PracticeMode,
+	answers: readonly ISessionAnswer[],
+): IPracticeExclusions {
+	return {
+		recent: answers.map((answer) => answer.questionId),
+		drop:
+			mode === "pogresni"
+				? answers
+						.filter((answer) => answer.correct)
+						.map((answer) => answer.questionId)
+				: [],
+	};
+}
+
+function withoutIds(ids: readonly string[], left: readonly string[] = []) {
+	const leftOut = new Set(left);
+
+	return ids.filter((id) => !leftOut.has(id));
+}
+
+/** The questions of one practice set in the order they are asked; flagged ones stay newest first, and a lesson's own questions come first when a lesson is picked. */
 export function selectPracticeQuestions(
 	course: ICourse,
 	request: IPracticeRequest,
 	context: IPracticeContext,
 	seed: number,
+	{ recent, drop }: IPracticeExclusions = {},
 ): IQuestion[] {
-	const shuffled = seededShuffle(
-		getQuestions(course, { ids: modeQuestionIds(course, request, context) }),
-		seed,
-	);
+	const all = withoutIds(modeQuestionIds(course, request, context), drop);
+	const fresh = withoutIds(all, recent);
+	const needed = request.length === "sve" ? 1 : request.length;
+
+	const questions = getQuestions(course, {
+		ids: fresh.length >= needed ? fresh : all,
+	});
+
+	const shuffled =
+		request.mode === "oznaceno" ? questions : seededShuffle(questions, seed);
 
 	const ordered = request.lesson
 		? [
