@@ -701,7 +701,7 @@ const questions: IQuestion[] = [
 			{ id: "d", text: "6 čvorova", correct: false },
 		],
 		explanation:
-			"Stupanj 6 je jak vjetar, 22 do 27 čvorova. Bofori nisu čvorovi: svaki stupanj pokriva raspon brzina.",
+			"Stupanj 6 je jaki vjetar, 22 do 27 čvorova. Bofori nisu čvorovi: svaki stupanj pokriva raspon brzina.",
 		difficulty: 3,
 		source: "original",
 	},

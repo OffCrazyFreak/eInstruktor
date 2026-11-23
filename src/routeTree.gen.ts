@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VizualiRouteImport } from './routes/vizuali'
 import { Route as UvjetiRouteImport } from './routes/uvjeti'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivatnostRouteImport } from './routes/privatnost'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const VizualiRoute = VizualiRouteImport.update({
+  id: '/vizuali',
+  path: '/vizuali',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UvjetiRoute = UvjetiRouteImport.update({
   id: '/uvjeti',
   path: '/uvjeti',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/privatnost': typeof PrivatnostRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/uvjeti': typeof UvjetiRoute
+  '/vizuali': typeof VizualiRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/privatnost': typeof PrivatnostRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/uvjeti': typeof UvjetiRoute
+  '/vizuali': typeof VizualiRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
@@ -61,19 +69,33 @@ export interface FileRoutesById {
   '/privatnost': typeof PrivatnostRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/uvjeti': typeof UvjetiRoute
+  '/vizuali': typeof VizualiRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/privatnost' | '/sitemap.xml' | '/uvjeti' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/privatnost'
+    | '/sitemap.xml'
+    | '/uvjeti'
+    | '/vizuali'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/privatnost' | '/sitemap.xml' | '/uvjeti' | '/api/auth/$'
+  to:
+    | '/'
+    | '/privatnost'
+    | '/sitemap.xml'
+    | '/uvjeti'
+    | '/vizuali'
+    | '/api/auth/$'
   id:
     | '__root__'
     | '/'
     | '/privatnost'
     | '/sitemap.xml'
     | '/uvjeti'
+    | '/vizuali'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
@@ -82,11 +104,19 @@ export interface RootRouteChildren {
   PrivatnostRoute: typeof PrivatnostRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UvjetiRoute: typeof UvjetiRoute
+  VizualiRoute: typeof VizualiRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vizuali': {
+      id: '/vizuali'
+      path: '/vizuali'
+      fullPath: '/vizuali'
+      preLoaderRoute: typeof VizualiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/uvjeti': {
       id: '/uvjeti'
       path: '/uvjeti'
@@ -130,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivatnostRoute: PrivatnostRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   UvjetiRoute: UvjetiRoute,
+  VizualiRoute: VizualiRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
