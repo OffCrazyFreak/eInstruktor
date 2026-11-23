@@ -12,7 +12,11 @@ interface IVisualFrameProps {
 	className?: string;
 }
 
-/** Card around one interactive visual: same padding everywhere, a caption, and a calm fallback if it fails. */
+/**
+ * Card around one interactive visual: same padding everywhere, a caption, and a calm fallback if it fails.
+ * Visuals seed their state from props once, so the frame remounts when the id or props change.
+ * Two questions can share the same props, so a consumer that swaps questions in place should also pass `key={question.id}`.
+ */
 export default function VisualFrame({
 	visual,
 	caption,
@@ -20,6 +24,7 @@ export default function VisualFrame({
 	className,
 }: IVisualFrameProps) {
 	const Visual = VISUALS[visual];
+	const instance = `${visual}:${JSON.stringify(props ?? {})}`;
 
 	return (
 		<figure
@@ -29,6 +34,7 @@ export default function VisualFrame({
 			)}
 		>
 			<VisualErrorBoundary
+				key={instance}
 				fallback={
 					<p className="rounded-2xl bg-[#eaf3ff] p-4 text-[0.92rem]">
 						Ovaj prikaz se nije učitao. Osvježi stranicu ili nastavi s lekcijom.
