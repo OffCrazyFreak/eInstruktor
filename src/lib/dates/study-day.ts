@@ -9,3 +9,17 @@ const zagrebDayFormat = new Intl.DateTimeFormat("en-CA", {
 export function toStudyDay(date: Date): string {
 	return zagrebDayFormat.format(date);
 }
+
+// Day strings are calendar dates with no time of day, so UTC arithmetic cannot be shifted by a DST change.
+export function addDays(day: string, days: number): string {
+	const [year, month, date] = day.split("-").map(Number);
+	const shifted = new Date(
+		Date.UTC(year ?? 0, (month ?? 1) - 1, (date ?? 1) + days),
+	);
+
+	return shifted.toISOString().slice(0, 10);
+}
+
+export function previousDay(day: string): string {
+	return addDays(day, -1);
+}
