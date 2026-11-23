@@ -50,7 +50,7 @@ const lesson: ILesson = {
 			type: "warning",
 			level: "common",
 			markdown:
-				"**Cijene su okvirne:** ispit A cca 23 EUR, ispit B cca 58 EUR, pripremni tečaj (ako ga želiš) cca 150 do 350 EUR. Iznosi se mogu promijeniti, posebno nakon 01.01.2027. kad se očekuju nova pravila.\n\nNe uplaćuj napamet: **poziv na broj razlikuje se od ureda do ureda**, pa iznos i podatke za uplatu uvijek prepiši s obrasca ureda u kojem polažeš.",
+				"**Cijene su okvirne:** ispit A cca 23 EUR, ispit B cca 58 EUR, pripremni tečaj (ako ga želiš) cca 150 do 350 EUR. Iznosi se mogu promijeniti, posebno tijekom 2027. kad se očekuju nova pravila.\n\nNe uplaćuj napamet: **poziv na broj razlikuje se od ureda do ureda**, pa iznos i podatke za uplatu uvijek prepiši s obrasca ureda u kojem polažeš.",
 		},
 		{
 			type: "text",
