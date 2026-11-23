@@ -51,6 +51,62 @@ describe("readiness", () => {
 		expect(result.overall).toBe("na-dobrom-putu");
 	});
 
+	it("puts the thresholds on the ready side at exactly 85, 80 and 70 percent", () => {
+		const twenty = { id: "dvadeset", questionIds: ids("p", 20) };
+		const atReady = answerAll(ids("p", 20), 0.85);
+		const atCoverage = answerAll(ids("p", 16), 1).concat(
+			answerAll(["p-16", "p-17", "p-18", "p-19"], 0),
+		);
+
+		expect(readiness([twenty], atReady).overall).toBe("spreman");
+		expect(readiness([twenty], answerAll(ids("p", 20), 0.8)).overall).toBe(
+			"na-dobrom-putu",
+		);
+		expect(
+			readiness([plovidba], answerAll(plovidba.questionIds, 0.7)).overall,
+		).toBe("na-dobrom-putu");
+		expect(
+			readiness([plovidba], answerAll(plovidba.questionIds, 0.6)).overall,
+		).toBe("za-pocetak");
+		expect(readiness([twenty], atCoverage).subjects[0]?.label).toBe(
+			"na-dobrom-putu",
+		);
+
+		const sixteenOfTwenty = answerAll(ids("p", 16), 1);
+
+		expect(readiness([twenty], sixteenOfTwenty).subjects[0]).toMatchObject({
+			coverage: 0.8,
+			label: "spreman",
+		});
+	});
+
+	it("measures a subject from exactly 10 answers", () => {
+		expect(readiness([plovidba], answerAll(ids("p", 10), 1)).overall).toBe(
+			"spreman",
+		);
+		expect(readiness([plovidba], answerAll(ids("p", 9), 1)).overall).toBe(
+			"premalo-podataka",
+		);
+	});
+
+	it("never lets an unmeasured subject hide a measured failing one", () => {
+		const result = readiness(
+			[plovidba, radio],
+			answerAll(plovidba.questionIds, 0.5),
+		);
+
+		expect(result.subjects[1]?.label).toBe("premalo-podataka");
+		expect(result.weakest?.id).toBe("plovidba");
+		expect(result.overall).toBe("za-pocetak");
+	});
+
+	it("says there is too little data while no subject is measured", () => {
+		const result = readiness([plovidba, radio], answerAll(ids("r", 3), 0));
+
+		expect(result.weakest).toBeNull();
+		expect(result.overall).toBe("premalo-podataka");
+	});
+
 	it("takes the weakest subject as the overall answer", () => {
 		const attempts = [
 			...answerAll(plovidba.questionIds, 1),

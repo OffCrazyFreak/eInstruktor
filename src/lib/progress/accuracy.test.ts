@@ -101,4 +101,37 @@ describe("weakGroups", () => {
 			"slabo",
 		]);
 	});
+
+	it("counts a group from exactly 5 answers and below 70 percent only", () => {
+		const fiveBelow = { id: "pet", questionIds: ["d"] };
+		const atSeventy = { id: "sedamdeset", questionIds: ["e"] };
+		const four = { id: "cetiri", questionIds: ["f"] };
+		const attempts = [
+			...answers("d", 3, 2),
+			...answers("e", 7, 3),
+			...answers("f", 0, 4),
+		];
+
+		expect(
+			weakGroups([fiveBelow, atSeventy, four], attempts).map(
+				(group) => group.id,
+			),
+		).toEqual(["pet"]);
+	});
+
+	it("returns at most three groups, weakest first", () => {
+		const many = ["g", "h", "i", "j"].map((id) => ({ id, questionIds: [id] }));
+		const attempts = [
+			...answers("g", 3, 7),
+			...answers("h", 1, 9),
+			...answers("i", 2, 8),
+			...answers("j", 0, 10),
+		];
+
+		expect(weakGroups(many, attempts).map((group) => group.id)).toEqual([
+			"j",
+			"h",
+			"i",
+		]);
+	});
 });

@@ -8,9 +8,7 @@ interface IReadinessCardProps {
 }
 
 export default function ReadinessCard({ readiness }: IReadinessCardProps) {
-	const showWeakest =
-		readiness.subjects.length > 1 &&
-		readiness.weakest?.label !== "premalo-podataka";
+	const showWeakest = readiness.subjects.length > 1 && readiness.weakest !== null;
 
 	return (
 		<section

@@ -34,7 +34,7 @@ export interface ISubjectReadiness {
 
 export interface IReadiness {
 	subjects: ISubjectReadiness[];
-	/** The pass rule is per subject, so the weakest subject is the overall answer. */
+	/** The weakest measured subject; the pass rule is per subject, so it is the overall answer. Null while no subject has enough answers. */
 	weakest: ISubjectReadiness | null;
 	overall: ReadinessLabel;
 }
@@ -88,11 +88,14 @@ export function readiness(
 		};
 	});
 
-	const weakest = perSubject.reduce<ISubjectReadiness | null>(
-		(current, subject) =>
-			current === null || isWeaker(subject, current) ? subject : current,
-		null,
-	);
+	// A subject without enough answers says nothing yet, so it must not hide a measured subject that is failing.
+	const weakest = perSubject
+		.filter((subject) => subject.label !== "premalo-podataka")
+		.reduce<ISubjectReadiness | null>(
+			(current, subject) =>
+				current === null || isWeaker(subject, current) ? subject : current,
+			null,
+		);
 
 	return {
 		subjects: perSubject,
