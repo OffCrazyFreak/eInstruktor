@@ -1,5 +1,6 @@
 import { z } from "zod";
-import type { AreaSlug, ExamSubjectId } from "@/content/types";
+import type { AreaSlug } from "@/content/types";
+import { EXAM_SUBJECT_IDS } from "@/content/voditelj-brodice/subjects";
 
 export const PRACTICE_MODES = [
 	"podrucje",
@@ -25,14 +26,6 @@ export const AREA_SLUGS = [
 	"motoristika",
 	"vhf-radio",
 ] as const satisfies readonly AreaSlug[];
-
-export const EXAM_SUBJECT_IDS = [
-	"pomorska-plovidba",
-	"motoristika",
-	"pomorstvo-propisi-meteorologija",
-	"manevriranje-sigurnost-prva-pomoc",
-	"radiotelefonija",
-] as const satisfies readonly ExamSubjectId[];
 
 export const SESSION_LENGTHS = [10, 20, "sve"] as const;
 

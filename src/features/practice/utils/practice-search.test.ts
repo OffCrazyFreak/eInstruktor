@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import course from "@/content/voditelj-brodice";
+import { EXAM_SUBJECT_IDS } from "@/content/voditelj-brodice/subjects";
 import {
 	AREA_SLUGS,
-	EXAM_SUBJECT_IDS,
 	practiceSearchSchema,
 } from "@/features/practice/utils/practice-search";
 

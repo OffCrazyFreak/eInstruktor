@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Layers } from "lucide-react";
 import course from "@/content/voditelj-brodice";
+import { EXAM_SUBJECT_IDS } from "@/content/voditelj-brodice/subjects";
 import { deckTitle } from "@/features/practice/utils/deck-title";
 import {
 	ALL_DECKS,
@@ -9,7 +10,6 @@ import {
 	deckStats,
 	type IDeckStats,
 } from "@/features/practice/utils/flashcard-deck";
-import { EXAM_SUBJECT_IDS } from "@/features/practice/utils/practice-search";
 import { toStudyDay } from "@/lib/dates/study-day";
 import { pluralHr } from "@/lib/plural";
 import useProgress from "@/lib/progress/use-progress";

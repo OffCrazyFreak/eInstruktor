@@ -1,12 +1,12 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import AppNotFoundPage from "@/components/custom/app-shell/app-not-found-page";
+import { EXAM_SUBJECT_IDS } from "@/content/voditelj-brodice/subjects";
 import OralSession from "@/features/practice/components/flashcards/oral-session";
 import { deckTitle } from "@/features/practice/utils/deck-title";
 import {
 	ALL_DECKS,
 	type DeckId,
 } from "@/features/practice/utils/flashcard-deck";
-import { EXAM_SUBJECT_IDS } from "@/features/practice/utils/practice-search";
 import pageHead from "@/lib/seo/page-head";
 
 const DECK_IDS: readonly string[] = [ALL_DECKS, ...EXAM_SUBJECT_IDS];
