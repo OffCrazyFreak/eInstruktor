@@ -48,7 +48,7 @@ export const Route = createRootRouteWithContext<IRouterContext>()({
 
 function RootDocument({ children }: IRootDocumentProps) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="hr" suppressHydrationWarning>
 			<head>
 				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: inline theme script must run before hydration to prevent a flash of the wrong theme */}
 				<script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
