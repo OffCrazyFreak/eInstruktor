@@ -50,4 +50,10 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 				"@/components/custom/visuals/sound-signal-player/sound-signal-player"
 			),
 	),
+	"collision-situations": lazyVisual(
+		() =>
+			import(
+				"@/components/custom/visuals/collision-situations/collision-situations"
+			),
+	),
 };

@@ -1,8 +1,6 @@
 import { describe, expect, it } from "vitest";
-import {
-	bearingFrom,
-	quadrantOf,
-} from "@/components/custom/visuals/cardinal-quadrant/quadrant-math";
+import { quadrantOf } from "@/components/custom/visuals/cardinal-quadrant/quadrant-math";
+import { bearingFrom } from "@/components/custom/visuals/shared/bearing";
 
 describe("bearingFrom", () => {
 	it("measures clockwise from north with screen y pointing down", () => {

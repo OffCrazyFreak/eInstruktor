@@ -1,11 +1,11 @@
 import { type PointerEvent, useRef, useState } from "react";
 import {
-	bearingFrom,
 	QUADRANT_MARK,
 	QUADRANTS,
 	type Quadrant,
 	quadrantOf,
 } from "@/components/custom/visuals/cardinal-quadrant/quadrant-math";
+import { bearingFrom } from "@/components/custom/visuals/shared/bearing";
 import BuoyFigure from "@/components/custom/visuals/shared/buoy/buoy-figure";
 import { MARKS } from "@/components/custom/visuals/shared/buoy/buoy-marks";
 import BoatIcon from "@/components/custom/visuals/shared/sea/boat-icon";
