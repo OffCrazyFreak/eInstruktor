@@ -1,5 +1,7 @@
 import { useState } from "react";
 import {
+	DIGITS,
+	type ICodeWord,
 	LETTERS,
 	spell,
 } from "@/components/custom/visuals/phonetic-alphabet/phonetic-data";
@@ -9,16 +11,21 @@ interface ISpellingDrillProps {
 	words: readonly string[];
 }
 
-/** Three code words per letter; pick the right one, letter by letter. Distractors rotate so the answer is not always first. */
+/** Three code words per symbol, letters among letters and digits among digits. Distractors rotate so the answer is not always first. */
 function choicesFor(symbol: string, position: number): string[] {
-	const index = LETTERS.findIndex((word) => word.symbol === symbol);
-	const pick = (offset: number) =>
-		LETTERS[(index + offset + LETTERS.length) % LETTERS.length]?.spoken ?? "";
-	const options = [pick(0), pick(7), pick(-5)];
+	const pool = /\d/.test(symbol) ? DIGITS : LETTERS;
+	const index = pool.findIndex((word) => word.symbol === symbol);
+	const options = [0, 7, -5].map((offset) =>
+		sayWord(pool[(index + offset + pool.length * 2) % pool.length]),
+	);
 
 	return options.map(
 		(_, slot) => options[(slot + position) % options.length] ?? "",
 	);
+}
+
+function sayWord(word: ICodeWord | null | undefined): string {
+	return word ? [word.spoken, word.english].filter(Boolean).join(" ") : "";
 }
 
 export default function SpellingDrill({ words }: ISpellingDrillProps) {
@@ -31,7 +38,7 @@ export default function SpellingDrill({ words }: ISpellingDrillProps) {
 	const finished = done.length === letters.length;
 
 	function answer(choice: string) {
-		if (choice === current?.word?.spoken) {
+		if (choice === sayWord(current?.word)) {
 			setDone([...done, choice]);
 			setWrong(null);
 		} else {
@@ -81,7 +88,7 @@ export default function SpellingDrill({ words }: ISpellingDrillProps) {
 			{current && !finished && (
 				<div className="space-y-2">
 					<p className="text-[0.92rem]">
-						Kako izgovaraš slovo{" "}
+						Kako izgovaraš {/\d/.test(current.symbol) ? "znamenku" : "slovo"}{" "}
 						<strong className="font-mono">{current.word?.symbol}</strong>
 						{current.hasMark ? " (bez kvačice)" : ""}?
 					</p>

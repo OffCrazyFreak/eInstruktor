@@ -1,4 +1,4 @@
-interface ICodeWord {
+export interface ICodeWord {
 	symbol: string;
 	/** Official ITU spelling. */
 	itu: string;
