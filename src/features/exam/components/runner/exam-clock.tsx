@@ -1,6 +1,7 @@
 import { Timer } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { crossedMark, formatClock } from "@/features/exam/utils/exam-timer";
+import { pluralHr } from "@/lib/plural";
 import { cn } from "@/lib/utils";
 
 interface IExamClockProps {
@@ -9,6 +10,14 @@ interface IExamClockProps {
 }
 
 const LOW_TIME_MS = 5 * 60_000;
+
+function minutesLeftText(minutes: number): string {
+	if (minutes === 1) {
+		return "Još jedna minuta.";
+	}
+
+	return `Još ${minutes} ${pluralHr(minutes, "minuta", "minute", "minuta")}.`;
+}
 
 /** The time left; a screen reader hears it only at the 10, 5 and 1 minute marks, never every second. */
 export default function ExamClock({ remaining }: IExamClockProps) {
@@ -28,7 +37,7 @@ export default function ExamClock({ remaining }: IExamClockProps) {
 		previous.current = remaining;
 
 		if (mark !== null) {
-			setAnnouncement(mark === 1 ? "Još 1 minuta." : `Još ${mark} minuta.`);
+			setAnnouncement(minutesLeftText(mark));
 		}
 	}, [remaining]);
 

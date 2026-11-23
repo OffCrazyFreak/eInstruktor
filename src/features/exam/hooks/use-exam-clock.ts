@@ -11,7 +11,10 @@ export default function useExamClock(
 	endsAt: number | null,
 	onExpire: () => void,
 ): number | null {
-	const [remaining, setRemaining] = useState<number | null>(null);
+	// Read at once, so a timed exam never shows the no-limit state for a frame.
+	const [remaining, setRemaining] = useState<number | null>(() =>
+		endsAt === null ? null : remainingMs(endsAt, Date.now()),
+	);
 	const expire = useEffectEvent(onExpire);
 
 	useEffect(() => {

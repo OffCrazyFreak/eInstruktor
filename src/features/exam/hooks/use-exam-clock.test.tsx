@@ -68,4 +68,31 @@ describe("useExamClock", () => {
 		expect(result.current).toBeNull();
 		expect(onExpire).not.toHaveBeenCalled();
 	});
+
+	it("starts with the real time left before any tick", () => {
+		const { result } = renderHook(() => useExamClock(START + 90_000, vi.fn()));
+
+		expect(result.current).toBe(90_000);
+	});
+
+	it("hands in at once when opened exactly at the end time", () => {
+		const onExpire = vi.fn();
+		const { result } = renderHook(() => useExamClock(START, onExpire));
+
+		expect(result.current).toBe(0);
+		expect(onExpire).toHaveBeenCalledTimes(1);
+	});
+
+	it("follows the device clock when it jumps backwards, without handing in", () => {
+		const onExpire = vi.fn();
+		const { result } = renderHook(() => useExamClock(START + 60_000, onExpire));
+
+		act(() => {
+			vi.setSystemTime(START - 5 * 60_000);
+			vi.advanceTimersByTime(1000);
+		});
+
+		expect(result.current).toBe(6 * 60_000 - 1000);
+		expect(onExpire).not.toHaveBeenCalled();
+	});
 });
