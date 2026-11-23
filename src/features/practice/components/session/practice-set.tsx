@@ -35,7 +35,7 @@ export default function PracticeSet({
 	const [sessionId] = useState(randomId);
 	const [leaving, setLeaving] = useState(false);
 	const checkedAt = useRef(0);
-	const questionRef = useRef<HTMLDivElement>(null);
+	const questionRef = useRef<HTMLElement>(null);
 	const shownIndex = useRef<number | null>(null);
 
 	const [state, dispatch] = useReducer(practiceSessionReducer, null, () =>
@@ -147,7 +147,7 @@ export default function PracticeSet({
 			/>
 
 			<main className="mx-auto max-w-2xl px-4 pt-6 pb-[calc(7rem+env(safe-area-inset-bottom))] sm:px-6">
-				<div
+				<section
 					ref={questionRef}
 					tabIndex={-1}
 					aria-label={`Pitanje ${state.index + 1} od ${questions.length}`}
@@ -162,7 +162,7 @@ export default function PracticeSet({
 						}
 						revealed={checked}
 					/>
-				</div>
+				</section>
 
 				{checked && (
 					<Button

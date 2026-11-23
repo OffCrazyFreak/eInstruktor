@@ -44,7 +44,7 @@ export default function OralRounds({ deck }: IOralRoundsProps) {
 	);
 
 	const revealedAt = useRef(0);
-	const cardRef = useRef<HTMLDivElement>(null);
+	const cardRef = useRef<HTMLElement>(null);
 	const shownCard = useRef<string | null>(null);
 
 	const cardId = currentCardId(state);
@@ -116,7 +116,7 @@ export default function OralRounds({ deck }: IOralRoundsProps) {
 			) : (
 				<>
 					<main className="mx-auto max-w-2xl px-4 pt-6 pb-[calc(9rem+env(safe-area-inset-bottom))] sm:px-6">
-						<div
+						<section
 							ref={cardRef}
 							tabIndex={-1}
 							aria-label={`Kartica ${state.index + 1} od ${state.queue.length}`}
@@ -129,7 +129,7 @@ export default function OralRounds({ deck }: IOralRoundsProps) {
 								revealed={state.phase === "back"}
 								onReveal={handleReveal}
 							/>
-						</div>
+						</section>
 					</main>
 
 					<SessionActionBar>
