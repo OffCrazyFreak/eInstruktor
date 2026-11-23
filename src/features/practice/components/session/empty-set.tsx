@@ -6,15 +6,23 @@ import SessionTopBar from "@/features/practice/components/session/session-top-ba
 interface IEmptySetProps {
 	title: string;
 	message: string;
+	/** Where the close button and the second button lead. */
+	back?: { to: "/vjezba" | "/vjezba/usmeno"; label: string };
 }
 
-export default function EmptySet({ title, message }: IEmptySetProps) {
+const PRACTICE_HUB = { to: "/vjezba", label: "Natrag na vježbu" } as const;
+
+export default function EmptySet({
+	title,
+	message,
+	back = PRACTICE_HUB,
+}: IEmptySetProps) {
 	return (
 		<>
 			<SessionTopBar
 				title={title}
-				closeTo="/vjezba"
-				closeLabel="Natrag na vježbu"
+				closeTo={back.to}
+				closeLabel={back.label}
 				position={null}
 			/>
 
@@ -44,7 +52,7 @@ export default function EmptySet({ title, message }: IEmptySetProps) {
 						variant="outline"
 						className="h-12 rounded-full px-6 font-semibold"
 					>
-						<Link to="/vjezba">Natrag na vježbu</Link>
+						<Link to={back.to}>{back.label}</Link>
 					</Button>
 				</div>
 			</main>
