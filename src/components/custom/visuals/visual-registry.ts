@@ -87,4 +87,10 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 				"@/components/custom/visuals/four-stroke-engine/four-stroke-engine"
 			),
 	),
+	"navigation-areas-map": lazyVisual(
+		() =>
+			import(
+				"@/components/custom/visuals/navigation-areas-map/navigation-areas-map"
+			),
+	),
 };
