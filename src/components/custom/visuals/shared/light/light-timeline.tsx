@@ -26,10 +26,7 @@ export default function LightTimeline({
 }: ILightTimelineProps) {
 	const length = total(segments);
 	const playheadX = useTransform(progress, (value) => value * WIDTH);
-	const blocks = segments.map((segment, index) => ({
-		segment,
-		start: total(segments.slice(0, index)),
-	}));
+	const blocks = withStartTimes(segments);
 
 	return (
 		<div className="flex items-center gap-3">
@@ -74,6 +71,17 @@ export default function LightTimeline({
 			</div>
 		</div>
 	);
+}
+
+function withStartTimes(segments: readonly ILightSegment[]) {
+	let start = 0;
+
+	return segments.map((segment) => {
+		const block = { segment, start };
+		start += segment.duration;
+
+		return block;
+	});
 }
 
 function formatSeconds(seconds: number): string {

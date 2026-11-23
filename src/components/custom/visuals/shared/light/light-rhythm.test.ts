@@ -119,3 +119,54 @@ describe("buildLightSequence", () => {
 		]);
 	});
 });
+
+describe("limits on what the parser accepts", () => {
+	it("refuses absurd group sizes with a friendly note", () => {
+		for (const code of ["Fl(99999999) 10s", "Fl(5000) 10s"]) {
+			const light = parseLightCode(code);
+			const rhythm = light.parts[0];
+
+			expect(light.groups).toEqual([]);
+			expect(rhythm?.known).toBe(false);
+			expect(rhythm?.meaning).toContain("najviše 9");
+			expect(buildLightSequence(light).length).toBeLessThan(10);
+		}
+	});
+
+	it("accepts the largest real group, the west cardinal's nine flashes", () => {
+		expect(parseLightCode("VQ(9) 10s").groups).toEqual([9]);
+	});
+
+	it("refuses more than three groups", () => {
+		expect(parseLightCode("Fl(1+1+1+1) 20s").groups).toEqual([]);
+	});
+
+	it("ignores text past the length limit", () => {
+		const light = parseLightCode(`Fl W 10s ${"15M ".repeat(500)}`);
+
+		expect(light.parts.length).toBeLessThan(20);
+	});
+});
+
+describe("Morse letters", () => {
+	it("knows every letter, not only the common ones", () => {
+		const light = parseLightCode("Mo(Q) 10s");
+
+		expect(light.parts[0]?.known).toBe(true);
+		expect(flashes("Mo(Q) 10s").map((segment) => segment.duration)).toEqual([
+			1.5, 1.5, 0.5, 1.5,
+		]);
+	});
+
+	it("refuses unknown signs", () => {
+		expect(parseLightCode("Mo(?) 10s").parts[0]?.known).toBe(false);
+	});
+});
+
+describe("flash rate", () => {
+	it("keeps the ultra quick demo under 3 flashes a second", () => {
+		const [on, off] = buildLightSequence(parseLightCode("UQ"));
+
+		expect((on?.duration ?? 0) + (off?.duration ?? 0)).toBeGreaterThan(1 / 3);
+	});
+});

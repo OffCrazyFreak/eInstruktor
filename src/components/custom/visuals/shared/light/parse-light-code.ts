@@ -7,6 +7,13 @@ import {
 	RHYTHM_CODES,
 	RHYTHM_NAMES,
 } from "@/components/custom/visuals/shared/light/light-code";
+import { MORSE_CODE } from "@/components/custom/visuals/shared/light/morse-code";
+
+/** Real lights group at most 9 flashes (west cardinal) in at most 3 groups; Morse lights show one or two letters. */
+const LIMITS = { flashesPerGroup: 9, groups: 3, morseLetters: 2 } as const;
+
+/** Longer than any real characteristic, so a pasted paragraph cannot flood the explanation list. */
+export const MAX_INPUT_LENGTH = 60;
 
 const RHYTHM_PATTERN =
 	/^(?:Al\.?)?(LFl|DBl|Fl|Bl|Oc|Pk|Iso|Izo|UQ|UK|VQ|VK|Q|K|Mo|F)(?:\(([^)]*)\))?(?:\+(LFl|DBl))?$/;
@@ -38,6 +45,7 @@ export function parseLightCode(input: string): ILightCharacteristic {
 
 function tokenize(input: string): string[] {
 	return input
+		.slice(0, MAX_INPUT_LENGTH)
 		.replace(/\s+\(/g, "(")
 		.replace(/\s*\+\s*/g, "+")
 		.replace(/(\d)\s+(s|m|M)\b/g, "$1$2")
@@ -91,12 +99,30 @@ function readRhythm(
 	result.plusLongFlash = match[3] !== undefined;
 
 	if (kind === "morse") {
-		result.morse = inside.toUpperCase() || null;
+		const letters = inside.toUpperCase();
+
+		if (!isValidMorse(letters)) {
+			return unreadable(
+				token,
+				`Morseov znak piše se kao jedno ili dva slova ili znamenke, na primjer Mo(A).`,
+			);
+		}
+
+		result.morse = letters || null;
 	} else if (inside !== "") {
-		result.groups = inside
+		const groups = inside
 			.split("+")
 			.map((count) => Number.parseInt(count, 10))
 			.filter((count) => Number.isFinite(count) && count > 0);
+
+		if (!areValidGroups(groups)) {
+			return unreadable(
+				token,
+				`Skupina ima najviše ${LIMITS.flashesPerGroup} bljeskova, a svjetlo najviše ${LIMITS.groups} skupine, na primjer Fl(2+1).`,
+			);
+		}
+
+		result.groups = groups;
 	}
 
 	const extras = [
@@ -114,6 +140,24 @@ function readRhythm(
 		meaning: [RHYTHM_NAMES[kind], ...extras].join("; "),
 		known: true,
 	};
+}
+
+function isValidMorse(letters: string): boolean {
+	return (
+		letters.length <= LIMITS.morseLetters &&
+		[...letters].every((letter) => letter in MORSE_CODE)
+	);
+}
+
+function areValidGroups(groups: readonly number[]): boolean {
+	return (
+		groups.length <= LIMITS.groups &&
+		groups.every((count) => count <= LIMITS.flashesPerGroup)
+	);
+}
+
+function unreadable(token: string, meaning: string): ILightPart {
+	return { text: token, meaning, known: false };
 }
 
 function readColors(body: string): LightColor[] | null {
@@ -134,11 +178,10 @@ function readColors(body: string): LightColor[] | null {
 }
 
 function readMeasure(token: string, result: ILightCharacteristic): ILightPart {
-	const number = (text: string) => Number.parseFloat(text.replace(",", "."));
 	const period = /^(\d+(?:[.,]\d+)?)s$/.exec(token);
 
 	if (period?.[1]) {
-		result.period = number(period[1]);
+		result.period = parseDecimal(period[1]);
 
 		return {
 			text: token,
@@ -150,7 +193,7 @@ function readMeasure(token: string, result: ILightCharacteristic): ILightPart {
 	const height = /^(\d+(?:[.,]\d+)?)m$/.exec(token);
 
 	if (height?.[1]) {
-		result.height = number(height[1]);
+		result.height = parseDecimal(height[1]);
 
 		return {
 			text: token,
@@ -162,16 +205,16 @@ function readMeasure(token: string, result: ILightCharacteristic): ILightPart {
 	const range = /^(\d+(?:[.,]\d+)?(?:-\d+(?:[.,]\d+)?)*)M$/.exec(token);
 
 	if (range?.[1]) {
-		result.ranges = range[1].split("-").map(number);
+		result.ranges = range[1].split("-").map(parseDecimal);
 
 		return { text: token, meaning: describeRanges(result), known: true };
 	}
 
-	return {
-		text: token,
-		meaning: "ovaj dio ne prepoznajemo, provjeri zapis",
-		known: false,
-	};
+	return unreadable(token, "ovaj dio ne prepoznajemo, provjeri zapis");
+}
+
+function parseDecimal(text: string): number {
+	return Number.parseFloat(text.replace(",", "."));
 }
 
 function describeRanges(result: ILightCharacteristic): string {
