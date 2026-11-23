@@ -62,4 +62,10 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 				"@/components/custom/visuals/compass-course-calculator/compass-course-calculator"
 			),
 	),
+	"light-characteristic-reader": lazyVisual(
+		() =>
+			import(
+				"@/components/custom/visuals/light-characteristic-reader/light-characteristic-reader"
+			),
+	),
 };
