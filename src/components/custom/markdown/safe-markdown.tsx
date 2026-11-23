@@ -59,6 +59,7 @@ export default function SafeMarkdown({
 				return (
 					<List
 						key={block.key}
+						start={block.ordered && block.start !== 1 ? block.start : undefined}
 						className={cn(
 							"space-y-1.5 pl-5",
 							block.ordered ? "list-decimal" : "list-disc",
