@@ -10,12 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VizualiRouteImport } from './routes/vizuali'
+import { Route as UvjetiRouteImport } from './routes/uvjeti'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PrivatnostRouteImport } from './routes/privatnost'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const VizualiRoute = VizualiRouteImport.update({
   id: '/vizuali',
   path: '/vizuali',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UvjetiRoute = UvjetiRouteImport.update({
+  id: '/uvjeti',
+  path: '/uvjeti',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivatnostRoute = PrivatnostRouteImport.update({
+  id: '/privatnost',
+  path: '/privatnost',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,30 +49,61 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/privatnost': typeof PrivatnostRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/uvjeti': typeof UvjetiRoute
   '/vizuali': typeof VizualiRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/privatnost': typeof PrivatnostRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/uvjeti': typeof UvjetiRoute
   '/vizuali': typeof VizualiRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/privatnost': typeof PrivatnostRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/uvjeti': typeof UvjetiRoute
   '/vizuali': typeof VizualiRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/vizuali' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/privatnost'
+    | '/sitemap.xml'
+    | '/uvjeti'
+    | '/vizuali'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/vizuali' | '/api/auth/$'
-  id: '__root__' | '/' | '/vizuali' | '/api/auth/$'
+  to:
+    | '/'
+    | '/privatnost'
+    | '/sitemap.xml'
+    | '/uvjeti'
+    | '/vizuali'
+    | '/api/auth/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/privatnost'
+    | '/sitemap.xml'
+    | '/uvjeti'
+    | '/vizuali'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PrivatnostRoute: typeof PrivatnostRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UvjetiRoute: typeof UvjetiRoute
   VizualiRoute: typeof VizualiRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
@@ -66,6 +115,27 @@ declare module '@tanstack/react-router' {
       path: '/vizuali'
       fullPath: '/vizuali'
       preLoaderRoute: typeof VizualiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/uvjeti': {
+      id: '/uvjeti'
+      path: '/uvjeti'
+      fullPath: '/uvjeti'
+      preLoaderRoute: typeof UvjetiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privatnost': {
+      id: '/privatnost'
+      path: '/privatnost'
+      fullPath: '/privatnost'
+      preLoaderRoute: typeof PrivatnostRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,6 +157,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PrivatnostRoute: PrivatnostRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UvjetiRoute: UvjetiRoute,
   VizualiRoute: VizualiRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }

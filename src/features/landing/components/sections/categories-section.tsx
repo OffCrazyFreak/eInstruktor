@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
 import GlassPanel from "@/features/landing/components/glass-panel";
-import { categories } from "@/features/landing/constants/landing-content";
+import {
+	categories,
+	factsCheckedOn,
+} from "@/features/landing/constants/landing-content";
 import { MUTE, NAVY, OCEAN } from "@/features/landing/constants/palette";
 import { reveal } from "@/features/landing/utils/reveal";
 
@@ -60,6 +63,10 @@ export default function CategoriesSection({ reduce }: ICategoriesSectionProps) {
 						</motion.div>
 					))}
 				</div>
+				<p className="mt-5 text-[0.8rem]" style={{ color: MUTE }}>
+					Prema Pravilniku o brodicama i jahtama. Propisi se mogu promijeniti.
+					Zadnje provjereno {factsCheckedOn}
+				</p>
 			</div>
 		</section>
 	);

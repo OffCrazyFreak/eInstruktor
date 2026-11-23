@@ -18,9 +18,9 @@ export const categories: Category[] = [
 		code: "A",
 		minAge: 15,
 		title: "Kategorija A",
-		summary: "Osnovna, manje brodice uz obalu",
+		summary: "Osnovna, mala brodica uz obalu",
 		detail:
-			"Od 15 godina. Za manje brodice u priobalju. Dovoljno za mirno ljeto blizu luke.",
+			"Od 15 godina. Brodica za osobne potrebe do 7 m i do 15 kW, do 6 NM od obale. Dovoljno za mirno ljeto blizu luke.",
 		recommended: false,
 	},
 	{
@@ -29,58 +29,8 @@ export const categories: Category[] = [
 		title: "Kategorija B",
 		summary: "Uobičajen izbor, pokriva A i daje puno više slobode",
 		detail:
-			"Od 16 godina. Pokriva sve iz kategorije A i otvara znatno veći doseg. Za većinu ljudi pravi izbor.",
+			"Od 16 godina. Brodice do 15 m i jahte do 18 m za osobne potrebe, do 12 NM od obale. Motor jači od 15 kW tek s 18 godina. Pokriva sve iz kategorije A i za većinu ljudi je pravi izbor.",
 		recommended: true,
-	},
-];
-
-export type ExamArea = {
-	id: string;
-	name: string;
-	blurb: string;
-};
-
-/** The 8 exam areas ("ispitna područja"). */
-export const examAreas: ExamArea[] = [
-	{
-		id: "navigacija",
-		name: "Pomorske karte i navigacija",
-		blurb: "Čitanje karte, kurs, pozicija.",
-	},
-	{
-		id: "iala",
-		name: "IALA plovne oznake",
-		blurb: "Bove i oznake plovnog puta.",
-	},
-	{
-		id: "svjetla",
-		name: "Svjetla i dnevni znakovi",
-		blurb: "Tko je tko na moru noću i danju.",
-	},
-	{
-		id: "sudari",
-		name: "Pravila izbjegavanja sudara",
-		blurb: "Tko koga propušta i kako.",
-	},
-	{
-		id: "meteorologija",
-		name: "Meteorologija",
-		blurb: "Jadranski vjetrovi: bura, jugo, maestral, nevera.",
-	},
-	{
-		id: "motoristika",
-		name: "Motoristika",
-		blurb: "Motor, gorivo, osnovni kvarovi.",
-	},
-	{
-		id: "sigurnost",
-		name: "Sigurnost i prva pomoć",
-		blurb: "Prsluci, oprema, postupci u nuždi.",
-	},
-	{
-		id: "vhf",
-		name: "VHF i radiotelefonija",
-		blurb: "Kanal 16, poziv MAYDAY.",
 	},
 ];
 
@@ -117,19 +67,28 @@ export const procedure: ProcedureStep[] = [
 	{
 		n: 4,
 		title: "Javi se za termin",
-		detail: "E-poštom zatraži datum ispita.",
+		detail:
+			"E-poštom zatraži datum ispita. Termini nisu isti u svim gradovima.",
 	},
-	{ n: 5, title: "Pripremi dokumente", detail: "Osobna, uplatnice i prijava." },
-	{ n: 6, title: "Uplati pristojbu", detail: "Iznos ovisi o kategoriji." },
+	{
+		n: 5,
+		title: "Pripremi dokumente",
+		detail: "Molba, preslika osobne i vozačke, dvije fotografije 3 x 3,5 cm.",
+	},
+	{
+		n: 6,
+		title: "Uplati pristojbu",
+		detail: "Podatke za uplatu prepiši s obrasca ureda u kojem polažeš.",
+	},
 	{
 		n: 7,
 		title: "Izađi na ispit",
-		detail: "Najčešće usmeno, pred ispitnim povjerenstvom.",
+		detail: "Usmeno, pred tročlanim povjerenstvom. Vožnje brodicom nema.",
 	},
 	{
 		n: 8,
 		title: "Rezultat i pregled",
-		detail: "Pregled grešaka, a po potrebi ponovni izlazak.",
+		detail: "Rezultat znaš odmah. Ako ne prođeš, prijaviš novi termin.",
 	},
 ];
 
@@ -143,6 +102,7 @@ export const harbours: Harbour[] = [
 	{ name: "Zagreb / Ministarstvo", kind: "ministarstvo" },
 	{ name: "Pula", kind: "kapetanija" },
 	{ name: "Rijeka", kind: "kapetanija" },
+	{ name: "Senj", kind: "kapetanija" },
 	{ name: "Zadar", kind: "kapetanija" },
 	{ name: "Šibenik", kind: "kapetanija" },
 	{ name: "Split", kind: "kapetanija" },
@@ -156,16 +116,19 @@ export type CostItem = {
 	note: string;
 };
 
-/** Approximate, changeable costs in EUR. */
+/** Approximate, changeable costs in EUR, matching Lekcija 0. */
 export const costs: CostItem[] = [
-	{ label: "Ispit A", range: "20 - 40 EUR", note: "okvirno" },
-	{ label: "Ispit B", range: "50 - 80 EUR", note: "okvirno" },
+	{ label: "Ispit A", range: "cca 23 EUR", note: "okvirno" },
+	{ label: "Ispit B", range: "cca 58 EUR", note: "okvirno" },
 	{
 		label: "Tečaj (nije obavezan)",
-		range: "150 - 350 EUR",
+		range: "cca 150 do 350 EUR",
 		note: "ako nemaš iskustva",
 	},
 ];
+
+/** The day the facts on this page were last compared with official sources. */
+export const factsCheckedOn = "23.11.2026.";
 
 export type Pillar = {
 	id: "ucenje" | "vjezbanje" | "ispit";
@@ -205,7 +168,7 @@ export type Badge = {
 	detail: string;
 };
 
-/** Readiness + light gamification (no streaks; the app is for one-time prep). */
+/** Readiness and light gamification. */
 export const readiness = {
 	label: "Spremnost za ispit",
 	sublabel: "Raste kako svladavaš područja",
@@ -213,7 +176,7 @@ export const readiness = {
 	badges: [
 		{ name: "Lekcija 0", detail: "Prva svladana lekcija." },
 		{ name: "Prvi probni ispit", detail: "Prošao si prvu simulaciju." },
-		{ name: "Sva područja", detail: "Dotaknuo si svih 8 tema." },
+		{ name: "Sva područja", detail: "Dotaknuo si sva područja gradiva." },
 	] satisfies Badge[],
 };
 
@@ -225,11 +188,11 @@ export type Faq = {
 export const faqs: Faq[] = [
 	{
 		q: "Mogu li polagati na engleskom ili njemačkom?",
-		a: "Ovisi o kapetaniji, pa provjeri kod njih prije prijave.",
+		a: "Ovisi o uredu i terminu, pa to dogovori unaprijed, kad se javljaš za termin.",
 	},
 	{
 		q: "Kada su ispiti?",
-		a: "Termini se razlikuju po gradovima. Prijavi se nekoliko dana ranije.",
+		a: "Termine određuje ured u kojem polažeš i nisu isti u svim gradovima. Ured ti mjesto i vrijeme javlja unaprijed.",
 	},
 	{
 		q: "Koliko traje priprema?",
@@ -246,7 +209,11 @@ export const quote = "Sigurna luka počinje dobrom pripremom.";
 /** Shared CTA copy so every call to action says the same thing. */
 export const cta = {
 	primary: "Počni besplatno",
+	startHref: "/ucenje/propisi/kako-do-dozvole",
+	continue: "Nastavi",
+	continueHref: "/pocetna",
 	secondary: "Prijava Googleom",
 	free: "100% besplatno",
-	freeNote: "Bez registracije. Napredak i slabe teme prati anonimno.",
+	freeNote:
+		"Bez registracije. Napredak ostaje u tvom pregledniku dok se ne prijaviš.",
 } as const;
