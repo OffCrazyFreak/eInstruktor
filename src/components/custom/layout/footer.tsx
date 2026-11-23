@@ -23,13 +23,13 @@ export default function Footer() {
 					<nav aria-label="Pravne stranice" className="flex gap-3">
 						<Link
 							to="/privatnost"
-							className="rounded-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+							className="-my-1 rounded-sm py-1 text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
 						>
 							Privatnost
 						</Link>
 						<Link
 							to="/uvjeti"
-							className="rounded-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+							className="-my-1 rounded-sm py-1 text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
 						>
 							Uvjeti
 						</Link>
