@@ -27,4 +27,6 @@ The real exam is oral and has no official question count, so the app runs its ow
 
 - `getArea`, `subjectOfArea`, `getLesson`, `getLessonsByArea(course, area, level?)` and `getQuestions(course, { area, lesson, level, ids })`. A level filter keeps `common` content plus the chosen level. With `ids`, questions come back in that order. `getLessonsByArea` leaves out lecture 0.
 - `getVisibleBlocks(lesson, level)`: an A learner sees `common` and `A` blocks; a B learner sees every block, and `isBOnly` marks the B ones so the reader can badge them.
+- `courseLessonOrder`, `nextLesson` and `firstUnreadLesson` in `lesson-order.ts`: Lekcija 0 first, then each area's lessons for the level in area order.
+- `subjectGroups` and `areaGroups` in `question-groups.ts`: question ids per exam subject (one group for A) and per area, for readiness and weak areas. Subject names are in `voditelj-brodice/subjects.ts`.
 - `questionsForExam(course, level, seed)` builds a mock exam from everything except the lecture 0 questions. The same seed always gives the same questions in the same order, and `exam_session` stores the seed and the question ids.

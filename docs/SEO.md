@@ -3,7 +3,7 @@
 ## Page head
 
 - Every route sets its head with `pageHead()` from `src/lib/seo/page-head.ts`: title with the site name, description, Open Graph tags (`og:type`, `og:site_name`, `og:locale` hr_HR, `og:title`, `og:description`, `og:url`) and a canonical link.
-- Pass `noindex: true` for app screens that should stay out of search (account, exam in progress); lessons and the lesson list stay indexed.
+- Pass `noindex: true` for app screens that should stay out of search (`/pocetna`, `/vjezba`, `/ispit`, `/napredak`, later the account); `/ucenje`, the area pages and every lesson, Lekcija 0 included, stay indexed.
 - Canonical and sitemap URLs use the fixed `SITE_ORIGIN` in `src/lib/seo/site.ts`, never the request host, so preview deploys never claim to be the real site. Change it there when the production domain is set.
 
 ## Sitemap and robots
