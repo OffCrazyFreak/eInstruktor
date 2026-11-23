@@ -20,6 +20,7 @@ import {
 	setLessonPercent,
 } from "@/lib/progress/progress-actions";
 import useProgress from "@/lib/progress/use-progress";
+import randomId from "@/lib/random-id";
 
 interface ILessonReaderProps {
 	lesson: ILesson;
@@ -31,7 +32,7 @@ const PERCENT_STEP = 0.05;
 export default function LessonReader({ lesson }: ILessonReaderProps) {
 	const navigate = useNavigate();
 	const { progress, ready, level, update } = useProgress();
-	const [sessionId] = useState(() => crypto.randomUUID());
+	const [sessionId] = useState(() => randomId());
 	const percent = useReadingPercent();
 
 	const isIntro = lesson.slug === course.introLessonSlug;

@@ -7,6 +7,7 @@ import course from "@/content/voditelj-brodice";
 import { getQuestions } from "@/lib/content/course-selectors";
 import { recordAnswer } from "@/lib/progress/progress-actions";
 import useProgress from "@/lib/progress/use-progress";
+import randomId from "@/lib/random-id";
 
 interface ICheckBlockProps {
 	questionId: string;
@@ -38,7 +39,7 @@ export default function CheckBlock({
 
 		update((progress) =>
 			recordAnswer(progress, {
-				id: crypto.randomUUID(),
+				id: randomId(),
 				questionId: question.id,
 				correct: isCorrectSelection(question, selected),
 				selected,
