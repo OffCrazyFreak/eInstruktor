@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isProductionRuntime } from "@/lib/is-production-runtime";
 
 const LOCAL_DB_URL = "file:local.db";
 
@@ -22,7 +23,17 @@ export interface IDbConfig {
 type DbEnv = Record<string, string | undefined>;
 
 // Turso only on an explicit DB_MODE=turso, so a .env.local that holds Turso credentials never points dev at production.
-export function resolveDbConfig(env: DbEnv = process.env): IDbConfig {
+// A production build must name its database, so a missing DB_MODE on the host cannot silently serve an empty local file.
+export function resolveDbConfig(
+	env: DbEnv = process.env,
+	isProduction: boolean = isProductionRuntime(),
+): IDbConfig {
+	if (isProduction && !env.DB_MODE) {
+		throw new Error(
+			"Production needs DB_MODE=turso (or DB_MODE=local on purpose, for a local preview)",
+		);
+	}
+
 	const mode = dbModeSchema.parse(env.DB_MODE || undefined);
 
 	if (mode === "local") {
