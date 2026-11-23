@@ -15,7 +15,8 @@
 
 - `/privatnost` and `/uvjeti` live in `src/features/legal/`. Both share `LegalPage` (title, last-changed date, "Ukratko" summary, contact line) and `LegalSection`.
 - The last-changed date and the contact link are in `src/features/legal/constants/legal.ts`. Update the date whenever the text changes.
-- The privacy page describes what is stored: localStorage without an account; name, email, image, progress and session data with Google login; deletion anonymizes the name, email and image. Keep it in sync when storage changes (PR 7 adds the sync and account deletion).
+- The privacy page describes what is stored: localStorage without an account; name, email, image, the Google ID and login tokens, progress and session data with Google login. It describes account deletion as coming with the account settings and asks for deletion through a GitHub issue until then. Update it when the account settings land: deletion removes the account and session rows and anonymizes the name, email and image.
+- Shared keys such as the localStorage progress key live in `src/lib/progress/storage-key.ts`.
 
 ## Landing facts
 
