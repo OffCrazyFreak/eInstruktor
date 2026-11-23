@@ -47,7 +47,7 @@ export default function LessonEndCard({
 				<Button
 					asChild
 					variant="secondary"
-					className="h-12 rounded-full text-[0.95rem] font-semibold"
+					className="h-12 rounded-full text-[0.95rem] font-semibold dark:bg-[#00aef3] dark:text-[#002c78] dark:hover:bg-[#4cc2ff]"
 				>
 					<Link
 						to="/vjezba/serija"
