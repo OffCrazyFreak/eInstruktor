@@ -1,6 +1,7 @@
 import FreeChip from "@/features/landing/components/free-chip";
 import LandingCtas from "@/features/landing/components/landing-ctas";
 import Sailboat from "@/features/landing/components/sailboat";
+import { cta } from "@/features/landing/constants/landing-content";
 import { MUTE, OCEAN } from "@/features/landing/constants/palette";
 
 interface IHeroSectionProps {
@@ -39,7 +40,7 @@ export default function HeroSection({ reduce }: IHeroSectionProps) {
 				<div className="mt-6 flex flex-wrap items-center gap-3">
 					<FreeChip />
 					<span className="text-[0.86rem]" style={{ color: MUTE }}>
-						Bez registracije. Napredak i slabe teme prati anonimno.
+						{cta.freeNote}
 					</span>
 				</div>
 			</div>

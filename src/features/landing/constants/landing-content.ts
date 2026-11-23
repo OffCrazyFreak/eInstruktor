@@ -214,5 +214,6 @@ export const cta = {
 	continueHref: "/pocetna",
 	secondary: "Prijava Googleom",
 	free: "100% besplatno",
-	freeNote: "Bez registracije. Napredak i slabe teme prati anonimno.",
+	freeNote:
+		"Bez registracije. Napredak ostaje u tvom pregledniku dok se ne prijaviš.",
 } as const;
