@@ -138,3 +138,5 @@ As the copyright holder, the owner reserves all commercial rights to the project
 ## Contributing
 
 Contributions are welcome (bugs, ideas, docs, designs, code). Please read [CONTRIBUTING.md](./CONTRIBUTING.md) and the [CLA](./CLA.md) first, and follow the conventions in [AGENTS.md](./AGENTS.md).
+
+Branch from `dev` and open pull requests into `dev`; `main` only receives release pull requests from `dev`.
