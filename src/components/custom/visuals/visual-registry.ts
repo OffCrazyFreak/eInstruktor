@@ -56,4 +56,10 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 				"@/components/custom/visuals/collision-situations/collision-situations"
 			),
 	),
+	"compass-course-calculator": lazyVisual(
+		() =>
+			import(
+				"@/components/custom/visuals/compass-course-calculator/compass-course-calculator"
+			),
+	),
 };
