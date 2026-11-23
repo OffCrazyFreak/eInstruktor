@@ -22,7 +22,7 @@ Lessons and questions show interactive visuals by id: a `visual` lesson block or
 ## Conventions
 
 - Mobile first at 375 px, SVG drawings, Motion for animation. Animations start on their own unless the reader asked for reduced motion; then they wait for the play button.
-- Sound (the signal player) uses the Web Audio API and only starts on a tap.
+- Sound (the signal player) uses the Web Audio API through one shared context in `shared/audio-context.ts`, created on the first tap. On iPhone the silent switch mutes it.
 - Questions often reuse a visual; props such as `hideName`, `mode: "identify"` or a single `pattern` hide the part that would give the answer away.
 - Visuals read their props once, as starting state. `VisualFrame` remounts the visual (and resets its error fallback) when the visual id or props change; when two questions can share the same props, render it with `key={question.id}` so each question starts fresh.
 - Pure logic has unit tests next to it: light code parsing and sequences, cardinal quadrants, ship light sectors, collision rules, course math, Beaufort data, sound patterns, spelling, winds, engine cycles and navigation areas.

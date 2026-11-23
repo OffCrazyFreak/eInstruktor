@@ -1,9 +1,7 @@
 import { useAnimationFrame } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import {
-	createAudioContext,
-	playSchedule,
-} from "@/components/custom/visuals/sound-signal-player/horn-audio";
+import { getAudioContext } from "@/components/custom/visuals/shared/audio-context";
+import { playSchedule } from "@/components/custom/visuals/sound-signal-player/horn-audio";
 import {
 	type PatternId,
 	scheduleSignal,
@@ -17,7 +15,6 @@ interface IPlayback {
 
 /** Plays one signal at a time, only after a tap, and reports how far into it we are for the display. */
 export function useSignalPlayer() {
-	const context = useRef<AudioContext | null>(null);
 	const silence = useRef<(() => void) | null>(null);
 	const [playback, setPlayback] = useState<IPlayback | null>(null);
 	const [elapsed, setElapsed] = useState(0);
@@ -31,11 +28,11 @@ export function useSignalPlayer() {
 
 	function play(id: PatternId) {
 		stop();
-		context.current ??= createAudioContext();
+		const context = getAudioContext();
 
-		if (context.current) {
-			void context.current.resume();
-			silence.current = playSchedule(context.current, scheduleSignal(id));
+		if (context) {
+			void context.resume();
+			silence.current = playSchedule(context, scheduleSignal(id));
 		}
 
 		setPlayback({ id, startedAt: performance.now() });
@@ -58,7 +55,6 @@ export function useSignalPlayer() {
 	useEffect(() => {
 		return () => {
 			silence.current?.();
-			void context.current?.close();
 		};
 	}, []);
 

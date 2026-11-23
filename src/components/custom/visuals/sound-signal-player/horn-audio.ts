@@ -1,17 +1,5 @@
 import type { IScheduledSound } from "@/components/custom/visuals/sound-signal-player/sound-patterns";
 
-type AudioContextClass = typeof AudioContext;
-
-/** Creates the audio context only on a tap, because browsers block sound that starts on its own. */
-export function createAudioContext(): AudioContext | null {
-	const AudioContextImpl: AudioContextClass | undefined =
-		window.AudioContext ??
-		(window as Window & { webkitAudioContext?: AudioContextClass })
-			.webkitAudioContext;
-
-	return AudioContextImpl ? new AudioContextImpl() : null;
-}
-
 /** Schedules every sound and returns a function that silences them all. */
 export function playSchedule(
 	context: AudioContext,
