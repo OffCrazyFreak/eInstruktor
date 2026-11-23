@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import TermsPage from "@/features/legal/components/terms-page";
 import pageHead from "@/lib/seo/page-head";
 
-export const Route = createFileRoute("/uvjeti")({
+export const Route = createFileRoute("/_site/uvjeti")({
 	head: () =>
 		pageHead({
 			path: "/uvjeti",

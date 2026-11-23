@@ -8,8 +8,6 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
 import TanStackQueryDevtools from "@/components/custom/devtools/query-devtools-plugin";
-import Footer from "@/components/custom/layout/footer";
-import Header from "@/components/custom/layout/header";
 import appCss from "@/styles.css?url";
 
 interface IRouterContext {
@@ -55,9 +53,7 @@ function RootDocument({ children }: IRootDocumentProps) {
 				<HeadContent />
 			</head>
 			<body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(0,174,243,0.22)]">
-				<Header />
 				{children}
-				<Footer />
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",

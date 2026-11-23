@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import PrivacyPage from "@/features/legal/components/privacy-page";
 import pageHead from "@/lib/seo/page-head";
 
-export const Route = createFileRoute("/privatnost")({
+export const Route = createFileRoute("/_site/privatnost")({
 	head: () =>
 		pageHead({
 			path: "/privatnost",

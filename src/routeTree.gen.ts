@@ -9,37 +9,42 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VizualiRouteImport } from './routes/vizuali'
-import { Route as UvjetiRouteImport } from './routes/uvjeti'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PrivatnostRouteImport } from './routes/privatnost'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as SiteRouteImport } from './routes/_site'
+import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteVizualiRouteImport } from './routes/_site/vizuali'
+import { Route as SiteUvjetiRouteImport } from './routes/_site/uvjeti'
+import { Route as SitePrivatnostRouteImport } from './routes/_site/privatnost'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
-const VizualiRoute = VizualiRouteImport.update({
-  id: '/vizuali',
-  path: '/vizuali',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UvjetiRoute = UvjetiRouteImport.update({
-  id: '/uvjeti',
-  path: '/uvjeti',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrivatnostRoute = PrivatnostRouteImport.update({
-  id: '/privatnost',
-  path: '/privatnost',
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteVizualiRoute = SiteVizualiRouteImport.update({
+  id: '/vizuali',
+  path: '/vizuali',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteUvjetiRoute = SiteUvjetiRouteImport.update({
+  id: '/uvjeti',
+  path: '/uvjeti',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePrivatnostRoute = SitePrivatnostRouteImport.update({
+  id: '/privatnost',
+  path: '/privatnost',
+  getParentRoute: () => SiteRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -48,82 +53,67 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/privatnost': typeof PrivatnostRoute
+  '/': typeof SiteIndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/uvjeti': typeof UvjetiRoute
-  '/vizuali': typeof VizualiRoute
+  '/privatnost': typeof SitePrivatnostRoute
+  '/uvjeti': typeof SiteUvjetiRoute
+  '/vizuali': typeof SiteVizualiRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/privatnost': typeof PrivatnostRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/uvjeti': typeof UvjetiRoute
-  '/vizuali': typeof VizualiRoute
+  '/privatnost': typeof SitePrivatnostRoute
+  '/uvjeti': typeof SiteUvjetiRoute
+  '/vizuali': typeof SiteVizualiRoute
+  '/': typeof SiteIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/privatnost': typeof PrivatnostRoute
+  '/_site': typeof SiteRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/uvjeti': typeof UvjetiRoute
-  '/vizuali': typeof VizualiRoute
+  '/_site/privatnost': typeof SitePrivatnostRoute
+  '/_site/uvjeti': typeof SiteUvjetiRoute
+  '/_site/vizuali': typeof SiteVizualiRoute
+  '/_site/': typeof SiteIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/privatnost'
     | '/sitemap.xml'
+    | '/privatnost'
     | '/uvjeti'
     | '/vizuali'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/privatnost'
     | '/sitemap.xml'
+    | '/privatnost'
     | '/uvjeti'
     | '/vizuali'
+    | '/'
     | '/api/auth/$'
   id:
     | '__root__'
-    | '/'
-    | '/privatnost'
+    | '/_site'
     | '/sitemap.xml'
-    | '/uvjeti'
-    | '/vizuali'
+    | '/_site/privatnost'
+    | '/_site/uvjeti'
+    | '/_site/vizuali'
+    | '/_site/'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  PrivatnostRoute: typeof PrivatnostRoute
+  SiteRoute: typeof SiteRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  UvjetiRoute: typeof UvjetiRoute
-  VizualiRoute: typeof VizualiRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/vizuali': {
-      id: '/vizuali'
-      path: '/vizuali'
-      fullPath: '/vizuali'
-      preLoaderRoute: typeof VizualiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/uvjeti': {
-      id: '/uvjeti'
-      path: '/uvjeti'
-      fullPath: '/uvjeti'
-      preLoaderRoute: typeof UvjetiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -131,19 +121,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/privatnost': {
-      id: '/privatnost'
-      path: '/privatnost'
-      fullPath: '/privatnost'
-      preLoaderRoute: typeof PrivatnostRouteImport
+    '/_site': {
+      id: '/_site'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof SiteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_site/': {
+      id: '/_site/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/vizuali': {
+      id: '/_site/vizuali'
+      path: '/vizuali'
+      fullPath: '/vizuali'
+      preLoaderRoute: typeof SiteVizualiRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/uvjeti': {
+      id: '/_site/uvjeti'
+      path: '/uvjeti'
+      fullPath: '/uvjeti'
+      preLoaderRoute: typeof SiteUvjetiRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/privatnost': {
+      id: '/_site/privatnost'
+      path: '/privatnost'
+      fullPath: '/privatnost'
+      preLoaderRoute: typeof SitePrivatnostRouteImport
+      parentRoute: typeof SiteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -155,12 +166,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface SiteRouteChildren {
+  SitePrivatnostRoute: typeof SitePrivatnostRoute
+  SiteUvjetiRoute: typeof SiteUvjetiRoute
+  SiteVizualiRoute: typeof SiteVizualiRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SitePrivatnostRoute: SitePrivatnostRoute,
+  SiteUvjetiRoute: SiteUvjetiRoute,
+  SiteVizualiRoute: SiteVizualiRoute,
+  SiteIndexRoute: SiteIndexRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  PrivatnostRoute: PrivatnostRoute,
+  SiteRoute: SiteRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  UvjetiRoute: UvjetiRoute,
-  VizualiRoute: VizualiRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
