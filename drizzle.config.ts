@@ -6,7 +6,7 @@ config({ path: ".env.local" });
 
 export default defineConfig({
 	out: "./drizzle",
-	schema: "./src/db/schema.ts",
+	schema: "./src/db/schema/index.ts",
 	dialect: "turso",
 	dbCredentials: resolveDbConfig(),
 });
