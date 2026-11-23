@@ -7,8 +7,12 @@ import {
 import { faqs } from "@/features/landing/constants/landing-content";
 import { cn } from "@/lib/utils";
 
+interface ILandingFaqProps {
+	dark?: boolean;
+}
+
 /** FAQ built on the shadcn Accordion, themed light or dark per section. */
-export function LandingFaq({ dark }: { dark?: boolean }) {
+export default function LandingFaq({ dark }: ILandingFaqProps) {
 	return (
 		<Accordion type="single" collapsible className="mt-8 w-full space-y-3">
 			{faqs.map((f, i) => (

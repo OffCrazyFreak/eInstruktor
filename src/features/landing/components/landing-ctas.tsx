@@ -1,14 +1,18 @@
-import { GoogleIcon } from "@/components/custom/icons/google-icon";
+import GoogleIcon from "@/components/custom/icons/google-icon";
 import { Button } from "@/components/ui/button";
 import { cta } from "@/features/landing/constants/landing-content";
-import { signInWithGoogle } from "@/lib/auth/sign-in-with-google";
+import signInWithGoogle from "@/lib/auth/sign-in-with-google";
 import { cn } from "@/lib/utils";
+
+interface ILandingCtasProps {
+	onDark?: boolean;
+}
 
 /**
  * The two primary calls to action, shared across sections. Built on the shadcn
  * Button with brand-blue styling layered on top.
  */
-export function LandingCtas({ onDark }: { onDark?: boolean }) {
+export default function LandingCtas({ onDark }: ILandingCtasProps) {
 	return (
 		<div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
 			<Button

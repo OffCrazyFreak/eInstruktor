@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ZlatniSat } from "@/features/landing/components/landing-page";
+import LandingPage from "@/features/landing/components/landing-page";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
 	return (
 		<main>
-			<ZlatniSat />
+			<LandingPage />
 		</main>
 	);
 }

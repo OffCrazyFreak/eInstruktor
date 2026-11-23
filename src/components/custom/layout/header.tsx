@@ -1,5 +1,7 @@
 import { Menu } from "lucide-react";
-import { GoogleIcon } from "@/components/custom/icons/google-icon";
+import GoogleIcon from "@/components/custom/icons/google-icon";
+import BrandMark from "@/components/custom/layout/brand-mark";
+import Wordmark from "@/components/custom/layout/wordmark";
 import { Button } from "@/components/ui/button";
 import {
 	Sheet,
@@ -8,7 +10,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { signInWithGoogle } from "@/lib/auth/sign-in-with-google";
+import signInWithGoogle from "@/lib/auth/sign-in-with-google";
 import { cn } from "@/lib/utils";
 
 /** `active` marks the current page: it stays light blue; the rest are navy. */
@@ -17,32 +19,6 @@ const NAV = [
 	{ label: "Vježba", href: "#vjezba", active: false },
 	{ label: "Ispit", href: "#ispit", active: false },
 ];
-
-function BrandMark() {
-	return (
-		<svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
-			<circle
-				cx="16"
-				cy="16"
-				r="15"
-				fill="none"
-				stroke="#002c78"
-				strokeWidth="2"
-			/>
-			<path d="M16 3 L19 16 L16 21 L13 16 Z" fill="#00aef3" />
-			<path d="M16 29 L13 16 L16 11 L19 16 Z" fill="#002c78" />
-			<path d="M3 16 L16 13 L21 16 L16 19 Z" fill="#002c78" opacity="0.5" />
-		</svg>
-	);
-}
-
-function Wordmark() {
-	return (
-		<span className="text-lg font-semibold tracking-tight text-[#002c78]">
-			<span className="text-[#00aef3]">e</span>Instruktor
-		</span>
-	);
-}
 
 export default function Header() {
 	return (

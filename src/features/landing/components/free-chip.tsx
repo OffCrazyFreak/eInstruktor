@@ -2,8 +2,12 @@ import { Badge } from "@/components/ui/badge";
 import { cta } from "@/features/landing/constants/landing-content";
 import { cn } from "@/lib/utils";
 
+interface IFreeChipProps {
+	onDark?: boolean;
+}
+
 /** The "100% besplatno" chip, built on the shadcn Badge. */
-export function FreeChip({ onDark }: { onDark?: boolean }) {
+export default function FreeChip({ onDark }: IFreeChipProps) {
 	return (
 		<Badge
 			variant="outline"

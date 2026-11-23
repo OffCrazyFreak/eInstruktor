@@ -1,5 +1,9 @@
+interface IGoogleIconProps {
+	className?: string;
+}
+
 /** Google "G" mark in its four brand colors. */
-export function GoogleIcon({ className }: { className?: string }) {
+export default function GoogleIcon({ className }: IGoogleIconProps) {
 	return (
 		<svg viewBox="0 0 24 24" className={className} aria-hidden="true">
 			<path

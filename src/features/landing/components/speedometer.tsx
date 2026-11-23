@@ -6,7 +6,7 @@ import { motion } from "motion/react";
  * 4:30). Recolored per use via props.
  */
 
-type SpeedometerProps = {
+interface ISpeedometerProps {
 	value: number;
 	size?: number;
 	/** Unfilled arc color. */
@@ -19,9 +19,9 @@ type SpeedometerProps = {
 	label?: string;
 	animated: boolean;
 	glow?: boolean;
-};
+}
 
-export function Speedometer({
+export default function Speedometer({
 	value,
 	size = 240,
 	track,
@@ -31,7 +31,7 @@ export function Speedometer({
 	label = "SPREMNOST",
 	animated,
 	glow = false,
-}: SpeedometerProps) {
+}: ISpeedometerProps) {
 	const r = 84;
 	const circumference = 2 * Math.PI * r;
 	const arc = 0.75; // 270 degrees, gap centered at the bottom
