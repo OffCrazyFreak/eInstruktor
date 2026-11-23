@@ -10,6 +10,9 @@ interface ISignalStripProps {
 	elapsed: number | null;
 }
 
+/** Every strip shares one time scale, so a single short blast still looks short next to a long one. */
+const SCALE_SECONDS = 15;
+
 const LABELS = {
 	short: "kratki",
 	long: "dugi",
@@ -19,7 +22,7 @@ const LABELS = {
 
 /** Dots for short blasts and bars for long ones, drawn to scale; the one sounding now lights up. */
 export default function SignalStrip({ sounds, elapsed }: ISignalStripProps) {
-	const length = signalLength(sounds);
+	const length = Math.max(signalLength(sounds), SCALE_SECONDS);
 
 	return (
 		<div

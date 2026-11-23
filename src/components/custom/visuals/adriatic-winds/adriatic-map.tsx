@@ -12,7 +12,7 @@ interface IAdriaticMapProps {
 	onSelect?: (wind: WindId) => void;
 }
 
-const C = { x: 168, y: 150 };
+const C = { x: 162, y: 150 };
 
 function polar(angle: number, radius: number): [number, number] {
 	const radians = (angle * Math.PI) / 180;
@@ -68,7 +68,7 @@ export default function AdriaticMap({
 				opacity="0.7"
 				fontFamily="var(--font-serif)"
 			>
-				<text x="250" y="60">
+				<text x="246" y="124">
 					Hrvatska
 				</text>
 				<text x="40" y="200">
@@ -81,7 +81,7 @@ export default function AdriaticMap({
 				const active = selected.includes(id);
 				const [tailX, tailY] = polar(wind.from, 118);
 				const [headX, headY] = polar(wind.from, 36);
-				const [labelX, labelY] = polar(wind.from, 134);
+				const [labelX, labelY] = polar(wind.from, 126);
 
 				return (
 					<g

@@ -3,10 +3,9 @@ import LightPlayer from "@/components/custom/visuals/light-characteristic-reader
 import SectorChart, {
 	SECTORS,
 } from "@/components/custom/visuals/light-characteristic-reader/sector-chart";
-import type { LightColor } from "@/components/custom/visuals/shared/light/light-code";
 import {
 	COLOR_CODES,
-	COLOR_NAMES,
+	type LightColor,
 } from "@/components/custom/visuals/shared/light/light-code";
 import { parseLightCode } from "@/components/custom/visuals/shared/light/parse-light-code";
 import {
@@ -114,7 +113,9 @@ export default function LightCharacteristicReader({
 							>
 								<span>Položaj broda</span>
 								<span>
-									{sector ? `${COLOR_NAMES[sector.color]} sektor` : ""}
+									{sector
+										? `${sector.color === "red" ? "crveni" : "bijeli"} sektor`
+										: ""}
 								</span>
 							</label>
 							<input

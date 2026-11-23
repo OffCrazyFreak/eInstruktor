@@ -21,7 +21,7 @@ export default function MarkScene({ mark, hideName = false }: IMarkSceneProps) {
 	const lit = segment?.on ?? true;
 
 	return (
-		<div className="flex h-full flex-col gap-3 rounded-2xl bg-[linear-gradient(180deg,#0c2550_0%,#3a4f86_46%,#ffb43c_78%,#ffe89a_100%)] p-3">
+		<div className="flex flex-col gap-3 self-start rounded-2xl bg-[linear-gradient(180deg,#0c2550_0%,#3a4f86_46%,#ffb43c_78%,#ffe89a_100%)] p-3">
 			<svg
 				viewBox="0 0 200 210"
 				className="mx-auto block h-56 w-full max-w-xs"

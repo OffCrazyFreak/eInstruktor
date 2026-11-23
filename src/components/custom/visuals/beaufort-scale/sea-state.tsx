@@ -5,13 +5,13 @@ interface ISeaStateProps {
 	label: string;
 }
 
-const CRESTS = Array.from({ length: 7 }, (_, index) => 22 + index * 44);
+const CRESTS = Array.from({ length: 8 }, (_, index) => 20 + index * 40);
 
 /** Waves, white crests, streaks of foam and a flag that grow with the Beaufort force. */
 export default function SeaState({ force, label }: ISeaStateProps) {
 	const amplitude = 1 + force * 2.2;
 	const wave = (y: number) =>
-		`M0 ${y} ${Array.from({ length: 8 }, (_, index) => `Q${index * 44 + 22} ${y - amplitude * 2} ${index * 44 + 44} ${y}`).join(" ")} V200 H0 z`;
+		`M0 ${y} ${Array.from({ length: 8 }, (_, index) => `Q${index * 40 + 20} ${y - amplitude * 2} ${index * 40 + 40} ${y}`).join(" ")} V200 H0 z`;
 	const sky = force >= 8 ? "#5a6b86" : force >= 5 ? "#9fb6d6" : PALETTE.sea;
 	const flagLift = Math.min(force, 8) * 9;
 
@@ -39,7 +39,7 @@ export default function SeaState({ force, label }: ISeaStateProps) {
 			<path d={wave(150)} fill={PALETTE.navy} opacity="0.85" />
 			{force >= 3 && (
 				<g fill="white">
-					{CRESTS.slice(0, Math.min(7, force - 1)).map((x) => (
+					{CRESTS.slice(0, Math.min(8, force - 1)).map((x) => (
 						<ellipse
 							key={x}
 							cx={x}
