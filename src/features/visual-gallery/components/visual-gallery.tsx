@@ -6,10 +6,12 @@ import { GALLERY } from "@/features/visual-gallery/constants/gallery-variants";
 interface IVisualGalleryProps {
 	/** Shows only this visual, for quick checks and screenshots. */
 	only?: VisualId;
+	/** With `only`, shows just this variant, for screenshots. */
+	variant?: number;
 }
 
 /** Internal QA page: every visual with every prop combination the lessons and questions use. */
-export default function VisualGallery({ only }: IVisualGalleryProps) {
+export default function VisualGallery({ only, variant }: IVisualGalleryProps) {
 	const shown = only ? GALLERY.filter((visual) => visual.id === only) : GALLERY;
 
 	return (
@@ -55,18 +57,23 @@ export default function VisualGallery({ only }: IVisualGalleryProps) {
 						</p>
 
 						<div className="mt-4 space-y-8">
-							{visual.variants.map((props) => {
-								const label = JSON.stringify(props);
+							{visual.variants
+								.filter(
+									(_, position) =>
+										variant === undefined || position === variant,
+								)
+								.map((props) => {
+									const label = JSON.stringify(props);
 
-								return (
-									<div key={label}>
-										<p className="mb-2 overflow-x-auto font-mono text-[0.72rem] text-[#002c78]/60">
-											{label}
-										</p>
-										<VisualFrame visual={visual.id} props={props} />
-									</div>
-								);
-							})}
+									return (
+										<div key={label}>
+											<p className="mb-2 overflow-x-auto font-mono text-[0.72rem] text-[#002c78]/60">
+												{label}
+											</p>
+											<VisualFrame visual={visual.id} props={props} />
+										</div>
+									);
+								})}
 						</div>
 					</section>
 				))}

@@ -8,6 +8,7 @@ const VISUAL_IDS = Object.keys(VISUALS) as [VisualId, ...VisualId[]];
 
 const searchSchema = z.object({
 	v: z.enum(VISUAL_IDS).optional().catch(undefined),
+	i: z.number().int().min(0).optional().catch(undefined),
 });
 
 export const Route = createFileRoute("/vizuali")({
@@ -22,11 +23,11 @@ export const Route = createFileRoute("/vizuali")({
 });
 
 function VisualGalleryPage() {
-	const { v } = Route.useSearch();
+	const { v, i } = Route.useSearch();
 
 	return (
 		<main>
-			<VisualGallery only={v} />
+			<VisualGallery only={v} variant={i} />
 		</main>
 	);
 }
