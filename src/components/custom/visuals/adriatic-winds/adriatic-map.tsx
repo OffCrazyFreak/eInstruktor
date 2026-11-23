@@ -84,7 +84,6 @@ export default function AdriaticMap({
 				const [labelX, labelY] = polar(wind.from, 134);
 
 				return (
-					// biome-ignore lint/a11y/noStaticElementInteractions: pointer shortcut only; the same choice is a real button below the map
 					<g
 						key={id}
 						onClick={() => onSelect?.(id)}

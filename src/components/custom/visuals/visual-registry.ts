@@ -75,4 +75,10 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 		() =>
 			import("@/components/custom/visuals/phonetic-alphabet/phonetic-alphabet"),
 	),
+	"adriatic-winds": lazyVisual(
+		() => import("@/components/custom/visuals/adriatic-winds/adriatic-winds"),
+	),
+	"beaufort-scale": lazyVisual(
+		() => import("@/components/custom/visuals/beaufort-scale/beaufort-scale"),
+	),
 };
