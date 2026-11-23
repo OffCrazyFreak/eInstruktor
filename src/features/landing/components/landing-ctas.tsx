@@ -1,5 +1,7 @@
+import { Link } from "@tanstack/react-router";
 import GoogleIcon from "@/components/custom/icons/google-icon";
 import { Button } from "@/components/ui/button";
+import lectureZero from "@/content/voditelj-brodice/lecture-0";
 import { cta } from "@/features/landing/constants/landing-content";
 import useHasLocalProgress from "@/features/landing/hooks/use-has-local-progress";
 import signInWithGoogle from "@/lib/auth/sign-in-with-google";
@@ -22,10 +24,16 @@ export default function LandingCtas({ onDark }: ILandingCtasProps) {
 				asChild
 				className="h-auto rounded-full bg-[#002c78] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_10px_30px_rgba(0,44,120,0.28)] transition-transform hover:-translate-y-0.5 hover:bg-[#002c78]"
 			>
-				{/* Plain anchor: these app routes are not registered yet, so a typed Link would not compile. */}
-				<a href={hasProgress ? cta.continueHref : cta.startHref}>
-					{hasProgress ? cta.continue : cta.primary}
-				</a>
+				{hasProgress ? (
+					<Link to="/pocetna">{cta.continue}</Link>
+				) : (
+					<Link
+						to="/ucenje/$area/$lesson"
+						params={{ area: lectureZero.area, lesson: lectureZero.slug }}
+					>
+						{cta.primary}
+					</Link>
+				)}
 			</Button>
 			<Button
 				type="button"
