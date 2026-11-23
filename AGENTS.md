@@ -33,7 +33,7 @@
 
 - Keep `.env.example` in sync with every variable the code reads, with no real values.
 - When nothing reads a variable, delete it from Netlify, GitHub and local `.env` files, keeping what `main` reads; print names only.
-- Development never talks to the production database: `DATABASE_URL` decides which database is used, and it defaults to the local file.
+- Development never talks to the production database: `DB_MODE` decides which database is used, and it defaults to the local file; Turso only with `DB_MODE=turso`.
 
 ## Conventions
 
