@@ -27,7 +27,7 @@ _(uskoro)_
 
 - **Core:** TanStack Start (React, file-based routing), TypeScript, pnpm
 - **Auth:** Better Auth (Google login only) + `tanstackStartCookies`
-- **Database:** Turso (libSQL) + Drizzle ORM / Drizzle Kit
+- **Database:** libSQL + Drizzle ORM / Drizzle Kit; a local SQLite file in development, Turso in production
 - **UI:** Tailwind CSS v4, shadcn/ui (Radix), Motion, lucide-react
 - **Forms:** Zod, React Hook Form + `@hookform/resolvers`
 - **Tooling:** Biome (lint/format), React Compiler, Vitest
@@ -58,8 +58,7 @@ Exact versions live in [AGENTS.md](./AGENTS.md).
    - `BETTER_AUTH_SECRET` - generate with `pnpm dlx @better-auth/cli secret`
    - `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` - from Google Cloud Console.
      Authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
-   - `TURSO_DATABASE_URL` / `TURSO_AUTH_TOKEN` - from Turso. Leave empty for local
-     development (falls back to `file:local.db`).
+   - `DB_MODE` - leave it `local` (or unset) for development, which uses `file:local.db`. Turso is used only with `DB_MODE=turso`, even when `TURSO_DATABASE_URL` / `TURSO_AUTH_TOKEN` are filled in.
 
 3. Create the database tables:
 
@@ -80,8 +79,10 @@ Exact versions live in [AGENTS.md](./AGENTS.md).
 - `pnpm dev` / `pnpm build` / `pnpm preview`
 - `pnpm generate-routes` (TanStack route tree)
 - `pnpm db:push` / `db:generate` / `db:migrate` / `db:studio`
-- `pnpm check` / `pnpm lint` / `pnpm format` (Biome)
+- `pnpm check` (Biome, TypeScript and tests) / `pnpm lint` / `pnpm format` (Biome)
 - `pnpm test` (Vitest)
+
+More detail (database switch, hooks, tests, the Netlify dev workaround) is in [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md).
 
 ## Database (Drizzle + Turso)
 
@@ -89,14 +90,13 @@ Exact versions live in [AGENTS.md](./AGENTS.md).
   `verification`). Hand-maintained, because `@better-auth/cli` (1.4.x) currently
   lags behind `better-auth` 1.6.x and its generator crashes. Regenerate when the
   CLI catches up.
-- Client: `src/db/index.ts` (libSQL; local `file:local.db`, production Turso).
+- Client: `src/db/index.ts` (libSQL). `src/db/config.ts` picks the local `file:local.db` unless `DB_MODE=turso`.
 
 ## Auth (Better Auth)
 
-- Config: `src/lib/auth.ts` - Drizzle adapter (`sqlite`) + Google provider, no
+- Config: `src/lib/auth/auth.ts` - Drizzle adapter (`sqlite`) + Google provider, no
   email/password.
-- API route: `src/routes/api/auth/$.ts`, client: `src/lib/auth-client.ts`, demo:
-  `/demo/better-auth`.
+- API route: `src/routes/api/auth/$.ts`, client: `src/lib/auth/auth-client.ts`.
 
 ## Note: pnpm 11 and build scripts
 
