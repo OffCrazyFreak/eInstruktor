@@ -1,15 +1,11 @@
 import { motion } from "motion/react";
-import course from "@/content/voditelj-brodice";
+import areas from "@/content/voditelj-brodice/areas-index";
 import { MUTE, OCEAN } from "@/features/landing/constants/palette";
 import { reveal } from "@/features/landing/utils/reveal";
 
 interface IAreasSectionProps {
 	reduce: boolean;
 }
-
-const areas = [...course.areas].sort(
-	(first, second) => first.order - second.order,
-);
 
 export default function AreasSection({ reduce }: IAreasSectionProps) {
 	return (
