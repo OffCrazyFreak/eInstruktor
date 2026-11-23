@@ -2,7 +2,7 @@
 
 ## Setup
 
-1. Use Node 22 (`.nvmrc`) and pnpm 12.18 (pinned as `packageManager` in `package.json`).
+1. Use Node 22.18 or newer (`.nvmrc` says 22; `engines` in `package.json` sets the floor) and pnpm 12.18 (pinned as `packageManager`). Scripts need 22.18 because that is the first Node 22 release that strips TypeScript types by default; the alias loader also needs `module.registerHooks` (22.15).
 2. Run `pnpm install`. Its `prepare` script runs `git config core.hooksPath .githooks`, which turns on the commit message hook.
 3. Run `cp .env.example .env.local` and fill in what you need. Every variable is optional for local work: without Google credentials the app runs and only sign-in is off.
 4. Run `pnpm db:push` to create the tables in `local.db`, then `pnpm dev` (http://localhost:3000).
@@ -14,9 +14,11 @@
 - `DB_MODE` unset, empty or `local`: the file `local.db` in the repository root (gitignored).
 - `DB_MODE=turso`: `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`, and it throws as soon as the database client loads when either is missing.
 
+In a production build (`pnpm build`, then Netlify or `pnpm preview`) an unset `DB_MODE` is an error, so a missing variable on the host cannot silently serve an empty local file. Netlify sets `DB_MODE=turso`; for `pnpm preview` against the local file, set `DB_MODE=local` on purpose.
+
 Turso credentials in `.env.local` do nothing on their own, so `pnpm dev` and `pnpm db:push` stay local. Set `DB_MODE=turso` only in Netlify, or for a deliberate one-off command such as `DB_MODE=turso pnpm db:migrate`. A shell variable beats `.env.local`.
 
-`src/lib/server-env.ts` validates the auth variables with zod. A production build requires `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`.
+`src/lib/server-env.ts` validates the auth variables with zod. The check runs when the server starts and first loads the auth module, not during `pnpm build`: a production server without `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID` or `GOOGLE_CLIENT_SECRET` fails at start, while the build itself still succeeds.
 
 ## Scripts
 
