@@ -65,7 +65,7 @@ export default function QuestionFeedback({
 				<Link
 					to="/ucenje/$area/$lesson"
 					params={{ area: question.area, lesson: question.lesson }}
-					className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-[0.95rem] font-semibold text-[#0a63b0] hover:text-[#002c78]"
+					className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-[0.95rem] font-semibold text-[#0a63b0] hover:text-[#002c78] dark:text-[#4cc2ff] dark:hover:text-white"
 				>
 					Pročitaj lekciju
 					<ArrowRight className="size-4" aria-hidden="true" />

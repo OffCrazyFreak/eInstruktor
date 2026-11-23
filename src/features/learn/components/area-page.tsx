@@ -45,7 +45,7 @@ export default function AreaPage({ area }: IAreaPageProps) {
 		<main className="mx-auto max-w-2xl px-4 pt-5 pb-8 sm:px-6 lg:pt-8">
 			<Link
 				to="/ucenje"
-				className="-ml-2 inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[0.9rem] font-medium text-[#0a63b0] hover:text-primary"
+				className="-ml-2 inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[0.9rem] font-medium text-[#0a63b0] hover:text-primary dark:text-[#4cc2ff]"
 			>
 				<ChevronLeft className="size-4" aria-hidden="true" />
 				Učenje
@@ -80,7 +80,7 @@ export default function AreaPage({ area }: IAreaPageProps) {
 			</ol>
 
 			{bOnly.length > 0 && (
-				<details className="group mt-4 rounded-2xl border border-dashed border-[#002c78]/25">
+				<details className="group mt-4 rounded-2xl border border-dashed border-[#002c78]/25 dark:border-white/20">
 					<summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 text-[0.95rem] font-semibold outline-none focus-visible:ring-[3px] focus-visible:ring-ring/60 [&::-webkit-details-marker]:hidden">
 						Još {bOnly.length}{" "}
 						{pluralHr(bOnly.length, "lekcija", "lekcije", "lekcija")} samo za

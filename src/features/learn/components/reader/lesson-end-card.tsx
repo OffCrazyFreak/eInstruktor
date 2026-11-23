@@ -16,7 +16,7 @@ export default function LessonEndCard({
 	return (
 		<section
 			aria-labelledby="lesson-end-title"
-			className="rounded-[1.6rem] bg-[#002c78] p-5 text-[#eaf3ff] sm:p-7"
+			className="rounded-[1.6rem] bg-[#002c78] dark:ring-1 dark:ring-white/15 p-5 text-[#eaf3ff] sm:p-7"
 		>
 			<p className="font-mono text-[0.74rem] tracking-[0.2em] text-[#ffb43c]">
 				KRAJ LEKCIJE

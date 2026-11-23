@@ -91,7 +91,7 @@ export default function LevelSheet({ children }: ILevelSheetProps) {
 										"grid size-9 shrink-0 place-items-center rounded-full border-2 font-mono font-semibold",
 										chosen
 											? "border-primary bg-primary text-primary-foreground"
-											: "border-[#002c78]/25 text-[#0a63b0]",
+											: "border-[#002c78]/25 text-[#0a63b0] dark:text-[#4cc2ff] dark:border-white/20",
 									)}
 								>
 									{chosen ? <Check className="size-4" /> : choice.level}

@@ -35,7 +35,7 @@ export default function WeakAreasCard({ areas }: IWeakAreasCardProps) {
 							<Link
 								to="/ucenje/$area"
 								params={{ area: area.slug }}
-								className="flex min-h-14 items-center gap-3 rounded-xl border border-border px-3 py-2 text-foreground outline-none hover:border-[#0a63b0]/40 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60"
+								className="flex min-h-14 items-center gap-3 rounded-xl border border-border px-3 py-2 text-foreground outline-none hover:border-[#0a63b0]/40 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
 							>
 								<AreaIcon
 									name={area.icon}

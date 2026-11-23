@@ -16,7 +16,7 @@ export default function LevelChip({ className }: ILevelChipProps) {
 			<button
 				type="button"
 				className={cn(
-					"inline-flex h-11 items-center gap-1.5 rounded-full border border-[#002c78]/20 bg-card px-3.5 text-[0.85rem] font-semibold text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60",
+					"inline-flex h-11 items-center gap-1.5 rounded-full border border-[#002c78]/20 bg-card px-3.5 text-[0.85rem] font-semibold text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:border-white/20",
 					className,
 				)}
 			>

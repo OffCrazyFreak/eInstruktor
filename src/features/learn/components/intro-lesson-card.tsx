@@ -15,7 +15,7 @@ export default function IntroLessonCard({
 		<Link
 			to="/ucenje/$area/$lesson"
 			params={{ area: lesson.area, lesson: lesson.slug }}
-			className="group relative block overflow-hidden rounded-[1.6rem] bg-[#002c78] p-5 text-[#eaf3ff] outline-none hover:text-[#eaf3ff] focus-visible:ring-[3px] focus-visible:ring-ring sm:p-6"
+			className="group relative block overflow-hidden rounded-[1.6rem] bg-[#002c78] dark:ring-1 dark:ring-white/15 p-5 text-[#eaf3ff] outline-none hover:text-[#eaf3ff] focus-visible:ring-[3px] focus-visible:ring-ring sm:p-6"
 		>
 			<span
 				aria-hidden="true"

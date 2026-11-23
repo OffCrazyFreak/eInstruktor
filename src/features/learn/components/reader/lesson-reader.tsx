@@ -114,7 +114,7 @@ export default function LessonReader({ lesson }: ILessonReaderProps) {
 				</div>
 
 				{ready && isBLesson && level === "A" && (
-					<p className="mt-5 rounded-2xl border border-dashed border-[#002c78]/25 p-4 text-[0.95rem]">
+					<p className="mt-5 rounded-2xl border border-dashed border-[#002c78]/25 p-4 text-[0.95rem] dark:border-white/20">
 						Ova lekcija je za kategoriju B. Za ispit A ti ne treba, ali je
 						slobodno pročitaj.
 					</p>

@@ -12,7 +12,7 @@ export default function FirstVisit({ intro }: IFirstVisitProps) {
 	return (
 		<section
 			aria-labelledby="first-visit-title"
-			className="relative overflow-hidden rounded-[1.8rem] bg-[#002c78] px-5 pt-8 pb-6 text-[#eaf3ff] sm:px-8 sm:pt-10"
+			className="relative overflow-hidden rounded-[1.8rem] bg-[#002c78] dark:ring-1 dark:ring-white/15 px-5 pt-8 pb-6 text-[#eaf3ff] sm:px-8 sm:pt-10"
 		>
 			<span
 				aria-hidden="true"
