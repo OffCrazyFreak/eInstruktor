@@ -22,9 +22,20 @@ describe("nextLeitnerEntry", () => {
 				.box,
 		).toBe(3);
 		expect(
-			nextLeitnerEntry({ box: 3, reviewedOn: "2026-11-18" }, true, "2026-11-20")
+			nextLeitnerEntry({ box: 3, reviewedOn: "2026-11-14" }, true, "2026-11-20")
 				.box,
 		).toBe(3);
+		expect(
+			nextLeitnerEntry({ box: 1, reviewedOn: "2026-11-20" }, true, "2026-11-20")
+				.box,
+		).toBe(2);
+	});
+
+	it("keeps an item that is not due yet in its box after a right answer", () => {
+		const waiting = { box: 2, reviewedOn: "2026-11-19" } as const;
+
+		expect(nextLeitnerEntry(waiting, true, "2026-11-20")).toBe(waiting);
+		expect(nextLeitnerEntry(waiting, false, "2026-11-20").box).toBe(1);
 	});
 });
 
@@ -54,5 +65,7 @@ describe("isDue", () => {
 		} as const;
 
 		expect(dueIds(boxes, "2026-11-21")).toEqual(["a"]);
+		expect(dueIds(boxes, "2026-11-26", ["b"])).toEqual(["b"]);
+		expect(dueIds(boxes, "2026-11-26", [])).toEqual([]);
 	});
 });
