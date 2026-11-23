@@ -60,7 +60,7 @@ export default function AreasChart({
 		<svg
 			ref={svgRef}
 			viewBox={`0 0 ${WIDTH} 230`}
-			className="mx-auto block w-full max-w-2xl touch-none select-none"
+			className="mx-auto block w-full max-w-2xl touch-pan-y select-none"
 			role="img"
 			aria-label={`Područja plovidbe od obale prema pučini. Brodica je u području ${area}.`}
 			onPointerDown={(event) => {
@@ -149,13 +149,16 @@ export default function AreasChart({
 				</text>
 			</g>
 
-			<BoatIcon
-				x={boatX}
-				y={boatY}
-				heading={90}
-				scale={1.4}
-				fill={PALETTE.navy}
-			/>
+			<g className="cursor-grab touch-none">
+				<circle cx={boatX} cy={boatY} r="20" fill="transparent" />
+				<BoatIcon
+					x={boatX}
+					y={boatY}
+					heading={90}
+					scale={1.4}
+					fill={PALETTE.navy}
+				/>
+			</g>
 		</svg>
 	);
 }

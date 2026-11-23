@@ -71,7 +71,7 @@ export default function QuadrantChart({
 		<svg
 			ref={svgRef}
 			viewBox={`0 0 ${SIZE} ${SIZE}`}
-			className="block w-full touch-none select-none"
+			className="block w-full touch-pan-y select-none"
 			role="img"
 			aria-label={`Kvadranti oko opasnosti. Brodica je u kvadrantu ${selected}.`}
 			onPointerDown={(event) => {
@@ -154,7 +154,10 @@ export default function QuadrantChart({
 				);
 			})}
 
-			<BoatIcon x={boat[0]} y={boat[1]} heading={heading} scale={1.3} />
+			<g className="cursor-grab touch-none">
+				<circle cx={boat[0]} cy={boat[1]} r="22" fill="transparent" />
+				<BoatIcon x={boat[0]} y={boat[1]} heading={heading} scale={1.3} />
+			</g>
 		</svg>
 	);
 }

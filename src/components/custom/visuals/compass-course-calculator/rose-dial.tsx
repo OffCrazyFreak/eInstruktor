@@ -61,7 +61,7 @@ export default function RoseDial({
 		<svg
 			ref={svgRef}
 			viewBox="0 0 300 300"
-			className="block w-full max-w-80 touch-none select-none"
+			className="block w-full max-w-80 touch-pan-y select-none"
 			role="img"
 			aria-label={label}
 			onPointerDown={(event) => {
@@ -145,23 +145,26 @@ export default function RoseDial({
 					strokeDasharray="5 5"
 				/>
 			)}
-			<line
-				x1={C}
-				y1={C}
-				x2={bowX}
-				y2={bowY}
-				stroke={PALETTE.sun}
-				strokeWidth="4"
-				strokeLinecap="round"
-			/>
-			<circle
-				cx={bowX}
-				cy={bowY}
-				r="9"
-				fill={PALETTE.sun}
-				stroke="white"
-				strokeWidth="2"
-			/>
+			<g className="cursor-grab touch-none">
+				<line
+					x1={C}
+					y1={C}
+					x2={bowX}
+					y2={bowY}
+					stroke={PALETTE.sun}
+					strokeWidth="4"
+					strokeLinecap="round"
+				/>
+				<circle cx={bowX} cy={bowY} r="22" fill="transparent" />
+				<circle
+					cx={bowX}
+					cy={bowY}
+					r="9"
+					fill={PALETTE.sun}
+					stroke="white"
+					strokeWidth="2"
+				/>
+			</g>
 			<BoatIcon x={C} y={C} heading={heading} scale={2.2} />
 		</svg>
 	);
