@@ -45,6 +45,15 @@ describe("nextLesson", () => {
 		);
 	});
 
+	it("falls back to the full order for a lesson outside the level", () => {
+		const all = courseLessonOrder(course);
+		const index = all.findIndex((lesson) => lesson.level === "B");
+		const bLesson = all[index];
+
+		expect(bLesson).toBeDefined();
+		expect(nextLesson(course, bLesson?.slug ?? "", "A")).toBe(all[index + 1]);
+	});
+
 	it("has nothing after the last lesson or for an unknown one", () => {
 		const order = courseLessonOrder(course, "B");
 
