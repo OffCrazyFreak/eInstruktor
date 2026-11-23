@@ -29,13 +29,15 @@ export const SECTORS: Record<LightKind, [number, number]> = {
 	"all-round": [0, 360],
 };
 
-const light = (
+function light(
 	kind: LightKind,
 	color: LightColor,
 	along: number,
 	height: number,
 	across = 0,
-): IShipLight => ({ kind, color, along, across, height });
+): IShipLight {
+	return { kind, color, along, across, height };
+}
 
 const SIDES = [
 	light("side-port", "red", 0.25, 0.3, -0.45),
@@ -131,4 +133,31 @@ export function screenX(shipLight: IShipLight, bearing: number): number {
 	return (
 		-shipLight.across * Math.cos(radians) + shipLight.along * Math.sin(radians)
 	);
+}
+
+/**
+ * What a learner can tell apart at night: the colours in each vertical column, top to bottom.
+ * Two vessels with the same signature from a bearing look identical from there.
+ */
+export function lightSignature(vessel: VesselId, bearing: number): string {
+	const columns = new Map<number, IShipLight[]>();
+
+	for (const shipLight of VESSEL_LIGHTS[vessel]) {
+		if (!isVisibleFrom(shipLight, bearing)) {
+			continue;
+		}
+
+		const column = Math.round(screenX(shipLight, bearing) * 10) / 10;
+		columns.set(column, [...(columns.get(column) ?? []), shipLight]);
+	}
+
+	return [...columns.entries()]
+		.sort(([left], [right]) => left - right)
+		.map(([, lights]) =>
+			lights
+				.sort((upper, lower) => lower.height - upper.height)
+				.map((shipLight) => shipLight.color)
+				.join("+"),
+		)
+		.join(" | ");
 }

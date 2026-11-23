@@ -1,26 +1,13 @@
 import { useState } from "react";
 import QuizChoices from "@/components/custom/visuals/shared/quiz-choices";
-import NightView from "@/components/custom/visuals/ship-lights-viewer/night-view";
 import {
-	VESSEL_IDS,
-	type VesselId,
-} from "@/components/custom/visuals/ship-lights-viewer/vessel-lights";
+	distractors,
+	QUIZ_BEARINGS,
+	QUIZ_VESSELS,
+} from "@/components/custom/visuals/ship-lights-viewer/lights-quiz-pool";
+import NightView from "@/components/custom/visuals/ship-lights-viewer/night-view";
+import type { VesselId } from "@/components/custom/visuals/ship-lights-viewer/vessel-lights";
 import { VESSELS } from "@/components/custom/visuals/ship-lights-viewer/vessels";
-
-const QUIZ_VESSELS: VesselId[] = [
-	"power-12-50m",
-	"power-over-50m",
-	"sailing-under-20m",
-	"trawler",
-	"fishing",
-	"towing",
-	"pilot",
-	"not-under-command",
-	"restricted",
-	"anchored",
-	"aground",
-];
-const QUIZ_BEARINGS = [0, 90, 270];
 
 interface IQuestion {
 	vessel: VesselId;
@@ -33,9 +20,7 @@ function pick<T>(items: readonly T[]): T {
 }
 
 function buildQuestion(vessel: VesselId, bearing: number): IQuestion {
-	const others = VESSEL_IDS.filter(
-		(id) => id !== vessel && QUIZ_VESSELS.includes(id),
-	)
+	const others = distractors(vessel, bearing)
 		.sort(() => Math.random() - 0.5)
 		.slice(0, 3);
 
