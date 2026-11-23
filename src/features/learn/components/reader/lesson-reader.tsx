@@ -148,6 +148,7 @@ export default function LessonReader({ lesson }: ILessonReaderProps) {
 
 				<div className="mt-10">
 					<LessonEndCard
+						lesson={lesson}
 						next={next}
 						cheatSheetArea={isIntro ? null : lesson.area}
 					/>

@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import type { ExamSubjectId } from "@/content/types";
+import { A_SUBJECT_ID } from "@/content/voditelj-brodice/subjects";
 import SubjectRow, { LABEL_TEXT } from "@/features/home/components/subject-row";
 import type { IReadiness } from "@/lib/progress/readiness";
 
@@ -10,6 +12,12 @@ interface IReadinessCardProps {
 export default function ReadinessCard({ readiness }: IReadinessCardProps) {
 	const showWeakest =
 		readiness.subjects.length > 1 && readiness.weakest !== null;
+
+	// Category A is one subject, so its practice set is simply every A question.
+	const weakestSubject =
+		readiness.weakest && readiness.weakest.id !== A_SUBJECT_ID
+			? (readiness.weakest.id as ExamSubjectId)
+			: undefined;
 
 	return (
 		<section
@@ -57,7 +65,12 @@ export default function ReadinessCard({ readiness }: IReadinessCardProps) {
 				variant="outline"
 				className="mt-3 h-11 w-full rounded-full font-semibold"
 			>
-				<Link to="/vjezba">Vježbaj najslabije</Link>
+				<Link
+					to="/vjezba/serija"
+					search={{ mode: "mjesovito", subject: weakestSubject, length: 10 }}
+				>
+					Vježbaj najslabije
+				</Link>
 			</Button>
 		</section>
 	);
