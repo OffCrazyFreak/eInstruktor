@@ -25,4 +25,9 @@ declare module "@tanstack/react-router" {
 	interface Register {
 		router: ReturnType<typeof getRouter>;
 	}
+
+	interface StaticDataRouteOption {
+		/** Full-screen app routes, such as the lesson reader, hide the app top bar and bottom tabs. */
+		immersive?: boolean;
+	}
 }
