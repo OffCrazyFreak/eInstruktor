@@ -17,7 +17,12 @@ export default function PillarsSection({ reduce }: IPillarsSectionProps) {
 				</h2>
 				<div className="mt-8 grid gap-5 md:grid-cols-3">
 					{pillars.map((p) => (
-						<motion.div key={p.id} {...reveal(reduce)}>
+						<motion.div
+							key={p.id}
+							id={p.id}
+							className="scroll-mt-20"
+							{...reveal(reduce)}
+						>
 							<GlassPanel className="h-full">
 								<h3 className="font-serif text-2xl">{p.name}</h3>
 								<p

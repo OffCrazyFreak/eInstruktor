@@ -16,8 +16,8 @@ import { cn } from "@/lib/utils";
 
 /** `active` marks the current page: it stays light blue; the rest are navy. */
 const NAV = [
-	{ label: "Lekcije", href: "#lekcije", active: false },
-	{ label: "Vježba", href: "#vjezba", active: false },
+	{ label: "Lekcije", href: "#ucenje", active: false },
+	{ label: "Vježba", href: "#vjezbanje", active: false },
 	{ label: "Ispit", href: "#ispit", active: false },
 ];
 
