@@ -24,7 +24,7 @@ function lazyVisual<P extends object>(
 	});
 }
 
-export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
+export const VISUALS: Record<VisualId, VisualComponent> = {
 	"iala-buoy-explorer": lazyVisual(
 		() =>
 			import(
@@ -92,5 +92,8 @@ export const VISUALS: Partial<Record<VisualId, VisualComponent>> = {
 			import(
 				"@/components/custom/visuals/navigation-areas-map/navigation-areas-map"
 			),
+	),
+	"knot-steps": lazyVisual(
+		() => import("@/components/custom/visuals/knot-steps/knot-steps"),
 	),
 };

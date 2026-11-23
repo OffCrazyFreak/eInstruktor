@@ -42,7 +42,7 @@ export default function VisualFrame({
 						</div>
 					}
 				>
-					{Visual && <Visual props={props} />}
+					<Visual props={props} />
 				</Suspense>
 			</VisualErrorBoundary>
 
