@@ -64,3 +64,19 @@ export function blockOfIndex(
 			index < block.startIndex + block.questions.length,
 	);
 }
+
+// A session whose stored ids no longer match the content (a removed question or subject) cannot be scored fairly.
+export function isPlayableExam(
+	course: ICourse,
+	level: ExamLevel,
+	blocks: IExamBlock[],
+): boolean {
+	if (blocks.length === 0) {
+		return false;
+	}
+
+	return (
+		level === "A" ||
+		blocks.length === new Set(course.areas.map((area) => area.subject)).size
+	);
+}
