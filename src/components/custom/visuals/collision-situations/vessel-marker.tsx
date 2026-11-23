@@ -5,7 +5,8 @@ import { PALETTE } from "@/components/custom/visuals/shared/visual-palette";
 interface IVesselMarkerProps {
 	vessel: IVesselState;
 	label: string;
-	role: "give-way" | "stand-on";
+	/** null hides the role tag, for question media. */
+	role: "give-way" | "stand-on" | null;
 	own: boolean;
 }
 
@@ -55,7 +56,7 @@ export default function VesselMarker({
 					x={vessel.x - 34}
 					y={vessel.y + 24}
 					width="68"
-					height="28"
+					height={role ? 28 : 16}
 					rx="6"
 					fill="white"
 					opacity="0.9"
@@ -63,13 +64,15 @@ export default function VesselMarker({
 				<text x={vessel.x} y={vessel.y + 35} fill={PALETTE.navy}>
 					{label}
 				</text>
-				<text
-					x={vessel.x}
-					y={vessel.y + 47}
-					fill={role === "give-way" ? "#b46a00" : "#0b7a43"}
-				>
-					{role === "give-way" ? "uklanja se" : "ima prednost"}
-				</text>
+				{role && (
+					<text
+						x={vessel.x}
+						y={vessel.y + 47}
+						fill={role === "give-way" ? "#b46a00" : "#0b7a43"}
+					>
+						{role === "give-way" ? "uklanja se" : "ima prednost"}
+					</text>
+				)}
 			</g>
 		</g>
 	);

@@ -157,13 +157,13 @@ export default function CollisionScene({
 				<VesselMarker
 					vessel={positionAt(scenario.other, otherSpeed, t, otherTurns)}
 					label="drugo plovilo"
-					role={otherTurns ? "give-way" : "stand-on"}
+					role={hideAnswer ? null : otherTurns ? "give-way" : "stand-on"}
 					own={false}
 				/>
 				<VesselMarker
 					vessel={positionAt(scenario.own, ownSpeed, t, ownTurns)}
 					label="Ti"
-					role={ownTurns ? "give-way" : "stand-on"}
+					role={hideAnswer ? null : ownTurns ? "give-way" : "stand-on"}
 					own
 				/>
 			</svg>

@@ -22,7 +22,7 @@ export interface ISoundSignalPlayerProps {
 	pattern?: PatternId;
 	set?: SignalSet;
 	mode?: (typeof MODES)[number];
-	/** Question media: the meaning cannot be revealed. */
+	/** Question media: no meaning and no blast lengths. */
 	hideAnswer?: boolean;
 }
 
@@ -73,9 +73,11 @@ export default function SoundSignalPlayer({
 				<p className="font-serif text-lg">
 					{pattern ? "Poslušaj signal" : SET_TITLES[set]}
 				</p>
-				<p className="font-mono text-[0.72rem] text-[#002c78]/60">
-					kratki 1 s, dugi 4 do 6 s
-				</p>
+				{!hideAnswer && (
+					<p className="font-mono text-[0.72rem] text-[#002c78]/60">
+						kratki 1 s, dugi 4 do 6 s
+					</p>
+				)}
 			</div>
 
 			<div className="space-y-2">
