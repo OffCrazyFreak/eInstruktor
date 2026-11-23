@@ -62,8 +62,8 @@ export default function FreeSection({ reduce }: IFreeSectionProps) {
 									className="pt-1 text-[0.8rem]"
 									style={{ color: "rgba(0,44,120,0.6)" }}
 								>
-									Iznosi su okvirni i mogu se promijeniti, posebno nakon
-									01.01.2027. kad se očekuju nova pravila. Zadnje provjereno{" "}
+									Iznosi su okvirni i mogu se promijeniti, posebno tijekom 2027.
+									kad se očekuju nova pravila. Zadnje provjereno{" "}
 									{factsCheckedOn}
 								</li>
 							</ul>
