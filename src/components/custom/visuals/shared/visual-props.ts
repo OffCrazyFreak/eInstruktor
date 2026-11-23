@@ -16,19 +16,31 @@ export function readOption<T extends string>(
 	return options.find((option) => option === value);
 }
 
+export interface INumberRange {
+	min: number;
+	max: number;
+	/** Rounds to this step, so the value lands on a position the slider can show. */
+	step?: number;
+}
+
+/** Reads a number or numeric string, clamped and rounded to the range of the control that shows it. */
 export function readNumber(
 	props: VisualProps | undefined,
 	key: string,
-	range: { min: number; max: number },
+	range: INumberRange,
 ): number | undefined {
 	const value = props?.[key];
-	const parsed = typeof value === "string" ? Number(value) : value;
+	const parsed =
+		typeof value === "string" && value.trim() !== "" ? Number(value) : value;
 
 	if (typeof parsed !== "number" || !Number.isFinite(parsed)) {
 		return undefined;
 	}
 
-	return Math.min(range.max, Math.max(range.min, parsed));
+	const step = range.step ?? 1;
+	const stepped = Math.round(parsed / step) * step;
+
+	return Math.min(range.max, Math.max(range.min, stepped));
 }
 
 export function readBoolean(
@@ -80,5 +92,8 @@ export function readStringList(
 		return [];
 	}
 
-	return value.map((item) => item.trim()).filter((item) => item !== "");
+	return value
+		.filter((item): item is string => typeof item === "string")
+		.map((item) => item.trim())
+		.filter((item) => item !== "");
 }

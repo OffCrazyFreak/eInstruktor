@@ -18,6 +18,8 @@ import {
 } from "@/components/custom/visuals/shared/visual-props";
 
 const MODES = ["course", "variation-deviation"] as const;
+const COURSE_RANGE = { min: 0, max: 359 };
+const CORRECTION_RANGE = { min: -10, max: 10 };
 
 export interface ICompassCourseCalculatorProps {
 	/** "course" reads a heading; "variation-deviation" converts true course to compass course. */
@@ -33,9 +35,9 @@ export function fromVisualProps(
 ): ICompassCourseCalculatorProps {
 	return {
 		mode: readOption(props, "mode", MODES),
-		trueCourse: readNumber(props, "trueCourse", { min: 0, max: 359 }),
-		variation: readNumber(props, "variation", { min: -15, max: 15 }),
-		deviation: readNumber(props, "deviation", { min: -15, max: 15 }),
+		trueCourse: readNumber(props, "trueCourse", COURSE_RANGE),
+		variation: readNumber(props, "variation", CORRECTION_RANGE),
+		deviation: readNumber(props, "deviation", CORRECTION_RANGE),
 	};
 }
 
@@ -91,8 +93,8 @@ export default function CompassCourseCalculator({
 				<CourseSlider
 					label={conversion ? "Pravi kurs (Kp)" : "Kurs"}
 					value={course}
-					min={0}
-					max={359}
+					min={COURSE_RANGE.min}
+					max={COURSE_RANGE.max}
 					display={formatCourse(course)}
 					onChange={setCourse}
 				/>
@@ -102,16 +104,16 @@ export default function CompassCourseCalculator({
 						<CourseSlider
 							label="Varijacija"
 							value={variationValue}
-							min={-10}
-							max={10}
+							min={CORRECTION_RANGE.min}
+							max={CORRECTION_RANGE.max}
 							display={formatCorrection(variationValue)}
 							onChange={setVariation}
 						/>
 						<CourseSlider
 							label="Devijacija"
 							value={deviationValue}
-							min={-10}
-							max={10}
+							min={CORRECTION_RANGE.min}
+							max={CORRECTION_RANGE.max}
 							display={formatCorrection(deviationValue)}
 							onChange={setDeviation}
 						/>
