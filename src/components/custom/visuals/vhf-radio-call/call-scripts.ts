@@ -28,7 +28,7 @@ export const DEFAULT_FIELDS: Record<CallId, ICallFields> = {
 		callSign: "9A2817",
 		position: "pola milje istočno od rta Ploča",
 		problem: "Kvar motora, usidreni smo, nema neposredne opasnosti",
-		help: "Trebamo tegalj do Rogoznice",
+		help: "Trebamo tegljenje do Rogoznice",
 		people: "tri osobe",
 	},
 	securite: {

@@ -75,7 +75,7 @@ export const DAY_STATES: Record<DayState, IDayState> = {
 		note: "Stožac vrhom dolje, na pramcu. Po pravilima je to motorno plovilo.",
 	},
 	towing: {
-		name: "Tegljač, teglj dulji od 200 m",
+		name: "Tegljač, tegalj dulji od 200 m",
 		shapes: ["diamond"],
 		note: "Dvostruki stožac spojen bazama, na tegljaču i na tegljenom objektu.",
 	},

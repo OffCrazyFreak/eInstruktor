@@ -65,7 +65,7 @@ export const VESSELS: Record<VesselId, IVessel> = {
 		note: "Crveno iznad bijelog kružnog. Dok plovi kroz vodu, još bočna i krmeno.",
 	},
 	towing: {
-		name: "Tegljač (teglj kraći od 200 m)",
+		name: "Tegljač (tegalj kraći od 200 m)",
 		group: "special",
 		hull: "power",
 		note: "Dva jarbolna svjetla u okomici, bočna, krmeno i žuto svjetlo za tegljenje iznad krmenog.",
