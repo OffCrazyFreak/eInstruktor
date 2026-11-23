@@ -1,4 +1,5 @@
 import { Outlet, useMatches } from "@tanstack/react-router";
+import { Toaster } from "sonner";
 import AppTopBar from "@/components/custom/app-shell/app-top-bar";
 import BottomNav from "@/components/custom/app-shell/bottom-nav";
 import NavRail from "@/components/custom/app-shell/nav-rail";
@@ -28,6 +29,8 @@ export default function AppLayout() {
 				</div>
 
 				{!immersive && <BottomNav />}
+
+				<Toaster position="top-center" richColors />
 			</div>
 		</ProgressProvider>
 	);

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { setTargetLevel } from "@/lib/progress/progress-actions";
+import { setExamDate, setTargetLevel } from "@/lib/progress/progress-actions";
 import { EMPTY_PROGRESS } from "@/lib/progress/progress-schema";
 import { createProgressStore } from "@/lib/progress/progress-store";
 import { PROGRESS_STORAGE_KEY } from "@/lib/progress/storage-key";
@@ -91,5 +91,82 @@ describe("createProgressStore", () => {
 
 		expect(listener).toHaveBeenCalledOnce();
 		expect(store.getSnapshot().targetLevel).toBe("A");
+	});
+});
+
+describe("createProgressStore across tabs", () => {
+	afterEach(() => {
+		vi.unstubAllGlobals();
+	});
+
+	it("re-reads storage before an update so a stale cache never overwrites another tab", () => {
+		const storage = memoryStorage();
+		const store = createProgressStore(() => storage);
+
+		store.getSnapshot();
+		storage.setItem(
+			PROGRESS_STORAGE_KEY,
+			JSON.stringify({ targetLevel: "A", lessonsDone: { uvod: 1 } }),
+		);
+		store.update((progress) => setExamDate(progress, "2026-12-01"));
+
+		const saved = JSON.parse(storage.getItem(PROGRESS_STORAGE_KEY) ?? "{}");
+
+		expect(saved.lessonsDone).toEqual({ uvod: 1 });
+		expect(saved.examDate).toBe("2026-12-01");
+	});
+
+	it("reloads when the first listener subscribes", () => {
+		const storage = memoryStorage();
+		const store = createProgressStore(() => storage);
+		const listener = vi.fn();
+
+		store.getSnapshot();
+		storage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify({ targetLevel: "B" }));
+		store.subscribe(listener);
+
+		expect(listener).toHaveBeenCalledOnce();
+		expect(store.getSnapshot().targetLevel).toBe("B");
+	});
+
+	it("starts over when another tab clears the progress", () => {
+		const target = new EventTarget();
+
+		vi.stubGlobal("window", target);
+
+		const storage = memoryStorage({
+			[PROGRESS_STORAGE_KEY]: JSON.stringify({ targetLevel: "A" }),
+		});
+		const store = createProgressStore(() => storage);
+
+		store.subscribe(vi.fn());
+		target.dispatchEvent(
+			Object.assign(new Event("storage"), {
+				key: PROGRESS_STORAGE_KEY,
+				newValue: null,
+			}),
+		);
+
+		expect(store.getSnapshot()).toEqual(EMPTY_PROGRESS);
+	});
+
+	it("keeps changes in memory and reports once when writing fails", () => {
+		const storage = memoryStorage();
+		const onWriteError = vi.fn();
+
+		storage.setItem = () => {
+			throw new Error("QuotaExceededError");
+		};
+
+		const store = createProgressStore(() => storage, { onWriteError });
+
+		store.update((progress) => setTargetLevel(progress, "A"));
+		store.update((progress) => setExamDate(progress, "2026-12-01"));
+
+		expect(onWriteError).toHaveBeenCalledOnce();
+		expect(store.getSnapshot()).toMatchObject({
+			targetLevel: "A",
+			examDate: "2026-12-01",
+		});
 	});
 });
