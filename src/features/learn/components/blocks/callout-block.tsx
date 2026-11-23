@@ -54,7 +54,11 @@ export default function CalloutBlock({
 	const { label, icon: Icon, className, iconClassName } = CALLOUTS[kind];
 
 	return (
-		<aside className={cn("rounded-2xl border-2 p-4 sm:p-5", className)}>
+		<div
+			role="note"
+			aria-label={label}
+			className={cn("rounded-2xl border-2 p-4 sm:p-5", className)}
+		>
 			<p
 				className={cn(
 					"flex items-center gap-2 font-mono text-[0.74rem] font-semibold tracking-[0.16em]",
@@ -68,6 +72,6 @@ export default function CalloutBlock({
 			{title && <p className="mt-2 font-semibold">{title}</p>}
 
 			<div className="mt-2 text-[1rem] leading-relaxed">{children}</div>
-		</aside>
+		</div>
 	);
 }

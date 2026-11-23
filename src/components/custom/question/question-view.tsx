@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, useState } from "react";
 import AnswerOption from "@/components/custom/question/answer-option";
 import {
 	isCorrectSelection,
@@ -32,6 +32,7 @@ export default function QuestionView({
 	className,
 }: IQuestionViewProps) {
 	const baseId = useId();
+	const [revealedAtMount] = useState(revealed);
 	const promptId = `${baseId}-prompt`;
 	const multiple = question.type === "multi";
 
@@ -105,6 +106,7 @@ export default function QuestionView({
 						question={question}
 						correct={isCorrectSelection(question, selected)}
 						showLessonLink={showLessonLink}
+						takeFocus={!revealedAtMount}
 					/>
 				)}
 			</div>

@@ -10,7 +10,12 @@ export default function TableBlock({
 	rows,
 }: ITableBlockProps) {
 	return (
-		<div className="overflow-x-auto rounded-2xl border border-border bg-card">
+		<section
+			// biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region must be focusable to scroll by keyboard (WCAG 2.1.1)
+			tabIndex={0}
+			aria-label={caption ?? "Tablica"}
+			className="overflow-x-auto rounded-2xl border border-border bg-card outline-none focus-visible:ring-[3px] focus-visible:ring-ring/60"
+		>
 			<table className="w-full min-w-[30rem] border-collapse text-left text-[0.94rem]">
 				{caption && (
 					<caption className="caption-top px-3 pt-3 pb-2 text-left font-semibold">
@@ -64,6 +69,6 @@ export default function TableBlock({
 					))}
 				</tbody>
 			</table>
-		</div>
+		</section>
 	);
 }

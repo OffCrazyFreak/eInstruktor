@@ -150,4 +150,18 @@ describe("QuestionView", () => {
 		expect(document.activeElement?.contains(verdict)).toBe(true);
 		expect(screen.queryByRole("link", { name: /Pročitaj lekciju/ })).toBeNull();
 	});
+
+	it("does not move focus when the question is already answered on first render", async () => {
+		await renderWithRouter(() => (
+			<QuestionView
+				question={single}
+				selected={["a"]}
+				onSelectedChange={() => {}}
+				revealed
+			/>
+		));
+
+		expect(screen.getByText("Točno")).toBeTruthy();
+		expect(document.activeElement).toBe(document.body);
+	});
 });

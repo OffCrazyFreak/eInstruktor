@@ -8,19 +8,24 @@ interface IQuestionFeedbackProps {
 	question: IQuestion;
 	correct: boolean;
 	showLessonLink: boolean;
+	/** False when the question was already answered on first render, so opening a page never jumps focus. */
+	takeFocus: boolean;
 }
 
 export default function QuestionFeedback({
 	question,
 	correct,
 	showLessonLink,
+	takeFocus,
 }: IQuestionFeedbackProps) {
 	const panelRef = useRef<HTMLDivElement>(null);
 
 	// Screen reader and keyboard users land on the result right after checking.
 	useEffect(() => {
-		panelRef.current?.focus();
-	}, []);
+		if (takeFocus) {
+			panelRef.current?.focus();
+		}
+	}, [takeFocus]);
 
 	const Icon = correct ? CircleCheck : CircleX;
 
