@@ -1,7 +1,5 @@
 import { useSyncExternalStore } from "react";
-
-// The key the local progress store writes; the landing only needs to know whether it exists.
-export const LOCAL_PROGRESS_KEY = "einstruktor:progress:v1";
+import { PROGRESS_STORAGE_KEY } from "@/lib/progress/storage-key";
 
 function subscribe(onChange: () => void) {
 	window.addEventListener("storage", onChange);
@@ -11,7 +9,7 @@ function subscribe(onChange: () => void) {
 
 function readHasProgress(): boolean {
 	try {
-		return window.localStorage.getItem(LOCAL_PROGRESS_KEY) !== null;
+		return window.localStorage.getItem(PROGRESS_STORAGE_KEY) !== null;
 	} catch {
 		return false;
 	}
