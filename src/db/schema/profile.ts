@@ -17,5 +17,6 @@ export const userProfile = sqliteTable("user_profile", {
 
 	updatedAt: integer("updated_at", { mode: "timestamp" })
 		.notNull()
-		.$defaultFn(() => new Date()),
+		.$defaultFn(() => new Date())
+		.$onUpdateFn(() => new Date()),
 });

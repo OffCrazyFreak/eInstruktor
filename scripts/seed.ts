@@ -5,9 +5,12 @@ import course from "@/content/voditelj-brodice";
 import { resolveDbConfig } from "@/db/config";
 import * as schema from "@/db/schema";
 import { getQuestions } from "@/lib/content/course-selectors";
+import { questionsForExam } from "@/lib/content/exam-questions";
 import { toStudyDay } from "@/lib/dates/study-day";
 
 const DEMO_USER_ID = "demo-user";
+
+const DEMO_EXAM_SEED = 2026;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -102,6 +105,10 @@ async function seedDemoUser(db: Database): Promise<void> {
 			id: "demo-exam-1",
 			userId: DEMO_USER_ID,
 			level: "B",
+			seed: DEMO_EXAM_SEED,
+			questionIds: questionsForExam(course, "B", DEMO_EXAM_SEED).map(
+				(question) => question.id,
+			),
 			startedAt: daysAgo(1),
 			finishedAt: new Date(daysAgo(1).getTime() + 40 * 60 * 1000),
 			score: 31,

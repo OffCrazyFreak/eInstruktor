@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "1dc6d307-935e-4cd8-ba4a-a56aafd802ae",
+  "id": "329f1e5c-5d62-4db9-9649-e5ce7024419a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "exam_session": {
@@ -23,6 +23,20 @@
         },
         "level": {
           "name": "level",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "seed": {
+          "name": "seed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "question_ids": {
+          "name": "question_ids",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -117,6 +131,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "exam_session_id": {
+          "name": "exam_session_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "correct": {
           "name": "correct",
           "type": "integer",
@@ -154,6 +175,13 @@
             "answered_at"
           ],
           "isUnique": false
+        },
+        "question_attempt_exam_session_idx": {
+          "name": "question_attempt_exam_session_idx",
+          "columns": [
+            "exam_session_id"
+          ],
+          "isUnique": false
         }
       },
       "foreignKeys": {
@@ -163,6 +191,19 @@
           "tableTo": "user",
           "columnsFrom": [
             "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "question_attempt_exam_session_id_exam_session_id_fk": {
+          "name": "question_attempt_exam_session_id_exam_session_id_fk",
+          "tableFrom": "question_attempt",
+          "tableTo": "exam_session",
+          "columnsFrom": [
+            "exam_session_id"
           ],
           "columnsTo": [
             "id"
