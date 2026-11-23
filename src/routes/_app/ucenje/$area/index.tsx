@@ -1,12 +1,11 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import type { AreaSlug } from "@/content/types";
-import course from "@/content/voditelj-brodice";
+import areasIndex from "@/content/voditelj-brodice/areas-index";
 import AreaPage from "@/features/learn/components/area-page";
-import { getArea } from "@/lib/content/course-selectors";
 import pageHead from "@/lib/seo/page-head";
 
+// The small area index keeps the course content out of the main bundle, where route loaders end up.
 function findArea(slug: string) {
-	return getArea(course, slug as AreaSlug);
+	return areasIndex.find((area) => area.slug === slug);
 }
 
 export const Route = createFileRoute("/_app/ucenje/$area/")({

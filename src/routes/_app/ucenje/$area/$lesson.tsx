@@ -1,20 +1,22 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import type { ICourse } from "@/content/course-types";
 import course from "@/content/voditelj-brodice";
 import LessonReader from "@/features/learn/components/reader/lesson-reader";
 import { getLesson } from "@/lib/content/course-selectors";
 import pageHead from "@/lib/seo/page-head";
 
-function findLesson(area: string, slug: string) {
-	const lesson = getLesson(course, slug);
+function findLesson(content: ICourse, area: string, slug: string) {
+	const lesson = getLesson(content, slug);
 
 	return lesson?.area === area ? lesson : undefined;
 }
 
 export const Route = createFileRoute("/_app/ucenje/$area/$lesson")({
 	staticData: { immersive: true },
-	// Only the head text goes through the loader, so the lesson body is not sent twice in the page payload.
-	loader: ({ params }) => {
-		const lesson = findLesson(params.area, params.lesson);
+	// Loaders are not code-split, so the course loads lazily here; only the head text goes into the page payload.
+	loader: async ({ params }) => {
+		const { default: content } = await import("@/content/voditelj-brodice");
+		const lesson = findLesson(content, params.area, params.lesson);
 
 		if (!lesson) {
 			throw notFound();
@@ -34,7 +36,7 @@ export const Route = createFileRoute("/_app/ucenje/$area/$lesson")({
 
 function LessonRoute() {
 	const params = Route.useParams();
-	const lesson = findLesson(params.area, params.lesson);
+	const lesson = findLesson(course, params.area, params.lesson);
 
 	return lesson ? <LessonReader key={lesson.slug} lesson={lesson} /> : null;
 }
