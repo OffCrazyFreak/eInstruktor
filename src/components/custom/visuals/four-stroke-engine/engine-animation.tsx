@@ -1,5 +1,5 @@
-import { useAnimationFrame } from "motion/react";
-import { useState } from "react";
+import { useAnimationFrame, useInView } from "motion/react";
+import { useRef, useState } from "react";
 import {
 	CYCLES,
 	cycleDegrees,
@@ -34,8 +34,11 @@ export default function EngineAnimation({
 	const index = strokeIndexAt(mode, angle);
 	const stroke = strokes[index];
 
+	const rootRef = useRef<HTMLDivElement>(null);
+	const onScreen = useInView(rootRef);
+
 	useAnimationFrame((_, delta) => {
-		if (playing) {
+		if (playing && onScreen) {
 			setAngle(
 				(previous) =>
 					(previous + (delta / 1000) * DEGREES_PER_SECOND) % cycleDegrees(mode),
@@ -44,7 +47,7 @@ export default function EngineAnimation({
 	});
 
 	return (
-		<div className="grid gap-4 md:grid-cols-2 md:items-center">
+		<div ref={rootRef} className="grid gap-4 md:grid-cols-2 md:items-center">
 			<EngineCylinder
 				mode={mode}
 				angle={angle}

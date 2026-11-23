@@ -1,5 +1,5 @@
-import { useAnimationFrame } from "motion/react";
-import { useId, useState } from "react";
+import { useAnimationFrame, useInView } from "motion/react";
+import { useId, useRef, useState } from "react";
 import {
 	classifySituation,
 	type IVesselState,
@@ -79,14 +79,17 @@ export default function CollisionScene({ scenario }: ICollisionSceneProps) {
 	const otherTurns = verdict.giveWay !== "a";
 	const [ownSpeed, otherSpeed] = scenario.speeds;
 
+	const rootRef = useRef<HTMLDivElement>(null);
+	const onScreen = useInView(rootRef);
+
 	useAnimationFrame((_, delta) => {
-		if (playing) {
+		if (playing && onScreen) {
 			setT((previous) => (previous + delta / 1000 / LOOP_SECONDS) % 1);
 		}
 	});
 
 	return (
-		<div className="space-y-2">
+		<div ref={rootRef} className="space-y-2">
 			<svg
 				viewBox="0 0 300 300"
 				className="block w-full"

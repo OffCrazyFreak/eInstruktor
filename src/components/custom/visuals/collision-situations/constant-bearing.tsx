@@ -1,5 +1,5 @@
-import { useAnimationFrame } from "motion/react";
-import { useState } from "react";
+import { useAnimationFrame, useInView } from "motion/react";
+import { useRef, useState } from "react";
 import { bearingFrom } from "@/components/custom/visuals/shared/bearing";
 import OptionButtons from "@/components/custom/visuals/shared/option-buttons";
 import PlayToggle from "@/components/custom/visuals/shared/play-toggle";
@@ -44,14 +44,17 @@ export default function ConstantBearing() {
 		bearingFrom(now.other.x - now.own.x, now.other.y - now.own.y),
 	);
 
+	const rootRef = useRef<HTMLDivElement>(null);
+	const onScreen = useInView(rootRef);
+
 	useAnimationFrame((_, delta) => {
-		if (playing) {
+		if (playing && onScreen) {
 			setT((previous) => (previous + delta / 1000 / 6) % END);
 		}
 	});
 
 	return (
-		<div className="space-y-3">
+		<div ref={rootRef} className="space-y-3">
 			<OptionButtons
 				label="Što se događa"
 				options={[
