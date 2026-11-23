@@ -4,9 +4,9 @@ import LegalSection from "@/features/legal/components/legal-section";
 import { CONTACT_URL } from "@/features/legal/constants/legal";
 
 const SUMMARY = [
-	"Bez prijave sve ostaje u tvom pregledniku. Nama ništa ne šaljemo.",
-	"S Google prijavom spremamo tvoje ime, e-mail, sliku profila i napredak, da ih vidiš na svakom uređaju.",
-	"Račun možeš obrisati kad želiš. Tada brišemo ime, e-mail i sliku, a ostaju samo anonimni odgovori.",
+	"Bez prijave napredak ostaje u tvom pregledniku i ne šaljemo ga nikamo. Hosting, kao kod svake web stranice, pri posjetu vidi tvoju IP adresu.",
+	"S Google prijavom spremamo tvoje ime, e-mail, sliku profila, Googleov ID računa, ključeve za prijavu i napredak, da ih vidiš na svakom uređaju.",
+	"Brisanje računa u aplikaciji stiže s postavkama računa. Do tada ga zatraži preko GitHub repozitorija.",
 	"Nemamo oglase ni kolačiće za praćenje.",
 ];
 
@@ -38,8 +38,8 @@ export default function PrivacyPage() {
 					<li>svijetla ili tamna tema</li>
 				</ul>
 				<p>
-					Ti podaci ne dolaze do nas. Obrišeš ih tako da u pregledniku očistiš
-					podatke ove stranice.
+					Taj napredak ne šaljemo nikamo. Obrišeš ga tako da u pregledniku
+					očistiš podatke ove stranice.
 				</p>
 			</LegalSection>
 
@@ -56,8 +56,12 @@ export default function PrivacyPage() {
 						učenja, kategoriju i datum ispita
 					</li>
 					<li>
-						podatke o prijavi: kolačić sesije, IP adresu i vrstu preglednika za
-						tu sesiju te tehničke ključeve koje Google izdaje za prijavu
+						Googleov ID tvog računa i ključeve za prijavu koje Google izdaje
+						(access, refresh i ID token)
+					</li>
+					<li>
+						podatke o sesiji: kolačić sesije, IP adresu i vrstu preglednika s
+						kojeg si se prijavio
 					</li>
 				</ul>
 				<p>
@@ -81,22 +85,37 @@ export default function PrivacyPage() {
 
 			<LegalSection title="Tko još obrađuje podatke">
 				<ul>
-					<li>Google, za prijavu (dobivamo samo ime, e-mail i sliku)</li>
+					<li>
+						Google, za prijavu (od njega dobivamo ime, e-mail, sliku i ID)
+					</li>
 					<li>Netlify, hosting na kojem aplikacija radi</li>
 					<li>pružatelj baze podataka u kojoj se čuva napredak s računom</li>
 				</ul>
 				<p>
-					Pružatelj hostinga može kratko čuvati tehničke zapise, poput IP
-					adrese, radi sigurnosti i rada servera.
+					Hosting pri svakom posjetu vidi tvoju IP adresu i može kratko čuvati
+					tehničke zapise radi sigurnosti i rada servera, i kad nisi prijavljen.
+				</p>
+				<p>
+					Google i Netlify su tvrtke iz SAD-a, pa se podaci koje obrađuju mogu
+					obrađivati i izvan Europske unije.
 				</p>
 			</LegalSection>
 
 			<LegalSection title="Brisanje računa">
 				<p>
-					Račun možeš obrisati u postavkama računa. Tada brišemo tvoje ime,
-					e-mail adresu i sliku profila i odjavljujemo te sa svih uređaja.
-					Odgovori na pitanja ostaju u bazi bez ikakve veze s tobom, kao
-					anonimna statistika o tome koja su pitanja teška.
+					Brisanje računa u aplikaciji stiže zajedno s postavkama računa. Tada
+					će brisanje ukloniti tvoj račun kod nas (Googleov ID i ključeve za
+					prijavu) i sve sesije, a ime, e-mail i sliku zamijeniti anonimnim
+					podacima. Odgovori na pitanja ostat će u bazi bez veze s tobom, kao
+					statistika o tome koja su pitanja teška.
+				</p>
+				<p>
+					Do tada brisanje zatraži preko{" "}
+					<a href={CONTACT_URL} target="_blank" rel="noreferrer">
+						GitHub repozitorija
+					</a>
+					: otvori issue s naslovom "Zahtjev za brisanje" i u njega ne upisuj
+					osobne podatke. Javit ćemo ti se preko tvog GitHub računa.
 				</p>
 			</LegalSection>
 
@@ -107,8 +126,9 @@ export default function PrivacyPage() {
 					<a href={CONTACT_URL} target="_blank" rel="noreferrer">
 						GitHub repozitorija
 					</a>
-					. Ako misliš da podatke obrađujemo protivno propisima, možeš se
-					obratiti Agenciji za zaštitu osobnih podataka (AZOP).
+					, kao i za brisanje, bez osobnih podataka u samom issueu. Ako misliš
+					da podatke obrađujemo protivno propisima, možeš se obratiti Agenciji
+					za zaštitu osobnih podataka (AZOP).
 				</p>
 				<p>
 					Pravila korištenja aplikacije su u{" "}
