@@ -3,8 +3,9 @@ import type { IAttempt } from "@/lib/progress/progress-schema";
 import { readiness } from "@/lib/progress/readiness";
 import { testAttempt } from "@/lib/progress/test-attempts";
 
-const ids = (prefix: string, count: number) =>
-	Array.from({ length: count }, (_, index) => `${prefix}-${index}`);
+function ids(prefix: string, count: number) {
+	return Array.from({ length: count }, (_, index) => `${prefix}-${index}`);
+}
 
 function answerAll(questionIds: string[], correctShare: number): IAttempt[] {
 	const correctCount = Math.round(questionIds.length * correctShare);

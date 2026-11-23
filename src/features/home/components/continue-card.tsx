@@ -1,47 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { IArea, ILesson } from "@/content/types";
+import CourseLine from "@/features/home/components/course-line";
 
 interface IContinueCardProps {
 	lesson: ILesson;
 	area: IArea | undefined;
 	/** Share of the lesson already read; 0 for a lesson not started yet. */
 	percent: number;
-}
-
-/** The course line: a dashed bearing from harbour to the next mark, with the sun where the learner is now. */
-function CourseLine({ percent }: { percent: number }) {
-	const position = 4 + percent * 92;
-
-	return (
-		<svg
-			viewBox="0 0 100 8"
-			preserveAspectRatio="none"
-			className="h-3 w-full"
-			aria-hidden="true"
-		>
-			<line
-				x1="4"
-				y1="4"
-				x2="96"
-				y2="4"
-				stroke="currentColor"
-				strokeOpacity="0.35"
-				strokeWidth="1"
-				strokeDasharray="2 2"
-				vectorEffect="non-scaling-stroke"
-			/>
-			<line
-				x1="4"
-				y1="4"
-				x2={position}
-				y2="4"
-				stroke="#00aef3"
-				strokeWidth="2"
-				vectorEffect="non-scaling-stroke"
-			/>
-		</svg>
-	);
 }
 
 export default function ContinueCard({

@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { pluralHr } from "@/lib/plural";
 
-const lekcija = (count: number) =>
-	pluralHr(count, "lekcija", "lekcije", "lekcija");
-const dan = (count: number) => pluralHr(count, "dan", "dana", "dana");
+function lekcija(count: number) {
+	return pluralHr(count, "lekcija", "lekcije", "lekcija");
+}
+function dan(count: number) {
+	return pluralHr(count, "dan", "dana", "dana");
+}
 
 describe("pluralHr", () => {
 	it("follows the Croatian count forms", () => {
