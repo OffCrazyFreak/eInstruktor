@@ -7,6 +7,9 @@ import type {
 	IProgressState,
 } from "@/lib/progress/progress-schema";
 
+// About 600 KB of JSON, well under the browser's localStorage limit; older answers matter little for recent accuracy.
+export const MAX_STORED_ATTEMPTS = 4000;
+
 export interface IAnswerInput {
 	id: string;
 	questionId: string;
@@ -51,7 +54,11 @@ export function recordAnswer(
 				};
 
 	return withStudyDay(
-		{ ...progress, attempts: [...progress.attempts, answer], questionBoxes },
+		{
+			...progress,
+			attempts: [...progress.attempts, answer].slice(-MAX_STORED_ATTEMPTS),
+			questionBoxes,
+		},
 		today,
 	);
 }

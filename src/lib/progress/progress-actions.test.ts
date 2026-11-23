@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+	MAX_STORED_ATTEMPTS,
 	markLessonDone,
 	markLessonUnread,
 	openLesson,
@@ -20,6 +21,20 @@ describe("recordAnswer", () => {
 		expect(right.attempts).toHaveLength(2);
 		expect(wrong.questionBoxes["q-1"]?.box).toBe(1);
 		expect(right.questionBoxes["q-1"]?.box).toBe(2);
+	});
+
+	it("keeps only the newest answers past the storage cap", () => {
+		const full = {
+			...EMPTY_PROGRESS,
+			attempts: Array.from({ length: MAX_STORED_ATTEMPTS }, (_, index) =>
+				testAttempt({ id: `old-${index}` }),
+			),
+		};
+		const next = recordAnswer(full, testAttempt({ id: "newest" }));
+
+		expect(next.attempts).toHaveLength(MAX_STORED_ATTEMPTS);
+		expect(next.attempts[0]?.id).toBe("old-1");
+		expect(next.attempts.at(-1)?.id).toBe("newest");
 	});
 
 	it("leaves the boxes alone for exam answers", () => {
