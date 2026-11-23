@@ -65,7 +65,7 @@ export default function ConstantBearing() {
 
 			<svg
 				viewBox="0 0 300 300"
-				className="block w-full"
+				className="mx-auto block w-full max-w-lg"
 				role="img"
 				aria-label={VERDICTS[caseId]}
 			>

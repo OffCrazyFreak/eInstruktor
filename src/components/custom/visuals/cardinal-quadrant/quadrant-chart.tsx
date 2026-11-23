@@ -1,4 +1,4 @@
-import { type PointerEvent, useRef, useState } from "react";
+import { type PointerEvent, useId, useRef, useState } from "react";
 import {
 	QUADRANT_MARK,
 	QUADRANTS,
@@ -63,6 +63,7 @@ export default function QuadrantChart({
 		onSelect(quadrantOf(bearingFrom(x - C, y - C)));
 	}
 
+	const clipId = useId();
 	const boat = boatPosition(dragged, selected);
 	const heading = bearingFrom(C - boat[0], C - boat[1]) + 90;
 
@@ -82,20 +83,28 @@ export default function QuadrantChart({
 			onPointerUp={() => setDragging(false)}
 			onPointerCancel={() => setDragging(false)}
 		>
+			<defs>
+				<clipPath id={clipId}>
+					<rect width={SIZE} height={SIZE} rx="18" />
+				</clipPath>
+			</defs>
+
 			<rect width={SIZE} height={SIZE} rx="18" fill={PALETTE.sea} />
 
-			{QUADRANTS.map((quadrant) => (
-				<path
-					key={quadrant}
-					d={WEDGES[quadrant]}
-					fill={PALETTE.sun}
-					opacity={quadrant === selected ? 0.28 : 0}
-				/>
-			))}
+			<g clipPath={`url(#${clipId})`}>
+				{QUADRANTS.map((quadrant) => (
+					<path
+						key={quadrant}
+						d={WEDGES[quadrant]}
+						fill={PALETTE.sun}
+						opacity={quadrant === selected ? 0.28 : 0}
+					/>
+				))}
 
-			<g stroke={PALETTE.navy} strokeOpacity="0.25" strokeDasharray="4 5">
-				<line x1="0" y1="0" x2={SIZE} y2={SIZE} />
-				<line x1={SIZE} y1="0" x2="0" y2={SIZE} />
+				<g stroke={PALETTE.navy} strokeOpacity="0.25" strokeDasharray="4 5">
+					<line x1="0" y1="0" x2={SIZE} y2={SIZE} />
+					<line x1={SIZE} y1="0" x2="0" y2={SIZE} />
+				</g>
 			</g>
 
 			<g

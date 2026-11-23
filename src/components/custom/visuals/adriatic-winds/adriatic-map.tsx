@@ -1,3 +1,4 @@
+import { useId } from "react";
 import {
 	WIND_IDS,
 	WINDS,
@@ -26,6 +27,8 @@ export default function AdriaticMap({
 	hideNames = false,
 	onSelect,
 }: IAdriaticMapProps) {
+	const clipId = useId();
+
 	return (
 		<svg
 			viewBox="0 0 320 300"
@@ -33,10 +36,17 @@ export default function AdriaticMap({
 			role="img"
 			aria-label={`Ruža vjetrova na Jadranu${selected.length && !hideNames ? `: ${selected.map((id) => WINDS[id].name).join(" i ")}` : ""}`}
 		>
+			<defs>
+				<clipPath id={clipId}>
+					<rect width="320" height="300" rx="16" />
+				</clipPath>
+			</defs>
+
 			<rect width="320" height="300" rx="16" fill={PALETTE.land} />
 			<path
 				d="M20 30 L95 8 L170 48 L238 118 L300 196 L320 232 V300 H262 L208 246 L140 188 L72 124 L30 76 z"
 				fill={PALETTE.sea}
+				clipPath={`url(#${clipId})`}
 			/>
 			<g fill={PALETTE.land} stroke={PALETTE.landEdge}>
 				<ellipse cx="160" cy="70" rx="9" ry="4" transform="rotate(40 160 70)" />

@@ -1,4 +1,4 @@
-import { type PointerEvent, useRef, useState } from "react";
+import { type PointerEvent, useId, useRef, useState } from "react";
 import {
 	AREA_IDS,
 	AREAS,
@@ -40,6 +40,7 @@ export default function AreasChart({
 	rings,
 }: IAreasChartProps) {
 	const svgRef = useRef<SVGSVGElement>(null);
+	const clipId = useId();
 	const [dragging, setDragging] = useState(false);
 	const area = areaAt(distance);
 	const boatX = distance <= 0 ? 22 : xAt(distance);
@@ -59,7 +60,7 @@ export default function AreasChart({
 		<svg
 			ref={svgRef}
 			viewBox={`0 0 ${WIDTH} 230`}
-			className="block w-full touch-none select-none"
+			className="mx-auto block w-full max-w-2xl touch-none select-none"
 			role="img"
 			aria-label={`Područja plovidbe od obale prema pučini. Brodica je u području ${area}.`}
 			onPointerDown={(event) => {
@@ -71,74 +72,83 @@ export default function AreasChart({
 			onPointerUp={() => setDragging(false)}
 			onPointerCancel={() => setDragging(false)}
 		>
-			<rect width={WIDTH} height="230" rx="16" fill={PALETTE.sea} />
-			{AREA_IDS.filter((id) => id !== "IV").map((id, index, list) => {
-				const inner = index === 0 ? 0 : AREAS[list[index - 1] ?? "IV"].limit;
-				const x = xAt(inner);
-				const end = xAt(
-					Number.isFinite(AREAS[id].limit) ? AREAS[id].limit : MAX_NM,
-				);
+			<defs>
+				<clipPath id={clipId}>
+					<rect width={WIDTH} height="230" rx="16" />
+				</clipPath>
+			</defs>
 
-				return (
-					<g key={id}>
-						<rect
-							x={x}
-							y="0"
-							width={end - x}
-							height="230"
-							fill={tinted.includes(id) ? PALETTE.sun : PALETTE.seaDeep}
-							opacity={
-								tinted.includes(id) ? 0.35 : index % 2 === 0 ? 0.12 : 0.28
-							}
+			<g clipPath={`url(#${clipId})`}>
+				<rect width={WIDTH} height="230" fill={PALETTE.sea} />
+				{AREA_IDS.filter((id) => id !== "IV").map((id, index, list) => {
+					const inner = index === 0 ? 0 : AREAS[list[index - 1] ?? "IV"].limit;
+					const x = xAt(inner);
+					const end = xAt(
+						Number.isFinite(AREAS[id].limit) ? AREAS[id].limit : MAX_NM,
+					);
+
+					return (
+						<g key={id}>
+							<rect
+								x={x}
+								y="0"
+								width={end - x}
+								height="230"
+								fill={tinted.includes(id) ? PALETTE.sun : PALETTE.seaDeep}
+								opacity={
+									tinted.includes(id) ? 0.35 : index % 2 === 0 ? 0.12 : 0.28
+								}
+							/>
+							<text
+								x={(x + end) / 2}
+								y="222"
+								textAnchor="middle"
+								fontSize={id.length > 3 ? 8.5 : 10}
+								fontWeight="700"
+								fill={PALETTE.navy}
+							>
+								{id}
+							</text>
+						</g>
+					);
+				})}
+				{rings.map((nm) => (
+					<g key={nm}>
+						<line
+							x1={xAt(nm)}
+							y1="0"
+							x2={xAt(nm)}
+							y2="206"
+							stroke={PALETTE.navy}
+							strokeOpacity="0.45"
+							strokeDasharray="4 4"
 						/>
 						<text
-							x={(x + end) / 2}
-							y="222"
-							textAnchor="middle"
-							fontSize={id.length > 3 ? 8.5 : 10}
-							fontWeight="700"
+							x={xAt(nm) + 2}
+							y="14"
+							fontSize="9"
+							fontFamily="var(--font-mono)"
 							fill={PALETTE.navy}
 						>
-							{id}
+							{nm} NM
 						</text>
 					</g>
-				);
-			})}
-			{rings.map((nm) => (
-				<g key={nm}>
-					<line
-						x1={xAt(nm)}
-						y1="0"
-						x2={xAt(nm)}
-						y2="206"
-						stroke={PALETTE.navy}
-						strokeOpacity="0.45"
-						strokeDasharray="4 4"
-					/>
-					<text
-						x={xAt(nm) + 2}
-						y="14"
-						fontSize="9"
-						fontFamily="var(--font-mono)"
-						fill={PALETTE.navy}
-					>
-						{nm} NM
-					</text>
-				</g>
-			))}
-			<path
-				d={`M0 0 H${COAST} C${COAST - 8} 40 ${COAST + 6} 80 ${COAST} 120 S${COAST - 6} 190 ${COAST} 230 H0 z`}
-				fill={PALETTE.land}
-				stroke={PALETTE.landEdge}
-			/>
-			<path
-				d="M0 36 H34 C40 44 40 72 34 80 H0 z"
-				fill={tinted.includes("IV") ? "#ffd889" : PALETTE.sea}
-				stroke={PALETTE.landEdge}
-			/>
-			<text x="6" y="98" fontSize="8.5" fill={PALETTE.navy} fontWeight="700">
-				IV
-			</text>
+				))}
+				<path
+					d={`M0 0 H${COAST} C${COAST - 8} 40 ${COAST + 6} 80 ${COAST} 120 S${COAST - 6} 190 ${COAST} 230 H0 z`}
+					fill={PALETTE.land}
+					stroke={PALETTE.landEdge}
+				/>
+				<path
+					d="M0 36 H34 C40 44 40 72 34 80 H0 z"
+					fill={tinted.includes("IV") ? "#ffd889" : PALETTE.sea}
+					stroke={PALETTE.landEdge}
+				/>
+				<text x="6" y="98" fontSize="8.5" fill={PALETTE.navy} fontWeight="700">
+					IV
+				</text>
+			</g>
+
 			<BoatIcon
 				x={boatX}
 				y={boatY}

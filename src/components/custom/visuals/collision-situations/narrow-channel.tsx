@@ -7,7 +7,7 @@ export default function NarrowChannel() {
 		<div className="space-y-2">
 			<svg
 				viewBox="0 0 300 300"
-				className="block w-full"
+				className="mx-auto block w-full max-w-lg"
 				role="img"
 				aria-label="Uski kanal: brodica plovi uz desni rub, a veliki brod sredinom plovnog puta."
 			>

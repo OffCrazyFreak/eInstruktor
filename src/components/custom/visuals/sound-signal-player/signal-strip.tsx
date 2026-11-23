@@ -20,7 +20,20 @@ const LABELS = {
 	stroke: "udarac zvona",
 } as const;
 
-/** Dots for short blasts and bars for long ones, drawn to scale; the one sounding now lights up. */
+/** Short blasts stay dots at any width, so they never read as dashes on a wide screen. */
+function blastWidth(sound: IScheduledSound, length: number) {
+	if (sound.element === "stroke") {
+		return undefined;
+	}
+
+	if (sound.element === "short") {
+		return "0.75rem";
+	}
+
+	return `max(0.75rem, ${(sound.duration / length) * 100}%)`;
+}
+
+/** Dots for short blasts and bars for long ones, placed to scale; the one sounding now lights up. */
 export default function SignalStrip({ sounds, elapsed }: ISignalStripProps) {
 	const length = Math.max(signalLength(sounds), SCALE_SECONDS);
 
@@ -50,10 +63,7 @@ export default function SignalStrip({ sounds, elapsed }: ISignalStripProps) {
 						)}
 						style={{
 							left: `${(sound.start / length) * 100}%`,
-							width:
-								sound.element === "stroke"
-									? undefined
-									: `max(0.75rem, ${(sound.duration / length) * 100}%)`,
+							width: blastWidth(sound, length),
 						}}
 					/>
 				);

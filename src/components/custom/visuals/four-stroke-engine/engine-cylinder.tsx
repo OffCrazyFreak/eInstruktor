@@ -160,12 +160,12 @@ export default function EngineCylinder({
 			</g>
 			<g fontSize="9" fill={PALETTE.navy} textAnchor="middle">
 				{mode !== "two-stroke" && (
-					<text x="92" y="16">
+					<text x="72" y="16">
 						usis
 					</text>
 				)}
 				{mode !== "two-stroke" && (
-					<text x="148" y="16">
+					<text x="168" y="16">
 						ispuh
 					</text>
 				)}
