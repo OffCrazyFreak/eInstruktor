@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 import { isCorrectSelection } from "@/components/custom/question/grade-answer";
 import QuestionView from "@/components/custom/question/question-view";
+import type { IQuestion } from "@/content/types";
 import course from "@/content/voditelj-brodice";
 import { examBlocks } from "@/features/exam/utils/exam-blocks";
 import type { IExamSession } from "@/lib/progress/progress-schema";
@@ -24,6 +25,17 @@ const STATUS_TEXT: Record<ReviewStatus, string> = {
 
 function ignoreChange() {}
 
+// The grade saved at hand-in is the record, so the review matches the score even after a question is reworded; older sessions are graded again.
+function wasCorrect(
+	session: IExamSession,
+	question: IQuestion,
+	selected: string[],
+): boolean {
+	return (
+		session.graded?.[question.id] ?? isCorrectSelection(question, selected)
+	);
+}
+
 /** Every exam question with the learner's answer, the right one and the explanation. */
 export default function ExamReview({ session, filter }: IExamReviewProps) {
 	const answers = session.answers ?? {};
@@ -36,7 +48,7 @@ export default function ExamReview({ session, filter }: IExamReviewProps) {
 				const status: ReviewStatus =
 					selected.length === 0
 						? "empty"
-						: isCorrectSelection(question, selected)
+						: wasCorrect(session, question, selected)
 							? "correct"
 							: "wrong";
 
@@ -134,6 +146,7 @@ export default function ExamReview({ session, filter }: IExamReviewProps) {
 											selected={item.selected}
 											onSelectedChange={ignoreChange}
 											revealed
+											readOnly
 										/>
 									</li>
 								))}

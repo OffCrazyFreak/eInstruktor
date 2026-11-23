@@ -13,6 +13,8 @@ interface IAnswerOptionProps {
 	/** Set once the answer is checked; the option then shows whether it was right. */
 	feedback: OptionFeedback | null;
 	onToggle: (optionId: string, checked: boolean) => void;
+	/** A list item with no input, for a finished answer that can no longer change. */
+	readOnly?: boolean;
 }
 
 const FEEDBACK_NOTE: Record<OptionFeedback, string | null> = {
@@ -30,7 +32,9 @@ export default function AnswerOption({
 	checked,
 	feedback,
 	onToggle,
+	readOnly = false,
 }: IAnswerOptionProps) {
+	const Root = readOnly ? "li" : "label";
 	const isRight =
 		feedback === "correct-chosen" || feedback === "correct-missed";
 	const isWrong = feedback === "wrong-chosen";
@@ -41,7 +45,7 @@ export default function AnswerOption({
 	}
 
 	return (
-		<label
+		<Root
 			className={cn(
 				"flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl border-2 bg-card px-4 py-3 text-[1rem] leading-snug transition-colors",
 				"has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/60",
@@ -57,15 +61,17 @@ export default function AnswerOption({
 				isWrong && "border-rose-600 bg-rose-50 dark:bg-rose-950/40",
 			)}
 		>
-			<input
-				type={multiple ? "checkbox" : "radio"}
-				name={name}
-				value={option.id}
-				checked={checked}
-				disabled={feedback !== null}
-				onChange={handleChange}
-				className="sr-only"
-			/>
+			{!readOnly && (
+				<input
+					type={multiple ? "checkbox" : "radio"}
+					name={name}
+					value={option.id}
+					checked={checked}
+					disabled={feedback !== null}
+					onChange={handleChange}
+					className="sr-only"
+				/>
+			)}
 
 			<span
 				aria-hidden="true"
@@ -106,6 +112,6 @@ export default function AnswerOption({
 					</span>
 				)}
 			</span>
-		</label>
+		</Root>
 	);
 }

@@ -17,6 +17,8 @@ interface IQuestionViewProps {
 	revealed: boolean;
 	/** Off inside the lesson the question belongs to. */
 	showLessonLink?: boolean;
+	/** A finished answer shown for review: options are a plain list, so screen readers do not offer them as changeable. */
+	readOnly?: boolean;
 	className?: string;
 }
 
@@ -29,6 +31,7 @@ export default function QuestionView({
 	onSelectedChange,
 	revealed,
 	showLessonLink = true,
+	readOnly = false,
 	className,
 }: IQuestionViewProps) {
 	const baseId = useId();
@@ -59,6 +62,7 @@ export default function QuestionView({
 			checked={selected.includes(option.id)}
 			feedback={revealed ? optionFeedback(option, selected) : null}
 			onToggle={handleToggle}
+			readOnly={readOnly}
 		/>
 	));
 
@@ -83,7 +87,14 @@ export default function QuestionView({
 				</p>
 			)}
 
-			{multiple ? (
+			{readOnly ? (
+				<ul
+					aria-labelledby={promptId}
+					className="m-0 list-none space-y-2.5 p-0"
+				>
+					{options}
+				</ul>
+			) : multiple ? (
 				<fieldset
 					aria-labelledby={promptId}
 					className="m-0 min-w-0 space-y-2.5 border-0 p-0"
