@@ -1,25 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ClipboardCheck } from "lucide-react";
-import ComingSoonPage from "@/components/custom/app-shell/coming-soon-page";
+import ExamStartPage from "@/features/exam/components/start/exam-start-page";
 import pageHead from "@/lib/seo/page-head";
 
-export const Route = createFileRoute("/_app/ispit")({
+export const Route = createFileRoute("/_app/ispit/")({
 	head: () =>
 		pageHead({
 			path: "/ispit",
 			title: "Probni ispit",
-			description: "Probni ispit za voditelja brodice kategorije A i B.",
+			description:
+				"Probni ispit za voditelja brodice kategorije A i B, s vremenom ili bez njega, s rezultatom po predmetima.",
 			noindex: true,
 		}),
-	component: ExamPage,
+	component: ExamStartPage,
 });
-
-function ExamPage() {
-	return (
-		<ComingSoonPage
-			icon={ClipboardCheck}
-			title="Probni ispit stiže uskoro"
-			description="Ovdje ćeš polagati probni ispit za A ili B, s vremenom ili bez njega, i dobiti rezultat po predmetima. Dok ga složimo, prođi lekcije."
-		/>
-	);
-}
