@@ -260,7 +260,7 @@ const lessons: ILesson[] = [
 				type: "visual",
 				level: "B",
 				visual: "phonetic-alphabet",
-				caption: "Dotakni slovo i poslušaj izgovor.",
+				caption: "Dotakni slovo ili znamenku i vidi kako se izgovara.",
 				props: { mode: "letters" },
 			},
 			{
