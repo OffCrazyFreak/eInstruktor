@@ -6,7 +6,7 @@ import { CONTACT_URL } from "@/features/legal/constants/legal";
 const SUMMARY = [
 	"Bez prijave napredak ostaje u tvom pregledniku i ne šaljemo ga nikamo. Hosting, kao kod svake web stranice, pri posjetu vidi tvoju IP adresu.",
 	"S Google prijavom spremamo tvoje ime, e-mail, sliku profila, Googleov ID računa, ključeve za prijavu i napredak, da ih vidiš na svakom uređaju.",
-	"Brisanje računa u aplikaciji stiže s postavkama računa. Do tada ga zatraži preko GitHub repozitorija.",
+	"Račun brišeš sam na stranici Račun. Brisanje uklanja Googleov ID, ključeve za prijavu i sve sesije, a ime, e-mail i sliku zamjenjuje anonimnim podacima.",
 	"Nemamo oglase ni kolačiće za praćenje.",
 ];
 
@@ -34,9 +34,18 @@ export default function PrivacyPage() {
 				<ul>
 					<li>odabrana kategorija (A ili B) i datum ispita, ako ga upišeš</li>
 					<li>odgovori na pitanja, završene lekcije i označena pitanja</li>
-					<li>probni ispiti, dani učenja i obavijesti koje si zatvorio</li>
+					<li>
+						probni ispiti, značke, dani učenja, oznaka da si položio i
+						obavijesti koje si zatvorio
+					</li>
 					<li>svijetla ili tamna tema</li>
 				</ul>
+				<p>
+					U sessionStorage bilježimo samo je li ti se ponuda za prijavu već
+					prikazala, da je ne vidiš više puta u istom posjetu. Kad si
+					prijavljen, preglednik pamti i što je već spremljeno na račun, da
+					šalje samo promjene.
+				</p>
 				<p>
 					Taj napredak ne šaljemo nikamo. Obrišeš ga tako da u pregledniku
 					očistiš podatke ove stranice.
@@ -53,7 +62,7 @@ export default function PrivacyPage() {
 					<li>ime, e-mail adresu i sliku profila koje nam pošalje Google</li>
 					<li>
 						napredak: odgovore, lekcije, probne ispite, oznake, značke, dane
-						učenja, kategoriju i datum ispita
+						učenja, kategoriju, datum ispita i dan kad si označio da si položio
 					</li>
 					<li>
 						Googleov ID tvog računa i ključeve za prijavu koje Google izdaje
@@ -64,6 +73,12 @@ export default function PrivacyPage() {
 						kojeg si se prijavio
 					</li>
 				</ul>
+				<p>
+					Kad se prijaviš, napredak koji je već u pregledniku prenosimo na
+					račun, a dok si prijavljen, svaka promjena se nekoliko sekundi kasnije
+					sprema i na račun. Tako ga vidiš na svakom uređaju na kojem se
+					prijaviš.
+				</p>
 				<p>
 					Kolačić sesije nužan je da bi prijava radila. Lozinku ne spremamo jer
 					je nema: prijava ide samo preko Googlea.
@@ -103,14 +118,33 @@ export default function PrivacyPage() {
 
 			<LegalSection title="Brisanje računa">
 				<p>
-					Brisanje računa u aplikaciji stiže zajedno s postavkama računa. Tada
-					će brisanje ukloniti tvoj račun kod nas (Googleov ID i ključeve za
-					prijavu) i sve sesije, a ime, e-mail i sliku zamijeniti anonimnim
-					podacima. Odgovori na pitanja ostat će u bazi bez veze s tobom, kao
-					statistika o tome koja su pitanja teška.
+					Račun brišeš na stranici <Link to="/racun">Račun</Link> gumbom "Obriši
+					račun". Brisanje odmah:
+				</p>
+				<ul>
+					<li>
+						uklanja vezu s Googleom: Googleov ID tvog računa i ključeve za
+						prijavu (access, refresh i ID token)
+					</li>
+					<li>
+						briše sve sesije, pa si odjavljen na svim uređajima, i zahtjeve za
+						potvrdu koji još čekaju
+					</li>
+					<li>briše kategoriju, datum ispita i oznaku da si položio</li>
+					<li>
+						ime, e-mail i sliku trajno zamjenjuje anonimnim podacima, pa se više
+						ne mogu vratiti
+					</li>
+				</ul>
+				<p>
+					Odgovori na pitanja, lekcije, probni ispiti, oznake, značke i dani
+					učenja ostaju u bazi bez imena, e-maila i veze s Google računom, kao
+					statistika o tome koja su pitanja teška. Napredak u ovom pregledniku
+					brišemo samo ako to odabereš u istom koraku. Ako se poslije opet
+					prijaviš istim Google računom, dobivaš novi, prazan račun.
 				</p>
 				<p>
-					Do tada brisanje zatraži preko{" "}
+					Ako ne možeš ući u račun, brisanje zatraži preko{" "}
 					<a href={CONTACT_URL} target="_blank" rel="noreferrer">
 						GitHub repozitorija
 					</a>
