@@ -24,6 +24,12 @@ import {
 	insertTestUser,
 } from "@/lib/testing/temp-database";
 
+// These tests use short made-up ids; the real course ids are covered in push-limits.server.test.ts.
+vi.mock("@/features/account/server/known-content.server", () => ({
+	KNOWN_QUESTION_IDS: { has: () => true },
+	KNOWN_LESSON_SLUGS: { has: () => true },
+}));
+
 let temp: ITempDatabase;
 
 function browser(initial: Partial<IProgressState> = {}) {

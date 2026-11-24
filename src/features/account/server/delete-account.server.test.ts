@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
 	account,
 	questionAttempt,
@@ -21,6 +21,12 @@ import {
 	type ITempDatabase,
 	insertTestUser,
 } from "@/lib/testing/temp-database";
+
+// These tests use short made-up ids; the real course ids are covered in push-limits.server.test.ts.
+vi.mock("@/features/account/server/known-content.server", () => ({
+	KNOWN_QUESTION_IDS: { has: () => true },
+	KNOWN_LESSON_SLUGS: { has: () => true },
+}));
 
 const NOW = new Date("2026-11-20T10:00:00Z");
 

@@ -1,4 +1,4 @@
-import { and, eq, inArray, sql } from "drizzle-orm";
+import { and, count, eq, inArray, sql } from "drizzle-orm";
 import {
 	examSession,
 	flaggedQuestion,
@@ -8,11 +8,19 @@ import {
 	userBadge,
 } from "@/db/schema";
 import type { AppDatabase } from "@/db/types";
+import {
+	KNOWN_LESSON_SLUGS,
+	KNOWN_QUESTION_IDS,
+} from "@/features/account/server/known-content.server";
 import type {
 	ISyncAttempt,
 	ISyncExamSession,
 	ISyncRequest,
 } from "@/features/account/utils/sync-schema";
+
+// A free account cannot grow without bound: past these counts new attempts and exams are ignored, far above anything a real learner produces.
+export const MAX_ATTEMPT_ROWS_PER_USER = 20_000;
+export const MAX_EXAM_ROWS_PER_USER = 500;
 
 // About 1000 bound values per statement at most, far below SQLite's limit.
 const ROWS_PER_INSERT = 100;
@@ -32,7 +40,14 @@ async function insertExamSessions(
 	userId: string,
 	sessions: readonly ISyncExamSession[],
 ) {
-	for (const chunk of inChunks(sessions)) {
+	const [stored] = await db
+		.select({ total: count() })
+		.from(examSession)
+		.where(eq(examSession.userId, userId));
+
+	const room = Math.max(0, MAX_EXAM_ROWS_PER_USER - (stored?.total ?? 0));
+
+	for (const chunk of inChunks(sessions.slice(0, room))) {
 		await db
 			.insert(examSession)
 			.values(
@@ -83,8 +98,20 @@ async function ownedExamIds(
 async function insertAttempts(
 	db: AppDatabase,
 	userId: string,
-	attempts: readonly ISyncAttempt[],
+	sent: readonly ISyncAttempt[],
 ): Promise<number> {
+	const [stored] = await db
+		.select({ total: count() })
+		.from(questionAttempt)
+		.where(eq(questionAttempt.userId, userId));
+
+	const room = Math.max(0, MAX_ATTEMPT_ROWS_PER_USER - (stored?.total ?? 0));
+
+	// Answers to questions that are not in the course carry nothing a learner could have produced.
+	const attempts = sent
+		.filter((attempt) => KNOWN_QUESTION_IDS.has(attempt.questionId))
+		.slice(0, room);
+
 	const examIds = await ownedExamIds(db, userId, attempts);
 	let inserted = 0;
 
@@ -120,7 +147,11 @@ async function applyLessons(
 	userId: string,
 	{ lessonsAdded, lessonsRemoved }: ISyncRequest,
 ) {
-	for (const chunk of inChunks(Object.entries(lessonsAdded))) {
+	const knownLessons = Object.entries(lessonsAdded).filter(([slug]) =>
+		KNOWN_LESSON_SLUGS.has(slug),
+	);
+
+	for (const chunk of inChunks(knownLessons)) {
 		await db
 			.insert(lessonProgress)
 			.values(
@@ -139,7 +170,9 @@ async function applyLessons(
 			});
 	}
 
-	const removed = lessonsRemoved.filter((slug) => !(slug in lessonsAdded));
+	const removed = lessonsRemoved.filter(
+		(slug) => !Object.hasOwn(lessonsAdded, slug),
+	);
 
 	for (const chunk of inChunks(removed)) {
 		await db
@@ -158,7 +191,11 @@ async function applyFlags(
 	userId: string,
 	{ flaggedAdded, flaggedRemoved }: ISyncRequest,
 ) {
-	for (const chunk of inChunks(Object.entries(flaggedAdded))) {
+	const knownFlags = Object.entries(flaggedAdded).filter(([questionId]) =>
+		KNOWN_QUESTION_IDS.has(questionId),
+	);
+
+	for (const chunk of inChunks(knownFlags)) {
 		await db
 			.insert(flaggedQuestion)
 			.values(
@@ -171,7 +208,9 @@ async function applyFlags(
 			.onConflictDoNothing();
 	}
 
-	const removed = flaggedRemoved.filter((id) => !(id in flaggedAdded));
+	const removed = flaggedRemoved.filter(
+		(id) => !Object.hasOwn(flaggedAdded, id),
+	);
 
 	for (const chunk of inChunks(removed)) {
 		await db
