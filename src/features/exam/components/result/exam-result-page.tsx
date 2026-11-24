@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { History, ListChecks, RotateCcw, SearchCheck } from "lucide-react";
+import LoginNudgeSlot from "@/components/custom/login-nudge/login-nudge-slot";
 import { Button } from "@/components/ui/button";
 import course from "@/content/voditelj-brodice";
 import ExamReview, {
@@ -167,6 +168,8 @@ export default function ExamResultPage({
 					</p>
 				</section>
 			</div>
+
+			<LoginNudgeSlot trigger="exam-result" />
 		</main>
 	);
 }
