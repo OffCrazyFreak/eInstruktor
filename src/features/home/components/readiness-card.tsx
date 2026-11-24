@@ -1,7 +1,10 @@
 import { Link } from "@tanstack/react-router";
+import ReadinessExplainer from "@/components/custom/readiness/readiness-explainer";
+import SubjectRow, {
+	LABEL_TEXT,
+} from "@/components/custom/readiness/subject-row";
 import { Button } from "@/components/ui/button";
 import { isExamSubjectId } from "@/content/voditelj-brodice/subjects";
-import SubjectRow, { LABEL_TEXT } from "@/features/home/components/subject-row";
 import type { IReadiness } from "@/lib/progress/readiness";
 
 interface IReadinessCardProps {
@@ -43,17 +46,7 @@ export default function ReadinessCard({ readiness }: IReadinessCardProps) {
 				))}
 			</ul>
 
-			<details className="mt-3 text-[0.88rem]">
-				<summary className="inline-flex min-h-11 cursor-pointer items-center font-semibold text-[#0a63b0] dark:text-[#4cc2ff]">
-					Kako računamo?
-				</summary>
-				<p className="leading-relaxed text-muted-foreground">
-					Za svaki predmet gledamo tvojih zadnjih 20 prvih odgovora i koliko si
-					pitanja već vidio. Spreman si s barem 85 % točnih i 80 % viđenih
-					pitanja, a ispit se polaže po predmetima, pa ukupna procjena prati
-					najslabiji.
-				</p>
-			</details>
+			<ReadinessExplainer className="mt-3" />
 
 			{weakest && (
 				<Button
