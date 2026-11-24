@@ -91,7 +91,7 @@ export default function LessonReader({ lesson }: ILessonReaderProps) {
 			/>
 
 			<main className="mx-auto max-w-2xl px-4 pt-7 pb-[calc(7rem+env(safe-area-inset-bottom))] sm:px-6">
-				<p className="font-mono text-[0.74rem] tracking-[0.2em] text-[#0a63b0] dark:text-[#4cc2ff]">
+				<p className="font-mono text-[0.74rem] tracking-[0.2em] text-ocean dark:text-[#4cc2ff]">
 					{isIntro ? "PRIJE SVEGA" : area?.title.toUpperCase()}
 				</p>
 				<h1 className="mt-2 font-serif text-[1.85rem] leading-tight sm:text-4xl">
@@ -122,7 +122,7 @@ export default function LessonReader({ lesson }: ILessonReaderProps) {
 				</div>
 
 				{ready && isBLesson && level === "A" && (
-					<p className="mt-5 rounded-2xl border border-dashed border-[#002c78]/25 p-4 text-[0.95rem] dark:border-white/20">
+					<p className="mt-5 rounded-2xl border border-dashed border-ink/25 p-4 text-[0.95rem] dark:border-white/20">
 						Ova lekcija je za kategoriju B. Za ispit A ti ne treba, ali je
 						slobodno pročitaj.
 					</p>

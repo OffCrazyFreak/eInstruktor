@@ -14,15 +14,15 @@ export default function WindCard({ wind: id, showSigns }: IWindCardProps) {
 	const [signsOpen, setSignsOpen] = useState(showSigns);
 
 	return (
-		<div className="space-y-2 rounded-2xl bg-[#eaf3ff] p-3 text-[0.9rem] leading-relaxed">
+		<div className="space-y-2 rounded-2xl bg-tint p-3 text-[0.9rem] leading-relaxed">
 			<div>
 				<p className="font-serif text-xl">
 					{wind.name}{" "}
-					<span className="font-mono text-[0.85rem] text-[#0a63b0]">
+					<span className="font-mono text-[0.85rem] text-ocean">
 						{wind.direction}
 					</span>
 				</p>
-				<p className="text-[#002c78]/70">
+				<p className="text-ink/70">
 					Puše {wind.directionName}
 					{wind.alsoCalled ? `; zovu ga i ${wind.alsoCalled}` : ""}.
 				</p>
@@ -32,7 +32,7 @@ export default function WindCard({ wind: id, showSigns }: IWindCardProps) {
 				<button
 					type="button"
 					onClick={() => setSignsOpen(true)}
-					className="text-[0.85rem] font-semibold text-[#0a63b0] underline underline-offset-2 outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+					className="text-[0.85rem] font-semibold text-ocean underline underline-offset-2 outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 				>
 					Pokaži znakove da dolazi
 				</button>

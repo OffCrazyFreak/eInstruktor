@@ -47,7 +47,7 @@ export default function LevelForm({ className }: ILevelFormProps) {
 							className={cn(
 								"flex min-h-14 cursor-pointer items-start gap-3 rounded-2xl border-2 bg-card p-4 has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/60",
 								chosen
-									? "border-primary bg-[#eaf3ff] dark:bg-accent"
+									? "border-primary bg-tint dark:bg-accent"
 									: "border-border",
 							)}
 						>
@@ -68,7 +68,7 @@ export default function LevelForm({ className }: ILevelFormProps) {
 									"grid size-9 shrink-0 place-items-center rounded-full border-2 font-mono font-semibold",
 									chosen
 										? "border-primary bg-primary text-primary-foreground"
-										: "border-[#002c78]/25 text-[#0a63b0] dark:text-[#4cc2ff] dark:border-white/20",
+										: "border-ink/25 text-ocean dark:text-[#4cc2ff] dark:border-white/20",
 								)}
 							>
 								{chosen ? <Check className="size-4" /> : choice.level}

@@ -31,7 +31,7 @@ export default function BadgeCelebration({
 			transition={{ type: "spring", stiffness: 260, damping: 22 }}
 			className="relative flex items-center gap-4 overflow-hidden rounded-[1.6rem] bg-[#ffb43c] p-4 pr-14 text-[#002c78] sm:p-5 sm:pr-16"
 		>
-			<span className="grid size-14 shrink-0 place-items-center rounded-full bg-[#002c78] text-[#ffb43c]">
+			<span className="grid size-14 shrink-0 place-items-center rounded-full bg-brand text-[#ffb43c]">
 				<Icon className="size-7" aria-hidden="true" />
 			</span>
 
@@ -50,7 +50,7 @@ export default function BadgeCelebration({
 				type="button"
 				onClick={onDismiss}
 				aria-label="Zatvori obavijest o znački"
-				className="absolute top-2 right-2 grid size-11 place-items-center rounded-full outline-none hover:bg-[#002c78]/10 focus-visible:ring-[3px] focus-visible:ring-[#002c78]/50"
+				className="absolute top-2 right-2 grid size-11 place-items-center rounded-full outline-none hover:bg-brand/10 focus-visible:ring-[3px] focus-visible:ring-[#002c78]/50"
 			>
 				<X className="size-5" aria-hidden="true" />
 			</button>

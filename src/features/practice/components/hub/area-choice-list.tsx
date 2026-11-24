@@ -32,8 +32,8 @@ export default function AreaChoiceList({
 							className={cn(
 								"flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border-2 px-3 py-2 has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/60",
 								chosen
-									? "border-primary bg-[#eaf3ff] dark:bg-accent"
-									: "border-border bg-card hover:border-[#0a63b0]/45 dark:hover:border-[#4cc2ff]/50",
+									? "border-primary bg-tint dark:bg-accent"
+									: "border-border bg-card hover:border-ocean/45 dark:hover:border-[#4cc2ff]/50",
 							)}
 						>
 							<input
@@ -46,7 +46,7 @@ export default function AreaChoiceList({
 							/>
 							<AreaIcon
 								name={area.icon}
-								className="size-5 shrink-0 text-[#0a63b0] dark:text-[#4cc2ff]"
+								className="size-5 shrink-0 text-ocean dark:text-[#4cc2ff]"
 							/>
 							<span className="min-w-0 flex-1 text-[0.95rem] leading-snug font-semibold">
 								{area.title}

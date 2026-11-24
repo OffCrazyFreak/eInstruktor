@@ -61,7 +61,7 @@ export default function TodayCard({ today, streak }: ITodayCardProps) {
 				<div className="min-w-0">
 					<h2
 						id="today-title"
-						className="font-mono text-[0.72rem] tracking-[0.18em] text-[#0a63b0] dark:text-[#4cc2ff]"
+						className="font-mono text-[0.72rem] tracking-[0.18em] text-ocean dark:text-[#4cc2ff]"
 					>
 						DANAS
 					</h2>
@@ -75,7 +75,7 @@ export default function TodayCard({ today, streak }: ITodayCardProps) {
 			<p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border pt-3 text-[0.9rem]">
 				<span className="inline-flex items-center gap-1.5 font-semibold">
 					<CalendarDays
-						className="size-4 text-[#0a63b0] dark:text-[#4cc2ff]"
+						className="size-4 text-ocean dark:text-[#4cc2ff]"
 						aria-hidden="true"
 					/>
 					{streak.daysThisWeek} od zadnjih 7 dana

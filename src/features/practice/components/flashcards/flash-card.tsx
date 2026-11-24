@@ -33,7 +33,7 @@ export default function FlashCard({
 			<button
 				type="button"
 				onClick={onReveal}
-				className={`${CARD_CLASS} flex min-h-[16rem] cursor-pointer flex-col items-start outline-none hover:border-[#0a63b0]/40 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50`}
+				className={`${CARD_CLASS} flex min-h-[16rem] cursor-pointer flex-col items-start outline-none hover:border-ocean/40 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50`}
 			>
 				<CardTags card={card} subject={subject} />
 				<span className="mt-6 block font-serif text-[1.45rem] leading-snug sm:text-[1.7rem]">
@@ -61,7 +61,7 @@ export default function FlashCard({
 				{card.prompt}
 			</h2>
 
-			<p className="mt-4 font-mono text-[0.72rem] tracking-[0.18em] text-[#0a63b0] dark:text-[#4cc2ff]">
+			<p className="mt-4 font-mono text-[0.72rem] tracking-[0.18em] text-ocean dark:text-[#4cc2ff]">
 				ODGOVOR
 			</p>
 			<p className="mt-1.5 whitespace-pre-line text-[1.02rem] leading-relaxed">

@@ -40,8 +40,8 @@ export default function BadgeMedal({
 					className={cn(
 						"grid size-14 place-items-center rounded-full",
 						earned
-							? "bg-[#002c78] text-[#ffb43c] shadow-[inset_0_0_0_3px_#ffb43c] dark:bg-[#0a63b0]"
-							: "border-2 border-dashed border-[#002c78]/30 text-[#002c78]/40 dark:border-white/25 dark:text-white/40",
+							? "bg-brand text-[#ffb43c] shadow-[inset_0_0_0_3px_#ffb43c] dark:bg-[#0a63b0]"
+							: "border-2 border-dashed border-ink/30 text-ink/40 dark:border-white/25 dark:text-white/40",
 					)}
 				>
 					<Icon className="size-6" aria-hidden="true" />

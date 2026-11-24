@@ -170,7 +170,7 @@ export default function CollisionScene({
 
 			<div className="flex items-center gap-3">
 				<PlayToggle playing={playing} onToggle={() => setPlaying(!playing)} />
-				<p className="text-[0.8rem] text-[#002c78]/70">
+				<p className="text-[0.8rem] text-ink/70">
 					Isprekidana crta je put.
 					{!hideAnswer &&
 						` Narančasti krug: plovilo koje se uklanja. Pravilo: ${verdict.rule}.`}

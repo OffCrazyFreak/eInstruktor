@@ -26,7 +26,7 @@ export default function BOnlyBlock({
 	}
 
 	return (
-		<details className="group rounded-2xl border border-dashed border-[#002c78]/25 bg-card dark:border-white/20">
+		<details className="group rounded-2xl border border-dashed border-ink/25 bg-card dark:border-white/20">
 			<summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 rounded-2xl px-4 py-3 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/60 [&::-webkit-details-marker]:hidden">
 				<span className="min-w-0 flex-1">
 					<BBadge />

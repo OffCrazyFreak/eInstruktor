@@ -11,7 +11,7 @@ export default function AreaSplit({ scores }: IAreaSplitProps) {
 		<section aria-labelledby="area-split-title" className="mt-8">
 			<h2
 				id="area-split-title"
-				className="font-mono text-[0.74rem] tracking-[0.2em] text-[#0a63b0] dark:text-[#4cc2ff]"
+				className="font-mono text-[0.74rem] tracking-[0.2em] text-ocean dark:text-[#4cc2ff]"
 			>
 				PO PODRUČJIMA
 			</h2>
@@ -27,7 +27,7 @@ export default function AreaSplit({ scores }: IAreaSplitProps) {
 								{score.correct} / {score.total}
 							</span>
 						</div>
-						<div className="mt-1.5 h-2 rounded-full bg-[#eaf3ff] dark:bg-accent">
+						<div className="mt-1.5 h-2 rounded-full bg-tint dark:bg-accent">
 							<div
 								className="h-full rounded-full bg-[#0a63b0] dark:bg-[#4cc2ff]"
 								style={{ width: `${(score.correct / score.total) * 100}%` }}

@@ -45,19 +45,19 @@ export default function AreaPage({ area }: IAreaPageProps) {
 		<main className="mx-auto max-w-2xl px-4 pt-5 pb-8 sm:px-6 lg:pt-8">
 			<Link
 				to="/ucenje"
-				className="-ml-2 inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[0.9rem] font-medium text-[#0a63b0] hover:text-primary dark:text-[#4cc2ff]"
+				className="-ml-2 inline-flex min-h-11 items-center gap-1 rounded-full px-2 text-[0.9rem] font-medium text-ocean hover:text-primary dark:text-[#4cc2ff]"
 			>
 				<ChevronLeft className="size-4" aria-hidden="true" />
 				Učenje
 			</Link>
 
 			<div className="mt-3 flex items-start gap-4">
-				<span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-[#eaf3ff] text-[#0a63b0] dark:bg-accent dark:text-[#4cc2ff]">
+				<span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-tint text-ocean dark:bg-accent dark:text-[#4cc2ff]">
 					<AreaIcon name={area.icon} className="size-7" />
 				</span>
 
 				<div className="min-w-0">
-					<p className="font-mono text-[0.72rem] tracking-[0.16em] text-[#0a63b0] dark:text-[#4cc2ff]">
+					<p className="font-mono text-[0.72rem] tracking-[0.16em] text-ocean dark:text-[#4cc2ff]">
 						{SUBJECT_LABELS[area.subject].toUpperCase()}
 					</p>
 					<h1 className="mt-1 font-serif text-[1.75rem] leading-tight sm:text-4xl">
@@ -80,7 +80,7 @@ export default function AreaPage({ area }: IAreaPageProps) {
 			</ol>
 
 			{bOnly.length > 0 && (
-				<details className="group mt-4 rounded-2xl border border-dashed border-[#002c78]/25 dark:border-white/20">
+				<details className="group mt-4 rounded-2xl border border-dashed border-ink/25 dark:border-white/20">
 					<summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 text-[0.95rem] font-semibold outline-none focus-visible:ring-[3px] focus-visible:ring-ring/60 [&::-webkit-details-marker]:hidden">
 						Još {bOnly.length}{" "}
 						{pluralHr(bOnly.length, "lekcija", "lekcije", "lekcija")} samo za

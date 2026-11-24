@@ -10,7 +10,7 @@ export default function ReadinessExplainer({
 }: IReadinessExplainerProps) {
 	return (
 		<details className={cn("text-[0.88rem]", className)}>
-			<summary className="inline-flex min-h-11 cursor-pointer items-center font-semibold text-[#0a63b0] dark:text-[#4cc2ff]">
+			<summary className="inline-flex min-h-11 cursor-pointer items-center font-semibold text-ocean dark:text-[#4cc2ff]">
 				Kako računamo?
 			</summary>
 			<p className="leading-relaxed text-muted-foreground">

@@ -106,12 +106,12 @@ export default function NavigationAreasMap({
 				step={0.1}
 				value={distance}
 				onChange={(event) => setDistance(Number(event.target.value))}
-				className="w-full accent-[#002c78]"
+				className="w-full accent-ink"
 			/>
 
 			<div className="grid gap-2 sm:grid-cols-2">
-				<div className="rounded-2xl bg-[#eaf3ff] p-3" aria-live="polite">
-					<p className="font-mono text-[0.72rem] tracking-[0.14em] text-[#0a63b0] uppercase">
+				<div className="rounded-2xl bg-tint p-3" aria-live="polite">
+					<p className="font-mono text-[0.72rem] tracking-[0.14em] text-ocean uppercase">
 						Područje
 					</p>
 					<p className="font-serif text-2xl">{area}</p>
@@ -134,7 +134,7 @@ export default function NavigationAreasMap({
 									"Ovdje ne smiješ ni s A ni s B: B ide najdalje 12 NM od obale."}
 							</p>
 						)}
-						<p className="mt-1 text-[0.8rem] text-[#002c78]/70">
+						<p className="mt-1 text-[0.8rem] text-ink/70">
 							Ograničenja tvoje brodice piše i u upisnom listu.
 						</p>
 					</div>

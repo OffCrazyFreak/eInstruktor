@@ -14,15 +14,15 @@ export default function LetterGrid() {
 		<div className="space-y-3">
 			<div
 				aria-live="polite"
-				className="rounded-2xl bg-[#eaf3ff] px-4 py-3 text-[#002c78]"
+				className="rounded-2xl bg-tint px-4 py-3 text-ink"
 			>
-				<p className="font-mono text-[0.72rem] tracking-[0.14em] text-[#0a63b0] uppercase">
+				<p className="font-mono text-[0.72rem] tracking-[0.14em] text-ocean uppercase">
 					{/\d/.test(selected.symbol) ? "Znamenka" : "Slovo"} {selected.symbol}
 				</p>
 				<p className="font-serif text-3xl">
 					{[selected.spoken, selected.english].filter(Boolean).join(" ")}
 				</p>
-				<p className="font-mono text-[0.8rem] text-[#002c78]/65">
+				<p className="font-mono text-[0.8rem] text-ink/65">
 					ITU: {selected.itu}
 				</p>
 			</div>
@@ -68,8 +68,8 @@ function SymbolButtons({
 						className={cn(
 							"min-h-11 w-full rounded-xl border px-2 py-1 text-left outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 							word.symbol === selected.symbol
-								? "border-[#002c78] bg-[#002c78] text-white"
-								: "border-[#002c78]/10 bg-white hover:border-[#00aef3]",
+								? "border-ink bg-brand text-white"
+								: "border-ink/10 bg-paper hover:border-[#00aef3]",
 						)}
 					>
 						<span className="font-serif text-xl font-bold">{word.symbol}</span>

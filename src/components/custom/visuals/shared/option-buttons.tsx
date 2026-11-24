@@ -41,8 +41,8 @@ export default function OptionButtons<T extends string>({
 								"min-h-9 rounded-full border px-3 py-1 text-[0.82rem] font-medium outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 								tone === "day" &&
 									(selected
-										? "border-[#002c78] bg-[#002c78] text-white"
-										: "border-[#002c78]/15 bg-white text-[#002c78] hover:border-[#00aef3] hover:bg-[#eaf3ff]"),
+										? "border-ink bg-brand text-white"
+										: "border-ink/15 bg-paper text-ink hover:border-[#00aef3] hover:bg-tint"),
 								tone === "night" &&
 									(selected
 										? "border-[#ffb43c] bg-[#ffb43c] text-[#04142e]"

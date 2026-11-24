@@ -28,7 +28,7 @@ export default function ModeCard({
 					"grid size-11 shrink-0 place-items-center rounded-2xl",
 					empty
 						? "bg-muted text-muted-foreground"
-						: "bg-[#eaf3ff] text-[#0a63b0] dark:bg-accent dark:text-[#4cc2ff]",
+						: "bg-tint text-ocean dark:bg-accent dark:text-[#4cc2ff]",
 				)}
 			>
 				<Icon className="size-5" aria-hidden="true" />
@@ -77,7 +77,7 @@ export default function ModeCard({
 			aria-haspopup="dialog"
 			className={cn(
 				CARD_CLASS,
-				"cursor-pointer outline-none hover:border-[#0a63b0]/40 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50",
+				"cursor-pointer outline-none hover:border-ocean/40 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50",
 			)}
 		>
 			{body}

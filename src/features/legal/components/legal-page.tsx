@@ -18,20 +18,20 @@ export default function LegalPage({
 	children,
 }: ILegalPageProps) {
 	return (
-		<main className="min-h-svh bg-[#f6fafe] px-5 pt-28 pb-20 text-[#002c78] md:px-8 md:pt-32">
+		<main className="min-h-svh bg-background px-5 pt-28 pb-20 text-ink md:px-8 md:pt-32">
 			<article className="mx-auto max-w-2xl">
-				<p className="font-mono text-[0.74rem] tracking-[0.22em] text-[#0a63b0]">
+				<p className="font-mono text-[0.74rem] tracking-[0.22em] text-ocean">
 					{eyebrow}
 				</p>
 				<h1 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">
 					{title}
 				</h1>
-				<p className="mt-3 text-sm text-[#002c78]/65">
+				<p className="mt-3 text-sm text-ink/65">
 					Zadnja izmjena {LEGAL_UPDATED_ON}
 				</p>
 
-				<div className="mt-8 rounded-2xl border border-[#00aef3]/35 bg-[#eaf3ff] p-6">
-					<h2 className="text-sm font-semibold tracking-wide text-[#0a63b0]">
+				<div className="mt-8 rounded-2xl border border-[#00aef3]/35 bg-tint p-6">
+					<h2 className="text-sm font-semibold tracking-wide text-ocean">
 						Ukratko
 					</h2>
 					<ul className="mt-3 list-disc space-y-2 pl-5 text-[0.98rem] leading-relaxed">
@@ -43,13 +43,13 @@ export default function LegalPage({
 
 				<div className="mt-10 space-y-9">{children}</div>
 
-				<p className="mt-12 border-t border-[#002c78]/10 pt-6 text-[0.95rem] text-[#002c78]/80">
+				<p className="mt-12 border-t border-ink/10 pt-6 text-[0.95rem] text-ink/80">
 					Kontakt: putem{" "}
 					<a
 						href={CONTACT_URL}
 						target="_blank"
 						rel="noreferrer"
-						className="font-medium text-[#0a63b0] underline underline-offset-2"
+						className="font-medium text-ocean underline underline-offset-2"
 					>
 						GitHub repozitorija
 					</a>

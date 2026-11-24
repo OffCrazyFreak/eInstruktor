@@ -18,7 +18,7 @@ export default function ExamHistoryPage() {
 		<main className="mx-auto max-w-5xl px-4 pt-6 pb-8 sm:px-6 lg:pt-10">
 			<Link
 				to="/ispit"
-				className="-ml-2 inline-flex min-h-11 items-center gap-1 rounded-full px-2 font-semibold text-[#0a63b0] hover:bg-accent dark:text-[#4cc2ff]"
+				className="-ml-2 inline-flex min-h-11 items-center gap-1 rounded-full px-2 font-semibold text-ocean hover:bg-accent dark:text-[#4cc2ff]"
 			>
 				<ChevronLeft className="size-5" aria-hidden="true" />
 				Probni ispit

@@ -38,7 +38,7 @@ export default function StudyDaysCard({
 				<div className="mt-2 space-y-1">
 					<p className="inline-flex items-center gap-2 text-[1.05rem] font-semibold">
 						<CalendarDays
-							className="size-5 text-[#0a63b0] dark:text-[#4cc2ff]"
+							className="size-5 text-ocean dark:text-[#4cc2ff]"
 							aria-hidden="true"
 						/>
 						{streak.daysThisWeek} od zadnjih 7 dana

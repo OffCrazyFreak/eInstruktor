@@ -101,7 +101,7 @@ export default function CompassCourseCalculator({
 					track={conversion && drift !== 0 ? course + drift : undefined}
 				/>
 				{conversion && (
-					<p className="mt-1 text-center text-[0.72rem] text-[#002c78]/60">
+					<p className="mt-1 text-center text-[0.72rem] text-ink/60">
 						Kutovi pogreški su na crtežu povećani tri puta da se vide.
 					</p>
 				)}
@@ -136,7 +136,7 @@ export default function CompassCourseCalculator({
 							onChange={setDeviation}
 						/>
 
-						<dl className="space-y-1.5 rounded-2xl bg-[#eaf3ff] p-3 font-mono text-[0.85rem]">
+						<dl className="space-y-1.5 rounded-2xl bg-tint p-3 font-mono text-[0.85rem]">
 							<div className="flex flex-wrap justify-between gap-x-3">
 								<dt>Km = Kp - var</dt>
 								<dd className="m-0">
@@ -154,7 +154,7 @@ export default function CompassCourseCalculator({
 								</dd>
 							</div>
 						</dl>
-						<p className="text-[0.82rem] leading-relaxed text-[#002c78]/75">
+						<p className="text-[0.82rem] leading-relaxed text-ink/75">
 							S karte na kompas oduzimaš, s kompasa na kartu zbrajaš. Istočno
 							(E) je plus, zapadno (W) minus. Na ruži: plava crta je magnetski,
 							crvena kompasni sjever.
@@ -184,18 +184,18 @@ export default function CompassCourseCalculator({
 						)}
 					</>
 				) : (
-					<dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1.5 rounded-2xl bg-[#eaf3ff] p-3 text-[0.9rem]">
-						<dt className="text-[#002c78]/60">Kurs</dt>
+					<dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1.5 rounded-2xl bg-tint p-3 text-[0.9rem]">
+						<dt className="text-ink/60">Kurs</dt>
 						<dd className="m-0 font-mono font-semibold">
 							{formatCourse(course)}
 						</dd>
-						<dt className="text-[#002c78]/60">Smjer</dt>
+						<dt className="text-ink/60">Smjer</dt>
 						<dd className="m-0">
 							{point.name} ({point.code})
 						</dd>
-						<dt className="text-[#002c78]/60">Kvadrant</dt>
+						<dt className="text-ink/60">Kvadrant</dt>
 						<dd className="m-0">{quadrantName(course)}</dd>
-						<dt className="text-[#002c78]/60">Povratni kurs</dt>
+						<dt className="text-ink/60">Povratni kurs</dt>
 						<dd className="m-0 font-mono">
 							{formatCourse(reciprocal(course))}
 						</dd>

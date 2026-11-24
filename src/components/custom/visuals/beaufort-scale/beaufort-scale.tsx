@@ -60,7 +60,7 @@ export default function BeaufortScale({
 				<div className="flex items-end gap-3">
 					<p className="font-serif text-6xl leading-none">{force}</p>
 					<div className="pb-1">
-						<p className="font-mono text-[0.72rem] tracking-[0.14em] text-[#0a63b0] uppercase">
+						<p className="font-mono text-[0.72rem] tracking-[0.14em] text-ocean uppercase">
 							Bofora
 						</p>
 						<p className="font-serif text-xl leading-tight">{level.name}</p>
@@ -78,9 +78,9 @@ export default function BeaufortScale({
 					max={12}
 					value={force}
 					onChange={(event) => setForce(Number(event.target.value))}
-					className="w-full accent-[#002c78]"
+					className="w-full accent-ink"
 				/>
-				<div className="flex justify-between font-mono text-[0.7rem] text-[#002c78]/60">
+				<div className="flex justify-between font-mono text-[0.7rem] text-ink/60">
 					<span>0</span>
 					<span>6</span>
 					<span>12</span>

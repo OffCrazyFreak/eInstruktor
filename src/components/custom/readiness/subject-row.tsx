@@ -48,7 +48,7 @@ export default function SubjectRow({ subject, weakest }: ISubjectRowProps) {
 				</span>
 			</div>
 
-			<div className="relative mt-2 h-2 rounded-full bg-[#eaf3ff] dark:bg-accent">
+			<div className="relative mt-2 h-2 rounded-full bg-tint dark:bg-accent">
 				{measured && (
 					<div
 						className="h-full rounded-full bg-[#0a63b0] dark:bg-[#4cc2ff]"
@@ -58,7 +58,7 @@ export default function SubjectRow({ subject, weakest }: ISubjectRowProps) {
 				<span
 					aria-hidden="true"
 					title="Cilj za Spreman"
-					className="absolute -top-1 h-4 w-0.5 rounded-full bg-[#002c78]/50 dark:bg-white/50"
+					className="absolute -top-1 h-4 w-0.5 rounded-full bg-brand/50 dark:bg-white/50"
 					style={{ left: `${READY_ACCURACY * 100}%` }}
 				/>
 			</div>

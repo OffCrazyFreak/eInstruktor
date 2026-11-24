@@ -38,7 +38,7 @@ export default function MaestralDay() {
 	const markerX = ((hour - 6) / 15) * 280 + 10;
 
 	return (
-		<div className="space-y-2 rounded-2xl border border-[#002c78]/10 bg-white p-3">
+		<div className="space-y-2 rounded-2xl border border-ink/10 bg-paper p-3">
 			<p className="font-semibold">Maestral kroz ljetni dan</p>
 			<svg
 				viewBox="0 0 300 110"

@@ -38,8 +38,8 @@ export default function PhoneticAlphabet({
 }: IPhoneticAlphabetProps) {
 	if (hideAnswer) {
 		return (
-			<div className="rounded-2xl bg-[#eaf3ff] px-4 py-3 text-[#002c78]">
-				<p className="font-mono text-[0.72rem] tracking-[0.14em] text-[#0a63b0] uppercase">
+			<div className="rounded-2xl bg-tint px-4 py-3 text-ink">
+				<p className="font-mono text-[0.72rem] tracking-[0.14em] text-ocean uppercase">
 					Sriči
 				</p>
 				<p className="font-serif text-3xl">{words.join(", ")}</p>

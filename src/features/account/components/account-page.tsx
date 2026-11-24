@@ -40,7 +40,7 @@ export default function AccountPage({ viewer }: IAccountPageProps) {
 				<div className="space-y-4">
 					<section
 						aria-label="Prijavljeni račun"
-						className="rounded-[1.4rem] bg-[#002c78] p-5 text-[#eaf3ff] sm:p-6 dark:ring-1 dark:ring-white/15"
+						className="rounded-[1.4rem] bg-brand p-5 text-[#eaf3ff] sm:p-6 dark:ring-1 dark:ring-white/15"
 					>
 						<div className="flex items-center gap-4">
 							<span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-full bg-white/15 font-serif text-2xl text-white">
@@ -113,7 +113,7 @@ export default function AccountPage({ viewer }: IAccountPageProps) {
 								točno brišemo piše u{" "}
 								<Link
 									to="/privatnost"
-									className="font-medium text-[#0a63b0] underline underline-offset-2 dark:text-[#4cc2ff]"
+									className="font-medium text-ocean underline underline-offset-2 dark:text-[#4cc2ff]"
 								>
 									pravilima privatnosti
 								</Link>

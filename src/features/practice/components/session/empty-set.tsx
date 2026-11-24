@@ -27,7 +27,7 @@ export default function EmptySet({
 			/>
 
 			<main className="mx-auto flex max-w-xl flex-col items-start px-4 pt-10 pb-8 sm:px-6">
-				<span className="grid size-14 place-items-center rounded-2xl bg-[#eaf3ff] text-[#0a63b0] dark:bg-accent dark:text-[#4cc2ff]">
+				<span className="grid size-14 place-items-center rounded-2xl bg-tint text-ocean dark:bg-accent dark:text-[#4cc2ff]">
 					<Inbox className="size-7" aria-hidden="true" />
 				</span>
 

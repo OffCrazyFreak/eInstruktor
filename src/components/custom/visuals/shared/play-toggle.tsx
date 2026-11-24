@@ -27,7 +27,7 @@ export default function PlayToggle({
 			className={cn(
 				"inline-flex size-10 shrink-0 items-center justify-center rounded-full outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 				tone === "day"
-					? "bg-[#002c78] text-white hover:bg-[#0a63b0]"
+					? "bg-brand text-white hover:bg-[#0a63b0]"
 					: "bg-[#ffb43c] text-[#04142e] hover:bg-[#ffe89a]",
 			)}
 		>

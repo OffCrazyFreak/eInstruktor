@@ -80,7 +80,7 @@ export default function QuestionGridSheet({
 					<li className="inline-flex items-center gap-1.5">
 						<span
 							aria-hidden="true"
-							className="size-4 rounded-[0.3rem] border-2 border-dashed border-[#002c78]/30 dark:border-white/30"
+							className="size-4 rounded-[0.3rem] border-2 border-dashed border-ink/30 dark:border-white/30"
 						/>
 						Bez odgovora
 					</li>
@@ -126,8 +126,8 @@ export default function QuestionGridSheet({
 													className={cn(
 														"relative grid h-12 w-full place-items-center rounded-[0.8rem] border-2 font-mono text-[0.95rem] font-semibold tabular-nums outline-none focus-visible:ring-[3px] focus-visible:ring-ring/60",
 														done
-															? "border-[#0a63b0] bg-[#0a63b0] text-white dark:border-[#4cc2ff] dark:bg-[#4cc2ff] dark:text-[#04142e]"
-															: "border-dashed border-[#002c78]/30 bg-card text-foreground dark:border-white/30",
+															? "border-ocean bg-[#0a63b0] text-white dark:border-[#4cc2ff] dark:bg-[#4cc2ff] dark:text-[#04142e]"
+															: "border-dashed border-ink/30 bg-card text-foreground dark:border-white/30",
 														index === current &&
 															"ring-[3px] ring-[#00aef3] ring-offset-2 ring-offset-background",
 													)}

@@ -25,7 +25,7 @@ export default function Header() {
 	const showSignIn = canOfferSignIn(useAuthStatus());
 
 	return (
-		<header className="fixed inset-x-0 top-0 z-50 border-b border-[#002c78]/10 bg-white/70 backdrop-blur-md">
+		<header className="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-paper/70 backdrop-blur-md">
 			<div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 md:px-8">
 				<Link
 					to="/"
@@ -44,7 +44,7 @@ export default function Header() {
 						<Link
 							key={n.label}
 							to={n.to}
-							className="group relative text-sm font-medium text-[#002c78] data-[status=active]:text-[#00aef3]"
+							className="group relative text-sm font-medium text-ink data-[status=active]:text-[#00aef3]"
 						>
 							{n.label}
 							<span className="absolute -bottom-1.5 left-0 h-0.5 w-full origin-left scale-x-0 bg-[#00aef3] transition-transform duration-300 ease-out group-hover:scale-x-100 group-data-[status=active]:scale-x-100" />
@@ -58,7 +58,7 @@ export default function Header() {
 							type="button"
 							onClick={() => signInWithGoogle()}
 							variant="outline"
-							className="hidden h-9 gap-2 rounded-full border-[#0a63b0] bg-transparent px-4 text-[#0a63b0] hover:bg-[#0a63b0]/5 hover:text-[#0a63b0] md:inline-flex"
+							className="hidden h-9 gap-2 rounded-full border-ocean bg-transparent px-4 text-ocean hover:bg-[#0a63b0]/5 hover:text-ocean md:inline-flex"
 						>
 							<GoogleIcon className="h-4 w-4" />
 							Prijava
@@ -70,14 +70,14 @@ export default function Header() {
 							<Button
 								variant="outline"
 								size="icon"
-								className="rounded-full border-[#002c78]/20 bg-transparent text-[#002c78] md:hidden"
+								className="rounded-full border-ink/20 bg-transparent text-ink md:hidden"
 								aria-label="Otvori izbornik"
 							>
 								<Menu className="h-5 w-5" />
 							</Button>
 						</SheetTrigger>
-						<SheetContent side="right" className="w-72 bg-white">
-							<SheetTitle className="px-5 pt-5 text-[#002c78]">
+						<SheetContent side="right" className="w-72 bg-paper">
+							<SheetTitle className="px-5 pt-5 text-ink">
 								<span className="text-[#00aef3]">e</span>Instruktor
 							</SheetTitle>
 							<nav
@@ -88,7 +88,7 @@ export default function Header() {
 									<SheetClose asChild key={n.label}>
 										<Link
 											to={n.to}
-											className="rounded-lg px-3 py-3 text-base font-medium text-[#002c78]/80 transition-colors hover:bg-[#eaf3fd] hover:text-[#002c78]"
+											className="rounded-lg px-3 py-3 text-base font-medium text-ink/80 transition-colors hover:bg-tint hover:text-ink"
 										>
 											{n.label}
 										</Link>
@@ -101,7 +101,7 @@ export default function Header() {
 										<Button
 											type="button"
 											onClick={() => signInWithGoogle()}
-											className="w-full gap-2 rounded-full bg-[#002c78] text-white hover:bg-[#002c78]"
+											className="w-full gap-2 rounded-full"
 										>
 											<GoogleIcon className="h-4 w-4" />
 											Prijava Googleom

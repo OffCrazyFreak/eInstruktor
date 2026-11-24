@@ -97,7 +97,7 @@ export default function LightCharacteristicReader({
 					onChange={(event) => setText(event.target.value)}
 					maxLength={MAX_INPUT_LENGTH}
 					spellCheck={false}
-					className="min-h-11 w-full rounded-xl border border-[#002c78]/20 bg-white px-3 font-mono text-[0.95rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+					className="min-h-11 w-full rounded-xl border border-ink/20 bg-paper px-3 font-mono text-[0.95rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 				/>
 				<div className="flex flex-wrap gap-1.5">
 					{PRESETS.map((preset) => (
@@ -108,8 +108,8 @@ export default function LightCharacteristicReader({
 							className={cn(
 								"rounded-full border px-2.5 py-1 font-mono text-[0.75rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 								preset === text
-									? "border-[#002c78] bg-[#002c78] text-white"
-									: "border-[#002c78]/15 bg-white hover:border-[#00aef3]",
+									? "border-ink bg-brand text-white"
+									: "border-ink/15 bg-paper hover:border-[#00aef3]",
 							)}
 						>
 							{preset}
@@ -171,10 +171,10 @@ export default function LightCharacteristicReader({
 								key={part.id}
 								className={cn(
 									"flex gap-3 rounded-xl p-2.5",
-									part.known ? "bg-[#eaf3ff]" : "bg-[#e0322b]/10",
+									part.known ? "bg-tint" : "bg-[#e0322b]/10",
 								)}
 							>
-								<code className="shrink-0 self-start border-0 bg-white px-2 py-0.5 font-mono text-[0.85rem] font-semibold">
+								<code className="shrink-0 self-start border-0 bg-paper px-2 py-0.5 font-mono text-[0.85rem] font-semibold">
 									{part.text}
 								</code>
 								<span className="text-[0.88rem] leading-snug">

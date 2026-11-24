@@ -17,7 +17,7 @@ export default function ProgressMeter({
 		<div>
 			<div
 				aria-hidden="true"
-				className="h-1.5 overflow-hidden rounded-full bg-[#eaf3ff] dark:bg-accent"
+				className="h-1.5 overflow-hidden rounded-full bg-tint dark:bg-accent"
 			>
 				<div
 					className="h-full rounded-full bg-[#00aef3] transition-[width] duration-500"

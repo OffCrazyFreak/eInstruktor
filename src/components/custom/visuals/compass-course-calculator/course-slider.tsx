@@ -38,7 +38,7 @@ export default function CourseSlider({
 				step={step}
 				value={value}
 				onChange={(event) => onChange(Number(event.target.value))}
-				className="mt-1 w-full accent-[#002c78]"
+				className="mt-1 w-full accent-ink"
 			/>
 		</div>
 	);

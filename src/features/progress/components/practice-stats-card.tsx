@@ -42,7 +42,7 @@ export default function PracticeStatsCard({
 				{figures.map((figure) => (
 					<div
 						key={figure.label}
-						className="rounded-xl bg-[#eaf3ff] px-3 py-2.5 dark:bg-accent"
+						className="rounded-xl bg-tint px-3 py-2.5 dark:bg-accent"
 					>
 						<dt className="text-[0.8rem] text-muted-foreground">
 							{figure.label}

@@ -73,7 +73,7 @@ export default function HomeDashboard({
 							percent={target.percent}
 						/>
 					) : (
-						<section className="rounded-[1.6rem] bg-[#002c78] dark:ring-1 dark:ring-white/15 p-5 text-[#eaf3ff] sm:p-6">
+						<section className="rounded-[1.6rem] bg-brand dark:ring-1 dark:ring-white/15 p-5 text-[#eaf3ff] sm:p-6">
 							<p className="font-mono text-[0.74rem] tracking-[0.2em] text-[#ffb43c]">
 								SVE LEKCIJE SU GOTOVE
 							</p>

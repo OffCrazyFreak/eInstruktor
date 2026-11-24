@@ -53,12 +53,12 @@ export default function ProgressPage() {
 					)}
 
 					{!hasAnyProgress(progress) && (
-						<p className="mt-5 rounded-[1.4rem] bg-[#eaf3ff] p-4 text-[0.95rem] leading-relaxed dark:bg-accent">
+						<p className="mt-5 rounded-[1.4rem] bg-tint p-4 text-[0.95rem] leading-relaxed dark:bg-accent">
 							Ovdje se skuplja sve što riješiš. Kreni od{" "}
 							<Link
 								to="/ucenje/$area/$lesson"
 								params={{ area: lectureZero.area, lesson: lectureZero.slug }}
-								className="font-semibold text-[#0a63b0] underline underline-offset-2 dark:text-[#4cc2ff]"
+								className="font-semibold text-ocean underline underline-offset-2 dark:text-[#4cc2ff]"
 							>
 								Lekcije 0
 							</Link>{" "}

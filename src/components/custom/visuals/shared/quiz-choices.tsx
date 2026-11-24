@@ -50,7 +50,7 @@ export default function QuizChoices({
 							className={cn(
 								"flex min-h-11 items-center justify-between gap-2 rounded-2xl border px-4 py-2 text-left text-[0.9rem] font-medium outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60 disabled:cursor-default",
 								tone === "day"
-									? "border-[#002c78]/15 bg-white text-[#002c78] enabled:hover:border-[#00aef3]"
+									? "border-ink/15 bg-paper text-ink enabled:hover:border-[#00aef3]"
 									: "border-white/20 bg-white/5 text-[#eaf3ff] enabled:hover:border-[#ffb43c]",
 								answered && isAnswer && "border-[#14a05a] bg-[#14a05a]/12",
 								answered &&
@@ -89,7 +89,7 @@ export default function QuizChoices({
 					className={cn(
 						"inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[0.88rem] font-semibold outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 						tone === "day"
-							? "bg-[#002c78] text-white hover:bg-[#0a63b0]"
+							? "bg-brand text-white hover:bg-[#0a63b0]"
 							: "bg-[#ffb43c] text-[#04142e] hover:bg-[#ffe89a]",
 					)}
 				>

@@ -14,7 +14,7 @@ import useAuthStatus from "@/lib/auth/use-auth-status";
 import useSignOut from "@/lib/auth/use-sign-out";
 
 const ROUND_BUTTON =
-	"grid size-11 place-items-center overflow-hidden rounded-full border border-[#002c78]/20 bg-card text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:border-white/20";
+	"grid size-11 place-items-center overflow-hidden rounded-full border border-ink/20 bg-card text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:border-white/20";
 
 const MENU_ITEM = "min-h-11 cursor-pointer gap-2.5 px-3 text-[0.95rem]";
 

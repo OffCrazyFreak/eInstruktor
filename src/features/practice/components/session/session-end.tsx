@@ -57,7 +57,7 @@ export default function SessionEnd({
 			/>
 
 			<main className="mx-auto max-w-2xl px-4 pt-8 pb-[calc(9rem+env(safe-area-inset-bottom))] sm:px-6">
-				<p className="font-mono text-[0.74rem] tracking-[0.2em] text-[#0a63b0] dark:text-[#4cc2ff]">
+				<p className="font-mono text-[0.74rem] tracking-[0.2em] text-ocean dark:text-[#4cc2ff]">
 					KRAJ SERIJE
 				</p>
 				<h1

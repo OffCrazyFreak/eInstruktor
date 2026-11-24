@@ -16,7 +16,7 @@ export default function SubjectHeader({
 }: ISubjectHeaderProps) {
 	return (
 		<div className="mb-5 border-l-4 border-[#00aef3] pl-3">
-			<p className="font-mono text-[0.72rem] font-semibold tracking-[0.16em] text-[#0a63b0] dark:text-[#4cc2ff]">
+			<p className="font-mono text-[0.72rem] font-semibold tracking-[0.16em] text-ocean dark:text-[#4cc2ff]">
 				{blockCount > 1
 					? `PREDMET ${blockNumber} OD ${blockCount}`
 					: "JEDAN PREDMET"}

@@ -8,7 +8,7 @@ export default function SpellInput() {
 	const spelled = spell(text);
 
 	return (
-		<div className="space-y-2 rounded-2xl bg-[#eaf3ff] p-3">
+		<div className="space-y-2 rounded-2xl bg-tint p-3">
 			<label htmlFor={id} className="text-[0.85rem] font-semibold">
 				Upiši ime brodice, otoka ili svoje ime
 			</label>
@@ -17,7 +17,7 @@ export default function SpellInput() {
 				value={text}
 				maxLength={24}
 				onChange={(event) => setText(event.target.value)}
-				className="min-h-11 w-full rounded-xl border border-[#002c78]/20 bg-white px-3 text-[0.95rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+				className="min-h-11 w-full rounded-xl border border-ink/20 bg-paper px-3 text-[0.95rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 			/>
 			<ol
 				className="m-0 flex list-none flex-wrap gap-1.5 p-0"
@@ -31,12 +31,12 @@ export default function SpellInput() {
 					.map((item) => (
 						<li
 							key={item.id}
-							className="rounded-xl bg-white px-2.5 py-1 text-[0.88rem]"
+							className="rounded-xl bg-paper px-2.5 py-1 text-[0.88rem]"
 						>
 							<span className="font-mono font-bold">{item.symbol}</span>{" "}
 							{item.word ? item.word.spoken : "?"}
 							{item.hasMark && (
-								<span className="text-[#002c78]/60"> (s kvačicom)</span>
+								<span className="text-ink/60"> (s kvačicom)</span>
 							)}
 						</li>
 					))}
