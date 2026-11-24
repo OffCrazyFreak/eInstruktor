@@ -15,7 +15,8 @@ export function getRouter() {
 		defaultPreload: "intent",
 		defaultPreloadStaleTime: 0,
 		defaultNotFoundComponent: NotFoundPage,
-		defaultErrorComponent: ({ reset }) => <ErrorPage reset={reset} />,
+		defaultErrorComponent: ErrorPage,
+		defaultOnCatch: (error) => console.error("Route error", error),
 	});
 
 	setupRouterSsrQueryIntegration({ router, queryClient: context.queryClient });

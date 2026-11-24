@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 
 interface IErrorPageProps {
 	reset: () => void;
@@ -6,6 +6,14 @@ interface IErrorPageProps {
 
 // The message stays generic on purpose: a raw error can carry paths or values that are not for visitors.
 export default function ErrorPage({ reset }: IErrorPageProps) {
+	const router = useRouter();
+
+	// A failed loader stays failed until the router loads again, so clearing the boundary alone would show the same page.
+	function handleRetry() {
+		reset();
+		void router.invalidate();
+	}
+
 	return (
 		<main className="grid min-h-svh place-items-center p-6 text-center">
 			<div>
@@ -17,7 +25,7 @@ export default function ErrorPage({ reset }: IErrorPageProps) {
 					Pokušaj ponovno, a ako se ponovi, vrati se na početnu.
 				</p>
 				<div className="mt-4 flex items-center justify-center gap-4 text-sm">
-					<button type="button" onClick={reset} className="underline">
+					<button type="button" onClick={handleRetry} className="underline">
 						Pokušaj ponovno
 					</button>
 					<Link to="/" className="underline">
