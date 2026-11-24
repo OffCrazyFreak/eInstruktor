@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "368e7b00-a878-49f7-b7d5-e09b1ada8505",
+  "id": "91e52e55-aedb-4921-98b8-95e41919c7dd",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "exam_session": {
@@ -10,7 +10,7 @@
         "id": {
           "name": "id",
           "type": "text",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
@@ -124,7 +124,15 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "exam_session_user_id_id_pk": {
+          "columns": [
+            "user_id",
+            "id"
+          ],
+          "name": "exam_session_user_id_id_pk"
+        }
+      },
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
@@ -134,7 +142,7 @@
         "id": {
           "name": "id",
           "type": "text",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
@@ -226,21 +234,31 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "question_attempt_exam_session_id_exam_session_id_fk": {
-          "name": "question_attempt_exam_session_id_exam_session_id_fk",
+        "question_attempt_user_id_exam_session_id_exam_session_user_id_id_fk": {
+          "name": "question_attempt_user_id_exam_session_id_exam_session_user_id_id_fk",
           "tableFrom": "question_attempt",
           "tableTo": "exam_session",
           "columnsFrom": [
+            "user_id",
             "exam_session_id"
           ],
           "columnsTo": [
+            "user_id",
             "id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "question_attempt_user_id_id_pk": {
+          "columns": [
+            "user_id",
+            "id"
+          ],
+          "name": "question_attempt_user_id_id_pk"
+        }
+      },
       "uniqueConstraints": {},
       "checkConstraints": {}
     },

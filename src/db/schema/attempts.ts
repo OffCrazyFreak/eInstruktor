@@ -1,4 +1,11 @@
-import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import {
+	foreignKey,
+	index,
+	integer,
+	primaryKey,
+	sqliteTable,
+	text,
+} from "drizzle-orm/sqlite-core";
 import { user } from "./auth";
 import { ATTEMPT_MODES, EXAM_LEVELS } from "./enums";
 
@@ -12,7 +19,7 @@ export interface ISubjectResult {
 export const examSession = sqliteTable(
 	"exam_session",
 	{
-		id: text("id").primaryKey(),
+		id: text("id").notNull(),
 
 		userId: text("user_id")
 			.notNull()
@@ -47,6 +54,8 @@ export const examSession = sqliteTable(
 		graded: text("graded", { mode: "json" }).$type<Record<string, boolean>>(),
 	},
 	(table) => [
+		// Client-made ids are only unique per learner, so one learner's id can never block or clobber another's.
+		primaryKey({ columns: [table.userId, table.id] }),
 		index("exam_session_user_started_idx").on(table.userId, table.startedAt),
 	],
 );
@@ -55,7 +64,7 @@ export const examSession = sqliteTable(
 export const questionAttempt = sqliteTable(
 	"question_attempt",
 	{
-		id: text("id").primaryKey(),
+		id: text("id").notNull(),
 
 		userId: text("user_id")
 			.notNull()
@@ -66,9 +75,7 @@ export const questionAttempt = sqliteTable(
 		// The lesson visit, practice set or exam on the device; accuracy counts only the first answer per session.
 		sessionId: text("session_id").notNull(),
 
-		examSessionId: text("exam_session_id").references(() => examSession.id, {
-			onDelete: "cascade",
-		}),
+		examSessionId: text("exam_session_id"),
 
 		correct: integer("correct", { mode: "boolean" }).notNull(),
 
@@ -81,6 +88,12 @@ export const questionAttempt = sqliteTable(
 		answeredAt: integer("answered_at", { mode: "timestamp_ms" }).notNull(),
 	},
 	(table) => [
+		primaryKey({ columns: [table.userId, table.id] }),
+		// The composite link keeps an attempt tied to an exam of the same learner.
+		foreignKey({
+			columns: [table.userId, table.examSessionId],
+			foreignColumns: [examSession.userId, examSession.id],
+		}).onDelete("cascade"),
 		index("question_attempt_user_answered_idx").on(
 			table.userId,
 			table.answeredAt,
