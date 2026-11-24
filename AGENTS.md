@@ -21,9 +21,9 @@
 
 - TanStack Start (full-stack React, file-based routing) and TanStack Router, React 19 with the React Compiler, Vite 8, TypeScript 6, pnpm.
 - Auth: better-auth with the Google provider only, `tanstackStartCookies()` as the last plugin, Drizzle adapter on SQLite.
-- Database: libSQL through `@libsql/client` and Drizzle ORM / Drizzle Kit. Local development uses a SQLite file filled by the seed script; production moves to Turso later.
-- UI: Tailwind CSS 4, shadcn/ui on Radix (new-york, zinc), lucide-react icons, Motion (`motion/react`), Lenis smooth scroll, Sonner toasts.
-- Data and forms: TanStack Query owns server state; React Hook Form with Zod.
+- Database: libSQL through `@libsql/client` and Drizzle ORM / Drizzle Kit. Local development uses a SQLite file created by `pnpm db:seed`; production moves to Turso later.
+- UI: Tailwind CSS 4, shadcn/ui on Radix (new-york, zinc), lucide-react icons, Motion (`motion/react`), Sonner toasts, fonts self-hosted through `@fontsource-variable`.
+- Data: TanStack Query owns server state; Zod validates input.
 - Tooling: Biome (lint and format), Vitest with Testing Library and jsdom.
 - Deploy: Netlify through `@netlify/vite-plugin-tanstack-start`.
 
@@ -44,7 +44,7 @@
 
 ### Content
 
-- Course content (areas, lessons, blocks, questions) is typed data under `src/content/`, seeded into the database by `pnpm db:seed`; adding a topic must not need new UI code.
+- Course content (areas, lessons, blocks, questions) is typed data under `src/content/` and read from code, never stored in the database (the database holds only learner state plus the better-auth account, session and user rows; `pnpm db:seed` applies migrations and optional demo data); adding a topic must not need new UI code.
 - Tag every question and lesson block with its level (`A`, `B` or `common`) and its source, so imported material can be traced and removed.
 
 ## Frontend

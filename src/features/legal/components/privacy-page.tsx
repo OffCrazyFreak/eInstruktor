@@ -103,10 +103,6 @@ export default function PrivacyPage() {
 					<li>
 						Google, za prijavu (od njega dobivamo ime, e-mail, sliku i ID)
 					</li>
-					<li>
-						Google Fonts, s kojeg se učitavaju slova stranice, pa Google pri
-						svakom posjetu vidi tvoju IP adresu, i kad nisi prijavljen
-					</li>
 					<li>Netlify, hosting na kojem aplikacija radi</li>
 					<li>pružatelj baze podataka u kojoj se čuva napredak s računom</li>
 				</ul>
