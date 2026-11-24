@@ -6,9 +6,12 @@ CREATE TABLE `exam_session` (
 	`question_ids` text NOT NULL,
 	`started_at` integer NOT NULL,
 	`finished_at` integer,
+	`ends_at` integer,
 	`score` integer,
 	`passed` integer,
 	`per_subject` text,
+	`answers` text,
+	`graded` text,
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
@@ -17,6 +20,7 @@ CREATE TABLE `question_attempt` (
 	`id` text PRIMARY KEY NOT NULL,
 	`user_id` text NOT NULL,
 	`question_id` text NOT NULL,
+	`session_id` text NOT NULL,
 	`exam_session_id` text,
 	`correct` integer NOT NULL,
 	`selected_option_ids` text NOT NULL,
@@ -80,8 +84,9 @@ CREATE TABLE `verification` (
 --> statement-breakpoint
 CREATE TABLE `user_profile` (
 	`user_id` text PRIMARY KEY NOT NULL,
-	`target_level` text NOT NULL,
+	`target_level` text,
 	`exam_date` text,
+	`passed_at` integer,
 	`created_at` integer NOT NULL,
 	`updated_at` integer NOT NULL,
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE cascade

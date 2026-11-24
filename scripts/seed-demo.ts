@@ -59,6 +59,7 @@ function practiceAttempts(days: string[]) {
 			id: `demo-attempt-${index}`,
 			userId: DEMO_USER_ID,
 			questionId: question.id,
+			sessionId: `demo-set-${index % days.length}`,
 			correct,
 			selectedOptionIds: answer(question, correct),
 			mode: "practice" as const,
@@ -76,6 +77,7 @@ function examAttempts(questions: IQuestion[], startedAt: Date) {
 			id: `demo-exam-attempt-${index}`,
 			userId: DEMO_USER_ID,
 			questionId: question.id,
+			sessionId: DEMO_EXAM_ID,
 			examSessionId: DEMO_EXAM_ID,
 			correct,
 			selectedOptionIds: answer(question, correct),
@@ -168,6 +170,12 @@ export async function seedDemoUser(db: Database): Promise<void> {
 			score: exam.filter((attempt) => attempt.correct).length,
 			passed: Object.values(perSubject).every((result) => result.passed),
 			perSubject,
+			answers: Object.fromEntries(
+				exam.map((attempt) => [attempt.questionId, attempt.selectedOptionIds]),
+			),
+			graded: Object.fromEntries(
+				exam.map((attempt) => [attempt.questionId, attempt.correct]),
+			),
 		})
 		.onConflictDoNothing();
 

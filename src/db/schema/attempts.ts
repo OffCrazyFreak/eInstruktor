@@ -26,9 +26,11 @@ export const examSession = sqliteTable(
 			.$type<string[]>()
 			.notNull(),
 
-		startedAt: integer("started_at", { mode: "timestamp" }).notNull(),
+		startedAt: integer("started_at", { mode: "timestamp_ms" }).notNull(),
 
-		finishedAt: integer("finished_at", { mode: "timestamp" }),
+		finishedAt: integer("finished_at", { mode: "timestamp_ms" }),
+
+		endsAt: integer("ends_at", { mode: "timestamp_ms" }),
 
 		score: integer("score"),
 
@@ -37,6 +39,12 @@ export const examSession = sqliteTable(
 		perSubject: text("per_subject", { mode: "json" }).$type<
 			Record<string, ISubjectResult>
 		>(),
+
+		answers: text("answers", { mode: "json" }).$type<
+			Record<string, string[]>
+		>(),
+
+		graded: text("graded", { mode: "json" }).$type<Record<string, boolean>>(),
 	},
 	(table) => [
 		index("exam_session_user_started_idx").on(table.userId, table.startedAt),
@@ -55,6 +63,9 @@ export const questionAttempt = sqliteTable(
 
 		questionId: text("question_id").notNull(),
 
+		// The lesson visit, practice set or exam on the device; accuracy counts only the first answer per session.
+		sessionId: text("session_id").notNull(),
+
 		examSessionId: text("exam_session_id").references(() => examSession.id, {
 			onDelete: "cascade",
 		}),
@@ -67,7 +78,7 @@ export const questionAttempt = sqliteTable(
 
 		mode: text("mode", { enum: ATTEMPT_MODES }).notNull(),
 
-		answeredAt: integer("answered_at", { mode: "timestamp" }).notNull(),
+		answeredAt: integer("answered_at", { mode: "timestamp_ms" }).notNull(),
 	},
 	(table) => [
 		index("question_attempt_user_answered_idx").on(

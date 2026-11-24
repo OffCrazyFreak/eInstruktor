@@ -19,7 +19,7 @@ export const lessonProgress = sqliteTable(
 
 		lessonSlug: text("lesson_slug").notNull(),
 
-		completedAt: integer("completed_at", { mode: "timestamp" }).notNull(),
+		completedAt: integer("completed_at", { mode: "timestamp_ms" }).notNull(),
 	},
 	(table) => [primaryKey({ columns: [table.userId, table.lessonSlug] })],
 );
@@ -31,7 +31,7 @@ export const flaggedQuestion = sqliteTable(
 
 		questionId: text("question_id").notNull(),
 
-		createdAt: integer("created_at", { mode: "timestamp" })
+		createdAt: integer("created_at", { mode: "timestamp_ms" })
 			.notNull()
 			.$defaultFn(() => new Date()),
 	},
@@ -45,7 +45,7 @@ export const userBadge = sqliteTable(
 
 		badgeId: text("badge_id").notNull(),
 
-		earnedAt: integer("earned_at", { mode: "timestamp" }).notNull(),
+		earnedAt: integer("earned_at", { mode: "timestamp_ms" }).notNull(),
 	},
 	(table) => [primaryKey({ columns: [table.userId, table.badgeId] })],
 );

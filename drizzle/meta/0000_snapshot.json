@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "329f1e5c-5d62-4db9-9649-e5ce7024419a",
+  "id": "368e7b00-a878-49f7-b7d5-e09b1ada8505",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "exam_session": {
@@ -56,6 +56,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "ends_at": {
+          "name": "ends_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "score": {
           "name": "score",
           "type": "integer",
@@ -72,6 +79,20 @@
         },
         "per_subject": {
           "name": "per_subject",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "answers": {
+          "name": "answers",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "graded": {
+          "name": "graded",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -126,6 +147,13 @@
         },
         "question_id": {
           "name": "question_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "session_id": {
+          "name": "session_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -553,12 +581,19 @@
           "name": "target_level",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "exam_date": {
           "name": "exam_date",
           "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "passed_at": {
+          "name": "passed_at",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
