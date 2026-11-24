@@ -12,8 +12,8 @@ The schema is in `src/db/schema/`, one file per concern, re-exported from `index
 | --- | --- | --- | --- |
 | `user`, `session`, `account`, `verification` | `auth.ts` | `id` | Better Auth tables, hand-maintained |
 | `user_profile` | `profile.ts` | `user_id` | Target level (`A`, `B` or empty until picked), optional exam date and `passed_at` from "Položio sam"; `updated_at` refreshes on every update |
-| `question_attempt` | `attempts.ts` | `id` (client UUID) | One answer: question id, `session_id` (the lesson visit, practice set or exam on the device, so first-attempt accuracy survives the round trip), correct, chosen option ids (JSON), mode (`practice`, `exam`, `check`), time, and `exam_session_id` for answers given in a mock exam the same user owns |
-| `exam_session` | `attempts.ts` | `id` (client UUID) | One finished mock exam: level, `seed` and `question_ids` (JSON, in exam order), start, finish and `ends_at`, score, passed, per-subject result, chosen `answers` and `graded` (JSON) for the review |
+| `question_attempt` | `attempts.ts` | `user_id` + `id` (client UUID) | One answer: question id, `session_id` (the lesson visit, practice set or exam on the device, so first-attempt accuracy survives the round trip), correct, chosen option ids (JSON), mode (`practice`, `exam`, `check`), time, and `exam_session_id` for answers given in a mock exam the same user owns (a composite foreign key on user and exam) |
+| `exam_session` | `attempts.ts` | `user_id` + `id` (client UUID) | One finished mock exam: level, `seed` and `question_ids` (JSON, in exam order), start, finish and `ends_at`, score, passed, per-subject result, chosen `answers` and `graded` (JSON) for the review |
 | `lesson_progress` | `progress.ts` | `user_id` + `lesson_slug` | When a lesson was finished |
 | `flagged_question` | `progress.ts` | `user_id` + `question_id` | Questions the learner marked for later |
 | `user_badge` | `progress.ts` | `user_id` + `badge_id` | Badges and when they were earned |

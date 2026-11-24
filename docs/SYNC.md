@@ -30,7 +30,7 @@ The first sync into an account that has not seen this browser shows "Prenijeli s
 
 An exam answer links to `exam_session_id` only when that exam belongs to the same user, so a client cannot attach rows to someone else's exam. Every insert is idempotent, so a retry, a double fire or two tabs sending the same rows change nothing and need no lock; tests run two tabs at once against the real merge.
 
-`syncRequestSchema` (`src/features/account/utils/sync-schema.ts`) validates the request with limits a little above what the browser keeps: 5000 attempts, 150 exams of up to 100 questions, 500 lessons, 2000 flags, 1000 study days, 50 badges, ids up to 120 characters. Inserts go in chunks of 100 rows.
+`syncRequestSchema` (`src/features/account/utils/sync-schema.ts`) validates the request with limits a little above what the browser keeps: 5000 attempts, 150 exams of up to 100 questions, 500 lessons, 2000 flags, 1000 study days, 50 badges, ids up to 120 characters. Inserts go in chunks of 100 rows. The server also ignores answers and flags for question ids, and lessons for slugs, that are not in the course, and stops adding attempts at 20,000 and exams at 500 per learner (`push-progress.server.ts`). A database error is logged and the client only sees "Sinkronizacija nije uspjela".
 
 ## What comes back
 
@@ -46,6 +46,8 @@ The server returns the account's lessons, flags, study days, badges and profile,
 `einstruktor:sync-baseline:v1` in localStorage (`sync-baseline.ts`) holds what the account had after the last sync: user id, `attemptsThrough` (the newest answer time this device has sent), synced exam ids, lessons, flags, study days, badges and profile. A removed flag or lesson is one in the baseline but no longer in the store, which is how an unflag on one device reaches the other on its next full sync. A baseline for another user id, or a damaged one, counts as empty: the next sync sends everything again, which the server ignores. Deleting the account clears it.
 
 ## Known limits
+
+- The browser skips a damaged local item instead of failing the whole request, and the sent-through mark never moves past the present, so a clock that ran ahead cannot hide later answers.
 
 - Another device's changes arrive on the next full sync, which is the first sync of each page load, not live.
 - A full sync pulls up to 4000 attempts (about 600 KB of JSON) on each page load of a signed-in learner.
