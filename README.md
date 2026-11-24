@@ -4,7 +4,7 @@
 
 e-instruktor je web aplikacija za ucenje i pripremu ispita kroz kratke, jasne i vizualno zanimljive lekcije te vjezbanje pitanja. Umjesto suhoparnog citanja skripte, gradivo je podijeljeno na manje cjeline, objasnjeno jednostavnim jezikom, uz vizuale, primjere i provjere znanja.
 
-Prva verzija pokriva ispit za **Voditelja brodice B kategorije**. Arhitektura je zamisljena tako da se kasnije lako prosiri na druga podrucja (autoskola, matura, faks kolegiji, certifikati).
+Prva verzija pokriva ispit za **Voditelja brodice A i B kategorije**. Arhitektura je zamisljena tako da se kasnije lako prosiri na druga podrucja (autoskola, matura, faks kolegiji, certifikati).
 
 Fokus prve verzije: banka pitanja (vjezbanje + simulacija ispita + "spreman za ispit" mjerac), uz vizualne lekcije za teme koje su prirodno vizualne (svjetla, plovne oznake, pravila mimoilazenja).
 
@@ -26,7 +26,7 @@ _(uskoro)_
 - **Tooling:** Biome (lint/format), React Compiler, Vitest
 - **Deploy:** Netlify
 
-Exact versions live in [AGENTS.md](./AGENTS.md).
+Exact versions are in `package.json`.
 
 ## How to run
 
@@ -52,10 +52,10 @@ Exact versions live in [AGENTS.md](./AGENTS.md).
    - `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` - from Google Cloud Console. Authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
    - `DB_MODE` - leave it `local` (or unset) for development, which uses `file:local.db`. Turso is used only with `DB_MODE=turso`, even when `TURSO_DATABASE_URL` / `TURSO_AUTH_TOKEN` are filled in.
 
-3. Create the database tables:
+3. Create the local database (applies the migrations and prints what the course holds; add `--demo` for a demo learner):
 
    ```bash
-   pnpm db:push
+   pnpm db:seed
    ```
 
 4. Start the dev server:
@@ -86,9 +86,9 @@ More detail (database switch, hooks, tests, the Netlify dev workaround) is in [d
 - Config: `src/lib/auth/auth.ts` - Drizzle adapter (`sqlite`) + Google provider, no email/password.
 - API route: `src/routes/api/auth/$.ts`, client: `src/lib/auth/auth-client.ts`.
 
-## Note: pnpm 11 and build scripts
+## Note: pnpm 12 and build scripts
 
-pnpm 11 skips dependency build scripts by default (this is why the initial scaffold `pnpm install` failed with `ERR_PNPM_IGNORED_BUILDS`). Approved in `pnpm-workspace.yaml`:
+pnpm 12 skips dependency build scripts by default, so the ones this project needs are approved in `pnpm-workspace.yaml`:
 
 - `onlyBuiltDependencies` + `allowBuilds: true` for `esbuild`, `sharp`, `lightningcss`, `@parcel/watcher`, `@biomejs/biome`.
 - `better-sqlite3` and `@prisma/client` are intentionally `false` (we use Turso/libSQL).
@@ -102,7 +102,7 @@ Netlify (`@netlify/vite-plugin-tanstack-start`). Cloudflare DNS for the domain i
 
 **App logic (soon):**
 
-- [ ] The first user who signs in becomes **admin**; admin gets a dashboard with full management (courses, modules, lessons, questions, answers, explanations, media).
+- [ ] Content editing without a code change (an admin area) is planned for a later version.
 
 **Infra:**
 
