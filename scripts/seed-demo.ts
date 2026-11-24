@@ -181,6 +181,16 @@ export async function seedDemoUser(db: Database): Promise<void> {
 
 	await db.insert(schema.questionAttempt).values(exam).onConflictDoNothing();
 
+	// The demo finished Lekcija 0 among its first lessons, which earns the first badge.
+	await db
+		.insert(schema.userBadge)
+		.values({
+			userId: DEMO_USER_ID,
+			badgeId: "uvod-gotov",
+			earnedAt: middayOf(days[days.length - 1] ?? today),
+		})
+		.onConflictDoNothing();
+
 	await db
 		.insert(schema.studyDay)
 		.values(days.map((day) => ({ userId: DEMO_USER_ID, day })))

@@ -128,3 +128,36 @@ export function toggleFlag(
 		flagged: existing === undefined ? { ...rest, [questionId]: now } : rest,
 	};
 }
+
+// Earned badges are a record of what the learner reached, so they are never taken back.
+export function awardBadges(
+	progress: IProgressState,
+	badgeIds: readonly string[],
+	now: number,
+): IProgressState {
+	const fresh = badgeIds.filter((id) => progress.badges[id] === undefined);
+
+	if (fresh.length === 0) {
+		return progress;
+	}
+
+	return {
+		...progress,
+		badges: {
+			...progress.badges,
+			...Object.fromEntries(fresh.map((id) => [id, now])),
+		},
+	};
+}
+
+export function setPassed(
+	progress: IProgressState,
+	passed: boolean,
+	now: number,
+): IProgressState {
+	if (passed === (progress.passedAt !== null)) {
+		return progress;
+	}
+
+	return { ...progress, passedAt: passed ? now : null };
+}

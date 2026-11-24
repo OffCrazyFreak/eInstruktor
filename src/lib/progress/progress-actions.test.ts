@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
+	awardBadges,
 	MAX_STORED_ATTEMPTS,
 	markLessonDone,
 	markLessonUnread,
 	openLesson,
 	recordAnswer,
 	setLessonPercent,
+	setPassed,
 	toggleFlag,
 } from "@/lib/progress/progress-actions";
 import { EMPTY_PROGRESS } from "@/lib/progress/progress-schema";
@@ -91,5 +93,30 @@ describe("toggleFlag", () => {
 
 		expect(flagged.flagged).toEqual({ "q-1": NOON });
 		expect(toggleFlag(flagged, "q-1", NOON).flagged).toEqual({});
+	});
+});
+
+describe("awardBadges", () => {
+	it("adds new badges with the time and keeps the first time of old ones", () => {
+		const first = awardBadges(EMPTY_PROGRESS, ["uvod-gotov"], 1);
+		const second = awardBadges(first, ["uvod-gotov", "sto-pitanja"], 2);
+
+		expect(second.badges).toEqual({ "uvod-gotov": 1, "sto-pitanja": 2 });
+	});
+
+	it("returns the same state when nothing is new", () => {
+		const first = awardBadges(EMPTY_PROGRESS, ["uvod-gotov"], 1);
+
+		expect(awardBadges(first, ["uvod-gotov"], 2)).toBe(first);
+	});
+});
+
+describe("setPassed", () => {
+	it("stores when the learner passed and clears it again", () => {
+		const passed = setPassed(EMPTY_PROGRESS, true, NOON);
+
+		expect(passed.passedAt).toBe(NOON);
+		expect(setPassed(passed, true, NOON + 1)).toBe(passed);
+		expect(setPassed(passed, false, NOON).passedAt).toBeNull();
 	});
 });
