@@ -17,8 +17,8 @@ export default function GalleryLink({ to, active, label }: IGalleryLinkProps) {
 			className={cn(
 				"rounded-full border px-3 py-1 text-[0.8rem] font-medium no-underline",
 				active
-					? "border-[#002c78] bg-[#002c78] text-white hover:text-white"
-					: "border-[#002c78]/15 bg-white text-[#002c78] hover:border-[#00aef3] hover:text-[#002c78]",
+					? "border-ink bg-brand text-white hover:text-white"
+					: "border-ink/15 bg-paper text-ink hover:border-[#00aef3] hover:text-ink",
 			)}
 		>
 			{label}

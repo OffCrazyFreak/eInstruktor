@@ -35,8 +35,8 @@ export default function ChoiceChips<T extends string | number>({
 							className={cn(
 								"flex min-h-12 flex-1 cursor-pointer items-center justify-center rounded-xl border-2 px-3 text-center text-[0.95rem] font-semibold has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/60",
 								chosen
-									? "border-primary bg-[#eaf3ff] text-primary dark:bg-accent dark:text-foreground"
-									: "border-border bg-card hover:border-[#0a63b0]/45 dark:hover:border-[#4cc2ff]/50",
+									? "border-primary bg-tint text-primary dark:bg-accent dark:text-foreground"
+									: "border-border bg-card hover:border-ocean/45 dark:hover:border-[#4cc2ff]/50",
 							)}
 						>
 							<input

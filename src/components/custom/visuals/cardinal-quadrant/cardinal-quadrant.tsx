@@ -81,13 +81,13 @@ export default function CardinalQuadrant({
 				<div className="space-y-3">
 					<MarkScene key={quadrant} mark={selected} />
 
-					<div className="rounded-2xl bg-[#eaf3ff] p-3 text-[0.9rem] leading-relaxed">
+					<div className="rounded-2xl bg-tint p-3 text-[0.9rem] leading-relaxed">
 						<p className="font-serif text-lg">{selected.name}</p>
 						<p>
 							{selected.colorText}; {selected.topmarkText}.
 						</p>
 						<p className="font-semibold">{selected.pass}</p>
-						<p className="mt-1 text-[#002c78]/75">
+						<p className="mt-1 text-ink/75">
 							Bljeskovi su kao brojke na satu: istok 3, jug 6 i jedan dugi,
 							zapad 9, a sjever svijetli bez prekida.
 						</p>

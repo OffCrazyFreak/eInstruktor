@@ -136,32 +136,32 @@ export default function IalaBuoyExplorer({
 
 				<div className="flex flex-col gap-3">
 					<div>
-						<p className="font-mono text-[0.7rem] tracking-[0.14em] text-[#0a63b0] uppercase">
+						<p className="font-mono text-[0.7rem] tracking-[0.14em] text-ocean uppercase">
 							IALA regija A
 						</p>
 						<h3 className="mt-1 font-serif text-xl leading-tight">
 							{mark.name}
 						</h3>
-						<p className="mt-1 text-[0.92rem] leading-relaxed text-[#002c78]/80">
+						<p className="mt-1 text-[0.92rem] leading-relaxed text-ink/80">
 							{mark.meaning}
 						</p>
 					</div>
 
 					<dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1.5 text-[0.88rem]">
-						<dt className="text-[#002c78]/60">Boja</dt>
+						<dt className="text-ink/60">Boja</dt>
 						<dd className="m-0">{mark.colorText}</dd>
-						<dt className="text-[#002c78]/60">Vršni znak</dt>
+						<dt className="text-ink/60">Vršni znak</dt>
 						<dd className="m-0">{mark.topmarkText}</dd>
-						<dt className="text-[#002c78]/60">Svjetlo</dt>
+						<dt className="text-ink/60">Svjetlo</dt>
 						<dd className="m-0 font-mono">
 							{mark.light}
 							{mark.lightAlt && (
-								<span className="text-[#002c78]/60"> ili {mark.lightAlt}</span>
+								<span className="text-ink/60"> ili {mark.lightAlt}</span>
 							)}
 						</dd>
 					</dl>
 
-					<div className="rounded-2xl bg-[#eaf3ff] p-3">
+					<div className="rounded-2xl bg-tint p-3">
 						{mark.group === "lateral" && (
 							<OptionButtons
 								label="Smjer plovidbe"

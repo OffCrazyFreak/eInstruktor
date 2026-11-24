@@ -23,7 +23,7 @@ export default function HistoryItem({ session }: IHistoryItemProps) {
 			<Link
 				to="/ispit/rezultat/$sessionId"
 				params={{ sessionId: session.id }}
-				className="flex items-center gap-3 rounded-[1.2rem] border border-border bg-card p-4 outline-none hover:border-[#0a63b0]/45 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
+				className="flex items-center gap-3 rounded-[1.2rem] border border-border bg-card p-4 outline-none hover:border-ocean/45 focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
 			>
 				<div className="min-w-0 flex-1">
 					<div className="flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -31,7 +31,7 @@ export default function HistoryItem({ session }: IHistoryItemProps) {
 						<span className="text-[0.85rem] text-muted-foreground">
 							{formatExamTime(finishedAt)}
 						</span>
-						<span className="rounded-full bg-[#eaf3ff] px-2 py-0.5 font-mono text-[0.72rem] font-semibold text-[#0a63b0] dark:bg-accent dark:text-[#4cc2ff]">
+						<span className="rounded-full bg-tint px-2 py-0.5 font-mono text-[0.72rem] font-semibold text-ocean dark:bg-accent dark:text-[#4cc2ff]">
 							{session.level}
 						</span>
 					</div>

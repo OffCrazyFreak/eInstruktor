@@ -40,7 +40,7 @@ export default function AppLayout({ background }: IAppLayoutProps) {
 
 				{!immersive && <BottomNav />}
 
-				<Toaster position="top-center" richColors />
+				<Toaster position="top-center" richColors theme="system" />
 			</div>
 
 			{background}

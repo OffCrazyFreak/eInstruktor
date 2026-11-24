@@ -88,8 +88,8 @@ export default function EngineAnimation({
 								className={cn(
 									"w-full rounded-xl border px-3 py-2 text-left text-[0.88rem] font-medium outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 									revealed && position === index
-										? "border-[#002c78] bg-[#002c78] text-white"
-										: "border-[#002c78]/15 bg-white",
+										? "border-ink bg-brand text-white"
+										: "border-ink/15 bg-paper",
 								)}
 							>
 								{item.name}
@@ -99,7 +99,7 @@ export default function EngineAnimation({
 				</ol>
 
 				<div
-					className="min-h-16 rounded-2xl bg-[#eaf3ff] p-3 text-[0.9rem] leading-relaxed"
+					className="min-h-16 rounded-2xl bg-tint p-3 text-[0.9rem] leading-relaxed"
 					aria-live="polite"
 				>
 					{revealed && stroke ? (
@@ -108,7 +108,7 @@ export default function EngineAnimation({
 						<button
 							type="button"
 							onClick={() => setRevealed(true)}
-							className="font-semibold text-[#0a63b0] underline underline-offset-2 outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+							className="font-semibold text-ocean underline underline-offset-2 outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 						>
 							Pokaži koji je takt
 						</button>
@@ -117,7 +117,7 @@ export default function EngineAnimation({
 
 				<div className="flex items-center gap-3">
 					<PlayToggle playing={playing} onToggle={() => setPlaying(!playing)} />
-					<p className="text-[0.8rem] text-[#002c78]/70">
+					<p className="text-[0.8rem] text-ink/70">
 						{mode === "two-stroke"
 							? "Dva takta u jednom okretaju radilice."
 							: "Četiri takta u dva okretaja radilice."}

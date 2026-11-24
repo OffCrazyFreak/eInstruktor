@@ -55,8 +55,8 @@ export default function KnotSteps({
 						className={cn(
 							"rounded-2xl border p-2 text-left outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 							id === selected
-								? "border-[#002c78] ring-2 ring-[#002c78]/20"
-								: "border-[#002c78]/12 hover:border-[#00aef3]",
+								? "border-ink ring-2 ring-ink/20"
+								: "border-ink/12 hover:border-[#00aef3]",
 						)}
 					>
 						<KnotDrawing
@@ -67,7 +67,7 @@ export default function KnotSteps({
 						<span className="mt-1 block font-serif text-[1rem]">
 							{KNOTS[id].name}
 						</span>
-						<span className="block text-[0.8rem] leading-snug text-[#002c78]/70">
+						<span className="block text-[0.8rem] leading-snug text-ink/70">
 							{KNOTS[id].use}
 						</span>
 					</button>

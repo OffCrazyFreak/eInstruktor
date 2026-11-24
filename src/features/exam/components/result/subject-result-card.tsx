@@ -43,7 +43,7 @@ export default function SubjectResultCard({
 								"h-2 flex-1 rounded-full",
 								index < subject.correct
 									? "bg-[#0a63b0] dark:bg-[#4cc2ff]"
-									: "bg-[#eaf3ff] dark:bg-accent",
+									: "bg-tint dark:bg-accent",
 							)}
 						/>
 					))}
@@ -51,7 +51,7 @@ export default function SubjectResultCard({
 			) : (
 				<div
 					aria-hidden="true"
-					className="mt-3 h-2 rounded-full bg-[#eaf3ff] dark:bg-accent"
+					className="mt-3 h-2 rounded-full bg-tint dark:bg-accent"
 				>
 					<div
 						className="h-full rounded-full bg-[#0a63b0] dark:bg-[#4cc2ff]"

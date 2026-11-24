@@ -74,7 +74,7 @@ export default function SoundSignalPlayer({
 					{pattern ? "Poslušaj signal" : SET_TITLES[set]}
 				</p>
 				{!hideAnswer && (
-					<p className="font-mono text-[0.72rem] text-[#002c78]/60">
+					<p className="font-mono text-[0.72rem] text-ink/60">
 						kratki 1 s, dugi 4 do 6 s
 					</p>
 				)}
@@ -94,7 +94,7 @@ export default function SoundSignalPlayer({
 							<button
 								type="button"
 								onClick={() => setRevealed(true)}
-								className="text-[0.85rem] font-semibold text-[#0a63b0] underline underline-offset-2 outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+								className="text-[0.85rem] font-semibold text-ocean underline underline-offset-2 outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 							>
 								Pokaži što znači
 							</button>
@@ -107,7 +107,7 @@ export default function SoundSignalPlayer({
 				))}
 			</div>
 
-			<p className="text-[0.78rem] text-[#002c78]/60">
+			<p className="text-[0.78rem] text-ink/60">
 				Zvuk se pušta samo kad pritisneš zvučnik. Bez zvuka prati točke i
 				crtice.
 			</p>

@@ -24,7 +24,7 @@ export default function TableBlock({
 				)}
 
 				<thead>
-					<tr className="bg-[#eaf3ff] dark:bg-accent">
+					<tr className="bg-tint dark:bg-accent">
 						{columns.map((column, index) => (
 							<th
 								// biome-ignore lint/suspicious/noArrayIndexKey: static lesson content, never reordered, and header cells can repeat or be empty

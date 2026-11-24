@@ -53,9 +53,9 @@ export default function CheckBlock({
 	return (
 		<section
 			aria-label="Pitanje za provjeru"
-			className="rounded-[1.4rem] border-2 border-[#002c78]/12 bg-[#f4f9ff] p-4 sm:p-5 dark:bg-card dark:border-white/20"
+			className="rounded-[1.4rem] border-2 border-ink/12 bg-[#f4f9ff] p-4 sm:p-5 dark:bg-card dark:border-white/20"
 		>
-			<p className="mb-3 flex items-center gap-2 font-mono text-[0.74rem] font-semibold tracking-[0.16em] text-[#0a63b0] dark:text-[#4cc2ff]">
+			<p className="mb-3 flex items-center gap-2 font-mono text-[0.74rem] font-semibold tracking-[0.16em] text-ocean dark:text-[#4cc2ff]">
 				<CircleHelp className="size-4" aria-hidden="true" />
 				PROVJERI SE
 			</p>

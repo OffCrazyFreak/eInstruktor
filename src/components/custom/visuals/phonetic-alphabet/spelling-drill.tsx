@@ -55,7 +55,7 @@ export default function SpellingDrill({ words }: ISpellingDrillProps) {
 	return (
 		<div className="space-y-4">
 			<div>
-				<p className="font-mono text-[0.72rem] tracking-[0.14em] text-[#0a63b0] uppercase">
+				<p className="font-mono text-[0.72rem] tracking-[0.14em] text-ocean uppercase">
 					Sriči
 				</p>
 				<p className="font-serif text-3xl">{word}</p>
@@ -74,7 +74,7 @@ export default function SpellingDrill({ words }: ISpellingDrillProps) {
 								? "border-[#14a05a] bg-[#14a05a]/10"
 								: position === done.length
 									? "border-[#ffb43c] bg-[#ffe89a]/50"
-									: "border-[#002c78]/10",
+									: "border-ink/10",
 						)}
 					>
 						<span className="font-mono font-bold">{item.symbol}</span>
@@ -103,7 +103,7 @@ export default function SpellingDrill({ words }: ISpellingDrillProps) {
 										"min-h-11 rounded-2xl border px-4 text-[0.92rem] font-medium outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 										wrong === choice
 											? "border-[#e0322b] bg-[#e0322b]/10"
-											: "border-[#002c78]/15 bg-white hover:border-[#00aef3]",
+											: "border-ink/15 bg-paper hover:border-[#00aef3]",
 									)}
 								>
 									{choice}
@@ -122,7 +122,7 @@ export default function SpellingDrill({ words }: ISpellingDrillProps) {
 							<button
 								type="button"
 								onClick={nextWord}
-								className="inline-flex min-h-10 items-center rounded-full bg-[#002c78] px-4 text-[0.88rem] font-semibold text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+								className="inline-flex min-h-10 items-center rounded-full bg-brand px-4 text-[0.88rem] font-semibold text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 							>
 								Sljedeći otok
 							</button>

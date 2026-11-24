@@ -119,12 +119,12 @@ export default function InstrumentPanel() {
 			</div>
 
 			<p
-				className="rounded-2xl bg-[#eaf3ff] p-3 text-[0.92rem] leading-relaxed"
+				className="rounded-2xl bg-tint p-3 text-[0.92rem] leading-relaxed"
 				aria-live="polite"
 			>
 				{current.text}
 			</p>
-			<p className="text-[0.8rem] leading-relaxed text-[#002c78]/70">
+			<p className="text-[0.8rem] leading-relaxed text-ink/70">
 				Zeleno područje je normalno prema uputama proizvođača. Točne vrijednosti
 				ovise o motoru, a na ispitu je dovoljno znati što koji instrument
 				pokazuje i što znači nagla promjena.

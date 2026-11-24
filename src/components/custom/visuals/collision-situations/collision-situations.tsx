@@ -91,7 +91,7 @@ export default function CollisionSituations({
 			{scenario ? (
 				<div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-start">
 					<CollisionScene key={`${selected}-${own}`} scenario={scenario} />
-					<div className="rounded-2xl bg-[#eaf3ff] p-3 text-[0.92rem] leading-relaxed">
+					<div className="rounded-2xl bg-tint p-3 text-[0.92rem] leading-relaxed">
 						<p className="font-serif text-lg">{scenario.title}</p>
 						<p>{scenario.explanation}</p>
 					</div>

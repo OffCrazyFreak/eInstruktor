@@ -22,7 +22,7 @@ export default function ReadinessPanel({ readiness }: IReadinessPanelProps) {
 	return (
 		<section
 			aria-labelledby="readiness-title"
-			className="rounded-[1.6rem] bg-[#002c78] p-5 text-[#eaf3ff] sm:p-6 dark:ring-1 dark:ring-white/15"
+			className="rounded-[1.6rem] bg-brand p-5 text-[#eaf3ff] sm:p-6 dark:ring-1 dark:ring-white/15"
 		>
 			<div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
 				<h2 id="readiness-title" className="font-serif text-xl text-white">
@@ -62,7 +62,7 @@ export default function ReadinessPanel({ readiness }: IReadinessPanelProps) {
 				<Button
 					asChild
 					variant="secondary"
-					className="mt-3 h-12 w-full rounded-full font-semibold dark:bg-[#00aef3] dark:text-[#002c78] dark:hover:bg-[#4cc2ff]"
+					className="mt-3 h-12 w-full rounded-full font-semibold dark:bg-[#00aef3] dark:text-[#04142e] dark:hover:bg-[#4cc2ff]"
 				>
 					<Link
 						to="/vjezba/serija"

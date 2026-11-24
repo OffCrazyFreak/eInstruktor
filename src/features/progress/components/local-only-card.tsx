@@ -6,14 +6,14 @@ export default function LocalOnlyCard() {
 	return (
 		<section
 			aria-labelledby="local-only-title"
-			className="rounded-[1.4rem] border border-dashed border-[#002c78]/25 p-4 sm:p-5 dark:border-white/20"
+			className="rounded-[1.4rem] border border-dashed border-ink/25 p-4 sm:p-5 dark:border-white/20"
 		>
 			<h2
 				id="local-only-title"
 				className="flex items-center gap-2 font-semibold"
 			>
 				<HardDrive
-					className="size-4 text-[#0a63b0] dark:text-[#4cc2ff]"
+					className="size-4 text-ocean dark:text-[#4cc2ff]"
 					aria-hidden="true"
 				/>
 				Napredak je samo u ovom pregledniku

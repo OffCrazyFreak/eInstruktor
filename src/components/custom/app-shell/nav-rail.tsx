@@ -23,7 +23,7 @@ export default function NavRail({ belowTopBar }: INavRailProps) {
 							to={to}
 							className="group flex w-20 flex-col items-center gap-1.5 rounded-2xl py-2.5 text-[0.75rem] font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60 data-[status=active]:text-primary"
 						>
-							<span className="grid h-8 w-14 place-items-center rounded-full transition-colors group-hover:bg-accent group-data-[status=active]:bg-[#eaf3ff] dark:group-data-[status=active]:bg-accent">
+							<span className="grid h-8 w-14 place-items-center rounded-full transition-colors group-hover:bg-accent group-data-[status=active]:bg-tint dark:group-data-[status=active]:bg-accent">
 								<Icon className="size-5" aria-hidden="true" />
 							</span>
 							{label}

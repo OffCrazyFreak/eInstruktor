@@ -60,7 +60,7 @@ export default function ExamClock({ remaining }: IExamClockProps) {
 					"inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full px-3 font-mono text-[0.95rem] font-semibold tabular-nums",
 					low
 						? "bg-[#ffb43c] text-[#002c78]"
-						: "bg-[#eaf3ff] text-[#002c78] dark:bg-accent dark:text-[#dbe9fb]",
+						: "bg-tint text-ink dark:bg-accent dark:text-[#dbe9fb]",
 				)}
 			>
 				<Timer className="size-4" aria-hidden="true" />

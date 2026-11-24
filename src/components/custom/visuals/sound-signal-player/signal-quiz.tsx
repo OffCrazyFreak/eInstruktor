@@ -34,7 +34,7 @@ export default function SignalQuiz({ ids }: ISignalQuizProps) {
 				onPlay={() => player.play(current)}
 				onStop={player.stop}
 			>
-				<p className="text-[0.82rem] text-[#002c78]/70">
+				<p className="text-[0.82rem] text-ink/70">
 					Pritisni zvučnik i poslušaj. Crtice su dugi, točke kratki signali.
 				</p>
 			</SignalRow>

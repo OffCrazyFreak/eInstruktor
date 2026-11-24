@@ -48,7 +48,7 @@ export default function OralDecks() {
 		<main className="mx-auto max-w-3xl px-4 pt-7 pb-8 sm:px-6 lg:pt-10">
 			<Link
 				to="/vjezba"
-				className="-ml-1 inline-flex min-h-11 items-center gap-1 text-[0.92rem] font-semibold text-[#0a63b0] dark:text-[#4cc2ff]"
+				className="-ml-1 inline-flex min-h-11 items-center gap-1 text-[0.92rem] font-semibold text-ocean dark:text-[#4cc2ff]"
 			>
 				<ChevronLeft className="size-4" aria-hidden="true" />
 				Vježba
@@ -67,9 +67,9 @@ export default function OralDecks() {
 						<Link
 							to="/vjezba/usmeno/$deck"
 							params={{ deck }}
-							className="flex min-h-16 items-center gap-3 rounded-[1.2rem] border border-border bg-card p-4 text-foreground outline-none hover:border-[#0a63b0]/40 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
+							className="flex min-h-16 items-center gap-3 rounded-[1.2rem] border border-border bg-card p-4 text-foreground outline-none hover:border-ocean/40 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
 						>
-							<span className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#eaf3ff] text-[#0a63b0] dark:bg-accent dark:text-[#4cc2ff]">
+							<span className="grid size-10 shrink-0 place-items-center rounded-xl bg-tint text-ocean dark:bg-accent dark:text-[#4cc2ff]">
 								<Layers className="size-5" aria-hidden="true" />
 							</span>
 							<span className="min-w-0 flex-1">

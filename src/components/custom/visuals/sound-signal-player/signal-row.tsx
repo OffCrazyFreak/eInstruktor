@@ -25,12 +25,12 @@ export default function SignalRow({
 	children,
 }: ISignalRowProps) {
 	return (
-		<div className="flex items-start gap-3 rounded-2xl border border-[#002c78]/10 bg-white p-3">
+		<div className="flex items-start gap-3 rounded-2xl border border-ink/10 bg-paper p-3">
 			<button
 				type="button"
 				onClick={playing ? onStop : onPlay}
 				aria-label={playing ? "Zaustavi signal" : "Poslušaj signal"}
-				className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-[#002c78] text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+				className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-brand text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 			>
 				{playing ? (
 					<Square className="size-4" aria-hidden />

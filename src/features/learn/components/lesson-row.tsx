@@ -20,14 +20,14 @@ export default function LessonRow({
 		<Link
 			to="/ucenje/$area/$lesson"
 			params={{ area: lesson.area, lesson: lesson.slug }}
-			className="flex min-h-16 items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none hover:border-[#0a63b0]/40 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
+			className="flex min-h-16 items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none hover:border-ocean/40 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
 		>
 			<span
 				className={cn(
 					"grid size-9 shrink-0 place-items-center rounded-full font-mono text-[0.8rem] font-semibold",
 					done
 						? "bg-emerald-600 text-white"
-						: "bg-[#eaf3ff] text-[#0a63b0] dark:bg-accent dark:text-[#4cc2ff]",
+						: "bg-tint text-ocean dark:bg-accent dark:text-[#4cc2ff]",
 				)}
 			>
 				{done ? (

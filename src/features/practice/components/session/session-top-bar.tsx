@@ -89,7 +89,7 @@ export default function SessionTopBar({
 					aria-valuemin={0}
 					aria-valuemax={position.total}
 					aria-valuenow={position.current - 1}
-					className="h-1 bg-[#eaf3ff] dark:bg-accent"
+					className="h-1 bg-tint dark:bg-accent"
 				>
 					<div
 						className="h-full origin-left bg-[#00aef3] transition-transform motion-reduce:transition-none"

@@ -95,7 +95,7 @@ export default function ExamStartPage() {
 				{hasHistory && (
 					<Link
 						to="/ispit/povijest"
-						className="inline-flex min-h-11 items-center gap-2 rounded-full px-3 font-semibold text-[#0a63b0] hover:bg-accent dark:text-[#4cc2ff]"
+						className="inline-flex min-h-11 items-center gap-2 rounded-full px-3 font-semibold text-ocean hover:bg-accent dark:text-[#4cc2ff]"
 					>
 						<History className="size-4" aria-hidden="true" />
 						Povijest ispita

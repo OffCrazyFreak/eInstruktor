@@ -34,15 +34,12 @@ export default function KnotStepper({ knot, hideName }: IKnotStepperProps) {
 				{!hideName && (
 					<div>
 						<p className="font-serif text-xl">{info.name}</p>
-						<p className="text-[0.9rem] text-[#002c78]/75">{info.use}</p>
+						<p className="text-[0.9rem] text-ink/75">{info.use}</p>
 					</div>
 				)}
 
-				<div
-					className="min-h-20 rounded-2xl bg-[#eaf3ff] p-3"
-					aria-live="polite"
-				>
-					<p className="font-mono text-[0.72rem] tracking-[0.14em] text-[#0a63b0] uppercase">
+				<div className="min-h-20 rounded-2xl bg-tint p-3" aria-live="polite">
+					<p className="font-mono text-[0.72rem] tracking-[0.14em] text-ocean uppercase">
 						Korak {step + 1} od {total}
 					</p>
 					{!hideName && (
@@ -53,9 +50,7 @@ export default function KnotStepper({ knot, hideName }: IKnotStepperProps) {
 				</div>
 
 				{!hideName && info.mnemonic && (
-					<p className="text-[0.85rem] italic text-[#002c78]/75">
-						{info.mnemonic}
-					</p>
+					<p className="text-[0.85rem] italic text-ink/75">{info.mnemonic}</p>
 				)}
 
 				<div className="flex gap-2">
@@ -63,7 +58,7 @@ export default function KnotStepper({ knot, hideName }: IKnotStepperProps) {
 						type="button"
 						onClick={() => setStep(step - 1)}
 						disabled={step === 0}
-						className="inline-flex min-h-10 items-center gap-1 rounded-full border border-[#002c78]/20 px-3 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60 disabled:opacity-40"
+						className="inline-flex min-h-10 items-center gap-1 rounded-full border border-ink/20 px-3 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60 disabled:opacity-40"
 					>
 						<ChevronLeft className="size-4" aria-hidden /> Natrag
 					</button>
@@ -71,7 +66,7 @@ export default function KnotStepper({ knot, hideName }: IKnotStepperProps) {
 						type="button"
 						onClick={() => setStep(step + 1)}
 						disabled={step === total - 1}
-						className="inline-flex min-h-10 items-center gap-1 rounded-full bg-[#002c78] px-4 text-[0.85rem] font-semibold text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60 disabled:opacity-40"
+						className="inline-flex min-h-10 items-center gap-1 rounded-full bg-brand px-4 text-[0.85rem] font-semibold text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60 disabled:opacity-40"
 					>
 						Sljedeći korak <ChevronRight className="size-4" aria-hidden />
 					</button>

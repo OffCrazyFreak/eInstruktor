@@ -73,7 +73,7 @@ export default function PracticeHub() {
 				<QuickStartCard dueCount={ready ? counts.ponavljanje : 0} />
 			</div>
 
-			<h2 className="mt-10 font-mono text-[0.74rem] tracking-[0.2em] text-[#0a63b0] dark:text-[#4cc2ff]">
+			<h2 className="mt-10 font-mono text-[0.74rem] tracking-[0.2em] text-ocean dark:text-[#4cc2ff]">
 				NAČINI VJEŽBE
 			</h2>
 
@@ -99,7 +99,7 @@ export default function PracticeHub() {
 				})}
 			</ul>
 
-			<h2 className="mt-10 font-mono text-[0.74rem] tracking-[0.2em] text-[#0a63b0] dark:text-[#4cc2ff]">
+			<h2 className="mt-10 font-mono text-[0.74rem] tracking-[0.2em] text-ocean dark:text-[#4cc2ff]">
 				USMENI ISPIT
 			</h2>
 

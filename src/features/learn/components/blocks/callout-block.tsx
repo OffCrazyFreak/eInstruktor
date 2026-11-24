@@ -23,8 +23,8 @@ const CALLOUTS: Record<
 	remember: {
 		label: "Zapamti",
 		icon: Bookmark,
-		className: "border-[#00aef3]/45 bg-[#eaf3ff] dark:bg-accent",
-		iconClassName: "text-[#0a63b0] dark:text-[#4cc2ff]",
+		className: "border-[#00aef3]/45 bg-tint dark:bg-accent",
+		iconClassName: "text-ocean dark:text-[#4cc2ff]",
 	},
 	warning: {
 		label: "Pažnja",
@@ -35,8 +35,8 @@ const CALLOUTS: Record<
 	example: {
 		label: "Primjer",
 		icon: PenLine,
-		className: "border-dashed border-[#0a63b0]/40 bg-card",
-		iconClassName: "text-[#0a63b0] dark:text-[#4cc2ff]",
+		className: "border-dashed border-ocean/40 bg-card",
+		iconClassName: "text-ocean dark:text-[#4cc2ff]",
 	},
 	"source-note": {
 		label: "Napomena o izvoru",

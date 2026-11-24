@@ -106,11 +106,11 @@ export default function DayShapes({
 					label={`${info.name}: ${shapesText}`}
 				/>
 
-				<div className="rounded-2xl bg-[#eaf3ff] p-3 text-[0.9rem] leading-relaxed">
+				<div className="rounded-2xl bg-tint p-3 text-[0.9rem] leading-relaxed">
 					<p className="font-serif text-lg">{info.name}</p>
 					<p className="font-semibold">{shapesText}</p>
 					<p>{info.note}</p>
-					<p className="mt-1 text-[#002c78]/70">
+					<p className="mt-1 text-ink/70">
 						Dnevni znakovi su crni i nose se danju, kad se svjetla ne vide.
 					</p>
 				</div>

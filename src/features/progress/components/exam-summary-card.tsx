@@ -53,7 +53,7 @@ export default function ExamSummaryCard({ sessions }: IExamSummaryCardProps) {
 
 			<Link
 				to={latest ? "/ispit/povijest" : "/ispit"}
-				className="mt-3 -ml-2 flex w-fit min-h-11 items-center gap-1 rounded-full px-2 font-semibold text-[#0a63b0] hover:bg-accent dark:text-[#4cc2ff]"
+				className="mt-3 -ml-2 flex w-fit min-h-11 items-center gap-1 rounded-full px-2 font-semibold text-ocean hover:bg-accent dark:text-[#4cc2ff]"
 			>
 				{latest ? "Povijest ispita" : "Riješi probni ispit"}
 				<ChevronRight className="size-4" aria-hidden="true" />

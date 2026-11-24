@@ -53,7 +53,7 @@ export default function ReaderTopBar({
 				aria-valuemin={0}
 				aria-valuemax={100}
 				aria-valuenow={Math.round(percent * 100)}
-				className="h-1 bg-[#eaf3ff] dark:bg-accent"
+				className="h-1 bg-tint dark:bg-accent"
 			>
 				<div
 					className="h-full origin-left bg-[#00aef3]"

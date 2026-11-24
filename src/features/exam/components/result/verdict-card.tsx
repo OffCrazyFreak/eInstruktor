@@ -23,7 +23,7 @@ export default function VerdictCard({ session, total }: IVerdictCardProps) {
 	return (
 		<section
 			aria-labelledby="verdict-title"
-			className="relative overflow-hidden rounded-[1.6rem] bg-[#002c78] p-5 text-[#eaf3ff] sm:p-7 dark:ring-1 dark:ring-white/15"
+			className="relative overflow-hidden rounded-[1.6rem] bg-brand p-5 text-[#eaf3ff] sm:p-7 dark:ring-1 dark:ring-white/15"
 		>
 			<p className="font-mono text-[0.72rem] tracking-[0.2em] text-[#8fd3f7]">
 				ZAPISNIK PROBNOG ISPITA · KATEGORIJA {session.level}

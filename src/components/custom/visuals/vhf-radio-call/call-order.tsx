@@ -38,7 +38,7 @@ export default function CallOrder({
 					{shuffled.map((step) => (
 						<li
 							key={step.title}
-							className="rounded-2xl border border-[#002c78]/15 bg-white px-3 py-2 text-[0.88rem]"
+							className="rounded-2xl border border-ink/15 bg-paper px-3 py-2 text-[0.88rem]"
 						>
 							{step.title}
 						</li>
@@ -87,7 +87,7 @@ export default function CallOrder({
 									"min-h-11 rounded-2xl border px-3 text-[0.88rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60",
 									wrong === step.title
 										? "border-[#e0322b] bg-[#e0322b]/10"
-										: "border-[#002c78]/15 bg-white hover:border-[#00aef3]",
+										: "border-ink/15 bg-paper hover:border-[#00aef3]",
 								)}
 							>
 								{step.title}
@@ -112,7 +112,7 @@ export default function CallOrder({
 						<button
 							type="button"
 							onClick={() => setPicked([])}
-							className="min-h-10 rounded-full border border-[#002c78]/20 px-4 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+							className="min-h-10 rounded-full border border-ink/20 px-4 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 						>
 							Ponovi
 						</button>

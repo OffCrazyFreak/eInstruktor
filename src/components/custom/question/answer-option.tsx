@@ -51,10 +51,8 @@ export default function AnswerOption({
 				"has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/60",
 				feedback === null &&
 					!checked &&
-					"border-border hover:border-[#0a63b0]/45 hover:bg-[#eaf3ff]/60 dark:hover:bg-accent dark:hover:border-[#4cc2ff]/50",
-				feedback === null &&
-					checked &&
-					"border-primary bg-[#eaf3ff] dark:bg-accent",
+					"border-border hover:border-ocean/45 hover:bg-tint/60 dark:hover:bg-accent dark:hover:border-[#4cc2ff]/50",
+				feedback === null && checked && "border-primary bg-tint dark:bg-accent",
 				feedback !== null && "cursor-default",
 				feedback === "neutral" && "border-border opacity-75",
 				isRight && "border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40",
@@ -80,7 +78,7 @@ export default function AnswerOption({
 					multiple ? "rounded-lg" : "rounded-full",
 					checked
 						? "border-primary bg-primary text-primary-foreground"
-						: "border-[#002c78]/25 text-[#0a63b0] dark:text-[#4cc2ff] dark:border-white/20",
+						: "border-ink/25 text-ocean dark:text-[#4cc2ff] dark:border-white/20",
 					isRight &&
 						"border-emerald-600 bg-emerald-600 text-white dark:border-emerald-600 dark:text-white",
 					isWrong &&

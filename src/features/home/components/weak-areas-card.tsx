@@ -35,11 +35,11 @@ export default function WeakAreasCard({ areas }: IWeakAreasCardProps) {
 							<Link
 								to="/vjezba/serija"
 								search={{ mode: "podrucje", area: area.slug, length: 10 }}
-								className="flex min-h-14 items-center gap-3 rounded-xl border border-border px-3 py-2 text-foreground outline-none hover:border-[#0a63b0]/40 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
+								className="flex min-h-14 items-center gap-3 rounded-xl border border-border px-3 py-2 text-foreground outline-none hover:border-ocean/40 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:hover:border-[#4cc2ff]/50"
 							>
 								<AreaIcon
 									name={area.icon}
-									className="size-5 shrink-0 text-[#0a63b0] dark:text-[#4cc2ff]"
+									className="size-5 shrink-0 text-ocean dark:text-[#4cc2ff]"
 								/>
 								<span className="min-w-0 flex-1">
 									<span className="block text-[0.95rem] font-semibold leading-snug">

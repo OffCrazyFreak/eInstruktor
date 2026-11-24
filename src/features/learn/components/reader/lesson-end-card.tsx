@@ -18,7 +18,7 @@ export default function LessonEndCard({
 	return (
 		<section
 			aria-labelledby="lesson-end-title"
-			className="rounded-[1.6rem] bg-[#002c78] dark:ring-1 dark:ring-white/15 p-5 text-[#eaf3ff] sm:p-7"
+			className="rounded-[1.6rem] bg-brand dark:ring-1 dark:ring-white/15 p-5 text-[#eaf3ff] sm:p-7"
 		>
 			<p className="font-mono text-[0.74rem] tracking-[0.2em] text-[#ffb43c]">
 				KRAJ LEKCIJE
@@ -47,7 +47,7 @@ export default function LessonEndCard({
 				<Button
 					asChild
 					variant="secondary"
-					className="h-12 rounded-full text-[0.95rem] font-semibold dark:bg-[#00aef3] dark:text-[#002c78] dark:hover:bg-[#4cc2ff]"
+					className="h-12 rounded-full text-[0.95rem] font-semibold dark:bg-[#00aef3] dark:text-[#04142e] dark:hover:bg-[#4cc2ff]"
 				>
 					<Link
 						to="/vjezba/serija"

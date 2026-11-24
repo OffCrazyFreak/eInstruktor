@@ -74,7 +74,7 @@ export default function ExamTopBar({
 				{blocks.map((item, index) => (
 					<div
 						key={item.subjectId}
-						className="h-full basis-0 bg-[#eaf3ff] dark:bg-accent"
+						className="h-full basis-0 bg-tint dark:bg-accent"
 						style={{ flexGrow: item.questions.length }}
 					>
 						<div

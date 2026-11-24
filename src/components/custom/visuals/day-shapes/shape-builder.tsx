@@ -56,7 +56,7 @@ export default function ShapeBuilder() {
 							onClick={() => add(shape)}
 							disabled={stack.length >= MAX_SHAPES}
 							aria-label={`Dodaj: ${SHAPE_NAMES[shape]}`}
-							className="flex h-14 items-center justify-center rounded-2xl border border-[#002c78]/15 bg-white outline-none hover:border-[#00aef3] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60 disabled:opacity-40"
+							className="flex h-14 items-center justify-center rounded-2xl border border-ink/15 bg-paper outline-none hover:border-[#00aef3] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60 disabled:opacity-40"
 						>
 							<svg viewBox="0 0 40 40" className="size-9" aria-hidden="true">
 								<DayShapeIcon shape={shape} x={20} y={20} />
@@ -69,21 +69,21 @@ export default function ShapeBuilder() {
 					<button
 						type="button"
 						onClick={() => setStack(stack.slice(0, -1))}
-						className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-[#002c78]/20 px-3 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+						className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-ink/20 px-3 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 					>
 						<Undo2 className="size-4" aria-hidden /> Makni zadnji
 					</button>
 					<button
 						type="button"
 						onClick={() => setStack([])}
-						className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-[#002c78]/20 px-3 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+						className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-ink/20 px-3 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 					>
 						<Eraser className="size-4" aria-hidden /> Očisti
 					</button>
 					<button
 						type="button"
 						onClick={() => setChecked(true)}
-						className="inline-flex min-h-10 items-center rounded-full bg-[#002c78] px-4 text-[0.85rem] font-semibold text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+						className="inline-flex min-h-10 items-center rounded-full bg-brand px-4 text-[0.85rem] font-semibold text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 					>
 						Provjeri
 					</button>

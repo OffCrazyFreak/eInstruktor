@@ -115,7 +115,7 @@ export default function ShipLightsViewer({
 					id={selectId}
 					value={vesselId}
 					onChange={(event) => setVesselId(event.target.value as VesselId)}
-					className="min-h-11 w-full rounded-xl border border-[#002c78]/20 bg-white px-3 text-[0.92rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+					className="min-h-11 w-full rounded-xl border border-ink/20 bg-paper px-3 text-[0.92rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 				>
 					{groups.map((group) => (
 						<optgroup key={group} label={GROUP_LABELS[group]}>
@@ -168,11 +168,11 @@ export default function ShipLightsViewer({
 				</div>
 			</div>
 
-			<div className="rounded-2xl bg-[#eaf3ff] p-3 text-[0.9rem] leading-relaxed">
+			<div className="rounded-2xl bg-tint p-3 text-[0.9rem] leading-relaxed">
 				<p className="font-serif text-lg">{info.name}</p>
 				<p>{info.note}</p>
 				{focus === "sectors" && (
-					<p className="mt-1 text-[#002c78]/75">
+					<p className="mt-1 text-ink/75">
 						Jarbolno svjetlo svijetli 225° prema naprijed, svako bočno 112,5°, a
 						krmeno 135° prema natrag. Zajedno pokrivaju cijeli krug.
 					</p>

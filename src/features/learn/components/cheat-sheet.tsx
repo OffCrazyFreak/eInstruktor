@@ -23,7 +23,7 @@ export default function CheatSheet({ lessons }: ICheatSheetProps) {
 			<div className="mt-5 space-y-5">
 				{withNotes.map((lesson) => (
 					<div key={lesson.slug}>
-						<h3 className="font-mono text-[0.74rem] tracking-[0.14em] text-[#0a63b0] dark:text-[#4cc2ff]">
+						<h3 className="font-mono text-[0.74rem] tracking-[0.14em] text-ocean dark:text-[#4cc2ff]">
 							{lesson.title.toUpperCase()}
 						</h3>
 						<ul className="mt-2 list-disc space-y-1.5 pl-5 text-[0.98rem] leading-relaxed">

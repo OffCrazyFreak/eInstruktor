@@ -35,11 +35,8 @@ export default function ControlsTour() {
 				onChange={setRadio}
 			/>
 
-			<div
-				className="space-y-3 rounded-2xl bg-[#eaf3ff] p-3"
-				aria-live="polite"
-			>
-				<p className="font-mono text-[0.72rem] tracking-[0.14em] text-[#0a63b0] uppercase">
+			<div className="space-y-3 rounded-2xl bg-tint p-3" aria-live="polite">
+				<p className="font-mono text-[0.72rem] tracking-[0.14em] text-ocean uppercase">
 					Kontrola {index + 1} od {CONTROL_IDS.length}
 				</p>
 				<p className="font-serif text-lg">{info.name}</p>
@@ -59,7 +56,7 @@ export default function ControlsTour() {
 								] ?? "volume",
 							)
 						}
-						className="min-h-10 rounded-full border border-[#002c78]/20 px-4 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+						className="min-h-10 rounded-full border border-ink/20 px-4 text-[0.85rem] outline-none focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 					>
 						Prethodna
 					</button>
@@ -70,7 +67,7 @@ export default function ControlsTour() {
 								CONTROL_IDS[(index + 1) % CONTROL_IDS.length] ?? "volume",
 							)
 						}
-						className="min-h-10 rounded-full bg-[#002c78] px-4 text-[0.85rem] font-semibold text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
+						className="min-h-10 rounded-full bg-brand px-4 text-[0.85rem] font-semibold text-white outline-none hover:bg-[#0a63b0] focus-visible:ring-[3px] focus-visible:ring-[#00aef3]/60"
 					>
 						Sljedeća kontrola
 					</button>

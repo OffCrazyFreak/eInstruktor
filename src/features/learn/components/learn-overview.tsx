@@ -33,7 +33,7 @@ export default function LearnOverview() {
 				</div>
 			)}
 
-			<h2 className="mt-10 font-mono text-[0.74rem] tracking-[0.2em] text-[#0a63b0] dark:text-[#4cc2ff]">
+			<h2 className="mt-10 font-mono text-[0.74rem] tracking-[0.2em] text-ocean dark:text-[#4cc2ff]">
 				PODRUČJA
 			</h2>
 

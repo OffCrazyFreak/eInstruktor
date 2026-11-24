@@ -33,21 +33,21 @@ export default function VisualFrame({
 	return (
 		<figure
 			className={cn(
-				"m-0 min-w-0 rounded-[1.4rem] border border-[#002c78]/12 bg-white/85 p-3 text-[#002c78] shadow-[0_10px_30px_-18px_rgba(0,44,120,0.45)] sm:p-5",
+				"m-0 min-w-0 rounded-[1.4rem] border border-ink/12 bg-white/85 p-3 text-ink shadow-[0_10px_30px_-18px_rgba(0,44,120,0.45)] sm:p-5",
 				className,
 			)}
 		>
 			<VisualErrorBoundary
 				key={instance}
 				fallback={
-					<p className="rounded-2xl bg-[#eaf3ff] p-4 text-[0.92rem]">
+					<p className="rounded-2xl bg-tint p-4 text-[0.92rem]">
 						Ovaj prikaz se nije učitao. Osvježi stranicu ili nastavi s lekcijom.
 					</p>
 				}
 			>
 				<Suspense
 					fallback={
-						<div className="h-72 animate-pulse rounded-2xl bg-[#eaf3ff]">
+						<div className="h-72 animate-pulse rounded-2xl bg-tint">
 							<span className="sr-only">Učitavam prikaz</span>
 						</div>
 					}
@@ -57,7 +57,7 @@ export default function VisualFrame({
 			</VisualErrorBoundary>
 
 			{caption && (
-				<figcaption className="mt-3 px-1 text-[0.86rem] leading-relaxed text-[#002c78]/70">
+				<figcaption className="mt-3 px-1 text-[0.86rem] leading-relaxed text-ink/70">
 					{caption}
 				</figcaption>
 			)}

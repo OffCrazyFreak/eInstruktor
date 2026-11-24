@@ -29,7 +29,7 @@ export default function PracticeHint({
 	return (
 		<p className="flex gap-2.5 px-1 text-[0.92rem] leading-snug text-muted-foreground">
 			<Lightbulb
-				className="mt-0.5 size-4 shrink-0 text-[#0a63b0] dark:text-[#4cc2ff]"
+				className="mt-0.5 size-4 shrink-0 text-ocean dark:text-[#4cc2ff]"
 				aria-hidden="true"
 			/>
 			<span>

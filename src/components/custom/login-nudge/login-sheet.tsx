@@ -27,7 +27,7 @@ export default function LoginSheet({
 				side="bottom"
 				className="mx-auto max-h-[90svh] max-w-xl gap-0 overflow-y-auto rounded-t-[1.6rem] px-5 pt-6 pb-[calc(1.25rem+env(safe-area-inset-bottom))]"
 			>
-				<span className="grid size-12 place-items-center rounded-2xl bg-[#eaf3ff] text-[#0a63b0] dark:bg-accent dark:text-[#4cc2ff]">
+				<span className="grid size-12 place-items-center rounded-2xl bg-tint text-ocean dark:bg-accent dark:text-[#4cc2ff]">
 					<Cloud className="size-6" aria-hidden="true" />
 				</span>
 
