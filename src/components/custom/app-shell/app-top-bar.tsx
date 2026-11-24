@@ -1,9 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { UserRound } from "lucide-react";
+import AccountMenu from "@/components/custom/app-shell/account-menu";
 import LevelChip from "@/components/custom/app-shell/level-chip";
 import BrandMark from "@/components/custom/layout/brand-mark";
 import Wordmark from "@/components/custom/layout/wordmark";
-import signInWithGoogle from "@/lib/auth/sign-in-with-google";
 
 export default function AppTopBar() {
 	return (
@@ -23,15 +22,7 @@ export default function AppTopBar() {
 				<div className="flex items-center gap-2">
 					<LevelChip />
 
-					<button
-						type="button"
-						onClick={signInWithGoogle}
-						aria-label="Prijava Googleom"
-						title="Prijava Googleom"
-						className="grid size-11 place-items-center rounded-full border border-[#002c78]/20 bg-card text-primary outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60 dark:border-white/20"
-					>
-						<UserRound className="size-5" aria-hidden="true" />
-					</button>
+					<AccountMenu />
 				</div>
 			</div>
 		</header>

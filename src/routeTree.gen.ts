@@ -18,6 +18,7 @@ import { Route as SiteUvjetiRouteImport } from './routes/_site/uvjeti'
 import { Route as SitePrivatnostRouteImport } from './routes/_site/privatnost'
 import { Route as AppPocetnaRouteImport } from './routes/_app/pocetna'
 import { Route as AppNapredakRouteImport } from './routes/_app/napredak'
+import { Route as AppAuthedRouteImport } from './routes/_app/_authed'
 import { Route as AppVjezbaIndexRouteImport } from './routes/_app/vjezba/index'
 import { Route as AppUcenjeIndexRouteImport } from './routes/_app/ucenje/index'
 import { Route as AppIspitIndexRouteImport } from './routes/_app/ispit/index'
@@ -25,6 +26,7 @@ import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AppVjezbaSerijaRouteImport } from './routes/_app/vjezba/serija'
 import { Route as AppIspitPovijestRouteImport } from './routes/_app/ispit/povijest'
 import { Route as AppIspitSessionIdRouteImport } from './routes/_app/ispit/$sessionId'
+import { Route as AppAuthedRacunRouteImport } from './routes/_app/_authed/racun'
 import { Route as AppVjezbaUsmenoIndexRouteImport } from './routes/_app/vjezba/usmeno/index'
 import { Route as AppUcenjeAreaIndexRouteImport } from './routes/_app/ucenje/$area/index'
 import { Route as AppVjezbaUsmenoDeckRouteImport } from './routes/_app/vjezba/usmeno/$deck'
@@ -74,6 +76,10 @@ const AppNapredakRoute = AppNapredakRouteImport.update({
   path: '/napredak',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAuthedRoute = AppAuthedRouteImport.update({
+  id: '/_authed',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppVjezbaIndexRoute = AppVjezbaIndexRouteImport.update({
   id: '/vjezba/',
   path: '/vjezba/',
@@ -108,6 +114,11 @@ const AppIspitSessionIdRoute = AppIspitSessionIdRouteImport.update({
   id: '/ispit/$sessionId',
   path: '/ispit/$sessionId',
   getParentRoute: () => AppRoute,
+} as any)
+const AppAuthedRacunRoute = AppAuthedRacunRouteImport.update({
+  id: '/racun',
+  path: '/racun',
+  getParentRoute: () => AppAuthedRoute,
 } as any)
 const AppVjezbaUsmenoIndexRoute = AppVjezbaUsmenoIndexRouteImport.update({
   id: '/vjezba/usmeno/',
@@ -144,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/privatnost': typeof SitePrivatnostRoute
   '/uvjeti': typeof SiteUvjetiRoute
   '/vizuali': typeof SiteVizualiRoute
+  '/racun': typeof AppAuthedRacunRoute
   '/ispit/$sessionId': typeof AppIspitSessionIdRoute
   '/ispit/povijest': typeof AppIspitPovijestRoute
   '/vjezba/serija': typeof AppVjezbaSerijaRoute
@@ -165,6 +177,7 @@ export interface FileRoutesByTo {
   '/privatnost': typeof SitePrivatnostRoute
   '/uvjeti': typeof SiteUvjetiRoute
   '/vizuali': typeof SiteVizualiRoute
+  '/racun': typeof AppAuthedRacunRoute
   '/ispit/$sessionId': typeof AppIspitSessionIdRoute
   '/ispit/povijest': typeof AppIspitPovijestRoute
   '/vjezba/serija': typeof AppVjezbaSerijaRoute
@@ -183,12 +196,14 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_site': typeof SiteRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_app/_authed': typeof AppAuthedRouteWithChildren
   '/_app/napredak': typeof AppNapredakRoute
   '/_app/pocetna': typeof AppPocetnaRoute
   '/_site/privatnost': typeof SitePrivatnostRoute
   '/_site/uvjeti': typeof SiteUvjetiRoute
   '/_site/vizuali': typeof SiteVizualiRoute
   '/_site/': typeof SiteIndexRoute
+  '/_app/_authed/racun': typeof AppAuthedRacunRoute
   '/_app/ispit/$sessionId': typeof AppIspitSessionIdRoute
   '/_app/ispit/povijest': typeof AppIspitPovijestRoute
   '/_app/vjezba/serija': typeof AppVjezbaSerijaRoute
@@ -212,6 +227,7 @@ export interface FileRouteTypes {
     | '/privatnost'
     | '/uvjeti'
     | '/vizuali'
+    | '/racun'
     | '/ispit/$sessionId'
     | '/ispit/povijest'
     | '/vjezba/serija'
@@ -233,6 +249,7 @@ export interface FileRouteTypes {
     | '/privatnost'
     | '/uvjeti'
     | '/vizuali'
+    | '/racun'
     | '/ispit/$sessionId'
     | '/ispit/povijest'
     | '/vjezba/serija'
@@ -250,12 +267,14 @@ export interface FileRouteTypes {
     | '/_app'
     | '/_site'
     | '/sitemap.xml'
+    | '/_app/_authed'
     | '/_app/napredak'
     | '/_app/pocetna'
     | '/_site/privatnost'
     | '/_site/uvjeti'
     | '/_site/vizuali'
     | '/_site/'
+    | '/_app/_authed/racun'
     | '/_app/ispit/$sessionId'
     | '/_app/ispit/povijest'
     | '/_app/vjezba/serija'
@@ -342,6 +361,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppNapredakRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/_authed': {
+      id: '/_app/_authed'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppAuthedRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/vjezba/': {
       id: '/_app/vjezba/'
       path: '/vjezba'
@@ -391,6 +417,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIspitSessionIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/_authed/racun': {
+      id: '/_app/_authed/racun'
+      path: '/racun'
+      fullPath: '/racun'
+      preLoaderRoute: typeof AppAuthedRacunRouteImport
+      parentRoute: typeof AppAuthedRoute
+    }
     '/_app/vjezba/usmeno/': {
       id: '/_app/vjezba/usmeno/'
       path: '/vjezba/usmeno'
@@ -429,7 +462,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AppAuthedRouteChildren {
+  AppAuthedRacunRoute: typeof AppAuthedRacunRoute
+}
+
+const AppAuthedRouteChildren: AppAuthedRouteChildren = {
+  AppAuthedRacunRoute: AppAuthedRacunRoute,
+}
+
+const AppAuthedRouteWithChildren = AppAuthedRoute._addFileChildren(
+  AppAuthedRouteChildren,
+)
+
 interface AppRouteChildren {
+  AppAuthedRoute: typeof AppAuthedRouteWithChildren
   AppNapredakRoute: typeof AppNapredakRoute
   AppPocetnaRoute: typeof AppPocetnaRoute
   AppIspitSessionIdRoute: typeof AppIspitSessionIdRoute
@@ -446,6 +492,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAuthedRoute: AppAuthedRouteWithChildren,
   AppNapredakRoute: AppNapredakRoute,
   AppPocetnaRoute: AppPocetnaRoute,
   AppIspitSessionIdRoute: AppIspitSessionIdRoute,
@@ -488,12 +535,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
