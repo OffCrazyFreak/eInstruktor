@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { todayActivity, withStudyDay } from "@/lib/progress/daily-goal";
 import { EMPTY_PROGRESS } from "@/lib/progress/progress-schema";
-import { testAttempt } from "@/lib/progress/test-attempts";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 describe("todayActivity", () => {
 	it("meets the goal at 5 answers or one finished lesson", () => {

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { applySyncResponse } from "@/features/account/utils/apply-sync-response";
 import { buildSyncRequest } from "@/features/account/utils/build-sync-request";
 import { EMPTY_PROGRESS } from "@/lib/progress/progress-schema";
-import { testAttempt } from "@/lib/progress/test-attempts";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 describe("sync robustness", () => {
 	it("leaves a damaged local attempt behind instead of blocking every sync", () => {

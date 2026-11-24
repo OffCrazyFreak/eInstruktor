@@ -8,12 +8,12 @@ import {
 	pushProgress,
 } from "@/features/account/server/push-progress.server";
 import type { ISyncRequest } from "@/features/account/utils/sync-schema";
-import { testAttempt } from "@/lib/progress/test-attempts";
 import {
 	createTempDatabase,
 	type ITempDatabase,
 	insertTestUser,
 } from "@/lib/testing/temp-database";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 const REAL_QUESTION = course.questions[0]?.id ?? "";
 const REAL_LESSON = course.lessons[0]?.slug ?? "";

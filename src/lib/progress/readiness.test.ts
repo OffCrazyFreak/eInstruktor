@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { IAttempt } from "@/lib/progress/progress-schema";
 import { readiness } from "@/lib/progress/readiness";
-import { testAttempt } from "@/lib/progress/test-attempts";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 function ids(prefix: string, count: number) {
 	return Array.from({ length: count }, (_, index) => `${prefix}-${index}`);

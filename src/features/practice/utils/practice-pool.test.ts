@@ -10,7 +10,7 @@ import {
 } from "@/features/practice/utils/practice-pool";
 import { getQuestions } from "@/lib/content/course-selectors";
 import { EMPTY_PROGRESS } from "@/lib/progress/progress-schema";
-import { testAttempt } from "@/lib/progress/test-attempts";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 const today = "2026-11-20";
 

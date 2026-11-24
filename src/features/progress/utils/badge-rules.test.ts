@@ -18,7 +18,7 @@ import {
 	type IExamSession,
 	type IProgressState,
 } from "@/lib/progress/progress-schema";
-import { testAttempt } from "@/lib/progress/test-attempts";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 function context(
 	progress: Partial<IProgressState>,

@@ -3,7 +3,7 @@ import {
 	flaggedIds,
 	wrongQuestionIds,
 } from "@/lib/progress/practice/practice-selectors";
-import { testAttempt } from "@/lib/progress/test-attempts";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 describe("wrongQuestionIds", () => {
 	it("lists a question whose latest answer is wrong", () => {
