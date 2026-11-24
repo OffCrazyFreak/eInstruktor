@@ -78,7 +78,7 @@ export default function BeaufortScale({
 					max={12}
 					value={force}
 					onChange={(event) => setForce(Number(event.target.value))}
-					className="w-full accent-[#002c78]"
+					className="w-full accent-ink"
 				/>
 				<div className="flex justify-between font-mono text-[0.7rem] text-ink/60">
 					<span>0</span>

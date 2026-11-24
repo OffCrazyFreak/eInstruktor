@@ -50,7 +50,7 @@ export default function BadgeCelebration({
 				type="button"
 				onClick={onDismiss}
 				aria-label="Zatvori obavijest o znački"
-				className="absolute top-2 right-2 grid size-11 place-items-center rounded-full outline-none hover:bg-brand/10 focus-visible:ring-[3px] focus-visible:ring-ink/50"
+				className="absolute top-2 right-2 grid size-11 place-items-center rounded-full outline-none hover:bg-brand/10 focus-visible:ring-[3px] focus-visible:ring-[#002c78]/50"
 			>
 				<X className="size-5" aria-hidden="true" />
 			</button>

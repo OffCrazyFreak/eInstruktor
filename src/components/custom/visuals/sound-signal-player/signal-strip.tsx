@@ -43,7 +43,7 @@ export default function SignalStrip({ sounds, elapsed }: ISignalStripProps) {
 			role="img"
 			aria-label={sounds.map((sound) => LABELS[sound.element]).join(", ")}
 		>
-			<div className="absolute inset-x-0 top-1/2 h-px bg-brand/15" />
+			<div className="absolute inset-x-0 top-1/2 h-px bg-ink/15" />
 			{sounds.map((sound) => {
 				const active =
 					elapsed !== null &&
@@ -57,7 +57,7 @@ export default function SignalStrip({ sounds, elapsed }: ISignalStripProps) {
 							"absolute top-1/2 h-3 -translate-y-1/2 rounded-full",
 							sound.element === "bell"
 								? "h-4 bg-[repeating-linear-gradient(90deg,#0a63b0_0_3px,transparent_3px_6px)]"
-								: "bg-brand",
+								: "bg-ink",
 							sound.element === "stroke" && "h-4 w-1.5 rounded-sm",
 							active && "bg-[#ffb43c] shadow-[0_0_0_4px_rgba(255,180,60,0.35)]",
 						)}

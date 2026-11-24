@@ -106,7 +106,7 @@ export default function NavigationAreasMap({
 				step={0.1}
 				value={distance}
 				onChange={(event) => setDistance(Number(event.target.value))}
-				className="w-full accent-[#002c78]"
+				className="w-full accent-ink"
 			/>
 
 			<div className="grid gap-2 sm:grid-cols-2">

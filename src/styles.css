@@ -6,10 +6,11 @@
 
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark *):not(.force-light *));
 
 :root,
 .force-light {
+  color-scheme: light;
   --ink: #002c78;
   --ocean: #0a63b0;
   --tint: #eaf3ff;

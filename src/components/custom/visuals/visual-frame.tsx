@@ -33,7 +33,7 @@ export default function VisualFrame({
 	return (
 		<figure
 			className={cn(
-				"m-0 min-w-0 rounded-[1.4rem] border border-ink/12 bg-white/85 p-3 text-ink shadow-[0_10px_30px_-18px_rgba(0,44,120,0.45)] sm:p-5",
+				"m-0 min-w-0 rounded-[1.4rem] border border-ink/12 force-light bg-white/85 p-3 text-ink shadow-[0_10px_30px_-18px_rgba(0,44,120,0.45)] sm:p-5",
 				className,
 			)}
 		>

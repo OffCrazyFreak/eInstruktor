@@ -88,7 +88,7 @@ export default function Header() {
 									<SheetClose asChild key={n.label}>
 										<Link
 											to={n.to}
-											className="rounded-lg px-3 py-3 text-base font-medium text-ink/80 transition-colors hover:bg-[#eaf3fd] hover:text-ink"
+											className="rounded-lg px-3 py-3 text-base font-medium text-ink/80 transition-colors hover:bg-tint hover:text-ink"
 										>
 											{n.label}
 										</Link>
@@ -101,7 +101,7 @@ export default function Header() {
 										<Button
 											type="button"
 											onClick={() => signInWithGoogle()}
-											className="w-full gap-2 rounded-full bg-brand text-white hover:bg-brand"
+											className="w-full gap-2 rounded-full"
 										>
 											<GoogleIcon className="h-4 w-4" />
 											Prijava Googleom
