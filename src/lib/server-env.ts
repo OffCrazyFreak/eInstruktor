@@ -15,7 +15,9 @@ const serverEnvSchema = z.object({
 	GOOGLE_CLIENT_SECRET: optionalString,
 });
 
+// Without a base URL better-auth trusts the request host, so the Google redirect and trusted origins would follow it.
 const REQUIRED_IN_PRODUCTION = [
+	"BETTER_AUTH_URL",
 	"BETTER_AUTH_SECRET",
 	"GOOGLE_CLIENT_ID",
 	"GOOGLE_CLIENT_SECRET",

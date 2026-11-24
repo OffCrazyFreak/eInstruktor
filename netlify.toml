@@ -5,3 +5,13 @@
   command = "pnpm dev"
   targetPort = 3000
   port = 8888
+
+# A full script and style policy needs a hash for the inline theme and hydration scripts and a check on a deploy preview; framing is the part that is safe to enforce now.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "frame-ancestors 'none'"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
