@@ -8,6 +8,8 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
 import TanStackQueryDevtools from "@/components/custom/devtools/query-devtools-plugin";
+import { authConfigQueryOptions } from "@/lib/auth/auth-config.functions";
+import AuthStatusProvider from "@/lib/auth/auth-status-provider";
 import appCss from "@/styles.css?url";
 
 interface IRouterContext {
@@ -41,6 +43,9 @@ export const Route = createRootRouteWithContext<IRouterContext>()({
 			},
 		],
 	}),
+	// Cached for the whole visit, so client navigations never call the server for it again.
+	loader: ({ context }) =>
+		context.queryClient.ensureQueryData(authConfigQueryOptions()),
 	shellComponent: RootDocument,
 });
 
@@ -53,7 +58,7 @@ function RootDocument({ children }: IRootDocumentProps) {
 				<HeadContent />
 			</head>
 			<body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(0,174,243,0.22)]">
-				{children}
+				<AuthStatusProvider>{children}</AuthStatusProvider>
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",

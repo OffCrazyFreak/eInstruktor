@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import HistoryItem from "@/features/exam/components/history/history-item";
 import TrendRow from "@/features/exam/components/history/trend-row";
 import ExamSkeleton from "@/features/exam/components/shared/exam-skeleton";
+import useAuthStatus from "@/lib/auth/use-auth-status";
 import { finishedExamSessions } from "@/lib/progress/exam-session-selectors";
 import useProgress from "@/lib/progress/use-progress";
 
 export default function ExamHistoryPage() {
 	const { progress, ready } = useProgress();
+	const signedIn = useAuthStatus().viewer.status === "signed-in";
 	const sessions = finishedExamSessions(progress);
 	const passedCount = sessions.filter((session) => session.passed).length;
 
@@ -49,8 +51,10 @@ export default function ExamHistoryPage() {
 			) : (
 				<>
 					<p className="mt-1 text-[0.95rem] text-muted-foreground">
-						Položeno {passedCount} od {sessions.length}. Spremljeno samo u ovom
-						pregledniku.
+						Položeno {passedCount} od {sessions.length}.
+						{signedIn
+							? " Spremljeno i na tvoj račun."
+							: " Spremljeno samo u ovom pregledniku."}
 					</p>
 
 					<div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1.3fr] lg:items-start">

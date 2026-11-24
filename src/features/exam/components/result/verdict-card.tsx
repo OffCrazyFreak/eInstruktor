@@ -2,9 +2,9 @@ import { CircleCheck, CircleX, TimerOff } from "lucide-react";
 import course from "@/content/voditelj-brodice";
 import {
 	durationMinutes,
-	formatExamDate,
 	formatExamTime,
 } from "@/features/exam/utils/exam-dates";
+import { formatDay } from "@/lib/dates/format-day";
 import { endedByClock } from "@/lib/progress/exam-session-selectors";
 import type { IExamSession } from "@/lib/progress/progress-schema";
 import { cn } from "@/lib/utils";
@@ -29,7 +29,7 @@ export default function VerdictCard({ session, total }: IVerdictCardProps) {
 				ZAPISNIK PROBNOG ISPITA · KATEGORIJA {session.level}
 			</p>
 			<p className="mt-1 text-[0.9rem] text-[#eaf3ff]/80">
-				{formatExamDate(finishedAt)} u {formatExamTime(finishedAt)}, trajalo{" "}
+				{formatDay(finishedAt)} u {formatExamTime(finishedAt)}, trajalo{" "}
 				{durationMinutes(session.startedAt, finishedAt)} min
 			</p>
 

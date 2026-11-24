@@ -6,8 +6,9 @@ The app screens live under the pathless `_app` layout route; the landing, the le
 
 - `src/routes/_app.tsx` renders `AppLayout` from `src/components/custom/app-shell/`: a sticky top bar (logo, level chip, account button), the page, and five tabs (Početna, Učenje, Vježba, Ispit, Napredak). Below `lg` the tabs are a bottom bar with the safe-area inset; from `lg` they are a left rail.
 - A route that needs the whole screen sets `staticData: { immersive: true }` (typed in `src/router.tsx`). The layout then hides the top bar and the bottom tabs, and the rail starts at the top. The lesson reader uses it for its own top bar and its fixed bottom action.
-- The level chip opens `LevelSheet`, a bottom sheet with the A and B choice and an optional exam date. The same sheet opens from the first-visit card and from the exam-date chip on Početna.
-- The account button starts Google sign-in until the account menu lands.
+- The level chip opens `LevelSheet`, a bottom sheet with the A and B choice and an optional exam date (`LevelForm`, shared with the account page). The same sheet opens from the first-visit card and from the exam-date chip on Početna.
+- The account button is `AccountMenu`: "Prijava Googleom" when signed out, a menu with Napredak, Račun and Odjava when signed in, and nothing while Google sign-in is not configured; see [ACCOUNTS.md](./ACCOUNTS.md).
+- `AppLayout` takes a `background` slot rendered inside the progress provider; the `_app` route mounts the account sync there ([SYNC.md](./SYNC.md)), so the shared layout never imports a feature.
 - Every tap target in the shell, the reader and the sheets is at least 44 px. Sheets close with a round "Zatvori" button; the level sheet also keeps its "Gotovo" button.
 - The layout mounts the sonner `Toaster`, used for the progress write-error toast.
 
@@ -21,7 +22,8 @@ The app screens live under the pathless `_app` layout route; the landing, the le
 | `/ucenje/$area/$lesson` | The lesson reader; Lekcija 0 is `/ucenje/propisi/kako-do-dozvole` | indexed |
 | `/vjezba` and below | Practice and oral cards, see [PRACTICE.md](./PRACTICE.md) | noindex |
 | `/ispit`, `/ispit/$sessionId`, `/ispit/rezultat/$sessionId`, `/ispit/povijest` | The mock exam: start, running exam (immersive), result with review, history; see [EXAM.md](./EXAM.md) | noindex |
-| `/napredak` | "Uskoro" placeholder until its feature lands | noindex |
+| `/napredak` | Progress: readiness per subject with the weakest highlighted, "Kako računamo?" and "Procjena, ne jamstvo"; coverage and accuracy; study days with the "Položio sam" switch that ends them; mock exam summary linking `/ispit/povijest`; the eight badges; the "Napredak je samo u ovom pregledniku" card while anonymous. Components in `src/features/progress/` | noindex |
+| `/racun` | Account: profile, level and exam date, sign out, delete account; guarded by the pathless `_authed` layout, see [ACCOUNTS.md](./ACCOUNTS.md) | noindex |
 
 Unknown areas and lessons, or a lesson under the wrong area, return a 404 from the loader. Under `_app` it renders `AppNotFoundPage` inside the shell (never immersive) with a link to `/ucenje`; under `_site` it renders the site `NotFoundPage`. Loaders return only the title and summary for the head, so the lesson body is not sent twice in the page payload.
 
@@ -44,4 +46,4 @@ Unknown areas and lessons, or a lesson under the wrong area, return a 404 from t
 
 ## SSR and hydration
 
-Progress lives in localStorage, so the server and the first client render show the empty state (`ready` is false). Početna shows a skeleton until then; lists show empty meters. See [PROGRESS.md](./PROGRESS.md).
+Progress lives in localStorage, so the server and the first client render show the empty state (`ready` is false). Početna and Napredak show a skeleton until then; lists show empty meters. The readiness rows (`SubjectRow`) and the "Kako računamo?" fold (`ReadinessExplainer`) are shared from `src/components/custom/readiness/`. See [PROGRESS.md](./PROGRESS.md).

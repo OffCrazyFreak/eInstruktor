@@ -7,9 +7,12 @@ export const userProfile = sqliteTable("user_profile", {
 		.primaryKey()
 		.references(() => user.id, { onDelete: "cascade" }),
 
-	targetLevel: text("target_level", { enum: EXAM_LEVELS }).notNull(),
+	targetLevel: text("target_level", { enum: EXAM_LEVELS }),
 
 	examDate: text("exam_date"),
+
+	// Set by "Položio sam"; the progress page then stops showing the streak.
+	passedAt: integer("passed_at", { mode: "timestamp_ms" }),
 
 	createdAt: integer("created_at", { mode: "timestamp" })
 		.notNull()

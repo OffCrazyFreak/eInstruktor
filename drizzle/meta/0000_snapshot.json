@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "329f1e5c-5d62-4db9-9649-e5ce7024419a",
+  "id": "91e52e55-aedb-4921-98b8-95e41919c7dd",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "exam_session": {
@@ -10,7 +10,7 @@
         "id": {
           "name": "id",
           "type": "text",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
@@ -56,6 +56,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "ends_at": {
+          "name": "ends_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "score": {
           "name": "score",
           "type": "integer",
@@ -72,6 +79,20 @@
         },
         "per_subject": {
           "name": "per_subject",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "answers": {
+          "name": "answers",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "graded": {
+          "name": "graded",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -103,7 +124,15 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "exam_session_user_id_id_pk": {
+          "columns": [
+            "user_id",
+            "id"
+          ],
+          "name": "exam_session_user_id_id_pk"
+        }
+      },
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
@@ -113,7 +142,7 @@
         "id": {
           "name": "id",
           "type": "text",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
@@ -126,6 +155,13 @@
         },
         "question_id": {
           "name": "question_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "session_id": {
+          "name": "session_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -198,21 +234,31 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "question_attempt_exam_session_id_exam_session_id_fk": {
-          "name": "question_attempt_exam_session_id_exam_session_id_fk",
+        "question_attempt_user_id_exam_session_id_exam_session_user_id_id_fk": {
+          "name": "question_attempt_user_id_exam_session_id_exam_session_user_id_id_fk",
           "tableFrom": "question_attempt",
           "tableTo": "exam_session",
           "columnsFrom": [
+            "user_id",
             "exam_session_id"
           ],
           "columnsTo": [
+            "user_id",
             "id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "question_attempt_user_id_id_pk": {
+          "columns": [
+            "user_id",
+            "id"
+          ],
+          "name": "question_attempt_user_id_id_pk"
+        }
+      },
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
@@ -553,12 +599,19 @@
           "name": "target_level",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "exam_date": {
           "name": "exam_date",
           "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "passed_at": {
+          "name": "passed_at",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false

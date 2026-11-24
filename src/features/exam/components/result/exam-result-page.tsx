@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { History, ListChecks, RotateCcw, SearchCheck } from "lucide-react";
+import LoginNudgeSlot from "@/components/custom/login-nudge/login-nudge-slot";
 import { Button } from "@/components/ui/button";
 import course from "@/content/voditelj-brodice";
 import ExamReview, {
@@ -12,6 +13,7 @@ import {
 	storedSubjectScores,
 	totalQuestions,
 } from "@/features/exam/utils/stored-subject-scores";
+import useAuthStatus from "@/lib/auth/use-auth-status";
 import { findExamSession } from "@/lib/progress/exam-session-selectors";
 import useProgress from "@/lib/progress/use-progress";
 
@@ -31,6 +33,7 @@ export default function ExamResultPage({
 	review,
 }: IExamResultPageProps) {
 	const { progress, ready } = useProgress();
+	const signedIn = useAuthStatus().viewer.status === "signed-in";
 	const session = findExamSession(progress, sessionId);
 
 	if (!ready) {
@@ -50,7 +53,9 @@ export default function ExamResultPage({
 				<p className="mt-3 text-[1rem] leading-relaxed text-muted-foreground">
 					{session
 						? "Rezultat dobiješ kad predaš ispit."
-						: "Rezultati se spremaju samo u ovom pregledniku."}
+						: signedIn
+							? "Rezultat s drugog uređaja stiže kad se napredak uskladi s računom."
+							: "Rezultati se spremaju samo u ovom pregledniku."}
 				</p>
 				<Button
 					asChild
@@ -167,6 +172,8 @@ export default function ExamResultPage({
 					</p>
 				</section>
 			</div>
+
+			<LoginNudgeSlot trigger="exam-result" />
 		</main>
 	);
 }

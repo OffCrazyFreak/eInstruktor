@@ -5,6 +5,7 @@ import lectureZero from "@/content/voditelj-brodice/lecture-0";
 import { cta } from "@/features/landing/constants/landing-content";
 import useHasLocalProgress from "@/features/landing/hooks/use-has-local-progress";
 import signInWithGoogle from "@/lib/auth/sign-in-with-google";
+import useAuthStatus, { canOfferSignIn } from "@/lib/auth/use-auth-status";
 import { cn } from "@/lib/utils";
 
 interface ILandingCtasProps {
@@ -17,6 +18,7 @@ interface ILandingCtasProps {
  */
 export default function LandingCtas({ onDark }: ILandingCtasProps) {
 	const hasProgress = useHasLocalProgress();
+	const showSignIn = canOfferSignIn(useAuthStatus());
 
 	return (
 		<div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
@@ -35,20 +37,22 @@ export default function LandingCtas({ onDark }: ILandingCtasProps) {
 					</Link>
 				)}
 			</Button>
-			<Button
-				type="button"
-				onClick={signInWithGoogle}
-				variant="outline"
-				className={cn(
-					"h-auto gap-2 rounded-full border px-6 py-3.5 text-[0.98rem] font-semibold transition-transform hover:-translate-y-0.5",
-					onDark
-						? "border-white/45 bg-transparent text-[#eaf3ff] hover:bg-white/10 hover:text-white"
-						: "border-[#0a63b0] bg-transparent text-[#0a63b0] hover:bg-[#0a63b0]/5 hover:text-[#0a63b0]",
-				)}
-			>
-				<GoogleIcon className="h-4 w-4" />
-				{cta.secondary}
-			</Button>
+			{showSignIn && (
+				<Button
+					type="button"
+					onClick={() => signInWithGoogle("/pocetna")}
+					variant="outline"
+					className={cn(
+						"h-auto gap-2 rounded-full border px-6 py-3.5 text-[0.98rem] font-semibold transition-transform hover:-translate-y-0.5",
+						onDark
+							? "border-white/45 bg-transparent text-[#eaf3ff] hover:bg-white/10 hover:text-white"
+							: "border-[#0a63b0] bg-transparent text-[#0a63b0] hover:bg-[#0a63b0]/5 hover:text-[#0a63b0]",
+					)}
+				>
+					<GoogleIcon className="h-4 w-4" />
+					{cta.secondary}
+				</Button>
+			)}
 		</div>
 	);
 }

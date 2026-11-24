@@ -4,7 +4,7 @@
 
 1. Use Node 22.18 or newer (`.nvmrc` says 22; `engines` in `package.json` sets the floor) and pnpm 12.18 (pinned as `packageManager`). Scripts need 22.18 because that is the first Node 22 release that strips TypeScript types by default; the alias loader also needs `module.registerHooks` (22.15).
 2. Run `pnpm install`. Its `prepare` script runs `git config core.hooksPath .githooks`, which turns on the commit message hook.
-3. Run `cp .env.example .env.local` and fill in what you need. Every variable is optional for local work: without Google credentials the app runs and only sign-in is off.
+3. Run `cp .env.example .env.local` and fill in what you need. Every variable is optional for local work: without Google credentials the app runs and only sign-in is off (every sign-in button is hidden or replaced by a note, see [ACCOUNTS.md](./ACCOUNTS.md)).
 4. Run `pnpm db:seed` to build `local.db` from the migrations (add `--demo` for a demo learner with some progress), then `pnpm dev` (http://localhost:3000).
 
 ## Database switch
@@ -40,6 +40,8 @@ TypeScript scripts in `scripts/` run with plain Node through `scripts/alias-load
 ## Tests
 
 `vitest.config.ts` is separate from `vite.config.ts` so tests skip the Netlify and Start plugins. It has two projects: `unit` runs `*.test.ts` in Node, `dom` runs `*.test.tsx` in jsdom with Testing Library. Put a test next to the file it covers.
+
+Database services take the database as a parameter. `createTempDatabase()` (`src/lib/testing/temp-database.ts`) migrates a fresh libSQL file in the system temp folder and deletes it in `cleanup()`; it is a file because libSQL runs a batch on a new connection, where an in-memory database would be empty. Components that need a signed-in viewer get one through `<AuthStatusContext value={...}>`, and tests mock server functions with `vi.mock`.
 
 ## Git hooks
 

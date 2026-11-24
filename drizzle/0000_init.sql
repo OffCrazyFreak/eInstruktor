@@ -1,29 +1,35 @@
 CREATE TABLE `exam_session` (
-	`id` text PRIMARY KEY NOT NULL,
+	`id` text NOT NULL,
 	`user_id` text NOT NULL,
 	`level` text NOT NULL,
 	`seed` integer NOT NULL,
 	`question_ids` text NOT NULL,
 	`started_at` integer NOT NULL,
 	`finished_at` integer,
+	`ends_at` integer,
 	`score` integer,
 	`passed` integer,
 	`per_subject` text,
+	`answers` text,
+	`graded` text,
+	PRIMARY KEY(`user_id`, `id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
 CREATE INDEX `exam_session_user_started_idx` ON `exam_session` (`user_id`,`started_at`);--> statement-breakpoint
 CREATE TABLE `question_attempt` (
-	`id` text PRIMARY KEY NOT NULL,
+	`id` text NOT NULL,
 	`user_id` text NOT NULL,
 	`question_id` text NOT NULL,
+	`session_id` text NOT NULL,
 	`exam_session_id` text,
 	`correct` integer NOT NULL,
 	`selected_option_ids` text NOT NULL,
 	`mode` text NOT NULL,
 	`answered_at` integer NOT NULL,
+	PRIMARY KEY(`user_id`, `id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE cascade,
-	FOREIGN KEY (`exam_session_id`) REFERENCES `exam_session`(`id`) ON UPDATE no action ON DELETE cascade
+	FOREIGN KEY (`user_id`,`exam_session_id`) REFERENCES `exam_session`(`user_id`,`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
 CREATE INDEX `question_attempt_user_answered_idx` ON `question_attempt` (`user_id`,`answered_at`);--> statement-breakpoint
@@ -80,8 +86,9 @@ CREATE TABLE `verification` (
 --> statement-breakpoint
 CREATE TABLE `user_profile` (
 	`user_id` text PRIMARY KEY NOT NULL,
-	`target_level` text NOT NULL,
+	`target_level` text,
 	`exam_date` text,
+	`passed_at` integer,
 	`created_at` integer NOT NULL,
 	`updated_at` integer NOT NULL,
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE cascade

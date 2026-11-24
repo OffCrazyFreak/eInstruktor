@@ -1,6 +1,8 @@
 import { useNavigate } from "@tanstack/react-router";
 import { CircleCheck, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
+import LoginNudgeSlot from "@/components/custom/login-nudge/login-nudge-slot";
+import { markNudgeDue } from "@/components/custom/login-nudge/nudge-session";
 import type { ILesson } from "@/content/types";
 import course from "@/content/voditelj-brodice";
 import BOnlyBlock from "@/features/learn/components/blocks/b-only-block";
@@ -71,6 +73,12 @@ export default function LessonReader({ lesson }: ILessonReaderProps) {
 
 	function handleFinish() {
 		update((current) => markLessonDone(current, lesson.slug, Date.now()));
+
+		// The reader moves straight on, so the next lesson's slot offers sign-in as it opens.
+		if (next) {
+			markNudgeDue("lesson");
+		}
+
 		goNext();
 	}
 
@@ -154,6 +162,8 @@ export default function LessonReader({ lesson }: ILessonReaderProps) {
 					/>
 				</div>
 			</main>
+
+			<LoginNudgeSlot trigger="lesson" />
 
 			<LessonActionBar
 				done={done}

@@ -101,6 +101,10 @@ export const progressSchema = z.object({
 	examSessions: listOf(examSessionSchema),
 	studyDays: listOf(studyDaySchema),
 	dismissedNudges: recordOf(z.number()),
+	/** Badge id to the time it was earned; a badge stays once earned. */
+	badges: recordOf(z.number()),
+	/** When the learner said "Položio sam"; the progress page then ends the streak. */
+	passedAt: z.number().nullable().catch(null),
 });
 
 export type IProgressState = z.output<typeof progressSchema>;
