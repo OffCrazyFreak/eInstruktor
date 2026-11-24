@@ -1,13 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, CircleCheck, CircleX } from "lucide-react";
-import {
-	formatExamDate,
-	formatExamTime,
-} from "@/features/exam/utils/exam-dates";
+import { formatExamTime } from "@/features/exam/utils/exam-dates";
 import {
 	storedSubjectScores,
 	totalQuestions,
 } from "@/features/exam/utils/stored-subject-scores";
+import { formatDay } from "@/lib/dates/format-day";
 import type { IExamSession } from "@/lib/progress/progress-schema";
 import { cn } from "@/lib/utils";
 
@@ -29,7 +27,7 @@ export default function HistoryItem({ session }: IHistoryItemProps) {
 			>
 				<div className="min-w-0 flex-1">
 					<div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-						<span className="font-semibold">{formatExamDate(finishedAt)}</span>
+						<span className="font-semibold">{formatDay(finishedAt)}</span>
 						<span className="text-[0.85rem] text-muted-foreground">
 							{formatExamTime(finishedAt)}
 						</span>
