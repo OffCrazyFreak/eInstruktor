@@ -41,6 +41,8 @@ export const Route = createRootRouteWithContext<IRouterContext>()({
 				rel: "stylesheet",
 				href: appCss,
 			},
+			{ rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+			{ rel: "icon", href: "/favicon.ico", sizes: "48x48" },
 		],
 	}),
 	// Cached for the whole visit, so client navigations never call the server for it again.
