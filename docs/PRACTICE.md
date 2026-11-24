@@ -43,7 +43,7 @@ The questions are picked once when the set opens, so answering a mistake right d
 
 "Provjeri" and "Dalje" are separate buttons in the same spot, and "Dalje" ignores taps for 400 ms after a check (`constants/double-tap.ts`), so a double tap never skips the feedback. After "Dalje" focus moves to the new question, and at the end to the score. Once the set has an answer, the close button asks first in a small sheet; the answers stay saved either way.
 
-The end screen shows the score, the split by area (`utils/session-summary.ts`), "Pogledaj pogreške" (each wrong question shown answered, with its explanation), "Još 10" and `LoginNudgeSlot` from `src/components/custom/login-nudge/`, which renders nothing until the account work fills it.
+The end screen shows the score, the split by area (`utils/session-summary.ts`), "Pogledaj pogreške" (each wrong question shown answered, with its explanation), "Još 10" and `LoginNudgeSlot` from `src/components/custom/login-nudge/` with the `practice-set` trigger, which offers anonymous learners Google sign-in in a bottom sheet (rules in [ACCOUNTS.md](./ACCOUNTS.md)).
 
 "Još 10" opens the same mode with 10 questions. `againExclusions` leaves out the questions just asked while at least 10 others remain, and falls back to the whole pool otherwise; in Pogrešni it always drops the mistakes just answered right, because they need a right answer in a second session before they leave the list.
 

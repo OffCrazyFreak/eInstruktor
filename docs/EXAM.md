@@ -8,7 +8,7 @@ The real exam is oral and has no official question count, so the mock exam is th
 | --- | --- |
 | `/ispit` | Start: category (the learner's level is preselected, so A learners get the A format), timer (Standardno, Produlji at double time, Bez vremena), the rules, the simulation note, the hint "Preporučeno kad ti točnost u vježbi prijeđe 80 %" with the current accuracy, and a card to continue a running exam |
 | `/ispit/$sessionId` | The running exam, immersive. `?pitanje=N` keeps the open question across reloads. A finished session redirects to its result |
-| `/ispit/rezultat/$sessionId` | Result: the verdict, one card per subject with n/8 and "Zadovoljio" or "Nije zadovoljio" (icon and text), "Pregledaj pogreške", "Vježbaj slabe predmete" (links to `/vjezba` until practice modes take a search), "Novi ispit", "Povijest ispita". `?pregled=pogreske` or `?pregled=sva` shows every question with the chosen and the right answer and the explanation |
+| `/ispit/rezultat/$sessionId` | Result: the verdict, one card per subject with n/8 and "Zadovoljio" or "Nije zadovoljio" (icon and text), "Pregledaj pogreške", "Vježbaj slabe predmete" (links to `/vjezba` until practice modes take a search), "Novi ispit", "Povijest ispita", and the `exam-result` login nudge for anonymous learners ([ACCOUNTS.md](./ACCOUNTS.md)). `?pregled=pogreske` or `?pregled=sva` shows every question with the chosen and the right answer and the explanation |
 | `/ispit/povijest` | Finished exams newest first with date, time, level, verdict and per-subject scores, and a bar row of the last ten results |
 
 All four are `noindex`.
@@ -45,4 +45,4 @@ The exam lives in the local progress store (see [PROGRESS.md](./PROGRESS.md)):
 - Finishing saves `finishedAt`, `score`, `passed`, `perSubject` and `graded` (right or wrong per answered question, which the review uses so it always matches the score; older sessions are graded again), and records each answered question as an attempt with mode `exam` and the session id, so readiness and coverage include exam answers. Exam answers do not move Leitner boxes.
 - `exam-session-selectors.ts`: the running exam, finished exams newest first, answered and flagged checks, and `endedByClock`.
 
-The fields match `exam_session` and `question_attempt.exam_session_id` in the database ([DATABASE.md](./DATABASE.md)) for the later sync.
+The fields match `exam_session` and `question_attempt.exam_session_id` in the database ([DATABASE.md](./DATABASE.md)). While signed in, finished exams sync to the account with their answers and grades, so the result and the review open on another device; a running exam and its flags stay on the device ([SYNC.md](./SYNC.md)). The result and history screens say "samo u ovom pregledniku" only to anonymous learners.
