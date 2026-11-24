@@ -1,5 +1,7 @@
 # e-instruktor - Feature plan and v1 scope (rev. 3)
 
+> Historical planning document. The app is built; the current design is in the other files in this folder (`APP-SHELL.md`, `PRACTICE.md`, `EXAM.md`, `ACCOUNTS.md`).
+
 ## Context
 
 Mapping every feature the app could have (informed by similar learning/testing apps)

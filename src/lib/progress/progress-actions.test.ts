@@ -11,7 +11,7 @@ import {
 	toggleFlag,
 } from "@/lib/progress/progress-actions";
 import { EMPTY_PROGRESS } from "@/lib/progress/progress-schema";
-import { testAttempt } from "@/lib/progress/test-attempts";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 const NOON = Date.parse("2026-11-20T11:00:00Z");
 

@@ -5,7 +5,7 @@ import {
 	recentAccuracy,
 	weakGroups,
 } from "@/lib/progress/accuracy";
-import { testAttempt } from "@/lib/progress/test-attempts";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 describe("firstAttempts", () => {
 	it("keeps the first answer per question in each session", () => {

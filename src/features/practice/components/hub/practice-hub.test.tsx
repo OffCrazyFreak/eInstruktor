@@ -4,8 +4,8 @@ import course from "@/content/voditelj-brodice";
 import PracticeHub from "@/features/practice/components/hub/practice-hub";
 import { practicePool } from "@/features/practice/utils/practice-pool";
 import { areaGroups } from "@/lib/content/question-groups";
-import { testAttempt } from "@/lib/progress/test-attempts";
 import { renderWithProgress } from "@/lib/testing/render-with-progress";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 describe("PracticeHub", () => {
 	afterEach(() => window.localStorage.clear());

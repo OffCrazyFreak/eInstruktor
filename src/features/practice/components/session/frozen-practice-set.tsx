@@ -10,6 +10,7 @@ import {
 } from "@/features/practice/utils/practice-pool";
 import type { IPracticeSearch } from "@/features/practice/utils/practice-search";
 import type { ISessionAnswer } from "@/features/practice/utils/practice-session";
+import randomSeed from "@/lib/content/random-seed";
 import { toStudyDay } from "@/lib/dates/study-day";
 import useProgress from "@/lib/progress/use-progress";
 
@@ -34,7 +35,7 @@ export default function FrozenPracticeSet({
 			course,
 			{ ...search, level: practiceLevel(level, search.level) },
 			{ progress, today: toStudyDay(new Date()) },
-			Math.floor(Math.random() * 2 ** 32),
+			randomSeed(),
 			exclusions,
 		),
 	);

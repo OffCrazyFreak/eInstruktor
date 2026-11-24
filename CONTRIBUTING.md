@@ -33,29 +33,25 @@ or code. These guidelines keep the process smooth for everyone.
 2. Follow the project conventions in [AGENTS.md](./AGENTS.md). Highlights:
    - **pnpm** for package management (`pnpm add` / `pnpm remove`, never edit
      `package.json` by hand).
-   - **Biome** for lint/format - run `pnpm check` (or `pnpm lint` / `pnpm format`).
-   - **TypeScript** - no `any`; run `pnpm exec tsc --noEmit` and make sure it is
-     clean before opening a PR.
+   - **Biome** for lint/format; `pnpm check` runs Biome, the type check and the tests together.
+   - **TypeScript** - no `any`; types must be clean before you open a PR.
    - Prefer `function foo() {}` declarations over arrow consts (except small
      inline functions); import React APIs as `import { useState } from 'react'`.
    - Feature-based structure: feature code in feature folders, shared/generic code
-     in `src/lib`, `src/utils`, etc. Reuse existing functions/components before
+     in `src/components`, `src/lib` and `src/content`. Reuse existing functions/components before
      writing new ones.
 3. Before opening a PR, verify locally:
-   - `pnpm exec tsc --noEmit` (types clean)
-   - `pnpm check` (Biome lint/format)
+   - `pnpm check` (Biome, types and tests)
    - `pnpm build` (app builds)
-   - `pnpm test` (if you touched tested code)
 4. Write concise, descriptive commit messages. The project uses this format:
 
    ```text
    type(scope): Short summary in imperative mood
 
-   Changes:
-   - Specific change 1
-   - Specific change 2
+   Why paragraph: the problem and the reason.
 
-   Brief explanation of why the change was needed.
+   Changes:
+   - Only when the commit has two or more separable parts
    ```
 
 5. Open a PR against `dev` with:
@@ -65,8 +61,7 @@ or code. These guidelines keep the process smooth for everyone.
 
 ## Pull request checklist
 
-- [ ] `pnpm exec tsc --noEmit` passes (no type errors).
-- [ ] Biome lint/format applied (`pnpm check`).
+- [ ] `pnpm check` passes (Biome, types and tests).
 - [ ] App builds (`pnpm build`) and relevant tests pass.
 - [ ] No secrets or sensitive data included; env vars added to both `.env` and
       `.env.example`.

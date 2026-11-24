@@ -16,13 +16,13 @@ import {
 import type { IProgressState } from "@/lib/progress/progress-schema";
 import { createProgressStore } from "@/lib/progress/progress-store";
 import { PROGRESS_STORAGE_KEY } from "@/lib/progress/storage-key";
-import { testAttempt } from "@/lib/progress/test-attempts";
 import { memoryStorage } from "@/lib/testing/memory-storage";
 import {
 	createTempDatabase,
 	type ITempDatabase,
 	insertTestUser,
 } from "@/lib/testing/temp-database";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 // These tests use short made-up ids; the real course ids are covered in push-limits.server.test.ts.
 vi.mock("@/features/account/server/known-content.server", () => ({

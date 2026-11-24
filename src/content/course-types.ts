@@ -24,8 +24,6 @@ export interface IPerSubjectExamFormat {
 	passPerSubject: number;
 }
 
-export type IExamFormat = IOverallExamFormat | IPerSubjectExamFormat;
-
 export interface ICourse {
 	slug: string;
 	title: string;

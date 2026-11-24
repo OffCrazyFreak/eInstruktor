@@ -15,12 +15,12 @@ import {
 	deleteAccountData,
 } from "@/features/account/server/delete-account.server";
 import { syncProgressForUser } from "@/features/account/server/sync-progress.server";
-import { testAttempt } from "@/lib/progress/test-attempts";
 import {
 	createTempDatabase,
 	type ITempDatabase,
 	insertTestUser,
 } from "@/lib/testing/temp-database";
+import { testAttempt } from "@/lib/testing/test-attempts";
 
 // These tests use short made-up ids; the real course ids are covered in push-limits.server.test.ts.
 vi.mock("@/features/account/server/known-content.server", () => ({

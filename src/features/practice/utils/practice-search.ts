@@ -47,5 +47,3 @@ export const practiceSearchSchema = z.object({
 });
 
 export type IPracticeSearch = z.output<typeof practiceSearchSchema>;
-
-export type IPracticeSearchInput = z.input<typeof practiceSearchSchema>;

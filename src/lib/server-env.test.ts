@@ -24,6 +24,12 @@ describe("parseServerEnv", () => {
 		).toThrow("GOOGLE_CLIENT_SECRET is required in production");
 	});
 
+	it("requires the base URL in production, so the Google redirect never follows the request host", () => {
+		expect(() =>
+			parseServerEnv({ ...COMPLETE_ENV, BETTER_AUTH_URL: "" }, true),
+		).toThrow("BETTER_AUTH_URL is required in production");
+	});
+
 	it("accepts a complete production env", () => {
 		expect(parseServerEnv(COMPLETE_ENV, true)).toEqual(COMPLETE_ENV);
 	});
