@@ -44,7 +44,7 @@
 
 ### Content
 
-- Course content (areas, lessons, blocks, questions) is typed data under `src/content/` and read from code, never stored in the database (the database holds only learner state; `pnpm db:seed` applies migrations and optional demo data); adding a topic must not need new UI code.
+- Course content (areas, lessons, blocks, questions) is typed data under `src/content/` and read from code, never stored in the database (the database holds only learner state plus the better-auth account, session and user rows; `pnpm db:seed` applies migrations and optional demo data); adding a topic must not need new UI code.
 - Tag every question and lesson block with its level (`A`, `B` or `common`) and its source, so imported material can be traced and removed.
 
 ## Frontend
