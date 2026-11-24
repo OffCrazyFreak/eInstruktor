@@ -16,6 +16,7 @@ import {
 } from "@/features/exam/utils/exam-timer";
 import { submitIfExpired } from "@/features/exam/utils/submit-exam";
 import { questionsForExam } from "@/lib/content/exam-questions";
+import randomSeed from "@/lib/content/random-seed";
 import { startExamSession } from "@/lib/progress/exam-session-actions";
 import {
 	activeExamSession,
@@ -47,17 +48,6 @@ function timerDetail(level: ExamLevel, choice: TimerChoice): string {
 		: `${minutes} minuta, kao u našoj simulaciji.`;
 }
 
-function newSeed(): number {
-	const values = new Uint32Array(1);
-
-	if (typeof crypto !== "undefined" && "getRandomValues" in crypto) {
-		crypto.getRandomValues(values);
-		return values[0] ?? 0;
-	}
-
-	return Math.floor(Math.random() * 2 ** 32);
-}
-
 export default function ExamStartPage() {
 	const navigate = useNavigate();
 	const { progress, ready, level: learnerLevel, update } = useProgress();
@@ -70,7 +60,7 @@ export default function ExamStartPage() {
 
 	function handleStart() {
 		const id = randomId();
-		const seed = newSeed();
+		const seed = randomSeed();
 		const startedAt = Date.now();
 
 		update((current) => {

@@ -8,6 +8,8 @@ import {
 import NightView from "@/components/custom/visuals/ship-lights-viewer/night-view";
 import type { VesselId } from "@/components/custom/visuals/ship-lights-viewer/vessel-lights";
 import { VESSELS } from "@/components/custom/visuals/ship-lights-viewer/vessels";
+import randomSeed from "@/lib/content/random-seed";
+import { seededShuffle } from "@/lib/content/seeded-shuffle";
 
 interface IQuestion {
 	vessel: VesselId;
@@ -20,14 +22,15 @@ function pick<T>(items: readonly T[]): T {
 }
 
 function buildQuestion(vessel: VesselId, bearing: number): IQuestion {
-	const others = distractors(vessel, bearing)
-		.sort(() => Math.random() - 0.5)
-		.slice(0, 3);
+	const others = seededShuffle(
+		distractors(vessel, bearing),
+		randomSeed(),
+	).slice(0, 3);
 
 	return {
 		vessel,
 		bearing,
-		choices: [vessel, ...others].sort(() => Math.random() - 0.5),
+		choices: seededShuffle([vessel, ...others], randomSeed()),
 	};
 }
 
