@@ -158,10 +158,14 @@ export function applySyncResponse(
 	const baseline: ISyncBaseline = {
 		userId,
 		// Every attempt in the sent state is on the account now; pulled times come from other clocks, so they never move this mark.
-		attemptsThrough: latestTime([
-			previous?.attemptsThrough ?? 0,
-			...sent.attempts.map((attempt) => attempt.answeredAt),
-		]),
+		// Capped at the present: one answer stamped by a clock that ran ahead must not hide every later answer from sync.
+		attemptsThrough: Math.min(
+			latestTime([
+				previous?.attemptsThrough ?? 0,
+				...sent.attempts.map((attempt) => attempt.answeredAt),
+			]),
+			Date.now(),
+		),
 		examSessionIds: [
 			...new Set([
 				...(previous?.examSessionIds ?? []),

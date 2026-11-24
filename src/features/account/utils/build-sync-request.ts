@@ -2,10 +2,12 @@ import {
 	emptyBaseline,
 	type ISyncBaseline,
 } from "@/features/account/utils/sync-baseline";
-import type {
-	ISyncExamSession,
-	ISyncProfile,
-	ISyncRequest,
+import {
+	type ISyncExamSession,
+	type ISyncProfile,
+	type ISyncRequest,
+	syncAttemptSchema,
+	syncExamSessionSchema,
 } from "@/features/account/utils/sync-schema";
 import type {
 	IExamSession,
@@ -71,6 +73,14 @@ function changedProfile(
 	);
 }
 
+// The server rejects a whole request for one bad item, so a damaged local entry is left behind instead of blocking every sync.
+function isSyncable<T>(
+	schema: { safeParse: (value: unknown) => { success: boolean } },
+	item: T,
+): boolean {
+	return schema.safeParse(item).success;
+}
+
 /** Everything this browser changed since the account last confirmed its state; a new account gets all of it. */
 export function buildSyncRequest(
 	progress: IProgressState,
@@ -87,14 +97,16 @@ export function buildSyncRequest(
 	return {
 		full,
 		// Strictly newer: answers saved together, such as a handed-in exam, share one time and are always sent together.
-		attempts: known
+		attempts: (known
 			? progress.attempts.filter(
 					(attempt) => attempt.answeredAt > base.attemptsThrough,
 				)
-			: progress.attempts,
+			: progress.attempts
+		).filter((attempt) => isSyncable(syncAttemptSchema, attempt)),
 		examSessions: progress.examSessions
 			.filter((session) => !syncedExams.has(session.id))
-			.flatMap((session) => toSyncExamSession(session) ?? []),
+			.flatMap((session) => toSyncExamSession(session) ?? [])
+			.filter((session) => isSyncable(syncExamSessionSchema, session)),
 		lessonsAdded: addedEntries(progress.lessonsDone, new Set(base.lessons)),
 		lessonsRemoved: removedKeys(progress.lessonsDone, base.lessons),
 		flaggedAdded: addedEntries(progress.flagged, new Set(base.flagged)),
