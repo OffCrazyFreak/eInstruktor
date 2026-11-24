@@ -12,6 +12,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import signInWithGoogle from "@/lib/auth/sign-in-with-google";
+import useAuthStatus, { canOfferSignIn } from "@/lib/auth/use-auth-status";
 
 // Real routes instead of landing anchors, so the links work on the legal pages and the gallery too.
 const NAV = [
@@ -21,6 +22,8 @@ const NAV = [
 ] as const;
 
 export default function Header() {
+	const showSignIn = canOfferSignIn(useAuthStatus());
+
 	return (
 		<header className="fixed inset-x-0 top-0 z-50 border-b border-[#002c78]/10 bg-white/70 backdrop-blur-md">
 			<div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 md:px-8">
@@ -50,15 +53,17 @@ export default function Header() {
 				</nav>
 
 				<div className="flex items-center gap-2">
-					<Button
-						type="button"
-						onClick={signInWithGoogle}
-						variant="outline"
-						className="hidden h-9 gap-2 rounded-full border-[#0a63b0] bg-transparent px-4 text-[#0a63b0] hover:bg-[#0a63b0]/5 hover:text-[#0a63b0] md:inline-flex"
-					>
-						<GoogleIcon className="h-4 w-4" />
-						Prijava
-					</Button>
+					{showSignIn && (
+						<Button
+							type="button"
+							onClick={() => signInWithGoogle()}
+							variant="outline"
+							className="hidden h-9 gap-2 rounded-full border-[#0a63b0] bg-transparent px-4 text-[#0a63b0] hover:bg-[#0a63b0]/5 hover:text-[#0a63b0] md:inline-flex"
+						>
+							<GoogleIcon className="h-4 w-4" />
+							Prijava
+						</Button>
+					)}
 
 					<Sheet>
 						<SheetTrigger asChild>
@@ -90,18 +95,20 @@ export default function Header() {
 									</SheetClose>
 								))}
 							</nav>
-							<div className="mt-4 px-5">
-								<SheetClose asChild>
-									<Button
-										type="button"
-										onClick={signInWithGoogle}
-										className="w-full gap-2 rounded-full bg-[#002c78] text-white hover:bg-[#002c78]"
-									>
-										<GoogleIcon className="h-4 w-4" />
-										Prijava Googleom
-									</Button>
-								</SheetClose>
-							</div>
+							{showSignIn && (
+								<div className="mt-4 px-5">
+									<SheetClose asChild>
+										<Button
+											type="button"
+											onClick={() => signInWithGoogle()}
+											className="w-full gap-2 rounded-full bg-[#002c78] text-white hover:bg-[#002c78]"
+										>
+											<GoogleIcon className="h-4 w-4" />
+											Prijava Googleom
+										</Button>
+									</SheetClose>
+								</div>
+							)}
 						</SheetContent>
 					</Sheet>
 				</div>
