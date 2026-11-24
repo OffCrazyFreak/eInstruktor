@@ -15,9 +15,21 @@ export const deleteAccount = createServerFn({ method: "POST" })
 	.handler(async () => {
 		const user = await requireUser(lookupRequestSession);
 
-		// Signing out first lets better-auth clear the session cookie on this response; the batch then removes every other session.
-		await auth.api.signOut({ headers: getRequestHeaders() });
-		await deleteAccountData(db, user.id);
+		// Data goes first: if the batch fails the session still works and the learner can retry; the batch also removes every session.
+		try {
+			await deleteAccountData(db, user.id);
+		} catch (error) {
+			console.error("deleteAccount failed", error);
+
+			throw new Error("Brisanje nije uspjelo");
+		}
+
+		// The session row is already gone, so this only clears the cookie and must not turn a finished deletion into an error.
+		try {
+			await auth.api.signOut({ headers: getRequestHeaders() });
+		} catch {
+			// The cookie then expires on its own and no longer matches a session.
+		}
 
 		return { deleted: true };
 	});
