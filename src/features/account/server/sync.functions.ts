@@ -6,7 +6,7 @@ import { syncProgressForUser } from "@/features/account/server/sync-progress.ser
 import { syncRequestSchema } from "@/features/account/utils/sync-schema";
 
 export const syncProgress = createServerFn({ method: "POST" })
-	.inputValidator(syncRequestSchema)
+	.validator(syncRequestSchema)
 	.handler(async ({ data }) => {
 		const user = await requireUser(lookupRequestSession);
 

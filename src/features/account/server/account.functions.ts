@@ -11,7 +11,7 @@ import { auth } from "@/lib/auth/auth";
 const deleteAccountSchema = z.object({ confirm: z.literal(true) });
 
 export const deleteAccount = createServerFn({ method: "POST" })
-	.inputValidator(deleteAccountSchema)
+	.validator(deleteAccountSchema)
 	.handler(async () => {
 		const user = await requireUser(lookupRequestSession);
 

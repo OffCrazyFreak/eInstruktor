@@ -53,6 +53,6 @@ The privacy page (`/privatnost`) describes exactly this; change both together.
 
 ## Server functions and guards
 
-Account server functions live in `src/features/account/server/` as `*.functions.ts` (thin `createServerFn` handlers with a zod `.inputValidator`) calling `*.server.ts` services that take the database and a user id, so tests run them against a temporary database. `requireUser(lookup)` takes the session lookup as a parameter; production passes `lookupRequestSession` (better-auth `getSession` with the request headers). `require-user.test.ts` reads every `*.functions.ts` file and fails when a function other than `getSession` does not call `requireUser(lookupRequestSession)`.
+Account server functions live in `src/features/account/server/` as `*.functions.ts` (thin `createServerFn` handlers with a zod `.validator()`; the installed TanStack Start marks `.inputValidator()` deprecated) calling `*.server.ts` services that take the database and a user id, so tests run them against a temporary database. `requireUser(lookup)` takes the session lookup as a parameter; production passes `lookupRequestSession` (better-auth `getSession` with the request headers). `require-user.test.ts` reads every `*.functions.ts` file and fails when a function other than `getSession` does not call `requireUser(lookupRequestSession)`.
 
 The client never sends a user id; the server takes it from the session.
