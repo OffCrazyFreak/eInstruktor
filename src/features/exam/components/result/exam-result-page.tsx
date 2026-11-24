@@ -13,6 +13,7 @@ import {
 	storedSubjectScores,
 	totalQuestions,
 } from "@/features/exam/utils/stored-subject-scores";
+import useAuthStatus from "@/lib/auth/use-auth-status";
 import { findExamSession } from "@/lib/progress/exam-session-selectors";
 import useProgress from "@/lib/progress/use-progress";
 
@@ -32,6 +33,7 @@ export default function ExamResultPage({
 	review,
 }: IExamResultPageProps) {
 	const { progress, ready } = useProgress();
+	const signedIn = useAuthStatus().viewer.status === "signed-in";
 	const session = findExamSession(progress, sessionId);
 
 	if (!ready) {
@@ -51,7 +53,9 @@ export default function ExamResultPage({
 				<p className="mt-3 text-[1rem] leading-relaxed text-muted-foreground">
 					{session
 						? "Rezultat dobiješ kad predaš ispit."
-						: "Rezultati se spremaju samo u ovom pregledniku."}
+						: signedIn
+							? "Rezultat s drugog uređaja stiže kad se napredak uskladi s računom."
+							: "Rezultati se spremaju samo u ovom pregledniku."}
 				</p>
 				<Button
 					asChild
