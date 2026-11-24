@@ -24,7 +24,7 @@ export default function useBadgeAwards() {
 		}
 
 		update((current) => awardBadges(current, earned, Date.now()));
-		setFresh((shown) => [...shown, ...earned]);
+		setFresh((shown) => [...new Set([...shown, ...earned])]);
 	}, [ready, progress, level, update]);
 
 	return { fresh, dismiss: () => setFresh([]) };

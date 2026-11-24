@@ -42,11 +42,16 @@ export default function LoginNudgeSlot({ trigger }: ILoginNudgeSlotProps) {
 		shouldShowLoginNudge(progress.dismissedNudges, trigger, Date.now());
 
 	useEffect(() => {
-		if (!eligible || (trigger === "lesson" && !takeNudgeDue("lesson"))) {
+		if (!eligible) {
 			return;
 		}
 
 		const timer = setTimeout(() => {
+			// Taken only when the timer fires: a development double effect would otherwise spend the flag on a timer it cancels.
+			if (trigger === "lesson" && !takeNudgeDue("lesson")) {
+				return;
+			}
+
 			markShownThisSession();
 			update(recordShowing);
 			setOpen(true);
