@@ -22,7 +22,7 @@ _(uskoro)_
 - **Auth:** Better Auth (Google login only) + `tanstackStartCookies`
 - **Database:** libSQL + Drizzle ORM / Drizzle Kit; a local SQLite file in development, Turso in production
 - **UI:** Tailwind CSS v4, shadcn/ui (Radix), Motion, lucide-react
-- **Forms:** Zod, React Hook Form + `@hookform/resolvers`
+- **Validation:** Zod
 - **Tooling:** Biome (lint/format), React Compiler, Vitest
 - **Deploy:** Netlify
 
@@ -69,7 +69,6 @@ Exact versions are in `package.json`.
 ### Scripts
 
 - `pnpm dev` / `pnpm build` / `pnpm preview`
-- `pnpm generate-routes` (TanStack route tree)
 - `pnpm db:seed` (`--demo` for a demo learner) / `db:push` / `db:generate` / `db:migrate` / `db:studio`
 - `pnpm check` (Biome, TypeScript and tests) / `pnpm lint` / `pnpm format` (Biome)
 - `pnpm test` (Vitest)

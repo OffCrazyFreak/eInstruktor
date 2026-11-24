@@ -18,7 +18,7 @@ In a production build (`pnpm build`, then Netlify or `pnpm preview`) an unset `D
 
 Turso credentials in `.env.local` do nothing on their own, so `pnpm dev` and `pnpm db:push` stay local. Set `DB_MODE=turso` only in Netlify, or for a deliberate one-off command such as `DB_MODE=turso pnpm db:migrate`. A shell variable beats `.env.local`.
 
-`src/lib/server-env.ts` validates the auth variables with zod. The check runs when the server starts and first loads the auth module, not during `pnpm build`: a production server without `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID` or `GOOGLE_CLIENT_SECRET` fails at start, while the build itself still succeeds.
+`src/lib/server-env.ts` validates the auth variables with zod. The check runs when the server starts and first loads the auth module, not during `pnpm build`: a production server without `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID` or `GOOGLE_CLIENT_SECRET` fails at start, while the build itself still succeeds.
 
 ## Scripts
 
@@ -33,7 +33,6 @@ Turso credentials in `.env.local` do nothing on their own, so `pnpm dev` and `pn
 | `pnpm db:push` | Apply `src/db/schema/` to the selected database without a migration, for quick local experiments |
 | `pnpm db:generate` / `pnpm db:migrate` | SQL migrations, for Turso once it is live |
 | `pnpm db:studio` | Drizzle Studio |
-| `pnpm generate-routes` | Regenerate `src/routeTree.gen.ts` |
 
 TypeScript scripts in `scripts/` run with plain Node through `scripts/alias-loader.mjs`; see [scripts/README.md](../scripts/README.md).
 
